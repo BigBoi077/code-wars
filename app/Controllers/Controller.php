@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
 
 /**
@@ -13,6 +14,9 @@ use Zephyrus\Network\Response;
  */
 abstract class Controller extends SecurityController
 {
+
+    const SESSION_IS_LOGGED = 'is_logged';
+
     /**
      * Override example of the render method to automatically include arguments to be sent to any views for any
      * Controller class extending this middleware. Useful for global data used in layout files.
@@ -55,5 +59,10 @@ abstract class Controller extends SecurityController
     public function after(?Response $response): ?Response
     {
         return parent::after($response);
+    }
+
+    public function isLogged()
+    {
+        return Session::getInstance()->has(self::SESSION_IS_LOGGED);
     }
 }
