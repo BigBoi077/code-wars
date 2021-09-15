@@ -9,6 +9,6 @@ class ExampleController extends Controller
 
     public function index()
     {
-        return $this->html("Test2");
+        return $this->html("Test092183");
     }
 }
