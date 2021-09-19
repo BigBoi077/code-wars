@@ -157,5 +157,6 @@ create table if not exists log (
     constraint pk_id_log primary key (id)
 );
 
+insert into person(da, firstname, lastname) values (000000, 'big', 'boi');
 insert into "user"(id, da, password) values (default, 000000, 'admin');
 insert into teacher(da) values (000000);
