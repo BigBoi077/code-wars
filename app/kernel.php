@@ -13,6 +13,7 @@ use Zephyrus\Application\Localization;
 use Zephyrus\Exceptions\LocalizationException;
 define('ROOT_DIR', __DIR__ . '/..');
 require ROOT_DIR . '/vendor/autoload.php';
+require ROOT_DIR . '/app/env.php';
 $router = new Router();
 include(Bootstrap::getHelperFunctionsPath());
 Bootstrap::start();

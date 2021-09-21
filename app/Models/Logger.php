@@ -10,7 +10,6 @@ use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 use Zephyrus\Application\Session;
 
-define('PASSWORD_PEPPER', getenv('PASSWORD_PEPPER')); //TODO mettre dans un fichier a part
 
 class Logger
 {
@@ -51,7 +50,7 @@ class Logger
 
     public function logUser()
     {
-        Session::getInstance()->set(Controller::SESSION_IS_LOGGED, true);
+        Session::getInstance()->set(Controller::SESSION_IS_LOGGED, true); //TODO IS_LOGGED dans un Constants.php ?
         Session::getInstance()->set('user', [
             'da' => $this->person->da,
             'firstname' => $this->person->firstname,
