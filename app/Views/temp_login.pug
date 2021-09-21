@@ -1,0 +1,23 @@
+include mixins/base
+
+doctype html
+html
+  head
+    title CodeWars - Login
+    meta(charset='utf-8')
+    body
+      +flash
+      form(method='post', action='/login')
+        label(for='da')
+          | DA
+        br
+        input(id='da', type='text', name='da')
+        br
+
+        label(for='password')
+          | Mot de passe
+        br
+        input(id='password', type='password', name='password')
+        br
+        button(type='submit')
+          | Connexion

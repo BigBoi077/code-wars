@@ -15,7 +15,7 @@ use Zephyrus\Network\Response;
 abstract class Controller extends SecurityController
 {
 
-    const SESSION_IS_LOGGED = 'is_logged';
+    public const SESSION_IS_LOGGED = 'is_logged'; //TODO mettre dans un fichier de constantes
 
     /**
      * Override example of the render method to automatically include arguments to be sent to any views for any
@@ -64,5 +64,10 @@ abstract class Controller extends SecurityController
     public function isLogged()
     {
         return Session::getInstance()->has(self::SESSION_IS_LOGGED);
+    }
+
+    public function getUser()
+    {
+        return Session::getInstance()->read('user');
     }
 }
