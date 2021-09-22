@@ -4,6 +4,8 @@
 namespace Controllers;
 
 
+use Zephyrus\Network\Response;
+
 class StudentPanelController extends Controller
 {
 	public function initializeRoutes()
@@ -11,7 +13,8 @@ class StudentPanelController extends Controller
 		$this->get('/student-panel', 'studentPanel');
 	}
 
-	public function studentPanel() {
+	public function studentPanel(): Response
+	{
 		if (!$this->isLogged()) {
 			return $this->redirect('/login');
 		}
