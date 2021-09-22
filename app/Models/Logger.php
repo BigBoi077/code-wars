@@ -58,7 +58,7 @@ class Logger
         ]);
     }
 
-    public function getErrorMessage(): array
+    public function getErrorMessage(): ?array
     {
         return $this->errorMessages;
     }

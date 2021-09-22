@@ -158,5 +158,5 @@ create table if not exists log (
 );
 
 insert into person(da, firstname, lastname) values (000000, 'big', 'boi');
-insert into "user"(id, da, password) values (default, 000000, 'admin');
+insert into "user"(id, da, password) values (default, 000000, '$2y$10$B9bEPdKiHAl0uL/MrIQLsOCmEh4.PtGPZLaqKbODyTrytc.zW3e8y');
 insert into teacher(da) values (000000);
