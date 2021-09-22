@@ -21,7 +21,6 @@ class Logger
     const INPUT_NAME_PASSWORD = 'password';
 
     private $user;
-    private $person;
     private $success = false;
     private $errorMessages;
 
@@ -40,11 +39,9 @@ class Logger
     private function tryCredentials($form)
     {
         $userBroker = new UserBroker();
-        $personBroker = new PersonBroker();
         $this->user = $userBroker->findByDa($form->getValue(self::INPUT_NAME_DA));
         if ($this->user != null) {
             $this->success = password_verify($form->getValue(self::INPUT_NAME_PASSWORD) . PASSWORD_PEPPER, $this->user->password);
-            $this->person = $personBroker->findByDa($form->getValue(self::INPUT_NAME_DA));
             if ($form->isRegistered('remember_me') && $this->success) {
                 $this->rememberUser();
             }
@@ -58,12 +55,14 @@ class Logger
 
     public function logUser()
     {
+        $personBroker = new PersonBroker();
+        $person = $personBroker->findByDa($this->user->da);
         Session::getInstance()->set(Controller::SESSION_IS_LOGGED, true); //TODO IS_LOGGED dans un Constants.php ?
         Session::getInstance()->set('user', [
             'id' => $this->user->id,
-            'da' => $this->person->da,
-            'firstname' => $this->person->firstname,
-            'lastname' => $this->person->lastname,
+            'da' => $person->da,
+            'firstname' => $person->firstname,
+            'lastname' => $person->lastname,
         ]);
     }
 

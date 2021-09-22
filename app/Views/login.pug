@@ -4,8 +4,8 @@ block pageTitle
 block body
   #title.container.p-5
     .text-center CODE WARS
-  +flash
   form(method='post', action='/login').container.login-form
+    +flash
     input(id='da', type='text', name='da', placeholder='DA').form-control.m-3
     input(id='password', type='password', name='password', placeholder='Mot de passe').form-control.m-3
     br
