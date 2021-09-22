@@ -14,4 +14,10 @@ class UserBroker extends Broker
         $sql = "SELECT * FROM codewars.user WHERE da = ?";
         return $this->selectSingle($sql, [$da]);
     }
+
+    public function findByID($id) : ?stdClass
+    {
+        $sql = "SELECT * FROM codewars.user WHERE id = ?";
+        return $this->selectSingle($sql, [$id]);
+    }
 }

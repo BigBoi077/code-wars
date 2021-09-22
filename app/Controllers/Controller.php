@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+use Models\Logger;
 use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
 
@@ -45,6 +46,14 @@ abstract class Controller extends SecurityController
      */
     public function before(): ?Response
     {
+        if (!$this->isLogged()) {
+            if (isset($_COOKIE[REMEMBER_ME])) {
+                $logger = new Logger();
+                if ($logger->automaticLogin()) {
+                    return $this->redirect("/home");
+                }
+            }
+        }
         return parent::before();
     }
 
