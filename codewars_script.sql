@@ -6,16 +6,17 @@ drop table if exists studentExercise;
 drop table if exists tips;
 drop table if exists exercise;
 drop table if exists week;
-drop table if exists student;
 drop table if exists studentItem;
+drop table if exists student;
 drop table if exists item;
 drop table if exists team;
 drop table if exists token;
 drop table if exists notification;
 drop table if exists teacher;
+drop table if exists log;
 drop table if exists "user";
 drop table if exists person;
-drop table if exists log;
+
 
 drop schema if exists codewars;
 
