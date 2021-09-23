@@ -30,22 +30,26 @@ class Logger
         $form->validate(self::INPUT_NAME_DA, Rule::integer('Le DA doit etre un chiffre'));
         $form->validate(self::INPUT_NAME_PASSWORD, Rule::notEmpty('Le mot de passe est requis'));
         if ($form->verify()) {
-            $this->tryCredentials($form);
+            $this->success = $this->tryCredentials($form);
         } else {
             $this->errorMessages = $form->getErrorMessages();
         }
     }
 
-    private function tryCredentials($form)
+    private function tryCredentials($form) : bool
     {
         $userBroker = new UserBroker();
         $this->user = $userBroker->findByDa($form->getValue(self::INPUT_NAME_DA));
         if ($this->user != null) {
-            $this->success = password_verify($form->getValue(self::INPUT_NAME_PASSWORD) . PASSWORD_PEPPER, $this->user->password);
-            if ($form->isRegistered('remember_me') && $this->success) {
-                $this->rememberUser();
+            if (password_verify($form->getValue(self::INPUT_NAME_PASSWORD) . PASSWORD_PEPPER, $this->user->password)) {
+                if ($form->isRegistered('remember_me')) {
+                    $this->rememberUser();
+                }
+                return true;
             }
         }
+        $this->errorMessages = 'Identifiants incorrects';
+        return false;
     }
 
     public function hasSucceeded() : bool
@@ -66,7 +70,7 @@ class Logger
         ]);
     }
 
-    public function getErrorMessage(): ?array
+    public function getErrorMessage()
     {
         return $this->errorMessages;
     }
