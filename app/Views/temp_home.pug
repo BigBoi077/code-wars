@@ -6,7 +6,8 @@ html
     body
       p Bonjour #{user.firstname} #{user.lastname}
       if user.isTeacher
-        h1 hi teacher
+        a(href='/management/students')
+          | Etudiants
       form(method='post', action='/logout')
         button(type='submit')
           | Deconnexion

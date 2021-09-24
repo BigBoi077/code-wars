@@ -5,6 +5,9 @@ namespace Controllers;
 
 
 use Models\Brokers\StudentBroker;
+use Models\Brokers\TeamBroker;
+use Models\Entities\Student;
+use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
 class ManagementController extends Controller
@@ -35,7 +38,9 @@ class ManagementController extends Controller
 
     public function createStudent()
     {
-        return $this->html('create student');
+        return $this->render('management/students/temp_student_create', [
+            'teams' => (new TeamBroker())->getAll(),
+        ]);
     }
 
     public function editStudent()
@@ -45,7 +50,13 @@ class ManagementController extends Controller
 
     public function storeStudent()
     {
-        return $this->html('store student');
+        $student = new Student($this->buildForm());
+        if ($student->areFieldsValid()) {
+            $student->insert();
+            return $this->redirect('/management/students');
+        }
+        Flash::error($student->getErrorMessages());
+        return $this->redirect('/management/students/create');
     }
 
     public function listExercises()

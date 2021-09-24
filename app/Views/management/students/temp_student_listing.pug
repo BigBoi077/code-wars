@@ -7,13 +7,15 @@ html
 			h1 student management
 			a(href='/management/students/create') Creer un etudiant
 			each student in students
-				p
-					| #{student.da}.
-					| #{student.firstname} #{student.lastname}
-					a(href='/management/students/' + student.da + '/edit')
-						|  Editer
-					span
-						|
-					a(href='/management/students/' + student.da + '/delete')
-						|  Supprimer
-
+				table
+					tr
+						td
+							p
+								| #{student.da}.
+								| #{student.firstname} #{student.lastname}
+						td
+							a(href='/management/students/' + student.da + '/edit')
+								|  Editer
+						td
+							a(href='/management/students/' + student.da + '/delete')
+								|  Supprimer

@@ -26,4 +26,13 @@ class UserBroker extends Broker
         $sql = "SELECT t.da from codewars.user u join codewars.teacher t on u.da = t.da WHERE u.da = ?";
         return $this->selectSingle($sql, [$da]) != null;
     }
+
+    public function insert($da, string $password)
+    {
+        $sql = "INSERT INTO codewars.user (da, password) VALUES (?, ?)";
+        $this->query($sql, [
+            $da,
+            $password
+        ]);
+    }
 }
