@@ -16,6 +16,7 @@ use Zephyrus\Network\Response;
 abstract class Controller extends SecurityController
 {
 
+    private const LOGIN_ROUTE = '/login';
     public const SESSION_IS_LOGGED = 'is_logged'; //TODO mettre dans un fichier de constantes
 
     /**
@@ -52,6 +53,9 @@ abstract class Controller extends SecurityController
                 if ($logger->automaticLogin()) {
                     return $this->redirect("/home");
                 }
+            }
+            if ($this->request->getRoute() != self::LOGIN_ROUTE) {
+                return $this->redirect(self::LOGIN_ROUTE);
             }
         }
         return parent::before();

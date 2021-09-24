@@ -1,0 +1,19 @@
+doctype html
+html
+	head
+		title CodeWars - Home
+		meta(charset='utf-8')
+		body
+			h1 student management
+			a(href='/management/students/create') Creer un etudiant
+			each student in students
+				p
+					| #{student.da}.
+					| #{student.firstname} #{student.lastname}
+					a(href='/management/students/' + student.da + '/edit')
+						|  Editer
+					span
+						|
+					a(href='/management/students/' + student.da + '/delete')
+						|  Supprimer
+

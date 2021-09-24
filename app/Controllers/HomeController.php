@@ -21,9 +21,6 @@ class HomeController extends Controller
 
     public function home()
     {
-        if (!$this->isLogged()) {
-            return $this->redirect('/');
-        }
         return $this->render('temp_home', ['user' => $this->getUser()]);
     }
 }
