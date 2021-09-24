@@ -7,20 +7,34 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\UserBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
-use Zephyrus\Security\Cryptography;
 
 class Student
 {
-
-    private $form;
+    private bool $success = false;
+    private Form $form;
     private $errorMessages;
 
-    public function __construct(Form $form)
+    public static function create(Form $form): Student
     {
-        $this->form = $form;
+        $instance = new self();
+        $instance->form = $form;
+        if ($instance->areFieldsValid()) {
+            $instance->insert();
+        }
+        return $instance;
     }
 
-    public function areFieldsValid(): bool
+    public function getErrorMessages()
+    {
+        return $this->errorMessages;
+    }
+
+    public function hasSucceeded(): bool
+    {
+        return $this->success;
+    }
+
+    private function areFieldsValid(): bool
     {
         $this->form->validate('da', Rule::integer('Le DA doit etre un nombre.'));
         $this->form->validate('da', Rule::maxLength(6, 'Le DA doit contenir 6 chiffres'));
@@ -31,8 +45,6 @@ class Student
         if ($this->form->getValue('cash') != "") {
             $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
         }
-//        var_dump($this->form->buildObject());
-//        die();
         if ((new UserBroker())->findByDa($this->form->getValue('da')) != null) {
             $this->errorMessages = 'Le DA est deja utilise.';
             return false;
@@ -41,15 +53,11 @@ class Student
             $this->errorMessages = $this->form->getErrorMessages();
             return false;
         }
+        $this->success = true;
         return true;
     }
 
-    public function getErrorMessages()
-    {
-        return $this->errorMessages;
-    }
-
-    public function insert()
+    private function insert()
     {
         $da = $this->form->getValue('da');
         $firstname = $this->form->getValue('firstname');
@@ -61,4 +69,5 @@ class Student
         (new UserBroker())->insert($da, $password);
         (new StudentBroker())->insert($da, $team_id, $cash);
     }
+
 }

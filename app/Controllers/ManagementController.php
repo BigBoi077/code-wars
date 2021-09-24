@@ -50,9 +50,9 @@ class ManagementController extends Controller
 
     public function storeStudent()
     {
-        $student = new Student($this->buildForm());
-        if ($student->areFieldsValid()) {
-            $student->insert();
+        $student = Student::create($this->buildForm());
+        if ($student->hasSucceeded()) {
+            Flash::success('Etudiant cree avec succes');
             return $this->redirect('/management/students');
         }
         Flash::error($student->getErrorMessages());
