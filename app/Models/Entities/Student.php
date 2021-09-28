@@ -45,12 +45,12 @@ class Student
         if ($this->form->getValue('cash') != "") {
             $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
         }
-        if ((new UserBroker())->findByDa($this->form->getValue('da')) != null) {
-            $this->errorMessages = 'Le DA est deja utilise.';
-            return false;
-        }
         if (!$this->form->verify()) {
             $this->errorMessages = $this->form->getErrorMessages();
+            return false;
+        }
+        if ((new UserBroker())->findByDa($this->form->getValue('da')) != null) {
+            $this->errorMessages = 'Le DA est deja utilise.';
             return false;
         }
         $this->success = true;
