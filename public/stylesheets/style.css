@@ -12,7 +12,6 @@
     --red: #fd5a5a;
 }
 
-
 .row {
     margin-left: 0; /* Bootstrap met de la margin negative par défaut */
     margin-right: 0;
@@ -223,7 +222,7 @@ header .disconnect i:hover {
 }
 
 
-h1, h2, h3, h4, .menu-items > li{
+.menu-items > li{
     font-family: 'Starjedi', sans-serif;
     color: var(--dark);
 }
@@ -253,6 +252,10 @@ body {
     width: 75%;
 }
 
+.main-container [class*="col-"] {
+    padding: 0;
+}
+
 .student-list {
     background-color: white;
     border: 2px solid black;
@@ -266,6 +269,10 @@ body {
 .student-row .col-1 {
     margin: auto;
     text-align: center;
+}
+
+.student-row-element, .student-header-element {
+    margin: 1em;
 }
 
 .student-row:nth-child(even) {background: #f6f6f6}

@@ -11,31 +11,32 @@ block body
 	#circle
 	#circleSmallRight
 	.main-container
-		h1 Gestion des étudiants
 		+flash
-		a(href='/management/students/create') Créer un étudiant
+		h1 Gestion des étudiants
 		.student-list
 			.row.heading-row
 				.col-2
-					h4 DA
+					h4.student-header-element DA
 				.col-3
-					h4 Nom
+					h4.student-header-element Nom
 				.col-2
-					h4 Équipe
+					h4.student-header-element Équipe
 				.col-3
-					h4 Balance
+					h4.student-header-element Balance
 				.col-1
+					a(href='/management/students/create')
+						i.fas.fa-plus-circle
 				.col-1
 			each student in students
 				.row.student-row
 					.col-2
-						p #{student.da}
+						p.student-row-element #{student.da}
 					.col-3
-						p #{student.firstname} #{student.lastname}
+						p.student-row-element #{student.firstname} #{student.lastname}
 					.col-2
-						p #{student.team_name}
+						p.student-row-element #{student.team_name}
 					.col-3
-						p #{student.cash} $
+						p.student-row-element #{format('money', student.cash)}
 					.col-1
 						a(href='/management/students/' + student.da + '/edit')
 							i.fas.fa-edit.student-icons
