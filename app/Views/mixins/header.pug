@@ -14,12 +14,11 @@ mixin header()
         li
           a(href="/market") Magasin
     .d-flex.flex-row
-      a#bell.fa-bell.fas.d-flex.align-items-center.fa-2x.p-3.mr-4
       #student.d-flex.align-items-center
-        .text-center.pr-3.d-flex.flex-column
+        .text-right.pr-3.d-flex.flex-column
           h6 josh Leb
           h6 100 $ | 34000 pts
-      a.compagny-profile(href="/profile")
+      a.profile-pic(href="/profile")
         img(src="assets/images/kakashi.jpeg")
       i#bell.fa-bell.fas.d-flex.align-items-center.fa.p-3
       form.disconnect.mr-2(action="/logout", method="post")
