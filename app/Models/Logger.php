@@ -1,7 +1,4 @@
-<?php
-
-
-namespace Models;
+<?php namespace Models;
 
 use Controllers\Controller;
 use Models\Brokers\Broker;
