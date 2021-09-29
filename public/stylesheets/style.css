@@ -7,7 +7,7 @@
 
 :root {
     --accent: rgb(255,222,0);
-    --dark: #343a40;
+    --dark: #000000;
     --background: #fff;
 }
 
@@ -61,6 +61,7 @@
 
 h1 {
     font-family: 'Starjedi', sans-serif;
+    color: var(--dark);
 }
 
 body {
@@ -146,11 +147,14 @@ body {
 
 .image-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 }
 
 .image-container img {
     object-fit: contain;
+    width: 70%;
 }
 
 .login-container {
