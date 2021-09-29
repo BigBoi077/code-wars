@@ -24,4 +24,17 @@ class PersonBroker extends Broker
             $lastname,
         ]);
     }
+
+    public function delete($da)
+    {
+        $sql = "DELETE FROM codewars.person WHERE da = ?";
+        return $this->query($sql, [$da]);
+    }
+
+    public function update($da, $firstname, $lastname)
+    {
+        $sql = "UPDATE codewars.person SET firstname = ?, lastname = ? WHERE da = ?";
+        $this->query($sql, [$firstname, $lastname, $da]);
+    }
 }
+

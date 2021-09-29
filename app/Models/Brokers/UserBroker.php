@@ -35,4 +35,15 @@ class UserBroker extends Broker
             $password
         ]);
     }
+
+    public function delete($da)
+    {
+        $sql = "DELETE FROM codewars.user WHERE da = ?";
+        return $this->query($sql, [$da]);
+    }
+
+    public function update($da)
+    {
+
+    }
 }
