@@ -1,6 +1,4 @@
-<?php
-
-namespace Models\Entities;
+<?php namespace Models\Entities;
 
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;

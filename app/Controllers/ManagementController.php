@@ -1,8 +1,4 @@
-<?php
-
-
-namespace Controllers;
-
+<?php namespace Controllers;
 
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
