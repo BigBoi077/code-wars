@@ -16,17 +16,17 @@ class ManagementController extends Controller
 	{
 		$this->get('/management/students', 'listStudents');
         $this->get('/management/students/create', 'createStudent');
-        $this->get('/management/students/{id}/edit', 'editStudent');
-        $this->get('/management/students/{id}/delete', 'deleteStudent');
+        $this->get('/management/students/{da}/edit', 'editStudent');
+        $this->get('/management/students/{da}/delete', 'deleteStudent');
         $this->post('/management/students/store', 'storeStudent');
-        $this->post('/management/students/{id}/update', 'updateStudent');
+        $this->post('/management/students/{da}/update', 'updateStudent');
 
         $this->get('/management/exercises', 'listExercises');
         $this->get('/management/exercises/create', 'createExercise');
-        $this->get('/management/exercises/{id}/edit', 'editExercise');
-        $this->get('/management/exercises/{id}/delete', 'deleteExercise');
+        $this->get('/management/exercises/{da}/edit', 'editExercise');
+        $this->get('/management/exercises/{da}/delete', 'deleteExercise');
         $this->post('/management/exercises/store', 'storeExercise');
-        $this->post('/management/exercises/{id}/update', 'updateExercise');
+        $this->post('/management/exercises/{da}/update', 'updateExercise');
 	}
 
 	public function listStudents(): Response
@@ -38,25 +38,59 @@ class ManagementController extends Controller
 
     public function createStudent()
     {
-        return $this->render('management/students/temp_student_create', [
+        return $this->render('management/students/temp_student_form', [
+            'title' => 'Créer un étudiant',
+            'action' => '/management/students/store',
+            'student' => null,
             'teams' => (new TeamBroker())->getAll(),
         ]);
     }
 
-    public function editStudent()
+    public function editStudent($da)
     {
-        return $this->html('edit student');
+        $student = (new StudentBroker())->findByDa($da);
+        return $this->render('management/students/temp_student_form', [
+            'title' => 'Éditer ' . $student->firstname . ' ' . $student->lastname,
+            'action' => '/management/students/' . $student->da . '/update',
+            'student' => $student,
+            'teams' => (new TeamBroker())->getAll(),
+        ]);
+    }
+
+    public function deleteStudent($da)
+    {
+        if (Student::exists($da)) {
+            Student::delete($da);
+            Flash::success('Étudiant supprimé avec succès.');
+        } else {
+            Flash::error('Une erreur est survenue.');
+        }
+        return $this->redirect('/management/students');
     }
 
     public function storeStudent()
     {
         $student = Student::create($this->buildForm());
         if ($student->hasSucceeded()) {
-            Flash::success('Etudiant cree avec succes');
+            Flash::success('Étudiant créé avec succès.');
             return $this->redirect('/management/students');
         }
         Flash::error($student->getErrorMessages());
         return $this->redirect('/management/students/create');
+    }
+
+    public function updateStudent($da)
+    {
+        if (Student::exists($da)) {
+            $student = Student::update($da, $this->buildForm());
+            if ($student->hasSucceeded()) {
+                Flash::success('Étudiant edité avec succèss.');
+                return $this->redirect('/management/students');
+            }
+            Flash::error($student->getErrorMessages());
+        }
+        Flash::error('Une erreur est survenue.');
+        return $this->redirect('/management/students/' . $da . '/edit');
     }
 
     public function listExercises()

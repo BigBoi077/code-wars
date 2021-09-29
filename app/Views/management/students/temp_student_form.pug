@@ -1,0 +1,60 @@
+include ../../mixins/base
+
+doctype html
+html
+  head
+    title Creer un etudiant - Code Wars
+    meta(charset='utf-8')
+    body
+      h2
+        | #{title}
+      +flash
+      form(method='post', action=action)
+
+
+        if student === null
+          label
+            | DA
+          br
+          input(id='da', name='da', type='text' required value=val('da'))
+          br
+
+        label
+          | Prenom
+        br
+        input(id='firstname', name='firstname', type='text' required value=(student !== null) ? student.firstname: val('firstname'))
+        br
+
+        label
+          | Nom
+        br
+        input(id='lastname', name='lastname', type='text' required value=(student !== null) ? student.lastname: val('lastname'))
+        br
+
+        label
+          | Argent (optionel)
+        br
+        input(id='cash', name='cash', type='text' value=(student !== null) ? student.cash: val('cash'))
+        br
+
+        label(for='team_id')
+          | Equipe
+        br
+        select(id='team_id', name='team_id' required)
+          each team in teams
+            if student !== null
+              if student.team_id === team.id
+                option(value=team.id, selected)
+                  | #{team.name}
+              else
+                option(value=team.id)
+                  | #{team.name}
+            else
+              option(value=team.id)
+                | #{team.name}
+        br
+        button(type='submit')
+          if student !== null
+            | Editer
+          else
+            | Creer
