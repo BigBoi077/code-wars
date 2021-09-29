@@ -67,6 +67,11 @@ class StudentService
         return $this->succes;
     }
 
+    public static function hasItem($da): bool
+    {
+        return (new StudentBroker())->hasItem($da);
+    }
+
     private function areFieldsValid(): bool
     {
         if (!$this->applyRules()) {
