@@ -1,4 +1,4 @@
-<?php namespace Models\Entities;
+<?php namespace Models\Services;
 
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
@@ -65,6 +65,11 @@ class StudentService
     public function hasSucceeded(): bool
     {
         return $this->succes;
+    }
+
+    public static function hasItem($da): bool
+    {
+        return (new StudentBroker())->hasItem($da);
     }
 
     private function areFieldsValid(): bool
