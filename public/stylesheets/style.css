@@ -221,6 +221,13 @@ header .disconnect i:hover {
     top: 50px;
 }
 
+/*notifications*/
+.notification {
+    font-size: small;
+    background-color: rgba(243, 243, 243, 0.5);
+    border-radius: 5px;
+}
+
 
 .menu-items > li{
     font-family: 'Starjedi', sans-serif;
