@@ -1,0 +1,15 @@
+include ../../mixins/base
+
+doctype html
+html
+  head
+    title Créer un article - Code Wars
+    meta(charset='utf-8')
+    body
+      h2
+        | #{title}
+      +flash
+      form(method='post', action=action)
+
+        label(for='name')
+        input(id='name', )

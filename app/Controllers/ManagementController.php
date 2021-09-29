@@ -1,11 +1,10 @@
 <?php namespace Controllers;
 
-use Models\Brokers\ExerciseBroker;
-use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
-use Models\Entities\StudentService;
+use Models\Brokers\ExerciseBroker;
 use Models\Entities\Exercise;
-use Models\Entities\Student;
+use Models\Services\ItemService;
+use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
@@ -26,6 +25,14 @@ class ManagementController extends Controller
         $this->get('/management/exercises/{id}/delete', 'deleteExercise');
         $this->post('/management/exercises/store', 'storeExercise');
         $this->post('/management/exercises/{da}/update', 'updateExercise');
+
+        $this->get('/management/items', 'listItems');
+        $this->get('/management/items/create', 'createItem');
+        $this->get('/management/items/{id}/edit', 'editItem');
+        $this->get('/management/items/{id}/delete', 'deleteItem');
+        $this->post('/management/items/store', 'storeItem');
+        $this->post('/management/items/{id}/update', 'updateItem');
+
 	}
 
 	public function listStudents(): Response
@@ -137,6 +144,41 @@ class ManagementController extends Controller
             Flash::error('Une erreur est survenue.');
         }
         return $this->redirect('/management/exercises');
+    }
+
+    public function listItems()
+    {
+        return $this->render('management/items/temp_item_listing', [
+            'items' => ItemService::getAll()
+        ]);
+    }
+
+    public function createItem()
+    {
+        return $this->render('management/items/temp_item_form', [
+            'title' => 'Créer un article',
+            'action' => '/management/items/store',
+        ]);
+    }
+
+    public function editItem()
+    {
+        return $this->html('item edit');
+    }
+
+    public function deleteItem()
+    {
+        return $this->html('item delete');
+    }
+
+    public function storeItem()
+    {
+        return $this->html('item store');
+    }
+
+    public function updateItem()
+    {
+        return $this->html('item update');
     }
 
 }
