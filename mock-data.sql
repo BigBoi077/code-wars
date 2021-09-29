@@ -32,5 +32,5 @@ insert into item(id, name, price, description) values (default, 'bonus points', 
 insert into item(id, name, price, description) values (default, 'assault sur ennemi', 500, '-100 points bonus à lennemi');
 
 /*student item*/
-insert into studentitem(id, item_id, student_da) values (default, 1, 111111);
-insert into studentitem(id, item_id, student_da) values (default, 1, 222222);
+insert into studentitem(id, item_id, student_da) values (default, 1, 1111111);
+insert into studentitem(id, item_id, student_da) values (default, 1, 2222222);
