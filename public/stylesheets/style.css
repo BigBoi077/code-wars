@@ -12,6 +12,12 @@
     --red: #fd5a5a;
 }
 
+
+.row {
+    margin-left: 0; /* Bootstrap met de la margin negative par défaut */
+    margin-right: 0;
+}
+
 @font-face {
     font-family: 'RobotoRegular';
     src: url("fonts/Roboto/Roboto-Regular.woff");
@@ -217,7 +223,7 @@ header .disconnect i:hover {
 }
 
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, .menu-items > li{
     font-family: 'Starjedi', sans-serif;
     color: var(--dark);
 }
@@ -240,6 +246,33 @@ body {
 
 .btn-yellow {
     background-color: var(--accent);
+}
+
+.main-container {
+    margin: auto;
+    width: 75%;
+}
+
+.student-list {
+    background-color: white;
+    border: 2px solid black;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+.student-row {
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.student-row .col-1 {
+    margin: auto;
+    text-align: center;
+}
+
+.student-row:nth-child(even) {background: #f6f6f6}
+.student-row:nth-child(odd) {background: #FFFFFF}
+
+.heading-row {
+    border-bottom: 2px solid #e1e1e1;
 }
 
 .background {
