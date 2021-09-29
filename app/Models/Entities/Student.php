@@ -74,8 +74,8 @@ class Student
     {
         if ($this->form->isRegistered('da')) {
             $this->form->validate('da', Rule::integer('Le DA doit etre un nombre.'));
-            $this->form->validate('da', Rule::maxLength(6, 'Le DA doit contenir 6 chiffres'));
-            $this->form->validate('da', Rule::minLength(6, 'Le DA doit contenir 6 chiffres'));
+            $this->form->validate('da', Rule::maxLength(7, 'Le DA doit contenir 7 chiffres'));
+            $this->form->validate('da', Rule::minLength(7, 'Le DA doit contenir 7 chiffres'));
         }
         $this->form->validate('firstname', Rule::notEmpty('Le prenom est requis.'));
         $this->form->validate('lastname', Rule::notEmpty('Le nom est requis.'));
