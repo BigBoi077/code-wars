@@ -30,7 +30,8 @@ abstract class Controller extends SecurityController
     public function render($page, $args = []): Response
     {
         return parent::render($page, array_merge($args, [
-            'system_date' => date(FORMAT_DATE_TIME)
+            'system_date' => date(FORMAT_DATE_TIME),
+            'user' => $this->getUser()
         ]));
     }
 

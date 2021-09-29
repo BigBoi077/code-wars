@@ -1,28 +1,44 @@
 include ../../mixins/base
+extends ../../mixins/layout
 
-doctype html
-html
-	head
-		title CodeWars - Home
-		meta(charset='utf-8')
-		body
-			h1 Gestion des étudiants
-			+flash
-			a(href='/management/students/create') Créer un étudiant
+block title
+	title Students - Code Wars
+
+block header
+	include ../../mixins/header
+	+header()
+block body
+	#circle
+	#circleSmallRight
+	.main-container
+		h1 Gestion des étudiants
+		+flash
+		a(href='/management/students/create') Créer un étudiant
+		.student-list
+			.row.heading-row
+				.col-2
+					h4 DA
+				.col-3
+					h4 Nom
+				.col-2
+					h4 Équipe
+				.col-3
+					h4 Balance
+				.col-1
+				.col-1
 			each student in students
-				table
-					tr
-						td
-							p
-								| #{student.da}.
-								| #{student.firstname} #{student.lastname}
-						td
-							| #{student.team_name} $
-						td
-								| #{student.cash} $
-						td
-							a(href='/management/students/' + student.da + '/edit')
-								|  Éditer
-						td
-							a(href='/management/students/' + student.da + '/delete')
-								|  Supprimer
+				.row.student-row
+					.col-2
+						p #{student.da}
+					.col-3
+						p #{student.firstname} #{student.lastname}
+					.col-2
+						p #{student.team_name}
+					.col-3
+						p #{student.cash} $
+					.col-1
+						a(href='/management/students/' + student.da + '/edit')
+							i.fas.fa-edit.student-icons
+					.col-1
+						a(href='/management/students/' + student.da + '/delete')
+							i.fas.fa-trash.student-icons

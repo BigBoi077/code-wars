@@ -2,7 +2,8 @@ mixin header()
   header.container.mt-1
     nav
       a.logo(href="/home")
-        img(src="assets/images/code_wars_logo.png")
+        | Code
+        | wars
       ul.menu-items.d-flex
         li
           a(href="/home") Accueil
@@ -20,3 +21,7 @@ mixin header()
           h6 100 $ | 34000 pts
       a.compagny-profile(href="/profile")
         img(src="assets/images/kakashi.jpeg")
+      i#bell.fa-bell.fas.d-flex.align-items-center.fa.p-3
+      form.disconnect.mr-2(action="/logout", method="post")
+        button
+          i#disconnect.fas.fa-power-off

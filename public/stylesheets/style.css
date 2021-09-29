@@ -8,7 +8,14 @@
 :root {
     --accent: rgb(255,222,0);
     --dark: #000000;
-    --background: #fff;
+    --background: #FFFFFF;
+    --red: #fd5a5a;
+}
+
+
+.row {
+    margin-left: 0; /* Bootstrap met de la margin negative par défaut */
+    margin-right: 0;
 }
 
 @font-face {
@@ -78,21 +85,45 @@ header nav {
     align-items: center;
 }
 
-header nav .logo, header .compagny-profile {
+header h6 {
+    margin-bottom: 0;
+}
+
+header nav ul {
+    margin: 0;
+}
+
+header nav .logo, header .profile-pic {
     width: 84px;
     height: 80px;
+}
+
+header .profile-pic img {
+    object-fit: cover;
+}
+
+header nav .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    text-align: center;
+    line-height: 1;
+    font-family: 'StarJedi', sans-serif;
+    color: var(--dark);
+    text-decoration: none;
 }
 
 header nav .logo:hover {
     cursor: pointer;
 }
 
-header .compagny-profile {
+header .profile-pic {
     height: 60px;
     width: 60px;
 }
 
-header .compagny-profile img, header nav .logo img {
+header .profile-pic img, header nav .logo img {
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -113,8 +144,26 @@ header .menu-items li a:hover {
     text-decoration: underline;
 }
 
-#bell:hover {
+#bell:hover, #disconnect:hover {
     cursor: pointer;
+}
+
+header .disconnect {
+    display: flex;
+    align-items: center;
+}
+
+header .disconnect button {
+    border: none;
+    background-color: var(--background);
+}
+
+header .header-right i {
+    transition: all 0.15s ease-in-out;
+}
+
+header .disconnect i:hover {
+    color: var(--red);
 }
 
 /*ScoreBoard*/
@@ -186,6 +235,11 @@ h1, h2, h3, h4, .menu-items > li{
     color: var(--dark);
 }
 
+.menu-items > li {
+    font-family: 'RobotoBold', sans-serif;
+    color: var(--dark);
+}
+
 body {
     font-size: 1.1rem;
     font-family: 'RobotoBold', sans-serif;
@@ -199,6 +253,33 @@ body {
 
 .btn-yellow {
     background-color: var(--accent);
+}
+
+.main-container {
+    margin: auto;
+    width: 75%;
+}
+
+.student-list {
+    background-color: white;
+    border: 2px solid black;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+.student-row {
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.student-row .col-1 {
+    margin: auto;
+    text-align: center;
+}
+
+.student-row:nth-child(even) {background: #f6f6f6}
+.student-row:nth-child(odd) {background: #FFFFFF}
+
+.heading-row {
+    border-bottom: 2px solid #e1e1e1;
 }
 
 .background {

@@ -1,4 +1,4 @@
-<?php namespace Models\Entities;
+<?php namespace Models\Services;
 
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
@@ -10,7 +10,7 @@ use Zephyrus\Application\Rule;
 
 class StudentService
 {
-    private $succes = false;
+    private $success = false;
     private Form $form;
     private $errorMessages;
 
@@ -64,18 +64,17 @@ class StudentService
 
     public function hasSucceeded(): bool
     {
-        return $this->succes;
+        return $this->success;
+    }
+
+    public static function hasItem($da): bool
+    {
+        return (new StudentBroker())->hasItem($da);
     }
 
     private function areFieldsValid(): bool
     {
-        if (!$this->applyRules()) {
-            return false;
-        }
-        if (!$this->isTeamValid()) {
-            return false;
-        }
-        return true;
+        return !$this->applyRules() || !$this->isTeamValid();
     }
 
     private function applyRules(): bool
@@ -127,7 +126,7 @@ class StudentService
         (new PersonBroker())->insert($da, $firstname, $lastname);
         (new UserBroker())->insert($da, $password);
         (new StudentBroker())->insert($da, $team_id, $cash);
-        $this->succes = true;
+        $this->success = true;
     }
 
     private function updateToDatabase($da)
@@ -138,7 +137,7 @@ class StudentService
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         (new PersonBroker())->update($da, $firstname, $lastname);
         (new StudentBroker())->update($da, $team_id, $cash);
-        $this->succes = true;
+        $this->success = true;
     }
 
 
