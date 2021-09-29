@@ -1,0 +1,19 @@
+mixin header()
+  header.container.mt-1
+    nav
+      a.logo(href="/home")
+        img(src="assets/images/code_wars_logo.png")
+      ul.menu-items.d-flex
+        li
+          a(href="/home") Accueil
+        li
+          a(href="/teams") Équipes
+        li
+          a(href="/missions") Missions
+        li
+          a(href="/market") Magasin
+    .d-flex.flex-row
+      a#bell.fa-bell.fas.d-flex.align-items-center.fa-2x.p-3.mr-4
+      h6.text-center.d-flex.align-items-center.pr-3 Josh Leb
+      a.compagny-profile(href="/profile")
+        img(src="assets/images/kakashi.jpeg")

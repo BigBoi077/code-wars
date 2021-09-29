@@ -1,0 +1,26 @@
+extends mixins/layout
+
+block title
+  title Accueil - Code Wars
+
+block header
+  include mixins/header
+  +header()
+block body
+  #circle
+  #circleSmallRight
+  .container
+    h1.title.mt-5.mx-5 ScoreBoard
+    #score.d-flex.justify-content-center
+      #scoreBoard.d-flex.flex-column.m-5
+        .d-flex.justify-content-between
+          .score-bar
+            .score-points
+              h4=100 + " pts"
+            .score-value-left(style="width: 200px")
+          .score-bar
+            .score-points.text-right
+              h4=1000 + " pts"
+            .score-value-right(style="width: 400px")
+        .rebel-sith.text-center.w-100
+          img(src='assets/images/sith.png')

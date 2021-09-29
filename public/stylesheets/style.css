@@ -32,6 +32,7 @@
     left: -300px;
     height: 600px;
     width: 600px;
+    z-index: -100;
     background-color: var(--accent);
     border-radius: 50%;
 }
@@ -42,6 +43,7 @@
     left: 100px;
     height: 300px;
     width: 300px;
+    z-index: -100;
     background-color: var(--accent);
     border-radius: 50%;
 }
@@ -51,17 +53,128 @@
     top: -200px;
     right: 50px;
     height: 300px;
+    z-index: -100;
     width: 300px;
     background-color: var(--accent);
     border-radius: 50%;
 }
 
-h1 {
+/*Header*/
+header {
+    height: 92px;
+    display: flex;
+    padding: 32px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav .logo, header .compagny-profile {
+    width: 84px;
+    height: 80px;
+}
+
+header nav .logo:hover {
+    cursor: pointer;
+}
+
+header .compagny-profile {
+    height: 60px;
+    width: 60px;
+}
+
+header .compagny-profile img, header nav .logo img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+header .menu-items li {
+    list-style-type: none;
+    padding: 20px
+}
+
+header .menu-items li a {
+    color: black;
+    text-decoration: none;
+}
+
+header .menu-items li a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+#bell:hover {
+    cursor: pointer;
+}
+
+/*ScoreBoard*/
+#scoreBoard {
+    position: relative;
+    max-width: 75vw;
+}
+
+.title {
+    position: relative;
+    max-width: 75vw;
+}
+
+.rebel-sith {
+    position: absolute;
+    top: -135%;
+}
+
+.rebel-sith > img {
+    width: 15%;
+}
+
+.score-bar {
+    background: black;
+    justify-content: flex-start;
+    border-radius: 50px;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+    display: flex;
+    height: 40px;
+    width: 500px;
+}
+
+.score-value-left {
+    position: absolute;
+    right: 0;
+    box-shadow: 0 10px 40px -10px #000;
+    border-radius: 100px;
+    background: #ff0000;
+    height: 30px;
+}
+
+.score-value-right {
+    position: absolute;
+    left: 0;
+    box-shadow: 0 10px 40px -10px #000;
+    border-radius: 100px;
+    background: #0000ff;
+    height: 30px;
+}
+
+.score-points {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+}
+
+
+h1, h2, h3, h4, .menu-items > li{
     font-family: 'Starjedi', sans-serif;
 }
 
 body {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-family: 'RobotoBold', sans-serif;
 }
 
@@ -69,11 +182,6 @@ body {
     position: relative;
     left: 120px;
     width: 125%;
-}
-
-.title {
-    letter-spacing: 3px;
-    -webkit-text-stroke: 1px var(--accent);
 }
 
 .btn-yellow {

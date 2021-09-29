@@ -21,6 +21,6 @@ class HomeController extends Controller
 
     public function home()
     {
-        return $this->render('temp_home', ['user' => $this->getUser()]);
+        return $this->render('home', ['user' => $this->getUser()]);
     }
 }
