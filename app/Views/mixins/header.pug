@@ -2,7 +2,8 @@ mixin header()
   header.container.mt-1
     nav
       a.logo(href="/home")
-        img(src="assets/images/code_wars_logo.png")
+        | Code
+        | wars
       ul.menu-items.d-flex
         li
           a(href="/home") Accueil
@@ -12,8 +13,11 @@ mixin header()
           a(href="/missions") Missions
         li
           a(href="/market") Magasin
-    .d-flex.flex-row
-      a#bell.fa-bell.fas.d-flex.align-items-center.fa-2x.p-3.mr-4
+    .d-flex.flex-row.header-right
       h6.text-center.d-flex.align-items-center.pr-3 Josh Leb
-      a.compagny-profile(href="/profile")
+      a.profile-pic(href="/profile")
         img(src="assets/images/kakashi.jpeg")
+      i#bell.fa-bell.fas.d-flex.align-items-center.fa.p-3
+      form.disconnect.mr-2(action="/logout", method="post")
+        button
+          i#disconnect.fas.fa-power-off
