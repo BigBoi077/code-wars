@@ -5,25 +5,25 @@ block body
   #circle
   #circleSmall
   #circleSmallRight
-  .row
-    .col-5.vertical-container
-      .vertical-center
-        img(src="/assets/images/sitting_troopers.png").ml-5.leftImg
-    .col-7.vertical-container
-      .container.text-center.vertical-center
-        img(src="/assets/images/trooper_helmet.png")
-        h1.mb-4 Se connnecter
-        form(method='post', action='/login').container.login-form
-          +flash
-          input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.m-3
-          input(id='password', type='password', name='password', placeholder='Mot de passe').form-control.m-3
-          br
-          .text-right.w-100.mb-4
-            .pretty.p-round.p-default.p-bigger.mr-0
-              input(id='remember_me', name='remember_me', type='checkbox')
-              .state.p-warning-o
-                label
-                  | Rester connecté
-          button(type='submit').btn.btn-yellow
-            | Connexion
+  .row.form-page
+    .col-6.image-container
+      img(src="/assets/images/sitting_troopers.png")
+    .col-6.vertical-container.login-container
+      .container.text-center.vertical-center.login-container
+        .form-container
+          img.login-logo(src="/assets/images/trooper_helmet.png")
+          h1.mb-4 Se connnecter
+          form(method='post', action='/login').container.login-form
+            +flash
+            input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.m-3
+            input(id='password', type='password', name='password', placeholder='Mot de passe').form-control.m-3
+            br
+            .text-right.w-100.mb-4
+              .pretty.p-round.p-default.p-bigger.mr-0
+                input(id='remember_me', name='remember_me', type='checkbox')
+                .state.p-warning-o
+                  label
+                    | Rester connecté
+            button(type='submit').btn.btn-yellow
+              | Connexion
         include mixins/footer

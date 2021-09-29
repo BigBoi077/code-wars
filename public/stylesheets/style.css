@@ -7,7 +7,7 @@
 
 :root {
     --accent: rgb(255,222,0);
-    --dark: #343a40;
+    --dark: #000000;
     --background: #fff;
 }
 
@@ -30,10 +30,12 @@
     position: fixed;
     bottom: -300px;
     left: -300px;
-    height: 600px;
+    height: 500px;
     width: 600px;
     z-index: -100;
     background-color: var(--accent);
+    background-color: var(--dark);
+    border: 20px solid var(--accent);
     border-radius: 50%;
 }
 
@@ -41,21 +43,24 @@
     position: fixed;
     bottom: -150px;
     left: 100px;
-    height: 300px;
+    height: 250px;
     width: 300px;
     z-index: -100;
     background-color: var(--accent);
+    background-color: var(--dark);
+    border: 20px solid var(--accent);
     border-radius: 50%;
 }
 
 #circleSmallRight {
     position: fixed;
     top: -200px;
-    right: 50px;
+    right: -100px;
     height: 300px;
     z-index: -100;
     width: 300px;
-    background-color: var(--accent);
+    background-color: var(--dark);
+    border: 20px solid var(--accent);
     border-radius: 50%;
 }
 
@@ -171,6 +176,7 @@ header .menu-items li a:hover {
 
 h1, h2, h3, h4, .menu-items > li{
     font-family: 'Starjedi', sans-serif;
+    color: var(--dark);
 }
 
 body {
@@ -193,13 +199,33 @@ body {
     background-size: cover;
 }
 
+.form-page {
+    height: 100vh;
+    width: 100vw;
+}
+
+.form-container {
+    margin-top: 10%;
+}
+
+.login-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
 .login-form {
-    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 0px 5% 28px;
+}
+
+.login-logo {
+    height: 150px;
+    width: 150px;
 }
 
 .login-form input:focus {
@@ -219,6 +245,7 @@ body {
 
 .login-form #password {
     background-image: url("images/padlock.png");
+    margin-bottom: 0px !important;
 }
 
 .login-form #da, .login-form #password {
@@ -228,9 +255,20 @@ body {
     padding-left: 40px;
 }
 
-.vertical-container {
-    min-height: 900px;
-    position: relative;
+.image-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.image-container img {
+    object-fit: contain;
+    width: 70%;
+}
+
+.login-container {
+    height: 100vh;
 }
 
 .vertical-center {
@@ -241,7 +279,19 @@ body {
     transform: translateY(-50%);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
+    .image-container {
+        display: none;
+    }
 
+    .login-container {
+        flex: none;
+        max-width: 100vw !important;
+        width: 100vw;
+    }
+
+    .form-page #footer {
+        align-self: flex-end;
+    }
 }
 /* endregion */

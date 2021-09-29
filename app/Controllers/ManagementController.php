@@ -1,12 +1,8 @@
-<?php
-
-
-namespace Controllers;
-
+<?php namespace Controllers;
 
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
-use Models\Entities\Student;
+use Models\Entities\StudentService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
@@ -32,7 +28,7 @@ class ManagementController extends Controller
 	public function listStudents(): Response
 	{
 		return $this->render('management/students/temp_student_listing', [
-            'students' => (new StudentBroker())->getAll()
+            'students' => StudentService::getAll()
         ]);
 	}
 
@@ -48,7 +44,11 @@ class ManagementController extends Controller
 
     public function editStudent($da)
     {
-        $student = (new StudentBroker())->findByDa($da);
+        if (!StudentService::exists($da)) {
+            Flash::error('L\'étudiant n\'existe pas');
+            return $this->redirect('/management/students');
+        }
+        $student = StudentService::get($da);
         return $this->render('management/students/temp_student_form', [
             'title' => 'Éditer ' . $student->firstname . ' ' . $student->lastname,
             'action' => '/management/students/' . $student->da . '/update',
@@ -59,8 +59,8 @@ class ManagementController extends Controller
 
     public function deleteStudent($da)
     {
-        if (Student::exists($da)) {
-            Student::delete($da);
+        if (StudentService::exists($da)) {
+            StudentService::delete($da);
             Flash::success('Étudiant supprimé avec succès.');
         } else {
             Flash::error('Une erreur est survenue.');
@@ -70,7 +70,7 @@ class ManagementController extends Controller
 
     public function storeStudent()
     {
-        $student = Student::create($this->buildForm());
+        $student = StudentService::create($this->buildForm());
         if ($student->hasSucceeded()) {
             Flash::success('Étudiant créé avec succès.');
             return $this->redirect('/management/students');
@@ -81,8 +81,8 @@ class ManagementController extends Controller
 
     public function updateStudent($da)
     {
-        if (Student::exists($da)) {
-            $student = Student::update($da, $this->buildForm());
+        if (StudentService::exists($da)) {
+            $student = StudentService::update($da, $this->buildForm());
             if ($student->hasSucceeded()) {
                 Flash::success('Étudiant edité avec succèss.');
                 return $this->redirect('/management/students');
