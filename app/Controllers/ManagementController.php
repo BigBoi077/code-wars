@@ -4,8 +4,10 @@
 namespace Controllers;
 
 
+use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
+use Models\Entities\Exercise;
 use Models\Entities\Student;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
@@ -93,9 +95,11 @@ class ManagementController extends Controller
         return $this->redirect('/management/students/' . $da . '/edit');
     }
 
-    public function listExercises()
+    public function listExercises(): Response
     {
-        return $this->html('exercises listing');
+        return $this->render('management/exercises/temp_exercise_listing', [
+            'exercises' => (new ExerciseBroker())->getAll()
+        ]);
     }
 
     public function createExercise()
@@ -111,6 +115,17 @@ class ManagementController extends Controller
     public function storeExercise()
     {
         return $this->html('store exercise');
+    }
+
+    public function deleteExercise($id)
+    {
+        if (Exercise::exists($id)) {
+            Exercise::delete($id);
+            Flash::success('Exercise supprimé avec succès.');
+        } else {
+            Flash::error('Une erreur est survenue.');
+        }
+        return $this->redirect('/management/exercises');
     }
 
 }

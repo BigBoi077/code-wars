@@ -91,7 +91,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0px 5% 28px;
+    padding: 0 5% 28px;
 }
 
 .login-form input:focus {
@@ -132,7 +132,37 @@ body {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+/*   CSS - Exercises               */
+.exerciceTitle{
+    font-weight: bold;
+    text-align: center;
+    margin-right: 5rem;
+}
+.exerciseTable{
+    margin-top: 2rem;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+}
+.pageTitle{
+    text-align: center;
+}
+.exerciseInfo{
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+}
+.exerciceInfo, .exerciceTitle {
+    width: 15rem;
+    text-align: center;
+    padding: 1rem;
+}
 
+.menuLink {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 1rem;
+    width: 100%;
+}
+/* ************************************* */
 @media only screen and (max-width: 600px) {
 
 }
