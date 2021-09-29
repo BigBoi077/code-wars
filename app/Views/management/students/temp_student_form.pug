@@ -3,7 +3,7 @@ include ../../mixins/base
 doctype html
 html
   head
-    title Creer un etudiant - Code Wars
+    title Créer un étudiant - Code Wars
     meta(charset='utf-8')
     body
       h2
@@ -20,7 +20,7 @@ html
           br
 
         label
-          | Prenom
+          | Prénom
         br
         input(id='firstname', name='firstname', type='text' required value=(student !== null) ? student.firstname: val('firstname'))
         br
@@ -38,7 +38,7 @@ html
         br
 
         label(for='team_id')
-          | Equipe
+          | Équipe
         br
         select(id='team_id', name='team_id' required)
           each team in teams
@@ -55,6 +55,6 @@ html
         br
         button(type='submit')
           if student !== null
-            | Editer
+            | Éditer
           else
-            | Creer
+            | Créer
