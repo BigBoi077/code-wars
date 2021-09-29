@@ -3,13 +3,34 @@ include ../../mixins/base
 doctype html
 html
   head
-    title Créer un article - Code Wars
+    title #{title} - Code Wars
     meta(charset='utf-8')
     body
       h2
         | #{title}
       +flash
       form(method='post', action=action)
+        label(for='name') Nom
+        br
+        input(id='name', type='text', name='name', value=(item !== null) ? item.name: val('name'))
+        br
 
-        label(for='name')
-        input(id='name', )
+        label(for='price') Prix
+        br
+        input(id='price', type='text', name='price', value=(item !== null) ? item.price: val('price'))
+        br
+
+        label(for='description') Description
+        br
+        textarea(id='description', name='description', rows='5', cols='30')
+          if item !== null
+            | #{item.description}
+          else
+            | #{val('description')}
+
+        br
+        button(type='submit')
+          if item !== null
+            | Éditer
+          else
+            | Créer

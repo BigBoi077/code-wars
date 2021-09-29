@@ -161,12 +161,22 @@ class ManagementController extends Controller
         return $this->render('management/items/temp_item_form', [
             'title' => 'Créer un article',
             'action' => '/management/items/store',
+            'item' => null,
         ]);
     }
 
-    public function editItem()
+    public function editItem($id)
     {
-        return $this->html('item edit');
+        if (!ItemService::exists($id)) {
+            Flash::error('L\'item n\'existe pas');
+            return $this->redirect('/management/items');
+        }
+        $item = ItemService::get($id);
+        return $this->render('management/items/temp_item_form', [
+            'title' => 'Éditer ' . $item->name,
+            'action' => '/management/students/' . $item->id . '/update',
+            'item' => $item,
+        ]);
     }
 
     public function deleteItem()
@@ -176,7 +186,13 @@ class ManagementController extends Controller
 
     public function storeItem()
     {
-        return $this->html('item store');
+        $item = ItemService::create($this->buildForm());
+        if ($item->hasSucceeded()) {
+            Flash::success('Article créé avec succès.');
+            return $this->redirect('/management/items');
+        }
+        Flash::error($item->getErrorMessages());
+        return $this->redirect('/management/items/create');
     }
 
     public function updateItem()
