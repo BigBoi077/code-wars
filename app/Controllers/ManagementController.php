@@ -174,14 +174,20 @@ class ManagementController extends Controller
         $item = ItemService::get($id);
         return $this->render('management/items/temp_item_form', [
             'title' => 'Éditer ' . $item->name,
-            'action' => '/management/students/' . $item->id . '/update',
+            'action' => '/management/items/' . $item->id . '/update',
             'item' => $item,
         ]);
     }
 
-    public function deleteItem()
+    public function deleteItem($id)
     {
-        return $this->html('item delete');
+        if (ItemService::exists($id)) {
+            ItemService::delete($id);
+            Flash::success('Article supprimé avec succès.');
+        } else {
+            Flash::error('Une erreur est survenue.');
+        }
+        return $this->redirect('/management/items');
     }
 
     public function storeItem()
@@ -195,9 +201,18 @@ class ManagementController extends Controller
         return $this->redirect('/management/items/create');
     }
 
-    public function updateItem()
+    public function updateItem($id)
     {
-        return $this->html('item update');
+        if (ItemService::exists($id)) {
+            $item = ItemService::update($id, $this->buildForm());
+            if ($item->hasSucceeded()) {
+                Flash::success('Article edité avec succèss.');
+                return $this->redirect('/management/items');
+            }
+            Flash::error($item->getErrorMessages());
+        }
+        Flash::error('Une erreur est survenue.');
+        return $this->redirect('/management/items/' . $id . '/edit');
     }
 
 }

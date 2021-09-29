@@ -4,6 +4,7 @@ namespace Models\Services;
 
 
 use Models\Brokers\ItemBroker;
+use Models\Brokers\StudentItemBroker;
 use stdClass;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
@@ -19,8 +20,18 @@ class ItemService
     {
         $instance = new self();
         $instance->form = $form;
-        if ($instance->applyRules() && $instance->isNameAvailable()) {
+        if ($instance->applyRules()) {
             $instance->insertToDatabase();
+        }
+        return $instance;
+    }
+
+    public static function update($id, Form $form)
+    {
+        $instance = new self();
+        $instance->form = $form;
+        if ($instance->applyRules()) {
+            $instance->updateToDatabase($id);
         }
         return $instance;
     }
@@ -40,6 +51,22 @@ class ItemService
         return (new ItemBroker())->findById($id);
     }
 
+    public static function delete($id)
+    {
+        (new StudentItemBroker())->deleteWithItemId($id);
+        (new ItemBroker())->delete($id);
+    }
+
+    public function hasSucceeded()
+    {
+        return $this->success;
+    }
+
+    public function getErrorMessages()
+    {
+        return $this->errorMessages;
+    }
+
     private function applyRules(): bool
     {
         $this->form->validate('name', Rule::notEmpty('Le nom est requis.'));
@@ -54,15 +81,6 @@ class ItemService
         return true;
     }
 
-    private function isNameAvailable(): bool
-    {
-        if ((new ItemBroker())->findByName($this->form->getValue('name')) != null) {
-            $this->errorMessages = 'Le nom d\'article est deja utilisé.';
-            return false;
-        }
-        return true;
-    }
-
     private function insertToDatabase()
     {
         $name = $this->form->getValue('name');
@@ -72,9 +90,13 @@ class ItemService
         $this->success = true;
     }
 
-    public function hasSucceeded()
+    private function updateToDatabase($id)
     {
-        return $this->success;
+        $name = $this->form->getValue('name');
+        $price = $this->form->getValue('price');
+        $description = $this->form->getValue('description');
+        (new ItemBroker())->update($id, $name, $price, $description);
+        $this->success = true;
     }
 
 
