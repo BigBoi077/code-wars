@@ -6,9 +6,9 @@ html
 		title CodeWars - Home
 		meta(charset='utf-8')
 		body
-			h1 Gestion des etudiants
+			h1 Gestion des étudiants
 			+flash
-			a(href='/management/students/create') Creer un etudiant
+			a(href='/management/students/create') Créer un étudiant
 			each student in students
 				table
 					tr
@@ -17,10 +17,12 @@ html
 								| #{student.da}.
 								| #{student.firstname} #{student.lastname}
 						td
+							| #{student.team_name} $
+						td
 								| #{student.cash} $
 						td
 							a(href='/management/students/' + student.da + '/edit')
-								|  Editer
+								|  Éditer
 						td
 							a(href='/management/students/' + student.da + '/delete')
 								|  Supprimer

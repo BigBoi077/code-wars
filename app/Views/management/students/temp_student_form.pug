@@ -3,7 +3,7 @@ include ../../mixins/base
 doctype html
 html
   head
-    title Creer un etudiant - Code Wars
+    title Créer un étudiant - Code Wars
     meta(charset='utf-8')
     body
       h2
@@ -20,34 +20,25 @@ html
           br
 
         label
-          | Prenom
+          | Prénom
         br
-        if student !== null
-          input(id='firstname', name='firstname', type='text' required value=student.firstname)
-        else
-          input(id='firstname', name='firstname', type='text' required value=val('firstname'))
+        input(id='firstname', name='firstname', type='text' required value=(student !== null) ? student.firstname: val('firstname'))
         br
 
         label
           | Nom
         br
-        if student !== null
-          input(id='lastname', name='lastname', type='text' required value=student.lastname)
-        else
-          input(id='lastname', name='lastname', type='text' required value=val('lastname'))
+        input(id='lastname', name='lastname', type='text' required value=(student !== null) ? student.lastname: val('lastname'))
         br
 
         label
           | Argent (optionel)
         br
-        if student !== null
-          input(id='cash', name='cash', type='text' value=student.cash)
-        else
-          input(id='cash', name='cash', type='text' value=val('cash'))
+        input(id='cash', name='cash', type='text' value=(student !== null) ? student.cash: val('cash'))
         br
 
         label(for='team_id')
-          | Equipe
+          | Équipe
         br
         select(id='team_id', name='team_id' required)
           each team in teams
@@ -62,9 +53,8 @@ html
               option(value=team.id)
                 | #{team.name}
         br
-        if student !== null
-          button(type='submit')
-            | Editer
-        else
-          button(type='submit')
-            | Creer
+        button(type='submit')
+          if student !== null
+            | Éditer
+          else
+            | Créer

@@ -1,22 +1,20 @@
-<?php
+<?php namespace Models\Entities;
 
-namespace Models\Entities;
-
-use Exception;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
 use Models\Brokers\UserBroker;
+use stdClass;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 
-class Student
+class StudentService
 {
     private $succes = false;
     private Form $form;
     private $errorMessages;
 
-    public static function create(Form $form): Student
+    public static function create(Form $form): StudentService
     {
         $instance = new self();
         $instance->form = $form;
@@ -27,7 +25,7 @@ class Student
     }
 
 
-    public static function update($da, Form $form): Student
+    public static function update($da, Form $form): StudentService
     {
         $instance = new self();
         $instance->form = $form;
@@ -35,6 +33,16 @@ class Student
             $instance->updateToDatabase($da);
         }
         return $instance;
+    }
+
+    public static function get($da): stdClass
+    {
+        return (new StudentBroker())->findByDa($da);
+    }
+
+    public static function getAll()
+    {
+        return (new StudentBroker())->getAll();
     }
 
     public static function delete($da)
@@ -74,8 +82,8 @@ class Student
     {
         if ($this->form->isRegistered('da')) {
             $this->form->validate('da', Rule::integer('Le DA doit etre un nombre.'));
-            $this->form->validate('da', Rule::maxLength(6, 'Le DA doit contenir 6 chiffres'));
-            $this->form->validate('da', Rule::minLength(6, 'Le DA doit contenir 6 chiffres'));
+            $this->form->validate('da', Rule::maxLength(7, 'Le DA doit contenir 7 chiffres'));
+            $this->form->validate('da', Rule::minLength(7, 'Le DA doit contenir 7 chiffres'));
         }
         $this->form->validate('firstname', Rule::notEmpty('Le prenom est requis.'));
         $this->form->validate('lastname', Rule::notEmpty('Le nom est requis.'));

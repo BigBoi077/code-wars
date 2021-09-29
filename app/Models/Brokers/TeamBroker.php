@@ -1,6 +1,4 @@
-<?php
-
-namespace Models\Brokers;
+<?php namespace Models\Brokers;
 
 class TeamBroker extends Broker
 {

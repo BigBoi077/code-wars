@@ -3,18 +3,18 @@ insert into team(id, color, name) values (default, 'Red', 'Sith');
 insert into team(id, color, name) values (default, 'Blue', 'Rebel');
 
 /*insert student*/
-insert into person(da, firstname, lastname) values (111111, 'test1', 'damnSon');
-insert into "user"(id, da, password) values(default, 111111, '$2y$10$CJAhNUuCUlyUxWStg83nbuNK.Gpbd8o1nRLxnfwc47CwvLcIpgFBC');
-insert into student(da, team_id, cash) values (111111, 1, 0);
-insert into person(da, firstname, lastname) values (222222, 'test2', 'damnSon2');
-insert into "user"(id, da, password) values(default, 222222, '$2y$10$sqSDweGhocBtjzxkFqeNmeIksEdEIHCzv4zLA44yTk1Je0ZPJyfoi');
-insert into student(da, team_id, cash) values (222222, 1, 0);
-insert into person(da, firstname, lastname) values (333333, 'test3', 'damnSon3');
-insert into "user"(id, da, password) values(default, 333333, '$2y$10$ancZUqfr.TVoTV4g6UQvHOJlIWSbimuct5wxPACa0rN/LCWFKrH0C');
-insert into student(da, team_id, cash) values (333333, 2, 0);
-insert into person(da, firstname, lastname) values (444444, 'test4', 'damnSon4');
-insert into "user"(id, da, password) values(default, 444444, '$2y$10$UDJujooasG4snjI09wKDsehOVFXc7qsJv1rQz0ePZIQSNbLl55tja');
-insert into student(da, team_id, cash) values (444444, 2, 0);
+insert into person(da, firstname, lastname) values (1111111, 'test1', 'damnSon');
+insert into "user"(id, da, password) values(default, 1111111, '$2y$10$CJAhNUuCUlyUxWStg83nbuNK.Gpbd8o1nRLxnfwc47CwvLcIpgFBC');
+insert into student(da, team_id, cash) values (1111111, 1, 0);
+insert into person(da, firstname, lastname) values (2222222, 'test2', 'damnSon2');
+insert into "user"(id, da, password) values(default, 2222222, '$2y$10$sqSDweGhocBtjzxkFqeNmeIksEdEIHCzv4zLA44yTk1Je0ZPJyfoi');
+insert into student(da, team_id, cash) values (2222222, 1, 0);
+insert into person(da, firstname, lastname) values (3333333, 'test3', 'damnSon3');
+insert into "user"(id, da, password) values(default, 3333333, '$2y$10$ancZUqfr.TVoTV4g6UQvHOJlIWSbimuct5wxPACa0rN/LCWFKrH0C');
+insert into student(da, team_id, cash) values (3333333, 2, 0);
+insert into person(da, firstname, lastname) values (4444444, 'test4', 'damnSon4');
+insert into "user"(id, da, password) values(default, 4444444, '$2y$10$UDJujooasG4snjI09wKDsehOVFXc7qsJv1rQz0ePZIQSNbLl55tja');
+insert into student(da, team_id, cash) values (4444444, 2, 0);
 
 /*week*/
 insert into week(id, number, start_date, is_active) values (default, 1, current_date, true);
@@ -32,5 +32,5 @@ insert into item(id, name, price, description) values (default, 'bonus points', 
 insert into item(id, name, price, description) values (default, 'assault sur ennemi', 500, '-100 points bonus à lennemi');
 
 /*student item*/
-insert into studentitem(id, item_id, student_da) values (default, 1, 111111);
-insert into studentitem(id, item_id, student_da) values (default, 1, 222222);
+insert into studentitem(id, item_id, student_da) values (default, 1, 1111111);
+insert into studentitem(id, item_id, student_da) values (default, 1, 2222222);
