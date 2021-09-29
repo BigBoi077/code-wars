@@ -1,0 +1,57 @@
+include ../../mixins/base
+doctype html
+html
+	head
+		title CodeWars - Home
+		meta(charset='utf-8')
+		link(rel="stylesheet" href="/stylesheets/style.css")
+		body
+			h1.pageTitle Gestion des exercises
+			+flash
+
+			div
+			    table.menuLink
+			        td
+                        a(href='/management/exercises/create')
+                            | Créer un exercise
+                    td
+                        a(href='/home')
+                            | Home
+			table.exerciseTable
+			    tr
+			        td.exerciceTitle
+                        | Name
+                    td.exerciceTitle
+                        | Difficulty
+			        td.exerciceTitle
+			            | Point Reward
+			        td.exerciceTitle
+			            | Cash Reward
+			        td.exerciceTitle
+			            | Edit
+			        td.exerciceTitle
+			            | Delete
+			        td.exerciceTitle
+			            | Detail
+			    tr
+                    each exercise in exercises
+                        tr
+                            td.exerciseInfo
+                                p
+                                    | #{exercise.name}.
+                            td.exerciseInfo
+                                    | #{exercise.difficulty}
+                            td.exerciseInfo
+                                    | #{exercise.point_reward}
+                            td.exerciseInfo
+                                    | #{exercise.cash_reward} $
+                            td.exerciseInfo
+                                a(href='/management/exercises/' + exercise.id + '/edit')
+                                    |  Editer
+                            td.exerciseInfo
+                                a(href='/management/exercises/' + exercise.id + '/delete')
+                                    |  Supprimer
+                            td.exerciseInfo
+                                a(href='/management/exercises/' + exercise.id + '/detail')
+                                    | Detail
+

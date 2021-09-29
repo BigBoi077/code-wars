@@ -26,7 +26,7 @@ class ManagementController extends Controller
         $this->get('/management/exercises', 'listExercises');
         $this->get('/management/exercises/create', 'createExercise');
         $this->get('/management/exercises/{da}/edit', 'editExercise');
-        $this->get('/management/exercises/{da}/delete', 'deleteExercise');
+        $this->get('/management/exercises/{id}/delete', 'deleteExercise');
         $this->post('/management/exercises/store', 'storeExercise');
         $this->post('/management/exercises/{da}/update', 'updateExercise');
 	}
@@ -104,7 +104,11 @@ class ManagementController extends Controller
 
     public function createExercise()
     {
-        return $this->html('create exercise');
+        return $this->render('management/exercises/temp_exercise_form', [
+            'title' => 'Créer un exercise',
+            'action' => '/management/exercises/store',
+            'exercise' => null,
+        ]);
     }
 
     public function editExercise()
@@ -114,7 +118,13 @@ class ManagementController extends Controller
 
     public function storeExercise()
     {
-        return $this->html('store exercise');
+        $exercise = Exercise::create($this->buildForm());
+        if ($exercise->hasSucceeded()) {
+            Flash::success('Exercicse créé avec succès.');
+            return $this->redirect('/management/exercises');
+        }
+        Flash::error($exercise->getErrorMessages());
+        return $this->redirect('/management/exercises/create');
     }
 
     public function deleteExercise($id)

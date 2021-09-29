@@ -1,0 +1,99 @@
+include ../../mixins/base
+
+doctype html
+html
+  head
+    title Creer un exercise - Code Wars
+    meta(charset='utf-8')
+    body
+      h2
+        | #{title}
+      +flash
+      form(method='post', action=action)
+
+        label
+          | Nom de l'exercise
+        br
+        if exercise !== null
+          input(id='exercisename', name='exercisename', type='text' required value=exercise.name)
+        else
+          input(id='exercisename', name='exercisename', type='text' required value=val('exercisename'))
+        br
+
+        label
+          | Difficulté
+        br
+        if exercise !== null
+          input(id='difficulty', name='difficulty', type='text' required value=exercise.difficulty)
+        else
+          input(id='difficulty', name='difficulty', type='text' required value=val('difficulty'))
+        br
+
+        label
+            | Description
+        br
+        if exercise !== null
+          input(id='description', name='description', type='text' required value=exercise.description)
+        else
+          input(id='description', name='description', type='text' required value=val('description'))
+        br
+
+        label
+          | Exemple d'exécution
+        br
+        if exercise !== null
+          input(id='exemple', name='exemple', type='text' required value=exercise.exemple)
+        else
+          input(id='exemple', name='exemple', type='text' required value=val('exemple'))
+        br
+
+        label
+          | Conseil (Optionel)
+        br
+        if exercise !== null
+          input(id='tips', name='tips', type='text' required value=exercise.tips)
+        else
+          input(id='tips', name='tips', type='text' required value=val('tips'))
+        br
+
+        label
+          | Argent
+        br
+        if exercise !== null
+          input(id='cash', name='cash', type='text' value=exercise.cash)
+        else
+          input(id='cash', name='cash', type='text' value=val('cash'))
+        br
+
+        label
+          | Points
+        br
+        if exercise !== null
+          input(id='point', name='point', type='text' value=exercise.point)
+        else
+          input(id='point', name='point', type='text' value=val('point'))
+        br
+
+         label
+          | Date
+        br
+        if exercise !== null
+          input(id='date', name='date', type='date' value=exercise.date)
+        else
+          input(id='date', name='date', type='date' value=val('date'))
+        br
+        br
+        if exercise !== null
+         input(id='activate',name='activate', type='checkbox' value=exercise.activate)
+         label Activer l'exercise
+        else
+         input(id='activate',name='activate', type='checkbox' value=val('activate'))
+         label Activer l'exercise
+        br
+        br
+        if exercise !== null
+          button(type='submit')
+            | Editer
+        else
+          button(type='submit')
+            | Creer
