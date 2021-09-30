@@ -2,7 +2,7 @@
 
 use Models\Brokers\TeamBroker;
 use Models\Brokers\ExerciseBroker;
-use Models\Entities\Exercise;
+use Models\Services\ExerciseService;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
@@ -129,7 +129,7 @@ class ManagementController extends Controller
 
     public function storeExercise()
     {
-        $exercise = Exercise::create($this->buildForm());
+        $exercise = ExerciseService::create($this->buildForm());
         if ($exercise->hasSucceeded()) {
             Flash::success('Exercicse créé avec succès.');
             return $this->redirect('/management/exercises');
@@ -140,9 +140,9 @@ class ManagementController extends Controller
 
     public function deleteExercise($id)
     {
-        if (Exercise::exists($id)) {
-            Exercise::delete($id);
-            Flash::success('Exercise supprimé avec succès.');
+        if (ExerciseService::exists($id)) {
+            ExerciseService::delete($id);
+            Flash::success('ExerciseService supprimé avec succès.');
         } else {
             Flash::error('Une erreur est survenue.');
         }

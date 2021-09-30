@@ -1,21 +1,20 @@
 <?php
 
-namespace Models\Entities;
+namespace Models\Services;
 
-use Exception;
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\TipBroker;
 use Models\Brokers\WeekBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 
-class Exercise
+class ExerciseService
 {
     private $succes = false;
     private Form $form;
     private $errorMessages;
 
-    public static function create(Form $form): Exercise
+    public static function create(Form $form): ExerciseService
     {
         $instance = new self();
         $instance->form = $form;
@@ -26,7 +25,7 @@ class Exercise
     }
 
 
-    public static function update($id, Form $form): Exercise
+    public static function update($id, Form $form): ExerciseService
     {
         $instance = new self();
         $instance->form = $form;
