@@ -57,6 +57,11 @@ class ItemService
         (new ItemBroker())->delete($id);
     }
 
+    public static function deleteAllStudentItem($da)
+    {
+        (new StudentItemBroker())->deleteAllStudentItem($da);
+    }
+
     public function hasSucceeded()
     {
         return $this->success;

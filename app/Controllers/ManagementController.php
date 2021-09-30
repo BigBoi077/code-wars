@@ -71,7 +71,7 @@ class ManagementController extends Controller
     {
         if (StudentService::exists($da)) {
             if (StudentService::hasItem($da)) {
-                // TODO : Delete all item of student
+                ItemService::deleteAllStudentItem($da);
             }
             StudentService::delete($da);
             Flash::success('Étudiant supprimé avec succès.');

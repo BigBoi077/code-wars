@@ -9,4 +9,10 @@ class StudentItemBroker extends Broker
         $sql = "DELETE FROM codewars.studentitem WHERE item_id = ?";
         $this->query($sql, [$itemId]);
     }
+
+    public function deleteAllStudentItem($da)
+    {
+        $sql = "DELETE FROM codewars.studentitem WHERE student_da = ?";
+        $this->query($sql, [ $da ]);
+    }
 }

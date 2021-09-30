@@ -48,9 +48,9 @@ class StudentBroker extends Broker
 
     public function hasItem($da): bool
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname from codewars.student s 
+        $sql = "SELECT s.da, s.team_id from codewars.student s 
                 join codewars.user u on s.da = u.da
-                join codewars.studentitem si on s.da = si.da
+                join codewars.studentitem si on s.da = si.student_da
                 WHERE s.da = ?";
         return $this->selectSingle($sql, [$da]) != null;
     }
