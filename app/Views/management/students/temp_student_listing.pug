@@ -12,9 +12,15 @@ block body
 	#circleSmallRight
 	.main-container
 		+flash
-		h1 Gestion des étudiants
+		h1 Étudiants
+		a(href='/management/students/create')
+			button.btn.btn-yellow#addStudentBtn
+				p
+					i.fas.fa-plus-square
+					| Nouvel étudiant
+
 		.student-list
-			.row.heading-row
+			.row
 				.col-2
 					h4.student-header-element DA
 				.col-3
@@ -24,8 +30,6 @@ block body
 				.col-3
 					h4.student-header-element Balance
 				.col-1
-					a(href='/management/students/create')
-						i.fas.fa-plus-circle
 				.col-1
 			each student in students
 				.row.student-row
