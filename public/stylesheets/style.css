@@ -279,7 +279,7 @@ body {
 }
 
 .student-row-element, .student-header-element {
-    margin: 1em;
+    margin: 1.75rem;
 }
 
 .student-row:nth-child(even) {background: #f6f6f6}
