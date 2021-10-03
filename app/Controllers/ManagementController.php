@@ -60,7 +60,7 @@ class ManagementController extends Controller
         }
         $student = StudentService::get($da);
         return $this->render('management/students/temp_student_form', [
-            'title' => 'Éditer ' . $student->firstname . ' ' . $student->lastname,
+            'title' => 'Modification de ' . $student->firstname . ' ' . $student->lastname,
             'action' => '/management/students/' . $student->da . '/update',
             'student' => $student,
             'teams' => (new TeamBroker())->getAll(),
