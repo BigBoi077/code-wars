@@ -269,11 +269,20 @@ body {
     margin: 1.5rem 0;
 }
 
-#addStudentBtn i {
+#buyBtn {
+    margin: 0;
+    float: right;
+}
+
+#addStudentBtn i{
     padding-right: .5rem;
 }
 
-#addStudentBtn p {
+#buyBtn i {
+    padding-left: .5rem;
+}
+
+#addStudentBtn p, #buyBtn p {
     color: var(--dark);
     margin: 0;
 }
@@ -321,6 +330,27 @@ body {
     background-color: #FFF;
     margin: 1rem 0;
     border-radius: .75rem;
+}
+
+#productImg {
+    width: 10rem;
+    margin: 1.75rem auto;
+}
+
+.shop-item {
+    border-radius: 1.5rem;
+}
+
+.shop-item .buying-element-row h5 {
+    margin-bottom: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.buying-element-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 .student-row .col-1 {

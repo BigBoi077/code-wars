@@ -1,0 +1,29 @@
+include mixins/base
+extends mixins/layout
+
+block title
+	title Magasin - Code Wars
+
+block header
+	include mixins/header
+	+header()
+block body
+	#circle
+	#circleSmallRight
+	.main-container
+		+flash
+		h1 Magasin
+		.card-deck.shop-items-list
+			each item in items
+				.card.shop-item
+					img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
+					.card-body
+						h3.card-title #{item.name}
+						p.card-text #{item.description}
+						.row.buying-element-row
+							h5 #{item.price} $
+							a(href='/store/buy/' + item.id)
+								button.btn.btn-yellow#buyBtn
+									p
+										| Acheter
+										i.fas.fa-shopping-basket
