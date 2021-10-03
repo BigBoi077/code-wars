@@ -10,20 +10,20 @@ block header
 block body
 	#circle
 	#circleSmallRight
-	.main-container
-		+flash
+	+flash
+	.row.shop-header
 		h1 Magasin
-		.card-deck.shop-items-list
-			each item in items
-				.card.shop-item
-					img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
-					.card-body
-						h3.card-title #{item.name}
-						p.card-text #{item.description}
-						.row.buying-element-row
-							h5 #{item.price} $
-							a(href='/store/buy/' + item.id)
-								button.btn.btn-yellow#buyBtn
-									p
-										| Acheter
-										i.fas.fa-shopping-basket
+	.row.shop-items-list
+		each item in items
+			.card.shop-item.col-lg-3.col-md-6.col-12
+				img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
+				.card-body
+					h3.card-title #{item.name}
+					p.card-text #{item.description}
+					.row.buying-element-row
+						h5 #{item.price} $
+						a(href='/store/buy/' + item.id)
+							button.btn.btn-yellow#buyBtn
+								p
+									| Acheter
+									i.fas.fa-shopping-basket

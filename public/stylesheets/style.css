@@ -337,8 +337,37 @@ body {
     margin: 1.75rem auto;
 }
 
+.shop-items-list {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.shop-header {
+    width: 80%;
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shop-header h1 {
+    margin: auto;
+}
+
+.shop-items-list .card {
+    margin: 1rem;
+    min-width: 15rem;
+}
+
 .shop-item {
     border-radius: 1.5rem;
+}
+
+.shop-item .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .shop-item .buying-element-row h5 {
