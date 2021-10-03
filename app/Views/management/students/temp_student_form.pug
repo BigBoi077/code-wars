@@ -1,60 +1,54 @@
 include ../../mixins/base
+extends ../../mixins/layout
 
-doctype html
-html
-  head
-    title Créer un étudiant - Code Wars
-    meta(charset='utf-8')
-    body
-      h2
-        | #{title}
-      +flash
-      form(method='post', action=action)
+block title
+  title Students - Code Wars
 
-
-        if student === null
-          label
-            | DA
-          br
-          input(id='da', name='da', type='text' required value=val('da'))
-          br
-
-        label
-          | Prénom
-        br
-        input(id='firstname', name='firstname', type='text' required value=(student !== null) ? student.firstname: val('firstname'))
-        br
-
-        label
-          | Nom
-        br
-        input(id='lastname', name='lastname', type='text' required value=(student !== null) ? student.lastname: val('lastname'))
-        br
-
-        label
-          | Argent (optionel)
-        br
-        input(id='cash', name='cash', type='text' value=(student !== null) ? student.cash: val('cash'))
-        br
-
-        label(for='team_id')
-          | Équipe
-        br
-        select(id='team_id', name='team_id' required)
-          each team in teams
-            if student !== null
-              if student.team_id === team.id
-                option(value=team.id, selected)
-                  | #{team.name}
+block header
+  include ../../mixins/header
+  +header()
+block body
+  +flash
+  #circle
+  #circleSmallRight
+  .student-form-container
+    h4 #{title}
+    hr
+    form(method='post', action=action)
+      if student === null
+        .form-row
+          .form-group.col-12
+            label DA
+            input.form-control(id='da', name='da', type='text' required value=val('da') placeholder="7777777")
+      .form-row
+        .form-group.col-6
+          label(for="firstname") Prénom
+          input.form-control(placeholder="Joshua" id='firstname', name='firstname', type='text' required value=(student !== null) ? student.firstname : val('firstname'))
+        .form-group.col-6
+          label(for="lastname") Nom
+          input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' required value=(student !== null) ? student.lastname : val('lastname'))
+      .form-row
+        .form-group.col-6
+          label(for="cash") Argent (Optionnel)
+          input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(student !== null) ? student.cash : val('cash'))
+        .form-group.col-6
+          label(for="team_id") Équipe
+          select.form-control(id='team_id', name='team_id' required)
+            each team in teams
+              if student !== null
+                if student.team_id === team.id
+                  option(value=team.id, selected)
+                    | #{team.name}
+                else
+                  option(value=team.id)
+                    | #{team.name}
               else
                 option(value=team.id)
                   | #{team.name}
-            else
-              option(value=team.id)
-                | #{team.name}
-        br
-        button(type='submit')
+
+      .form-row
+        button#submitBtn.btn(type='submit')
           if student !== null
-            | Éditer
+            | Modifier
           else
             | Créer
