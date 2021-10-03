@@ -74,7 +74,7 @@ class StudentService
 
     private function areFieldsValid(): bool
     {
-        return !$this->applyRules() || !$this->isTeamValid();
+        return $this->applyRules() && $this->isTeamValid();
     }
 
     private function applyRules(): bool
