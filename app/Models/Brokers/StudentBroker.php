@@ -18,7 +18,7 @@ class StudentBroker extends Broker
 
     public function getPoints($da): int
     {
-        $sql = "select sum(e.point_reward) points from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ?";
+        $sql = "select sum(e.point_reward) points from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.completed = true";
         $points = $this->selectSingle($sql, [$da])->points;
         return $points == null ? 0 : $points;
     }
