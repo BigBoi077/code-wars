@@ -29,5 +29,7 @@ block body
           each val in [1,2,3,4,5]
             +notification(val)
       .col-6
-        h2 Membre de l'équipe
-        #team
+        h2.mb-4 Membre de l'équipe
+        #team.card.py-3
+          each member in teamMembers
+            +teamMember(member)

@@ -231,6 +231,16 @@ header .disconnect i:hover {
     border-radius: 5px;
 }
 
+/*team Member*/
+#team {
+    margin: 1rem;
+    min-width: 15rem;
+    border-radius: 1.5rem;
+}
+
+#team .team-member {
+
+}
 
 .menu-items > li{
     font-family: 'Starjedi', sans-serif;

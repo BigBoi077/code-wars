@@ -23,8 +23,10 @@ class HomeController extends Controller
     public function home()
     {
         $user = ($this->getUser());
-        $student = ((new StudentBroker())->findByDa($user['da']));
-        return $this->render('home', ['user' => $user, 'student' => $student, 'teamPoints' => $this->getTeamsPoints()]);
+        $broker = new StudentBroker();
+        $student = $broker->findByDa($user['da']);
+        $teamMembers = $broker->sameTeamStudent($student->team_id);
+        return $this->render('home', ['user' => $user, 'student' => $student, 'teamPoints' => $this->getTeamsPoints(), 'teamMembers' => $teamMembers]);
     }
 
     private function getTeamsPoints(): array

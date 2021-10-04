@@ -63,4 +63,16 @@ class StudentBroker extends Broker
                 WHERE s.da = ?";
         return $this->selectSingle($sql, [$da]) != null;
     }
+
+    public function sameTeamStudent($teamId): array
+    {
+        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
+        $teamMembers =  $this->select($sql, [$teamId]);
+        foreach ($teamMembers as $member) {
+            $member->points = $this->getPoints($member->da);
+        }
+        $points= array_column($teamMembers, 'points');
+        array_multisort($points, SORT_DESC, $teamMembers);
+        return $teamMembers;
+    }
 }
