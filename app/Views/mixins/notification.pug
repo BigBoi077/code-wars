@@ -1,7 +1,10 @@
-mixin notification(text)
-  .row.notification.p-2.mb-3.w-75
-    .col-10
-      p=text
-      p.mb-0 Il y a 2 heures
-    .col-2
-      img(src="")
+mixin notification(notif)
+  .card.mb-3.w-75.notification
+    .row.p-3
+      .col-10
+        h6.mb-0=notif.name
+        p.mb-0=notif.description
+        p.mb-0.time.pt-2 Émis le #{notif.date}
+      .col-1.d-flex.align-items-center
+        a(href="/notification/seen/" + notif.id).text-dark.notification-check
+          i.fas.fa-check-circle.fa-2x

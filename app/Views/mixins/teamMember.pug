@@ -1,8 +1,8 @@
 mixin teamMember(member)
-  .team-member.pl-2.m-3
-    .row
+  .team-member.mx-4.my-3
+    .row.border-bottom
       .col-6
-        h5 #{member.firstname} #{member.lastname}
+        h6 #{member.firstname} #{member.lastname}
       .col-6
-        p.text-right
+        h6.text-right
          | #{member.cash} $ | #{member.points} pts

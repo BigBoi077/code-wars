@@ -14,22 +14,24 @@ block body
         .d-flex.justify-content-between
           .score-bar
             .score-points
-              h4 #{teamPoints.Sith} pts
-            .score-value-left(style="width: " + teamPoints.sithWidth + "%")
+              h4 #{teamPoints.Rebel} pts
+            .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
           .score-bar
             .score-points.text-right
-              h4 #{teamPoints.Rebel} pts
-            .score-value-right(style="width: " + teamPoints.rebelWidth + "%")
+              h4 #{teamPoints.Sith} pts
+            .score-value-right(style="width: " + teamPoints.sithWidth + "%")
         .rebel-sith.text-center.w-100
-          img(src='assets/images/sith.png')
+          img(src='assets/images/rebelvsith.png')
     .row.mt-5.p-4
       .col-6
-        h2.mb-4 Notifications
-        #notifs.container.mx-2
-          each val in [1,2,3,4,5]
-            +notification(val)
+        h2.mb-4 Mes notifications
+        #notifs.mx-2
+          each notif in notifications
+            +notification(notif)
       .col-6
-        h2.mb-4 Membre de l'équipe
+        h2.mb-4 Membre de mon équipe
         #team.card.py-3
           each member in teamMembers
             +teamMember(member)
+
+            //this needs yellow somewhere nice! plz
