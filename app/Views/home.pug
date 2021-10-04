@@ -26,8 +26,11 @@ block body
       .col-6
         h2.mb-4 Mes notifications
         #notifs.mx-2
-          each notif in notifications
-            +notification(notif)
+          if notifications == null
+            h6 Vous n'avez aucune notification
+          else
+            each notif in notifications
+              +notification(notif)
       .col-6
         h2.mb-4 Membre de mon équipe
         #team.card.py-3
