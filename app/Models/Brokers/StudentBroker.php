@@ -11,7 +11,16 @@ class StudentBroker extends Broker
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
                 WHERE s.da = ?";
-        return $this->selectSingle($sql, [$da]);
+        $student = $this->selectSingle($sql, [$da]);
+        $student->points = $this->getPoints($da);
+        return $student;
+    }
+
+    public function getPoints($da): int
+    {
+        $sql = "select sum(e.point_reward) points from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ?";
+        $points = $this->selectSingle($sql, [$da])->points;
+        return $points == null ? 0 : $points;
     }
 
     public function getAll()

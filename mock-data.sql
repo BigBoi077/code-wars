@@ -34,3 +34,4 @@ insert into item(id, name, price, description) values (default, 'assault sur enn
 /*student item*/
 insert into studentitem(id, item_id, student_da) values (default, 1, 1111111);
 insert into studentitem(id, item_id, student_da) values (default, 1, 2222222);
+

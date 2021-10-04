@@ -4,6 +4,7 @@
 namespace Controllers;
 
 
+use Models\Brokers\StudentBroker;
 use Models\Services\ItemService;
 
 class ShopController extends Controller
@@ -14,9 +15,12 @@ class ShopController extends Controller
 	}
 
 	public function market() {
+	    $user = $this->getUser();
+	    $student = (new StudentBroker())->findByDa($user['da']);
 		return $this->render('temp_market', [
-			'user' => $this->getUser(),
-			'items' => ItemService::getAll()
+			'user' => $user,
+			'items' => ItemService::getAll(),
+            'student' => $student
 		]);
 	}
 }

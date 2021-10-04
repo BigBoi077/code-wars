@@ -14,12 +14,12 @@ block body
         .d-flex.justify-content-between
           .score-bar
             .score-points
-              h4=100 + " pts"
-            .score-value-left(style="width: 30%")
+              h4 #{teamPoints.Sith} pts
+            .score-value-left(style="width: " + teamPoints.sithWidth + "%")
           .score-bar
             .score-points.text-right
-              h4=1000 + " pts"
-            .score-value-right(style="width: 400px")
+              h4 #{teamPoints.Rebel} pts
+            .score-value-right(style="width: " + teamPoints.rebelWidth + "%")
         .rebel-sith.text-center.w-100
           img(src='assets/images/sith.png')
     .row.mt-5.p-4
