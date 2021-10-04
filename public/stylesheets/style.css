@@ -225,6 +225,10 @@ header .disconnect i:hover {
 }
 
 /*notifications*/
+.card {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+}
+
 .notification {
     font-size: small;
     border-radius: 1rem;

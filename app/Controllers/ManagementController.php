@@ -38,7 +38,8 @@ class ManagementController extends Controller
 	public function listStudents(): Response
 	{
 		return $this->render('management/students/temp_student_listing', [
-            'students' => StudentService::getAll()
+            'students' => StudentService::getAll(),
+            'student' => null
         ]);
 	}
 
