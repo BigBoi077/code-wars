@@ -226,6 +226,7 @@ header .disconnect i:hover {
 
 /*notifications*/
 .card, .box-shadow {
+    border-radius: 1rem; !important;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
 }
 
@@ -243,7 +244,7 @@ header .disconnect i:hover {
 }
 
 /*team Member*/
-#team {
+.team {
     margin: 1rem;
     min-width: 15rem;
     border-radius: 1rem;

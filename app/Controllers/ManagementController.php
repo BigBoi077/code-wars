@@ -12,6 +12,8 @@ class ManagementController extends Controller
 {
 	public function initializeRoutes()
 	{
+	    $this->get('/management', 'management');
+
 		$this->get('/management/students', 'listStudents');
         $this->get('/management/students/create', 'createStudent');
         $this->get('/management/students/{da}/edit', 'editStudent');
@@ -34,6 +36,11 @@ class ManagementController extends Controller
         $this->post('/management/items/{id}/update', 'updateItem');
 
 	}
+
+	public function management(): Response
+    {
+        return $this->render('management/base', ['student' => null]);
+    }
 
 	public function listStudents(): Response
 	{

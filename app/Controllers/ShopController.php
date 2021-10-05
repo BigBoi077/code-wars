@@ -16,8 +16,11 @@ class ShopController extends Controller
 
 	public function market() {
 	    $user = $this->getUser();
-	    $student = (new StudentBroker())->findByDa($user['da']);
-		return $this->render('temp_market', [
+	    $student = null;
+	    if (!$user['isTeacher']) {
+            $student = (new StudentBroker())->findByDa($user['da']);
+        }
+		return $this->render('market', [
 			'user' => $user,
 			'items' => ItemService::getAll(),
             'student' => $student

@@ -1,0 +1,28 @@
+extends mixins/layout
+
+block title
+  title Équipe - Code Wars
+
+block header
+  +header()
+
+block body
+  #circle
+  #circleSmall
+  #circleSmallRight
+  .container
+    #score.d-flex.justify-content-center.my-5
+      +scoreBoard()
+    #teams
+      .row.justify-content-between.mb-3
+        .col-5.mx-4
+          h1 Rebel
+        .col-5.text-right.mx-4
+          h1 Sith
+      .row.justify-content-between
+        .col-5.mx-4.card.py-3
+          each sith, index in teams.siths
+            +teamMember(sith, index)
+        .col-5.mx-4.card.py-3
+            each rebel, index in teams.rebels
+              +teamMember(rebel, index)
