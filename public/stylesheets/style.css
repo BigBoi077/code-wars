@@ -21,6 +21,10 @@ html, body {
     margin-right: 0;
 }
 
+.starwars-font {
+    font-family: 'StarJedi', sans-serif;
+}
+
 @font-face {
     font-family: 'RobotoRegular';
     src: url("fonts/Roboto/Roboto-Regular.woff");
@@ -188,6 +192,11 @@ header .disconnect i:hover {
     width: 15%;
 }
 
+.rebel-sith-logo > img {
+    position: relative;
+    width: 10%;
+}
+
 .score-bar {
     background: black;
     justify-content: flex-start;
@@ -228,6 +237,14 @@ header .disconnect i:hover {
 .card, .box-shadow {
     border-radius: 1rem; !important;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+}
+
+.box-shadow-sith {
+    box-shadow: 0 5px 15px 0 rgba(255, 0, 0, 0.5); 
+}
+
+.box-shadow-rebel {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 255, 0.5);
 }
 
 .notification {
@@ -423,11 +440,6 @@ body {
 
 .heading-row {
     border-bottom: 2px solid #e1e1e1;
-}
-
-.background {
-    background: linear-gradient( rgba(255, 198, 94, 0.5), rgba(0, 0, 0, 0.5)), url('images/xwing_bg.jpg') no-repeat;
-    background-size: cover;
 }
 
 .form-page {
