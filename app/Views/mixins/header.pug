@@ -21,7 +21,7 @@ mixin header()
         .text-right.pr-3.d-flex.flex-column
           if student != null
             h6 #{student.firstname} #{student.lastname}
-            h6 #{student.cash} $ | #{student.points} pts
+            h6 #{format('money', student.cash)} | #{student.points} pts
           if user.isTeacher
             h6 Professeur
       a.profile-pic(href="/profile/user/id")
