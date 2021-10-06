@@ -10,7 +10,7 @@ mixin header()
         li
           a(href="/teams") Équipes
         li
-          a(href="/missions") Missions
+          a(href="/exercises") Missions
         li
           a(href="/market") Magasin
         if user.isTeacher
@@ -22,9 +22,9 @@ mixin header()
           if !user.isTeacher
             h6 #{user.firstname} #{user.lastname}
             h6 #{format('money', student.cash)} | #{student.points} pts
-          if user.isTeacher
+          else
             h6 Professeur
-      a.profile-pic(href="/profile/user/id")
+      a.profile-pic(href="/profile/user/")
           img(src="/assets/images/kakashi.jpeg")
       i#bell.fa-bell.fas.d-flex.align-items-center.fa.p-3
       form.disconnect.mr-2(action="/logout", method="post")

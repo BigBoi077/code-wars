@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Logger;
+use Models\Services\StudentService;
 use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
 
@@ -29,9 +30,11 @@ abstract class Controller extends SecurityController
      */
     public function render($page, $args = []): Response
     {
+        $student = StudentService::get($this->getUser()['da']);
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'student' => $student
         ]));
     }
 
