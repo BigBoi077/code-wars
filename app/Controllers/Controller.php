@@ -84,4 +84,9 @@ abstract class Controller extends SecurityController
     {
         return Session::getInstance()->read('user');
     }
+
+    public function isUserTeacher(): bool
+    {
+        return $this->getUser()['isTeacher'];
+    }
 }

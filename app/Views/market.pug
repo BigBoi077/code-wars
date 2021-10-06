@@ -1,0 +1,41 @@
+include mixins/base
+extends mixins/layout
+
+block title
+	title Magasin - Code Wars
+
+block header
+	include mixins/header
+	+header()
+block body
+	#circle
+	#circleSmall
+	#circleSmallRight
+	+flash
+	.row.shop-header
+		h1 Magasin
+	.row.shop-items-list
+		each item in items
+			.card.shop-item.col-lg-3.col-md-6.col-12
+				img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
+				.card-body
+					h3.card-title #{item.name}
+					p.card-text #{item.description}
+					.row.buying-element-row
+						h5 #{item.price} $
+						if studentItems !== null
+							- var contains = false;
+							each studentItem in studentItems
+								if studentItem.item_id === item.id
+									- contains = true
+							a(href=(!contains) ? '/market/buy/' + item.id: '#')
+								button(disabled=contains).btn.btn-yellow#buyBtn
+									p
+										| Acheter
+										i.fas.fa-shopping-basket
+						else
+							a(href='/market/buy/' + item.id)
+								button.btn.btn-yellow#buyBtn
+									p
+										| Acheter
+										i.fas.fa-shopping-basket

@@ -2,6 +2,10 @@
 
 
 
+use Models\Brokers\NotificationBroker;
+use Models\Brokers\StudentBroker;
+use Models\Brokers\TeamBroker;
+
 class HomeController extends Controller
 {
 
@@ -19,6 +23,17 @@ class HomeController extends Controller
 
     public function home()
     {
-        return $this->render('home', ['user' => $this->getUser()]);
+        $user = ($this->getUser());
+        $broker = new StudentBroker();
+        $student= null;
+        $teamMembers = [];
+        if (!$user['isTeacher']) {
+            $student = $broker->findByDa($user['da']);
+            $teamMembers = $broker->sameTeamStudent($student->team_id);
+        }
+        $notifications = (new NotificationBroker())->getStudentNotifications($user['id']);
+        return $this->render('home', ['user' => $user, 'student' => $student, 'teamPoints' => TeamController::getTeamsPoints(), 'teamMembers' => $teamMembers, 'notifications' => $notifications]);
     }
+
+
 }

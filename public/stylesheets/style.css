@@ -8,13 +8,21 @@
 :root {
     --accent: rgb(255,222,0);
     --dark: #000000;
-    --background: #FFFFFF;
+    --background: rgb(247, 247, 249);
     --red: #fd5a5a;
+}
+
+html, body {
+    background-color: var(--background);
 }
 
 .row {
     margin-left: 0; /* Bootstrap met de la margin negative par défaut */
     margin-right: 0;
+}
+
+.starwars-font {
+    font-family: 'StarJedi', sans-serif;
 }
 
 @font-face {
@@ -38,7 +46,6 @@
     left: -300px;
     height: 500px;
     width: 600px;
-    z-index: -100;
     background-color: var(--accent);
     background-color: var(--dark);
     border: 20px solid var(--accent);
@@ -51,7 +58,6 @@
     left: 100px;
     height: 250px;
     width: 300px;
-    z-index: -100;
     background-color: var(--accent);
     background-color: var(--dark);
     border: 20px solid var(--accent);
@@ -63,7 +69,6 @@
     top: -200px;
     right: -100px;
     height: 300px;
-    z-index: -100;
     width: 300px;
     background-color: var(--dark);
     border: 20px solid var(--accent);
@@ -77,6 +82,8 @@ header {
     padding: 32px;
     align-items: center;
     justify-content: space-between;
+    z-index: 10;
+    position: relative;
 }
 
 header nav {
@@ -185,6 +192,11 @@ header .disconnect i:hover {
     width: 15%;
 }
 
+.rebel-sith-logo > img {
+    position: relative;
+    width: 10%;
+}
+
 .score-bar {
     background: black;
     justify-content: flex-start;
@@ -202,7 +214,7 @@ header .disconnect i:hover {
     right: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #ff0000;
+    background: #0000ff;
     height: 30px;
 }
 
@@ -211,7 +223,7 @@ header .disconnect i:hover {
     left: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #0000ff;
+    background: #ff0000;
     height: 30px;
 }
 
@@ -222,12 +234,46 @@ header .disconnect i:hover {
 }
 
 /*notifications*/
-.notification {
-    font-size: small;
-    background-color: rgba(243, 243, 243, 0.5);
-    border-radius: 5px;
+.card, .box-shadow {
+    border-radius: 1rem; !important;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
 }
 
+.box-shadow-sith {
+    box-shadow: 0 5px 15px 0 rgba(255, 0, 0, 0.5); 
+}
+
+.box-shadow-rebel {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 255, 0.5);
+}
+
+.notification {
+    font-size: small;
+    border-radius: 1rem;
+}
+
+.notification .time {
+    font-size: xx-small;
+}
+
+.notification .notification-check:hover {
+    color: var(--accent) !important;
+}
+
+/*team Member*/
+.team {
+    margin: 1rem;
+    min-width: 15rem;
+    border-radius: 1rem;
+}
+
+/*#team .border-team {
+    border-bottom: var(--accent) 1px solid;
+}*/
+
+#team .team-member {
+
+}
 
 .menu-items > li{
     font-family: 'Starjedi', sans-serif;
@@ -254,23 +300,129 @@ body {
     background-color: var(--accent);
 }
 
+#submitBtn {
+    background-color: var(--accent);
+    padding: 1rem;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    width: 50%;
+}
+
+#addStudentBtn {
+    margin: 1.5rem 0;
+}
+
+#buyBtn {
+    margin: 0;
+    float: right;
+}
+
+#addStudentBtn i{
+    padding-right: .5rem;
+}
+
+#buyBtn i {
+    padding-left: .5rem;
+}
+
+#addStudentBtn p, #buyBtn p {
+    color: var(--dark);
+    margin: 0;
+}
+
 .main-container {
-    margin: auto;
     width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    z-index: 10;
+    position: relative;
+}
+
+.student-form-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    width: 50%;
+}
+
+.student-form-container .form-group {
+    padding: 0.75rem 1.5rem;
+}
+
+.student-form-container h4 {
+    padding-top: 1rem;
+    margin-left: 1.25rem;
+}
+
+.student-form-container hr {
+    margin: 0 1.25rem;
 }
 
 .main-container [class*="col-"] {
     padding: 0;
 }
 
-.student-list {
+.student-form-container {
     background-color: white;
-    border: 2px solid black;
-    box-shadow: 5px 10px 8px #888888;
+    border-radius: 1.5rem;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
 }
 
 .student-row {
-    border-bottom: 2px solid #e1e1e1;
+    background-color: #FFF;
+    margin: 1rem 0;
+    border-radius: .75rem;
+}
+
+#productImg {
+    width: 10rem;
+    margin: 1.75rem auto;
+}
+
+.shop-items-list {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.shop-header {
+    width: 80%;
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shop-header h1 {
+    margin: auto;
+}
+
+.shop-items-list .card {
+    margin: 1rem;
+    min-width: 15rem;
+}
+
+.shop-item {
+    border-radius: 1.5rem;
+}
+
+.shop-item .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.shop-item .buying-element-row h5 {
+    margin-bottom: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.buying-element-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 .student-row .col-1 {
@@ -278,20 +430,16 @@ body {
     text-align: center;
 }
 
-.student-row-element, .student-header-element {
-    margin: 1em;
+.student-row i {
+    color: var(--accent);
 }
 
-.student-row:nth-child(even) {background: #f6f6f6}
-.student-row:nth-child(odd) {background: #FFFFFF}
+.student-row-element, .student-header-element {
+    margin: 1.75rem;
+}
 
 .heading-row {
     border-bottom: 2px solid #e1e1e1;
-}
-
-.background {
-    background: linear-gradient( rgba(255, 198, 94, 0.5), rgba(0, 0, 0, 0.5)), url('images/xwing_bg.jpg') no-repeat;
-    background-size: cover;
 }
 
 .form-page {

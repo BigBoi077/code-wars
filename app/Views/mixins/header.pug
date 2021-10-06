@@ -13,13 +13,19 @@ mixin header()
           a(href="/missions") Missions
         li
           a(href="/market") Magasin
+        if user.isTeacher
+          li
+            a(href="/management") Management
     .d-flex.flex-row
       #student.d-flex.align-items-center
         .text-right.pr-3.d-flex.flex-column
-          h6 josh Leb
-          h6 100 $ | 34000 pts
-      a.profile-pic(href="/profile")
-        img(src="assets/images/kakashi.jpeg")
+          if student != null
+            h6 #{student.firstname} #{student.lastname}
+            h6 #{format('money', student.cash)} | #{student.points} pts
+          if user.isTeacher
+            h6 Professeur
+      a.profile-pic(href="/profile/user/id")
+          img(src="/assets/images/kakashi.jpeg")
       i#bell.fa-bell.fas.d-flex.align-items-center.fa.p-3
       form.disconnect.mr-2(action="/logout", method="post")
         button

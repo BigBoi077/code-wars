@@ -1,1 +1,13 @@
-
+mixin scoreBoard()
+  #scoreBoard.d-flex.flex-column.m-5
+    .d-flex.justify-content-between
+      .score-bar
+        .score-points
+          h4 #{teamPoints.Rebel} pts
+        .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
+      .score-bar
+        .score-points.text-right
+          h4 #{teamPoints.Sith} pts
+        .score-value-right(style="width: " + teamPoints.sithWidth + "%")
+    .rebel-sith.text-center.w-100
+      img(src='assets/images/rebelvsith.png')

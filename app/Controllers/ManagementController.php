@@ -12,8 +12,18 @@ use Zephyrus\Network\Response;
 
 class ManagementController extends Controller
 {
-	public function initializeRoutes()
+    public function before(): ?Response
+    {
+        if (!$this->isUserTeacher()) {
+            return $this->redirect("/");
+        }
+        return parent::before();
+    }
+
+    public function initializeRoutes()
 	{
+	    $this->get('/management', 'management');
+
 		$this->get('/management/students', 'listStudents');
         $this->get('/management/students/create', 'createStudent');
         $this->get('/management/students/{da}/edit', 'editStudent');
@@ -37,10 +47,16 @@ class ManagementController extends Controller
 
 	}
 
+	public function management(): Response
+    {
+        return $this->render('management/base', ['student' => null]);
+    }
+
 	public function listStudents(): Response
 	{
 		return $this->render('management/students/temp_student_listing', [
-            'students' => StudentService::getAll()
+            'students' => StudentService::getAll(),
+            'student' => null
         ]);
 	}
 
@@ -62,7 +78,7 @@ class ManagementController extends Controller
         }
         $student = StudentService::get($da);
         return $this->render('management/students/temp_student_form', [
-            'title' => 'Éditer ' . $student->firstname . ' ' . $student->lastname,
+            'title' => 'Modification de ' . $student->firstname . ' ' . $student->lastname,
             'action' => '/management/students/' . $student->da . '/update',
             'student' => $student,
             'teams' => (new TeamBroker())->getAll(),
