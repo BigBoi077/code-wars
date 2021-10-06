@@ -1,0 +1,16 @@
+include mixins/base
+extends mixins/layout
+
+block title
+  title Magasin - Code Wars
+
+block header
+  include mixins/header
+  +header()
+block body
+  #circle
+  #circleSmall
+  #circleSmallRight
+  +flash
+  .row.shop-header
+    h1 Magasin
