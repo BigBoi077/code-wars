@@ -21,15 +21,12 @@ class MarketController extends Controller
 	}
 
 	public function market() {
-	    $student = null;
         $studentItems = null;
 	    if (!$this->isUserTeacher()) {
-            $student = StudentService::get($this->getUser()['da']);
-            $studentItems = StudentItemService::getAllByDa($student->da);
+            $studentItems = StudentItemService::getAllByDa($this->getUser()['da']);
         }
 		return $this->render('market', [
 			'items' => ItemService::getAll(),
-            'student' => $student,
             'studentItems' => $studentItems
 		]);
 	}

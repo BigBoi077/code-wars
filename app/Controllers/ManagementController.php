@@ -49,14 +49,13 @@ class ManagementController extends Controller
 
 	public function management(): Response
     {
-        return $this->render('management/base', ['student' => null]);
+        return $this->render('management/base');
     }
 
 	public function listStudents(): Response
 	{
 		return $this->render('management/students/temp_student_listing', [
             'students' => StudentService::getAll(),
-            'student' => null
         ]);
 	}
 
