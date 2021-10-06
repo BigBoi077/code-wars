@@ -23,8 +23,9 @@ block body
             img(src='assets/images/sith.png').mx-3
       .row.justify-content-between
         .col-5.mx-4.card.py-3.box-shadow-rebel
+          each rebel, index in teams.rebels
+            +teamMember(rebel, index)
+        .col-5.mx-4.card.py-3.box-shadow-sith
           each sith, index in teams.siths
             +teamMember(sith, index)
-        .col-5.mx-4.card.py-3.box-shadow-sith
-            each rebel, index in teams.rebels
-              +teamMember(rebel, index)
+
