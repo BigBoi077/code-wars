@@ -15,44 +15,44 @@ html
           | Nom de l'exercise
         br
         if exercise !== null
-          input(id='exercisename', name='exercisename', type='text' required value=exercise.name)
+          input(id='exercisename', name='exercisename', type='text' value=exercise.name)
         else
-          input(id='exercisename', name='exercisename', type='text' required value=val('exercisename'))
+          input(id='exercisename', name='exercisename', type='text' value=val('exercisename'))
         br
 
         label
           | Difficulté
         br
         if exercise !== null
-          input(id='difficulty', name='difficulty', type='number' min='1' max='10' required value=exercise.difficulty)
+          input(id='difficulty', name='difficulty', type='number' min='1' max='10' value=exercise.difficulty)
         else
-          input(id='difficulty', name='difficulty', type='number' min='1' max='10' required value=val('difficulty'))
+          input(id='difficulty', name='difficulty', type='number' min='1' max='10' value=val('difficulty'))
         br
 
         label
             | Description
         br
         if exercise !== null
-          textArea(id='description', name='description', type='text' required value=exercise.description)
+          textArea(id='description', name='description', type='text')
+            | #{exercise.description}
         else
-          textArea(id='description', name='description', type='text' required value=val('description'))
+          textArea(id='description', name='description', type='text')=val('description')
         br
 
         label
-          | Exemple d'exécution
+          | Exemple d'exécution (optionel)
         br
         if exercise !== null
-          textArea(id='exemple', name='exemple', type='text' required value=exercise.exemple)
+          textArea(id='exemple', name='exemple', type='text')
+            | #{exercise.execution_exemple}
         else
-          textArea(id='exemple', name='exemple', type='text' required value=val('exemple'))
+          textArea(id='exemple', name='exemple', type='text')=val('exemple')
         br
 
         label
           | Conseil (Optionel)
         br
-        if exercise !== null
-          textArea(id='tips', name='tips', type='text'  value=exercise.tips)
-        else
+        if exercise == null
           textArea(id='tips', name='tips', type='text'  value=val('tips'))
         br
 
@@ -60,7 +60,7 @@ html
           | Argent
         br
         if exercise !== null
-          input(id='cash', name='cash', type='text' value=exercise.cash)
+          input(id='cash', name='cash', type='text' value=exercise.cash_reward)
         else
           input(id='cash', name='cash', type='text' value=val('cash'))
         br
@@ -69,26 +69,19 @@ html
           | Points
         br
         if exercise !== null
-          input(id='point', name='point', type='text' value=exercise.point)
+          input(id='point', name='point', type='text' value=exercise.point_reward)
         else
           input(id='point', name='point', type='text' value=val('point'))
         br
+        br
 
-         label
-          | Date
+        label
+          | Semaine
         br
-        if exercise !== null
-          input(id='date', name='date', type='date' value=exercise.date)
-        else
-          input(id='date', name='date', type='date' value=val('date'))
-        br
-        br
-        if exercise !== null
-         input(id='activate',name='activate', type='checkbox' value=exercise.activate)
-         label Activer l'exercise
-        else
-         input(id='activate',name='activate', type='checkbox' value=val('activate'))
-         label Activer l'exercise
+        select.form-control(id='week_id', name='week_id')
+          each week in weeks
+            option(value=week.id)
+              | #{week.number}
         br
         br
         if exercise !== null

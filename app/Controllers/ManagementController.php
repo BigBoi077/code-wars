@@ -33,7 +33,7 @@ class ManagementController extends Controller
 
         $this->get('/management/exercises', 'listExercises');
         $this->get('/management/exercises/create', 'createExercise');
-        $this->get('/management/exercises/{da}/edit', 'editExercise');
+        $this->get('/management/exercises/{id}/edit', 'editExercise');
         $this->get('/management/exercises/{id}/delete', 'deleteExercise');
         $this->post('/management/exercises/store', 'storeExercise');
         $this->post('/management/exercises/{id}/update', 'updateExercise');
@@ -127,7 +127,8 @@ class ManagementController extends Controller
     public function listExercises(): Response
     {
         return $this->render('management/exercises/temp_exercise_listing', [
-            'exercises' => (new ExerciseBroker())->getAll()
+            'exercises' => (new ExerciseBroker())->getAll(),
+            'student' => null
         ]);
     }
 
@@ -137,12 +138,30 @@ class ManagementController extends Controller
             'title' => 'Créer un exercise',
             'action' => '/management/exercises/store',
             'exercise' => null,
+            'weeks' => ((new WeekBroker())->getAll())
         ]);
     }
 
-    public function editExercise()
+    public function editExercise($id)
     {
-        return $this->html('edit exercise');
+        return $this->render('management/exercises/temp_exercise_form', [
+            'title' => 'Créer un exercise',
+            'action' => '/management/exercises/' . $id . '/update',
+            'exercise' => (new ExerciseBroker())->findByID($id),
+            'weeks' => (new WeekBroker())->getAll()
+        ]);
+    }
+
+    public function updateExercise($id)
+    {
+        $exercise = ExerciseService::update($id, $this->buildForm());
+        if ($exercise->hasSucceeded()) {
+            Flash::success('Exercicse mis à jour avec succès.');
+            return $this->redirect('/management/exercises');
+        }
+        Flash::error($exercise->getErrorMessages());
+        return $this->redirect('/management/exercises/' . $id . '/update');
+
     }
 
     public function detailExercise($id){
@@ -165,8 +184,6 @@ class ManagementController extends Controller
             'tip' => $tip,
             'week' => $week
         ]);
-
-       //return $this->html('detail exercise ' . $id);
 
     }
 

@@ -18,9 +18,6 @@ block body
                 td
                     a(href='/management/exercises/create')
                         | Créer un exercise
-                td
-                    a(href='/home')
-                        | Home
         table.exerciseTable
             tr
                 td
@@ -35,14 +32,12 @@ block body
                     | Edit
                 td
                     | Delete
-                td
-                    | Detail
             tr
                 each exercise in exercises
                     tr
                         td.exerciseInfo
                             p
-                                | #{exercise.name}.
+                                | #{exercise.name}
                         td.exerciseInfo
                                 | #{exercise.difficulty}
                         td.exerciseInfo
@@ -55,7 +50,4 @@ block body
                         td.exerciseInfo
                             a(href='/management/exercises/' + exercise.id + '/delete')
                                 |  Supprimer
-                        td.exerciseInfo
-                            a(href='/management/exercises/' + exercise.id + '/detail')
-                                | Detail
 
