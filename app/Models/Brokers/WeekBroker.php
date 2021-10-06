@@ -18,16 +18,15 @@ class WeekBroker extends Broker
 
     public function getAll()
     {
-        $sql = "SELECT w.id, w.start_date, w.is_active 
-                FROM codewars.week w
-                ORDER BY w.id";
+        $sql = "SELECT w.id, w.start_date, w.is_active, w.number
+                FROM codewars.week w";
         return $this->select($sql);
     }
 
     // TODO: Change Insert
-    public function insert($id,$date,$activate)
+    public function insert($exerciseId, $date, $activate)
     {
-        $sql = "INSERT INTO codewars.week (number,start_date,is_active) VALUES (?,?,?)";
+        $sql = "INSERT INTO codewars.week(id, number,start_date,is_active) VALUES (?,?,?)";
 
         return $this->query($sql, [
             $id,

@@ -9,7 +9,7 @@ class ExerciseBroker extends Broker
 
     public function findByID($id) : ?stdClass
     {
-        $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple 
+        $sql = "SELECT *
                 FROM codewars.exercise e 
                 WHERE e.id = ?";
 
@@ -24,19 +24,20 @@ class ExerciseBroker extends Broker
         return $this->select($sql);
     }
 
-    // TODO: Change Insert
-    public function insert($name,$difficulty,$description,$exemple,$cash,$point): int
+    public function insert($name,$difficulty,$description,$exemple, $cash, $point, $weekId): int
     {
-        $sql = "INSERT INTO codewars.exercise (name, difficulty, description, execution_exemple, cash_reward, point_reward) VALUES (?, ?, ?,?,?,?) RETURNING id";
+        $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?,?,?,?, ?) RETURNING id";
 
-        return $this->selectSingle($sql, [
+        $result = $this->selectSingle($sql, [
             $name,
             $difficulty,
             $description,
             $exemple,
             $cash,
-            $point
-        ])->id;
+            $point,
+            $weekId
+        ]);
+        return $result->id;
     }
 
     public function delete($id)
@@ -45,11 +46,10 @@ class ExerciseBroker extends Broker
         return $this->query($sql, [$id]);
     }
 
-    //TODO: Change Update
-    public function update($id,$name,$difficulty,$description,$exemple,$cash,$point)
+    public function update($id,$name,$difficulty,$description,$exemple,$cash,$point, $weekId)
     {
-        $sql = "UPDATE codewars.exercise SET name = ?, difficulty = ?, description = ?, execution_exemple = ?, cash_reward = ?, point_reward = ? WHERE id = ?";
-        $this->query($sql, [$id,$name,$difficulty,$description,$exemple,$cash,$point]);
+        $sql = "UPDATE codewars.exercise SET name = ?, difficulty = ?, description = ?, execution_exemple = ?, cash_reward = ?, point_reward = ?, week_id = ? WHERE id = ?";
+        $this->query($sql, [$name,$difficulty,$description,$exemple,$cash,$point, $weekId, $id]);
     }
 }
 

@@ -7,6 +7,7 @@ use Models\Brokers\TipBroker;
 use Models\Brokers\WeekBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
+use function PHPUnit\Framework\isEmpty;
 
 class ExerciseService
 {
@@ -74,20 +75,10 @@ class ExerciseService
     private function applyRules(): bool
     {
         $this->form->validate('exercisename', Rule::notEmpty('Le nom est requis.'));
-        $this->form->validate('description', Rule::notEmpty('La description est requise.'));
-        $this->form->validate('exemple', Rule::notEmpty('L\'exemple d\'execution est requis.'));
-        $this->form->validate('date', Rule::notEmpty('La date est requise.'));
 
-        if ($this->form->getValue('cash') != "") {
-            $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
-        }
-        if ($this->form->getValue('point') != "") {
-            $this->form->validate('point', Rule::integer('Les points doivent etre un chiffre'));
-        }
-        if ($this->form->getValue('difficulty') != "") {
-            $this->form->validate('difficulty', Rule::integer('La difficulté doit etre un chiffre'));
-        }
-        $this->form->isRegistered('activate');
+        $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
+        $this->form->validate('point', Rule::integer('Les points doivent etre un chiffre'));
+        $this->form->validate('difficulty', Rule::integer('La difficulté doit spécifié'));
         if (!$this->form->verify()) {
             $this->errorMessages = $this->form->getErrorMessages();
             return false;
@@ -97,38 +88,32 @@ class ExerciseService
 
     private function insertToDatabase()
     {
-        $exercisename = $this->form->getValue('exercisename');
+        $exerciseName = $this->form->getValue('exercisename');
         $difficulty = $this->form->getValue('difficulty');
         $description = $this->form->getValue('description');
         $exemple = $this->form->getValue('exemple');
-        $date = $this->form->getValue('date');
-        $tips = ($this->form->getValue('tips') != "") ? $this->form->getValue('tips') : "Aucun Conseil";
+        $tips = (isEmpty($this->form->getValue('tips'))) ? $this->form->getValue('tips') : null;
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        if($this->form->isRegistered('activate'))
-        {
-            $isActive = "true";
-        } else {
-            $isActive = "false";
+        $weekId = $this->form->getValue("week_id");
+        $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple,$cash,$point, $weekId);
+        if ($tips != null) {
+            (new TipBroker())->insert($exerciseId, $tips);
         }
-        $id = (new ExerciseBroker())->insert($exercisename,$difficulty,$description,$exemple,$cash,$point);
-        (new TipBroker())->insert($id, $tips);
-        (new WeekBroker())->insert($id, $date,$isActive);
         $this->succes = true;
     }
 
     //TODO: A faire
     private function updateToDatabase($id)
     {
-        /*
-        $firstname = $this->form->getValue('firstname');
-        $lastname = $this->form->getValue('lastname');
-        $team_id = $this->form->getValue('team_id');
+        $exerciseName = $this->form->getValue('exercisename');
+        $difficulty = $this->form->getValue('difficulty');
+        $description = $this->form->getValue('description');
+        $exemple = $this->form->getValue('exemple');
+        $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        (new PersonBroker())->update($da, $firstname, $lastname);
-        (new StudentBroker())->update($da, $team_id, $cash);
-        */
-
+        $weekId = $this->form->getValue("week_id");
+        (new ExerciseBroker())->update($id, $exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
 
 
         $this->succes = true;

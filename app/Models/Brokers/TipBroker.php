@@ -27,7 +27,7 @@ class TipBroker extends Broker
 
     public function insert($id,$tip)
     {
-        $sql = "INSERT INTO codewars.tips (exercise_id,tip) VALUES (?,?)";
+        $sql = "INSERT INTO codewars.tips (id, exercise_id,tip) VALUES (default, ?,?)";
 
         return $this->query($sql, [
             $id,
