@@ -12,7 +12,9 @@ class StudentBroker extends Broker
                 join codewars.person p on u.da = p.da
                 WHERE s.da = ?";
         $student = $this->selectSingle($sql, [$da]);
-        $student->points = $this->getPoints($da);
+        if ($student != null) {
+            $student->points = $this->getPoints($da);
+        }
         return $student;
     }
 

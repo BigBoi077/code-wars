@@ -10,7 +10,15 @@ use Zephyrus\Network\Response;
 
 class ManagementController extends Controller
 {
-	public function initializeRoutes()
+    public function before(): ?Response
+    {
+        if (!$this->isUserTeacher()) {
+            return $this->redirect("/");
+        }
+        return parent::before();
+    }
+
+    public function initializeRoutes()
 	{
 	    $this->get('/management', 'management');
 
