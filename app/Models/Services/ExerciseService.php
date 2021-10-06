@@ -14,6 +14,11 @@ class ExerciseService
     private Form $form;
     private $errorMessages;
 
+    public static function getAll()
+    {
+        return (new ExerciseBroker())->getAll();
+    }
+
     public static function create(Form $form): ExerciseService
     {
         $instance = new self();
@@ -23,7 +28,6 @@ class ExerciseService
         }
         return $instance;
     }
-
 
     public static function update($id, Form $form): ExerciseService
     {
