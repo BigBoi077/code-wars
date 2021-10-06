@@ -13,6 +13,13 @@ block body
   .container
     #score.d-flex.justify-content-center.my-5
       +scoreBoard()
+    if user.isTeacher
+      .container.d-flex.justify-content-end
+        a(href='/management/students')
+          button.btn.btn-yellow#Btn
+            p
+              i.fas.fa-plus-square
+              | Gestion des étudiants
     #teams
       .row.justify-content-between.mb-4
         .col-5.mx-4

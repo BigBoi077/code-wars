@@ -308,7 +308,7 @@ body {
     width: 50%;
 }
 
-#addStudentBtn {
+#Btn {
     margin: 1.5rem 0;
 }
 
@@ -317,7 +317,7 @@ body {
     float: right;
 }
 
-#addStudentBtn i{
+#Btn i{
     padding-right: .5rem;
 }
 
@@ -325,7 +325,7 @@ body {
     padding-left: .5rem;
 }
 
-#addStudentBtn p, #buyBtn p {
+#Btn p, #buyBtn p {
     color: var(--dark);
     margin: 0;
 }
@@ -389,7 +389,7 @@ body {
 
 .shop-header {
     width: 80%;
-    margin-top: 5rem;
+    margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
 }

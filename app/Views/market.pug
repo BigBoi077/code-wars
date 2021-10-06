@@ -14,6 +14,13 @@ block body
 	+flash
 	.row.shop-header
 		h1 Magasin
+	if user.isTeacher
+		.container.d-flex.justify-content-end
+			a(href='/management/items').mr-5
+				button.btn.btn-yellow#Btn
+					p
+						i.fas.fa-plus-square
+						| Gestion des articles
 	.row.shop-items-list
 		each item in items
 			.card.shop-item.col-lg-3.col-md-6.col-12
