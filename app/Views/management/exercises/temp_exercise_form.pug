@@ -24,36 +24,36 @@ html
           | Difficulté
         br
         if exercise !== null
-          input(id='difficulty', name='difficulty', type='text' required value=exercise.difficulty)
+          input(id='difficulty', name='difficulty', type='number' min='1' max='10' required value=exercise.difficulty)
         else
-          input(id='difficulty', name='difficulty', type='text' required value=val('difficulty'))
+          input(id='difficulty', name='difficulty', type='number' min='1' max='10' required value=val('difficulty'))
         br
 
         label
             | Description
         br
         if exercise !== null
-          input(id='description', name='description', type='text' required value=exercise.description)
+          textArea(id='description', name='description', type='text' required value=exercise.description)
         else
-          input(id='description', name='description', type='text' required value=val('description'))
+          textArea(id='description', name='description', type='text' required value=val('description'))
         br
 
         label
           | Exemple d'exécution
         br
         if exercise !== null
-          input(id='exemple', name='exemple', type='text' required value=exercise.exemple)
+          textArea(id='exemple', name='exemple', type='text' required value=exercise.exemple)
         else
-          input(id='exemple', name='exemple', type='text' required value=val('exemple'))
+          textArea(id='exemple', name='exemple', type='text' required value=val('exemple'))
         br
 
         label
           | Conseil (Optionel)
         br
         if exercise !== null
-          input(id='tips', name='tips', type='text' required value=exercise.tips)
+          textArea(id='tips', name='tips', type='text'  value=exercise.tips)
         else
-          input(id='tips', name='tips', type='text' required value=val('tips'))
+          textArea(id='tips', name='tips', type='text'  value=val('tips'))
         br
 
         label

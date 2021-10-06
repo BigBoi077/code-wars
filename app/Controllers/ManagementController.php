@@ -2,6 +2,8 @@
 
 use Models\Brokers\TeamBroker;
 use Models\Brokers\ExerciseBroker;
+use Models\Brokers\TipBroker;
+use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
@@ -10,7 +12,15 @@ use Zephyrus\Network\Response;
 
 class ManagementController extends Controller
 {
-	public function initializeRoutes()
+    public function before(): ?Response
+    {
+        if (!$this->isUserTeacher()) {
+            return $this->redirect("/");
+        }
+        return parent::before();
+    }
+
+    public function initializeRoutes()
 	{
 	    $this->get('/management', 'management');
 
@@ -26,7 +36,7 @@ class ManagementController extends Controller
         $this->get('/management/exercises/{da}/edit', 'editExercise');
         $this->get('/management/exercises/{id}/delete', 'deleteExercise');
         $this->post('/management/exercises/store', 'storeExercise');
-        $this->post('/management/exercises/{da}/update', 'updateExercise');
+        $this->post('/management/exercises/{id}/update', 'updateExercise');
 
         $this->get('/management/items', 'listItems');
         $this->get('/management/items/create', 'createItem');
@@ -133,6 +143,31 @@ class ManagementController extends Controller
     public function editExercise()
     {
         return $this->html('edit exercise');
+    }
+
+    public function detailExercise($id){
+
+        $exerciseBroker = new ExerciseBroker();
+        $tipBroker = new TipBroker();
+        $weekBroker = new WeekBroker();
+
+        $exercise = $exerciseBroker->findByID($id);
+        $week = $weekBroker->findByID($id);
+        $tip = $tipBroker->findByID($id);
+
+
+        if(is_null($exercise)){
+            return $this->redirect("/management/exercises/");
+        }
+        return $this->render("management/exercises/temp_exercise_detail",
+        [
+            'exercise' => $exercise,
+            'tip' => $tip,
+            'week' => $week
+        ]);
+
+       //return $this->html('detail exercise ' . $id);
+
     }
 
     public function storeExercise()

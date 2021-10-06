@@ -1,0 +1,52 @@
+include ../../mixins/base
+doctype html
+html
+	head
+		title CodeWars - Home
+		meta(charset='utf-8')
+		link(rel="stylesheet" href="/stylesheets/style.css")
+		body
+			h1.pageTitle  #{exercise.name}
+			+flash
+
+			div
+			    table.menuLink
+			        td
+                        a(href='/management/exercises/' + exercise.id + '/edit')
+                            | Modifier l'exercise
+                    td
+                        a(href='/home')
+                            | Home
+			div
+			    | Difficulté : #{exercise.difficulty}
+			    br
+			div
+			    | Description
+			    br
+			    p #{exercise.description}
+
+			div
+                | Conseil
+                br
+                if tip.tip === null
+                    p Aucun Conseil
+                else
+                    p #{tip.tip}
+            div
+                | Exemple d'execution
+                br
+                p #{exercise.execution_exemple}
+            div
+                | #{exercise.cash_reward} $
+            div
+                | #{exercise.point_reward} points
+            div
+                | Date de commencement: #{week.start_date}
+            div
+                if week.is_active === true
+                    p Exercise activée
+                else
+                    p Exercise non activée
+
+
+
