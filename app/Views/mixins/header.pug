@@ -19,8 +19,8 @@ mixin header()
     .d-flex.flex-row
       #student.d-flex.align-items-center
         .text-right.pr-3.d-flex.flex-column
-          if student != null
-            h6 #{student.firstname} #{student.lastname}
+          if !user.isTeacher
+            h6 #{user.firstname} #{user.lastname}
             h6 #{format('money', student.cash)} | #{student.points} pts
           if user.isTeacher
             h6 Professeur

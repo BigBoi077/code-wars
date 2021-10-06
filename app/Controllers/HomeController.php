@@ -25,14 +25,18 @@ class HomeController extends Controller
     {
         $user = ($this->getUser());
         $broker = new StudentBroker();
-        $student= null;
         $teamMembers = [];
-        if (!$user['isTeacher']) {
+        if ($this->isUserTeacher()) {
             $student = $broker->findByDa($user['da']);
             $teamMembers = $broker->sameTeamStudent($student->team_id);
         }
         $notifications = (new NotificationBroker())->getStudentNotifications($user['id']);
-        return $this->render('home', ['user' => $user, 'student' => $student, 'teamPoints' => TeamController::getTeamsPoints(), 'teamMembers' => $teamMembers, 'notifications' => $notifications]);
+        return $this->render('home', [
+            'user' => $user,
+            'student' => $student,
+            'teamPoints' => TeamController::getTeamsPoints(),
+            'teamMembers' => $teamMembers,
+            'notifications' => $notifications]);
     }
 
 
