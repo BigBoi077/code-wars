@@ -30,11 +30,10 @@ abstract class Controller extends SecurityController
      */
     public function render($page, $args = []): Response
     {
-        $student = StudentService::get($this->getUser()['da']);
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),
             'user' => $this->getUser(),
-            'student' => $student
+            'student' => $this->getActiveStudent()
         ]));
     }
 
@@ -86,6 +85,15 @@ abstract class Controller extends SecurityController
     public function getUser()
     {
         return Session::getInstance()->read('user');
+    }
+
+    public function getActiveStudent(): ?\stdClass
+    {
+        if ($this->getUser() != null && !$this->getUser()['isTeacher']) {
+            return StudentService::get($this->getUser()['da']);
+        } else {
+            return null;
+        }
     }
 
     public function isUserTeacher(): bool
