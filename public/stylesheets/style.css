@@ -389,4 +389,27 @@ body {
         align-self: flex-end;
     }
 }
+
+/* Exercise */
+
+.exerciseTable{
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.exerciseInfo{
+    font-family: "Roboto", sans-serif;
+}
+
+.menuLink{
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.pageTitle{
+text-align: center;
+    font-family: 'StarJedi', sans-serif;
+}
 /* endregion */

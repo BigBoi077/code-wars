@@ -42,4 +42,10 @@ class WeekBroker extends Broker
         $sql = "UPDATE codewars.week SET start_date = ?, is_active = ?  WHERE id = ?";
         $this->query($sql, [$id,$date,$activate]);
     }
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM codewars.week WHERE id = ?;";
+        return $this->query($sql, [$id]);
+    }
 }

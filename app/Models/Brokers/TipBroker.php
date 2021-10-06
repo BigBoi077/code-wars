@@ -24,7 +24,7 @@ class TipBroker extends Broker
         return $this->select($sql);
     }
 
-    // TODO: Change Insert
+
     public function insert($id,$tip)
     {
         $sql = "INSERT INTO codewars.tips (exercise_id,tip) VALUES (?,?)";
@@ -35,10 +35,17 @@ class TipBroker extends Broker
         ]);
     }
 
-    //TODO: Change Update
     public function update($id,$tip)
     {
         $sql = "UPDATE codewars.tips SET tip = ?  WHERE id = ?";
         $this->query($sql, [$id,$tip]);
     }
+
+
+    public function delete($id)
+    {
+        $sql = "DELETE FROM codewars.tips WHERE exercise_id = ?;";
+        return $this->query($sql, [$id]);
+    }
+
 }

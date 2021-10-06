@@ -38,6 +38,8 @@ class ExerciseService
     public static function delete($id)
     {
         /* TODO: Pop-up confirmation suppression d'exercise + mot de passe enseignant */
+        (new WeekBroker())->delete($id);
+        (new TipBroker())->delete($id);
         (new ExerciseBroker())->delete($id);
 
     }
@@ -101,9 +103,9 @@ class ExerciseService
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         if($this->form->isRegistered('activate'))
         {
-            $isActive = "1";
+            $isActive = "true";
         } else {
-            $isActive = "0";
+            $isActive = "false";
         }
         $id = (new ExerciseBroker())->insert($exercisename,$difficulty,$description,$exemple,$cash,$point);
         (new TipBroker())->insert($id, $tips);
@@ -112,13 +114,19 @@ class ExerciseService
     }
 
     //TODO: A faire
-    private function updateToDatabase($da)
+    private function updateToDatabase($id)
     {
         /*
         $firstname = $this->form->getValue('firstname');
         $lastname = $this->form->getValue('lastname');
         $team_id = $this->form->getValue('team_id');
-        $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;*/
+        $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
+        (new PersonBroker())->update($da, $firstname, $lastname);
+        (new StudentBroker())->update($da, $team_id, $cash);
+        */
+
+
+
         $this->succes = true;
     }
 }
