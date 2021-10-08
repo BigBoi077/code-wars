@@ -235,7 +235,7 @@ header .disconnect i:hover {
 
 /*notifications*/
 .card, .box-shadow {
-    shop-header-radius: 1rem; !important;
+    border-radius: 1rem; !important;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
 }
 
@@ -671,7 +671,7 @@ text-align: center;
 
 .single-mission-detail .mission-description {
     grid-area: description;
-    
+
 }
 
 .single-mission-detail .mission-cash-reward {
@@ -707,4 +707,15 @@ text-align: center;
 }
 
 
+
+/* Profile */
+
+.rounded-img {
+    height: 150px;
+    width: 150px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-size:cover;
+}
 /* endregion */

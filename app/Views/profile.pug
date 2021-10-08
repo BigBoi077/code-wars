@@ -12,3 +12,66 @@ block body
     #circle
     #circleSmall
     #circleSmallRight
+    +flash
+    .container.py-5
+        .row
+            .col-lg-4
+                .card.mb-4
+                    .card-body.text-center
+                        img.rounded-img(src="/assets/images/kakashi.jpeg")
+                        h5.my-3 #{user.firstname} #{user.lastname}
+                        p.text-muted.mb-1 #{student.points} pts
+                        p.text-muted.mb-4 #{format('money', student.cash)}
+                .card.mb-4
+                    .card-body
+                        ul.list-group.list-group-flush
+                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
+                                i.fas.fa-address-card
+                                p.mb-0 A
+                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
+                                i.fas.fa-address-card
+                                p.mb-0 B
+                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
+                                i.fas.fa-address-card
+                                p.mb-0 C
+                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
+                                i.fas.fa-address-card
+                                p.mb-0 D
+                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
+                                i.fas.fa-address-card
+                                p.mb-0 E
+            .col-lg-8
+                .card.mb-4
+                    .card-body
+                        .row
+                            .col-sm-3
+                                p.mb-0 Nom
+                            .col-sm-9
+                                p.text-muted.mb-0 #{user.lastname}
+                        hr
+                        .row
+                            .col-sm-3
+                                p.mb-0 Prénom
+                            .col-sm-9
+                                p.text-muted.mb-0 #{user.firstname}
+                        hr
+                        .row
+                            .col-sm-3
+                                p.mb-0 Équipe
+                            .col-sm-9
+                                p.text-muted.mb-0 #{student.team_id === 1 ? "Sith" : "Rebel"}
+                        hr
+                        .row
+                            .col-sm-3
+                                p.mb-0 DA
+                            .col-sm-9
+                                p.text-muted.mb-0 #{student.da}
+                .row
+                    .col-md-6
+                        .card.mb-4
+                            .card-body
+                                p Hello
+                    .col-md-6
+                        .card.mb-4
+                            .card-body
+                                p World

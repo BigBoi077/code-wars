@@ -24,8 +24,9 @@ mixin header()
             h6 #{format('money', student.cash)} | #{student.points} pts
           else
             h6 Professeur
-      a.profile-pic(href="/profile")
-          img(src="/assets/images/kakashi.jpeg")
+      if !user.isTeacher
+        a.profile-pic(href="/profile")
+            img(src="/assets/images/kakashi.jpeg")
       i#bell.fa-bell.fas.d-flex.align-items-center.fa.p-3
       form.disconnect.mr-2(action="/logout", method="post")
         button

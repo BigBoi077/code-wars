@@ -37,7 +37,8 @@ class HomeController extends Controller
     {
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
         return $this->render('profile', [
-            'notifications' => $notifications]
+            'notifications' => $notifications
+            ]
         );
     }
 }
