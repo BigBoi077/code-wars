@@ -25,6 +25,19 @@ class StudentBroker extends Broker
         return $points == null ? 0 : $points;
     }
 
+    public function getProgression($da): float
+    {
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.completed = true";
+        $done = $this->selectSingle($sql, [$da])->done;
+        return $done / Count((new ExerciseBroker())->getAll());
+    }
+
+    public function getExerciseDone($da): int
+    {
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.completed = true";
+        return $this->selectSingle($sql, [$da])->done;
+    }
+
     public function getAll()
     {
         $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, t.name as team_name from codewars.student s 

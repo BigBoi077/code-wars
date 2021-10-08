@@ -91,9 +91,8 @@ abstract class Controller extends SecurityController
     {
         if ($this->getUser() != null && !$this->getUser()['isTeacher']) {
             return StudentService::get($this->getUser()['da']);
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function isUserTeacher(): bool

@@ -28,7 +28,7 @@ class HomeController extends Controller
         }
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
         return $this->render('home', [
-            'teamPoints' => TeamController::getTeamsPoints(),
+            'teamPoints' => TeamController::getTeamPoints(),
             'teamMembers' => $teamMembers,
             'notifications' => $notifications]);
     }

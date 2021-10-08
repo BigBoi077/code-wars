@@ -96,7 +96,7 @@ class ExerciseService
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week_id");
-        $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple,$cash,$point, $weekId);
+        $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple, $cash, $point, $weekId);
         if ($tips != null) {
             (new TipBroker())->insert($exerciseId, $tips);
         }
