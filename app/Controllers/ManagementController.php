@@ -54,17 +54,17 @@ class ManagementController extends Controller
 
 	public function listStudents(): Response
 	{
-		return $this->render('management/students/temp_student_listing', [
+		return $this->render('management/students/student_listing', [
             'students' => StudentService::getAll(),
         ]);
 	}
 
     public function createStudent()
     {
-        return $this->render('management/students/temp_student_form', [
+        return $this->render('management/students/student_form', [
             'title' => 'Créer un étudiant',
             'action' => '/management/students/store',
-            'student' => null,
+            'editStudent' => null,
             'teams' => (new TeamBroker())->getAll(),
         ]);
     }
@@ -76,10 +76,10 @@ class ManagementController extends Controller
             return $this->redirect('/management/students');
         }
         $student = StudentService::get($da);
-        return $this->render('management/students/temp_student_form', [
+        return $this->render('management/students/student_form', [
             'title' => 'Modification de ' . $student->firstname . ' ' . $student->lastname,
             'action' => '/management/students/' . $student->da . '/update',
-            'student' => $student,
+            'editStudent' => $student,
             'teams' => (new TeamBroker())->getAll(),
         ]);
     }

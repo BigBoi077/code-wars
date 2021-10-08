@@ -15,7 +15,7 @@ block body
     h4 #{title}
     hr
     form(method='post', action=action)
-      if student === null
+      if editStudent === null
         .form-row
           .form-group.col-12
             label DA
@@ -23,20 +23,20 @@ block body
       .form-row
         .form-group.col-6
           label(for="firstname") Prénom
-          input.form-control(placeholder="Joshua" id='firstname', name='firstname', type='text' required value=(student !== null) ? student.firstname : val('firstname'))
+          input.form-control(placeholder="Joshua" id='firstname', name='firstname', type='text' required value=(editStudent !== null) ? editStudent.firstname: val('firstname'))
         .form-group.col-6
           label(for="lastname") Nom
-          input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' required value=(student !== null) ? student.lastname : val('lastname'))
+          input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' required value=(editStudent !== null) ? editStudent.lastname: val('lastname'))
       .form-row
         .form-group.col-6
           label(for="cash") Argent (Optionnel)
-          input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(student !== null) ? student.cash : val('cash'))
+          input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(editStudent !== null) ? editStudent.cash : val('cash'))
         .form-group.col-6
           label(for="team_id") Équipe
           select.form-control(id='team_id', name='team_id' required)
             each team in teams
-              if student !== null
-                if student.team_id === team.id
+              if editStudent !== null
+                if editStudent.team_id === team.id
                   option(value=team.id, selected)
                     | #{team.name}
                 else
@@ -48,7 +48,7 @@ block body
 
       .form-row
         button#submitBtn.btn(type='submit')
-          if student !== null
+          if editStudent !== null
             | Modifier
           else
             | Créer
