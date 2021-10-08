@@ -235,7 +235,7 @@ header .disconnect i:hover {
 
 /*notifications*/
 .card, .box-shadow {
-    border-radius: 1rem; !important;
+    shop-header-radius: 1rem; !important;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
 }
 
@@ -310,6 +310,15 @@ body {
 
 #Btn {
     margin: 1.5rem 0;
+    transition: all 0.25s ease-in-out;
+}
+
+#Btn:hover {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+}
+
+#Btn:active {
+    transform: scale(0.75);
 }
 
 #buyBtn {
@@ -387,14 +396,14 @@ body {
     justify-content: center;
 }
 
-.shop-header {
+.shop-header, .mission-header {
     width: 80%;
     margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
 }
 
-.shop-header h1 {
+.shop-header h1, .mission-header h1 {
     margin: auto;
 }
 
@@ -560,4 +569,142 @@ body {
 text-align: center;
     font-family: 'StarJedi', sans-serif;
 }
+
+/* Missions */
+
+.all-missions {
+
+}
+
+.single-mission-row {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 1000px;
+    padding: 26px;
+    border: 1px solid var(--dark);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+}
+
+.single-mission-row .mission-information-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.single-mission-row .mission-information-header .mission-results {
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-mission-row .mission-information-header .mission-results p {
+    margin: 0 8px;
+}
+
+.single-mission-row .mission-information-header .mission-results span {
+    margin: 0 8px;
+    font-weight: 700;
+}
+
+.single-mission-row .mission-information h4 {
+    font-size: 36px;
+}
+
+.single-mission-row .mission-detail {
+    display: flex;
+    align-items: center;
+}
+
+.single-mission-row .mission-detail p {
+    width: 75%;
+}
+
+.single-mission-row .mission-detail .detail-link {
+    width: 25%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.single-mission-row .mission-detail a i  {
+    color: var(--accent);
+    transition: all 0.25s ease-in-out;
+}
+
+.single-mission-row .mission-detail a i:hover {
+    transform: scale(1.5);
+    color: var(--dark);
+}
+
+.single-mission-detail {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    padding: 32px;
+    border: 1px solid var(--dark);
+    border-radius: 10px;
+    position: relative;
+    background-color: var(--background);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    margin-top: 32px;
+    grid-template-areas:
+    "title            title            title            title"
+    "separator        separator        separator        separator"
+    "cash             points           stars            stars"
+    "description      description      .                ."
+    "description      description      submit           submit"
+    "example          example          submit           submit";
+}
+
+.single-mission-detail #mission-title {
+    grid-area: title;
+    margin: auto;
+    font-family: StarJedi, sans-serif;
+}
+
+.single-mission-detail .separator {
+    grid-area: separator;
+    color: var(--dark);
+}
+
+.single-mission-detail .mission-description {
+    grid-area: description;
+    
+}
+
+.single-mission-detail .mission-cash-reward {
+    grid-area: cash;
+}
+
+.single-mission-detail .mission-point-reward {
+    grid-area: points;
+}
+
+.single-mission-detail .mission-cash-reward, .single-mission-detail .mission-point-reward {
+    font-size: 32px;
+}
+
+.single-mission-detail .mission-execution-example {
+    grid-area: example;
+}
+
+.single-mission-detail .mission-difficulty-container {
+    grid-area: stars;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.single-mission-detail .mission-difficulty-container i {
+    color: var(--accent);
+    margin: 6px;
+}
+
+.single-mission-detail .mission-submit {
+    grid-area: submit;
+}
+
+
 /* endregion */

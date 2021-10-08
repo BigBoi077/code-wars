@@ -2,15 +2,39 @@ include mixins/base
 extends mixins/layout
 
 block title
-  title Magasin - Code Wars
+  title Missions - Code Wars
 
 block header
   include mixins/header
   +header()
+
 block body
   #circle
   #circleSmall
   #circleSmallRight
   +flash
-  .row.shop-header
-    h1 Magasin
+  .row.mission-header
+    h1 Missions
+  if user.isTeacher
+    .container.d-flex.justify-content-end
+      a(href='/management/items').mr-5
+        button.btn.btn-yellow#Btn
+          p
+            i.fas.fa-plus-square
+            | Gestion des missions
+  .all-missions
+      .single-mission-row
+        .mission-information
+          .mission-information-header
+            h4 Les Bases de Java
+            .mission-results
+              p Récompense de
+                span 700 $
+                | et
+                span 50 points
+          hr
+        .mission-detail
+          p Hutt mon leia lando. Jar fett moff k-3po solo chewbacca. Kenobi k-3po wicket mandalorians organa utapau. Endor obi-wan organa sidious. Calrissian calamari amidala yoda.
+          .detail-link
+            a(href="/exercises/id")
+              i.fas.fa-info-circle.fa-2x
