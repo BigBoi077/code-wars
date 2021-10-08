@@ -1,11 +1,11 @@
-include mixins/base
-extends mixins/layout
+include ../mixins/base
+extends ../mixins/layout
 
 block title
   title Missions - Code Wars
 
 block header
-  include mixins/header
+  include ../mixins/header
   +header()
 
 block body
@@ -17,7 +17,7 @@ block body
     h1 Missions
   if user.isTeacher
     .container.d-flex.justify-content-end
-      a(href='/management/items').mr-5
+      a(href='/management/exercises').mr-5
         button.btn.btn-yellow#Btn
           p
             i.fas.fa-plus-square

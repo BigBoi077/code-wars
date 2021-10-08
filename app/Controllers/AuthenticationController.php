@@ -22,7 +22,7 @@ class AuthenticationController extends Controller
         if ($this->isLogged()) {
             return $this->redirect('/');
         }
-        return $this->render('login');
+        return $this->render('authentication/login');
     }
 
     public function processLogin()

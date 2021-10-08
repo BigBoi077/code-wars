@@ -30,15 +30,15 @@ class HomeController extends Controller
         return $this->render('home', [
             'teamPoints' => TeamController::getTeamPoints(),
             'teamMembers' => $teamMembers,
-            'notifications' => $notifications]);
+            'notifications' => $notifications
+        ]);
     }
 
     public function profile()
     {
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
-        return $this->render('profile', [
+        return $this->render('profile/profile', [
             'notifications' => $notifications
-            ]
-        );
+        ]);
     }
 }

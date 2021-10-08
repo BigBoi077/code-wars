@@ -24,8 +24,13 @@ class TeamController extends Controller
         $broker = new TeamBroker();
         $teams['siths'] = $broker->findAllStudentByTeam($broker->getIdByName('Sith'));
         $teams['rebels'] = $broker->findAllStudentByTeam($broker->getIdByName('Rebel'));
-        return $this->render("teams", ['user' => $user, 'student' => $student, 'teamPoints' => $this->getTeamPoints(),
-            'teamProgress' => $this->getTeamProgression(Count($teams['siths']), Count($teams['rebels'])), 'teams' => $teams]);
+        return $this->render("teams/teams", [
+            'user' => $user,
+            'student' => $student,
+            'teamPoints' => $this->getTeamPoints(),
+            'teamProgress' => $this->getTeamProgression(Count($teams['siths']), Count($teams['rebels'])),
+            'teams' => $teams
+        ]);
     }
 
     public static function getTeamProgression($nbSith, $nbRebel): array

@@ -15,13 +15,13 @@ class ExerciseController extends Controller
 
     public function exercises()
     {
-        return $this->render('exercises', [
+        return $this->render('exercises/exercises_listing', [
             'exercises' => ExerciseService::getAll(),
         ]);
     }
 
     public function exerciseDetail()
     {
-        return $this->render('singleExercise', []);
+        return $this->render('exercises/exercises_details', []);
     }
 }

@@ -25,7 +25,7 @@ class MarketController extends Controller
 	    if (!$this->isUserTeacher()) {
             $studentItems = StudentItemService::getAllByDa($this->getUser()['da']);
         }
-		return $this->render('market', [
+		return $this->render('market/market', [
 			'items' => ItemService::getAll(),
             'studentItems' => $studentItems
 		]);
