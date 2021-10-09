@@ -18,6 +18,12 @@ class UserBroker extends Broker
         return $this->selectSingle($sql, [$id]);
     }
 
+    public function findAll(): array
+    {
+        $sql = "SELECT * from codewars.user u join codewars.teacher t on u.da = t.da";
+        return $this->select($sql);
+    }
+
     public function isTeacher($da): bool
     {
         $sql = "SELECT t.da from codewars.user u join codewars.teacher t on u.da = t.da WHERE u.da = ?";

@@ -27,7 +27,7 @@ class StudentBroker extends Broker
 
     public function getProgression($da): float
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.completed = true";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true group by w.id";
         $done = $this->selectSingle($sql, [$da])->done;
         return $done / Count((new ExerciseBroker())->getAll());
     }

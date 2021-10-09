@@ -1,7 +1,7 @@
 extends ../mixins/layout
 
 block title
-  title Équipe - Code Wars
+  title Équipes - Code Wars
 
 block header
   +header()
@@ -24,10 +24,12 @@ block body
       .row.justify-content-between.mb-4
         .col-5.mx-4
           h1.rebel-sith-logo.starwars-font Rebel
-            img(src='assets/images/rebel.png').mx-3
+            img(src='assets/images/rebel.png').ml-3
+          h6 #{teamProgress.Rebel} % des missions totals complétées
         .col-5.text-right.mx-4
           h1.rebel-sith-logo.starwars-font Sith
-            img(src='assets/images/sith.png').mx-3
+            img(src='assets/images/sith.png').ml-3
+          h6 #{teamProgress.Sith} % des missions totals complétées
       .row.justify-content-between
         .col-5.mx-4.card.py-3.box-shadow-rebel
           each rebel, index in teams.rebels
