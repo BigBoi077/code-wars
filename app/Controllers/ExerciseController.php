@@ -10,7 +10,7 @@ class ExerciseController extends Controller
     public function initializeRoutes()
     {
         $this->get('/exercises', 'exercises');
-        $this->get('/exercises/id', 'exerciseDetail');
+        $this->get('/exercises/{id}', 'exerciseDetail');
     }
 
     public function exercises()
@@ -20,7 +20,7 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function exerciseDetail()
+    public function exerciseDetail($id)
     {
         return $this->render('exercises/exercises_details', []);
     }

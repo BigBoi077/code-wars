@@ -531,6 +531,15 @@ body {
     transform: translateY(-50%);
 }
 
+.progress-bar-vertical {
+    width: 20px;
+    min-height: 100px;
+    display: flex;
+    align-items: flex-end;
+    margin-right: 20px;
+    float: left;
+}
+
 @media only screen and (max-width: 800px) {
     .image-container {
         display: none;

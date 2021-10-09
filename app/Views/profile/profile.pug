@@ -60,4 +60,7 @@ block body
             .card-body
               h2.text-center.mb-3 Progression individuelle
               p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
-              //weekly progress
+              include ../mixins/weekProgress
+              .m-4
+                each week in weeklyProgress
+                  +weekProgress(week)
