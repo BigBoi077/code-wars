@@ -7,9 +7,10 @@ class StudentBroker extends Broker
 
     public function findByDa($da) : ?stdClass
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, p.email from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, p.firstname, p.lastname, p.email from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
+                join codewars.team t on t.id = s.team_id
                 WHERE s.da = ?";
         $student = $this->selectSingle($sql, [$da]);
         if ($student != null) {
@@ -25,11 +26,24 @@ class StudentBroker extends Broker
         return $points == null ? 0 : $points;
     }
 
-    public function getProgression($da): float
+    public function getProgression($da): array
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true group by w.id";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true";
         $done = $this->selectSingle($sql, [$da])->done;
-        return $done / Count((new ExerciseBroker())->getAll());
+        $nbExercises = Count((new ExerciseBroker())->getAll());
+        $totalDone = ($done / $nbExercises) * 100;
+        return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
+    }
+
+    public function getProgressionByWeek($da): array
+    {
+        $sql = "select w.id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true group by w.id";
+        $weeks = $this->select($sql, [$da]);
+        $nbExercises = Count((new ExerciseBroker())->getAll());
+        foreach ($weeks as $week) {
+            $week->progress = ($week->done / $nbExercises) * 100;
+        }
+        return $weeks;
     }
 
     public function getExerciseDone($da): int

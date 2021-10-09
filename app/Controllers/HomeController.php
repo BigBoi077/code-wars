@@ -37,8 +37,12 @@ class HomeController extends Controller
     public function profile()
     {
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
+        $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
+        $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
         return $this->render('profile/profile', [
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'weeklyProgress' => $weeklyProgress,
+            'individualProgress' => $indProgress
         ]);
     }
 }

@@ -14,7 +14,7 @@ block body
     #score.d-flex.justify-content-center.my-5
       +scoreBoard()
     .row.mt-5.p-4
-      .col-6
+      .col-5
         h2.mb-4 Mes notifications
         #notifs.mx-2
           if notifications == null
@@ -22,7 +22,7 @@ block body
           else
             each notif in notifications
               +notification(notif)
-      .col-6
+      .col-7
         h2.mb-4 Membre de mon équipe
         .card.py-3
           each member in teamMembers

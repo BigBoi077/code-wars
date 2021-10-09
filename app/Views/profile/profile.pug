@@ -2,76 +2,62 @@ include ../mixins/base
 extends ../mixins/layout
 
 block title
-    title Profile - Code Wars
+  title Profile - Code Wars
 
 block header
-    include ../mixins/header
-    +header()
+  include ../mixins/header
+  +header()
 
 block body
-    #circle
-    #circleSmall
-    #circleSmallRight
-    +flash
-    .container.py-5
+  #circle
+  #circleSmall
+  #circleSmallRight
+  +flash
+  .container.py-5
+    .row
+      .col-lg-4
+        .card.mb-4
+          .card-body.text-center
+            img.rounded-img(src=profileImageUrl)
+            h5.my-3 #{user.firstname} #{user.lastname}
+            p.text-muted.mb-1 #{student.points} pts
+            p.text-muted.mb-4 #{format('money', student.cash)}
+        #notifs
+          h2.mb-4 Mes notifications
+          if notifications == null
+            h6 Vous n'avez aucune notification
+          else
+            each notif in notifications
+              +notification(notif)
+      .col-lg-8
+        .card.mb-4
+          .card-body
+            .row
+              .col-sm-3
+                p.mb-0 Nom
+              .col-sm-9
+                p.text-muted.mb-0 #{user.lastname}
+            hr
+            .row
+              .col-sm-3
+                p.mb-0 Prénom
+              .col-sm-9
+                p.text-muted.mb-0 #{user.firstname}
+            hr
+            .row
+              .col-sm-3
+                p.mb-0 Équipe
+              .col-sm-9
+                p.text-muted.mb-0 #{student.team_name}
+            hr
+            .row
+              .col-sm-3
+                p.mb-0 Mot De Passe
+              .col-sm-9
+                p.text-muted.mb-0 **********
         .row
-            .col-lg-4
-                .card.mb-4
-                    .card-body.text-center
-                        img.rounded-img(src=profileImageUrl)
-                        h5.my-3 #{user.firstname} #{user.lastname}
-                        p.text-muted.mb-1 #{student.points} pts
-                        p.text-muted.mb-4 #{format('money', student.cash)}
-                .card.mb-4
-                    .card-body
-                        ul.list-group.list-group-flush
-                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
-                                i.fas.fa-address-card
-                                p.mb-0 A
-                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
-                                i.fas.fa-address-card
-                                p.mb-0 B
-                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
-                                i.fas.fa-address-card
-                                p.mb-0 C
-                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
-                                i.fas.fa-address-card
-                                p.mb-0 D
-                            li.list-group-item.d-flex.justify-content-between.align-items-center.p-3
-                                i.fas.fa-address-card
-                                p.mb-0 E
-            .col-lg-8
-                .card.mb-4
-                    .card-body
-                        .row
-                            .col-sm-3
-                                p.mb-0 Nom
-                            .col-sm-9
-                                p.text-muted.mb-0 #{user.lastname}
-                        hr
-                        .row
-                            .col-sm-3
-                                p.mb-0 Prénom
-                            .col-sm-9
-                                p.text-muted.mb-0 #{user.firstname}
-                        hr
-                        .row
-                            .col-sm-3
-                                p.mb-0 Équipe
-                            .col-sm-9
-                                p.text-muted.mb-0 #{student.team_id === 1 ? "Sith" : "Rebel"}
-                        hr
-                        .row
-                            .col-sm-3
-                                p.mb-0 Mot De Passe
-                            .col-sm-9
-                                p.text-muted.mb-0 **********
-                .row
-                    .col-md-6
-                        .card.mb-4
-                            .card-body
-                                p Hello
-                    .col-md-6
-                        .card.mb-4
-                            .card-body
-                                p World
+          .card.mb-4.w-100
+            .card-body
+              h2.text-center.mb-3 Progression individuelle
+              p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+              //weekly progress
