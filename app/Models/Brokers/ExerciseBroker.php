@@ -16,12 +16,19 @@ class ExerciseBroker extends Broker
         return $this->selectSingle($sql, [$id]);
     }
 
-    public function getAll()
+    public function getAll(): array
     {
         $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple 
                 FROM codewars.exercise e
                 ORDER BY e.id";
         return $this->select($sql);
+    }
+
+    public function getAllByWeek($weekId): array
+    {
+        $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple 
+                FROM codewars.exercise e join codewars.week w on w.id = e.week_id where e.week_id = ?";
+        return $this->select($sql, [$weekId]);
     }
 
     public function insert($name,$difficulty,$description,$exemple, $cash, $point, $weekId): int

@@ -39,9 +39,9 @@ class StudentBroker extends Broker
     {
         $sql = "select w.id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true group by w.id";
         $weeks = $this->select($sql, [$da]);
-        $nbExercises = Count((new ExerciseBroker())->getAll());
+        $broker = new ExerciseBroker();
         foreach ($weeks as $week) {
-            $week->progress = ($week->done / $nbExercises) * 100;
+            $week->progress = ($week->done / Count($broker->getAllByWeek($week->id))) * 100;
         }
         return $weeks;
     }
