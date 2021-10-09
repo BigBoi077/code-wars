@@ -32,11 +32,12 @@ abstract class Controller extends SecurityController
     public function render($page, $args = []): Response
     {
         $student = $this->getActiveStudent();
-
-        $gravatar = new Gravatar($student->email);
         $imageUrl= "/assets/images/profil_pic_default.png";
-        if ($gravatar->isAvailable()) {
-            $imageUrl = $gravatar->getUrl();
+        if ($student != null && $student->email != null) {
+            $gravatar = new Gravatar($student->email);
+            if ($gravatar->isAvailable()) {
+                $imageUrl = $gravatar->getUrl();
+            }
         }
 
         return parent::render($page, array_merge($args, [
