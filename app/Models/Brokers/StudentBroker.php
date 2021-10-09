@@ -7,7 +7,7 @@ class StudentBroker extends Broker
 
     public function findByDa($da) : ?stdClass
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, p.email from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
                 WHERE s.da = ?";
@@ -40,7 +40,7 @@ class StudentBroker extends Broker
 
     public function getAll()
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, t.name as team_name from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, t.name, p.email as team_name from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
 				join codewars.team t on s.team_id = t.id

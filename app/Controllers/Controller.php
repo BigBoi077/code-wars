@@ -4,6 +4,7 @@ use Models\Logger;
 use Models\Services\StudentService;
 use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
+use Zephyrus\Utilities\Gravatar;
 
 /**
  * This class acts as an application middleware, all other controller classes should extends this Controller and thus
@@ -30,10 +31,19 @@ abstract class Controller extends SecurityController
      */
     public function render($page, $args = []): Response
     {
+        $student = $this->getActiveStudent();
+
+        $gravatar = new Gravatar($student->email);
+        $imageUrl= "/assets/images/profil_pic_default.png";
+        if ($gravatar->isAvailable()) {
+            $imageUrl = $gravatar->getUrl();
+        }
+
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),
             'user' => $this->getUser(),
-            'student' => $this->getActiveStudent()
+            'profileImageUrl' => $imageUrl,
+            'student' => $student
         ]));
     }
 

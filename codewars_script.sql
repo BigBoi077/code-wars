@@ -64,6 +64,7 @@ create table if not exists person (
     da int,
     firstname varchar,
     lastname varchar,
+    email varchar,
     constraint pk_da_person primary key (da)
 );
 
