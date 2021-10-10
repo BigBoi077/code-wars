@@ -18,4 +18,9 @@ class NotificationService
     {
         (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Un de vos exercise vient d'être corrigé", "Exercise corrigé!");
     }
+
+    public static function newExerciseAvailable($exerciseName)
+    {
+        (new NotificationBroker())->sendNotificationToStudents("Une nouvelle mission est disponible : " . $exerciseName,"Nouvelle mission disponible");
+    }
 }

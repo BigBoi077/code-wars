@@ -100,6 +100,7 @@ class ExerciseService
         if ($tips != null) {
             (new TipBroker())->insert($exerciseId, $tips);
         }
+        NotificationService::newExerciseAvailable($exerciseName);
         $this->succes = true;
     }
 
