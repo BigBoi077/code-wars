@@ -1,0 +1,8 @@
+mixin itemRow(item)
+  .row.mb-2
+    .col-4
+      h6 #{item.name}
+    .col-6
+      h6 #{item.description}
+    .col-2
+      p(style="font-size: small") #{item.bought_date}

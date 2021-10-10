@@ -24,30 +24,20 @@ block body
         +notificationLayout(notifications)
       .col-lg-8
         .card.mb-4
+          include ../mixins/profileInfo
           .card-body
-            .row
-              .col-sm-3
-                p.mb-0 Nom
-              .col-sm-9
-                p.text-muted.mb-0 #{user.lastname}
+            h2.text-center.mb-3 Informations du compte
+            +profileInfo("Nom", user.lastname)
             hr
-            .row
-              .col-sm-3
-                p.mb-0 Prénom
-              .col-sm-9
-                p.text-muted.mb-0 #{user.firstname}
+            +profileInfo("Pénom", user.firstname)
             hr
-            .row
-              .col-sm-3
-                p.mb-0 Équipe
-              .col-sm-9
-                p.text-muted.mb-0 #{student.team_name}
+            +profileInfo("Équipe", student.team_name)
             hr
-            .row
-              .col-sm-3
-                p.mb-0 Mot De Passe
-              .col-sm-9
-                p.text-muted.mb-0 **********
+            +profileInfo("Mot de passe", "********")
+            .row.justify-content-md-end.mx-3
+              a.btn.btn-yellow.text-dark(href="/management/profile")
+                | Modifier le compte 
+                i.fas.fa-edit
         .row
           .card.mb-4.w-100
             .card-body
@@ -61,4 +51,23 @@ block body
           .card.mb-4.w-100
             .card-body
               h2.text-center.mb-3 Mes achats
+              include ../mixins/myItem
+              .m-4
+                .row
+                  .col-4
+                    h5.mb-0 Nom de l'item
+                  .col-6
+                    h5.mb-0 Description
+                  .col-2
+                    h5.mb-0 Date
+                hr.mt-1
+                if myItems == null
+                  h6.text-center Vous n'avez encore fait aucun achat
+                    .text-center.mt-3
+                      a.btn.btn-yellow.text-dark(href="/exercises")
+                        | Aller aux missions
+                else
+                  each item in myItems
+                    +itemRow(item)
+
 

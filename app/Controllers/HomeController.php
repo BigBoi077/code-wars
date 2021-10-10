@@ -2,6 +2,8 @@
 
 use Models\Brokers\NotificationBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentItemBroker;
+use Models\Brokers\UserBroker;
 use Models\Services\StudentService;
 
 class HomeController extends Controller
@@ -38,13 +40,16 @@ class HomeController extends Controller
 
     public function profile()
     {
+        $da = $this->getActiveStudent()->da;
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
-        $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
-        $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
+        $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
+        $indProgress = (new StudentBroker())->getProgression($da);
+        $items = (new StudentItemBroker())->getAllWithDa($da);
         return $this->render('profile/profile', [
             'notifications' => $notifications,
             'weeklyProgress' => $weeklyProgress,
-            'individualProgress' => $indProgress
+            'individualProgress' => $indProgress,
+            'myItems' => $items
         ]);
     }
 

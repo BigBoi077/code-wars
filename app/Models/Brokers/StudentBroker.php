@@ -41,7 +41,7 @@ class StudentBroker extends Broker
         $weeks = $this->select($sql, [$da]);
         $broker = new ExerciseBroker();
         foreach ($weeks as $week) {
-            $week->progress = ($week->done / Count($broker->getAllByWeek($week->id))) * 100;
+            $week->progress = number_format(($week->done / Count($broker->getAllByWeek($week->id))) * 100, 0);
         }
         return $weeks;
     }

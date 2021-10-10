@@ -21,7 +21,7 @@ class StudentItemBroker extends Broker
 
     public function getAllWithDa($da)
     {
-        $sql = "SELECT * FROM codewars.studentitem WHERE student_da = ?";
+        $sql = "SELECT * FROM codewars.studentitem join codewars.item i on i.id = studentitem.item_id WHERE student_da = ?";
         return $this->select($sql, [$da]);
     }
 
@@ -33,7 +33,7 @@ class StudentItemBroker extends Broker
 
     public function insert($item_id, $da)
     {
-        $sql = "INSERT INTO codewars.studentitem (item_id, student_da) VALUES(?, ?)";
+        $sql = "INSERT INTO codewars.studentitem (item_id, student_da, bought_date) VALUES(?, ?, now())";
         $this->query($sql, [$item_id, $da]);
     }
 }

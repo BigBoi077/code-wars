@@ -124,6 +124,7 @@ create table if not exists studentItem (
     id serial,
     item_id int,
     student_da int,
+    bought_date date,
     constraint fk_item_id foreign key (item_id) references item(id),
     constraint fk_student_da foreign key (student_da) references student(da),
     constraint pk_id_student_item primary key (id)
