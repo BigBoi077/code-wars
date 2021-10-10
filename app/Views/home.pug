@@ -23,7 +23,7 @@ block body
           +notificationLayout(notifications)
       .col-7
         if isTeacher === false
-          h2.mb-4 Membre de mon équipe
+          h2.mb-4 Membres de mon équipe
           .card.py-3
             each member in teamMembers
               +teamMember(member)
