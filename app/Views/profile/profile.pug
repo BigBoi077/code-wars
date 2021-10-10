@@ -1,11 +1,9 @@
-include ../mixins/base
 extends ../mixins/layout
 
 block title
   title Profile - Code Wars
 
 block header
-  include ../mixins/header
   +header()
 
 block body
@@ -22,13 +20,8 @@ block body
             h5.my-3 #{user.firstname} #{user.lastname}
             p.text-muted.mb-1 #{student.points} pts
             p.text-muted.mb-4 #{format('money', student.cash)}
-        #notifs
-          h2.mb-4 Mes notifications
-          if notifications == null
-            h6 Vous n'avez aucune notification
-          else
-            each notif in notifications
-              +notification(notif)
+        include ../mixins/notificationLayout
+        +notificationLayout(notifications)
       .col-lg-8
         .card.mb-4
           .card-body
@@ -64,3 +57,8 @@ block body
               .m-4
                 each week in weeklyProgress
                   +weekProgress(week)
+        .row
+          .card.mb-4.w-100
+            .card-body
+              h2.text-center.mb-3 Mes achats
+

@@ -1,0 +1,8 @@
+mixin notificationLayout(notifications)
+  h2.mb-4 Mes notifications
+  #notifs.mx-2
+    if notifications == null
+      h6 Vous n'avez aucune notification
+    else
+      each notif in notifications
+        +notification(notif)

@@ -10,7 +10,7 @@ class NotificationBroker extends Broker
 
     public function seenNotification($notificationId, $userId)
     {
-        $sql = "update codewars.notification n set n.is_seen = true where n.id = ? and n.user_id = ?";
+        $sql = "update codewars.notification set is_seen = true where id = ? and user_id = ?";
         $this->query($sql, [$notificationId, $userId]);
     }
 
@@ -21,7 +21,7 @@ class NotificationBroker extends Broker
     public function sendNotificationToSpecificStudent($userId, $msg, $name)
     {
         $sql = "insert into codewars.notification(id, user_id, name, is_seen, description, date) values(default, ?, ?, false, ?, now())";
-        $this->query($sql, [$userId, $name, $msg]);
+        $this->query($sql, [$userId, strtoupper($name), $msg]);
     }
 
     public function sendNotificationToStudents($msg, $name)
@@ -30,7 +30,7 @@ class NotificationBroker extends Broker
         $students = (new StudentBroker())->getAll();
         $sql = "insert into codewars.notification(id, user_id, name, is_seen, description, date) values(default, ?, ?, false, ?, now())";
         foreach ($students as $student) {
-            $this->query($sql, [($userBroker->findByDa($student->da))->id, $name, $msg]);
+            $this->query($sql, [($userBroker->findByDa($student->da))->id, strtoupper($name), $msg]);
         }
     }
 
@@ -41,7 +41,7 @@ class NotificationBroker extends Broker
         $sql = "insert into codewars.notification(id, user_id, name, is_seen, description, date) values(default, ?, ?, false, ?, now())";
         foreach ($users as $user) {
             if ($userBroker->isTeacher($user->da)) {
-                $this->query($sql, [$user->id, $name, $msg]);
+                $this->query($sql, [$user->id, strtoupper($name), $msg]);
             }
         }
     }

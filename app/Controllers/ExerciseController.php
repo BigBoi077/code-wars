@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Services\ExerciseService;
+use Zephyrus\Network\Response;
 
 class ExerciseController extends Controller
 {
@@ -16,12 +17,12 @@ class ExerciseController extends Controller
     public function exercises()
     {
         return $this->render('exercises/exercises_listing', [
-            'exercises' => ExerciseService::getAll(),
+            'exercises' => ExerciseService::getAll()
         ]);
     }
 
-    public function exerciseDetail($id)
+    public function exerciseDetail($id): Response
     {
-        return $this->render('exercises/exercises_details', []);
+        return $this->render('exercises/exercise_details');
     }
 }

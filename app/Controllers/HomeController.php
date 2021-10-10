@@ -12,6 +12,7 @@ class HomeController extends Controller
         $this->get('/', 'index');
         $this->get('/home', 'home');
         $this->get('/profile', 'profile');
+        $this->get('/notification/seen/{id}', 'seenNotification');
     }
 
     public function index()
@@ -28,6 +29,7 @@ class HomeController extends Controller
         }
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
         return $this->render('home', [
+            'isTeacher' => $this->isUserTeacher(),
             'teamPoints' => TeamController::getTeamPoints(),
             'teamMembers' => $teamMembers,
             'notifications' => $notifications
@@ -44,5 +46,11 @@ class HomeController extends Controller
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress
         ]);
+    }
+
+    public function seenNotification($id)
+    {
+        (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
+        return $this->redirect('/home');
     }
 }

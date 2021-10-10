@@ -4,6 +4,7 @@ namespace Models;
 
 use Models\Brokers\StudentBroker;
 use Models\Services\ItemService;
+use Models\Services\NotificationService;
 use Models\Services\StudentItemService;
 use Models\Services\StudentService;
 use stdClass;
@@ -64,6 +65,7 @@ class Transaction
         }
         StudentItemService::create($item_id, $da);
         (new StudentBroker())->update($student->da, $student->team_id, $student->cash - $item->price); //TODO mettre dans le service ?
+        NotificationService::studentBoughtItem($student, $item); //notification d'achat
         $this->success = true;
     }
 }
