@@ -16,7 +16,7 @@ block body
       .col-lg-4
         .card.mb-4
           .card-body.text-center
-            img.rounded-img(src=profileImageUrl)
+            img.rounded-img.mt-2(src=profileImageUrl)
             h5.my-3 #{user.firstname} #{user.lastname}
             p.text-muted.mb-1 #{student.points} pts
             p.text-muted.mb-4 #{format('money', student.cash)}
@@ -26,16 +26,16 @@ block body
         .card.mb-4
           include ../mixins/profileInfo
           .card-body
-            h2.text-center.mb-3 Informations du compte
+            h2.text-center.mb-4 Informations du compte
             +profileInfo("Nom", user.lastname)
             hr
-            +profileInfo("Pénom", user.firstname)
+            +profileInfo("Prénom", user.firstname)
             hr
             +profileInfo("Équipe", student.team_name)
             hr
             +profileInfo("Mot de passe", "********")
             .row.justify-content-md-end.mx-3
-              a.btn.btn-yellow.text-dark(href="/management/profile")
+              a.btn.btn-yellow.text-dark(href="/edit_profile")
                 | Modifier le compte
                 i.fas.fa-edit
         .row

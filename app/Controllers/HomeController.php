@@ -14,7 +14,10 @@ class HomeController extends Controller
         $this->get('/', 'index');
         $this->get('/home', 'home');
         $this->get('/profile', 'profile');
+        $this->get('/edit_profile', 'editProfile');
         $this->get('/notification/seen/{id}', 'seenNotification');
+
+        $this->post('/update_profile', 'updateProfile');
     }
 
     public function index()
@@ -51,6 +54,18 @@ class HomeController extends Controller
             'individualProgress' => $indProgress,
             'myItems' => $items
         ]);
+    }
+
+    public function editProfile()
+    {
+        return $this->render('profile/edit_profile', [
+            'action' => 'updateProfile'
+        ]);
+    }
+
+    public function updateProfile()
+    {
+        // TODO : DON'T TOUCH, I GOT QUESTIONS.   -Sam
     }
 
     public function seenNotification($id)
