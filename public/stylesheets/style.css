@@ -299,6 +299,11 @@ body {
 
 .btn-yellow {
     background-color: var(--accent);
+    transition: all 0.25s ease-in-out;
+}
+
+.btn-yellow:hover {
+    transform: scale(1.15);
 }
 
 #submitBtn {
@@ -307,6 +312,11 @@ body {
     margin: 1rem auto;
     border-radius: 1rem;
     width: 50%;
+    transition: all 0.25s ease-in-out;
+}
+
+#submitBtn:hover {
+    transform: scale(1.1);
 }
 
 #Btn {
@@ -383,6 +393,16 @@ body {
     background-color: #FFF;
     margin: 1rem 0;
     border-radius: .75rem;
+}
+
+.student-icons {
+    color: var(--dark) !important;
+    transition: all 0.25s ease-in-out;
+}
+
+.student-icons:hover {
+    transform: scale(1.25);
+    color: var(--accent) !important;
 }
 
 #productImg {
