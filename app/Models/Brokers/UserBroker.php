@@ -53,4 +53,11 @@ class UserBroker extends Broker
             $da
         ]);
     }
+
+    public function getHashedPassword($da)
+    {
+        $sql = "SELECT password FROM codewars.user WHERE da = ?";
+        $password = $this->selectSingle($sql, [$da]);
+        return $password->password;
+    }
 }
