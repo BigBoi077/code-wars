@@ -4,6 +4,7 @@
 use Models\Brokers\Broker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\UserBroker;
+use Models\SessionHelper;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
 
@@ -73,6 +74,7 @@ class PersonService
         $password = password_hash($this->form->getValue('password') . PASSWORD_PEPPER, PASSWORD_DEFAULT);
         (new PersonBroker())->update($da, $firstname, $lastname, $email);
         (new UserBroker())->update($da, $password);
+        SessionHelper::setUser((new UserBroker())->findByDa($da)->id, (new PersonBroker())->findByDa($da));
         $this->success = true;
     }
 }

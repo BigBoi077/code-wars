@@ -57,14 +57,8 @@ class Logger
     public function logUser()
     {
         $person = (new PersonBroker())->findByDa($this->user->da);
-        Session::getInstance()->set(Controller::SESSION_IS_LOGGED, true); //TODO IS_LOGGED dans un Constants.php ?
-        Session::getInstance()->set('user', [
-            'id' => $this->user->id,
-            'da' => $person->da,
-            'firstname' => $person->firstname,
-            'lastname' => $person->lastname,
-            'isTeacher' => (new UserBroker())->isTeacher($person->da)
-        ]);
+        SessionHelper::setIsLogged();
+        SessionHelper::setUser($this->user->id, $person);
     }
 
     public function getErrorMessage()
