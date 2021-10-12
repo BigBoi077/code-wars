@@ -20,6 +20,7 @@ class ExerciseController extends Controller
         $exercisesByWeek = [];
         foreach ($exercises as $exercise) {
             if ($exercise->is_active) {
+                $exercisesByWeek[$exercise->week_id]['number'] = $exercise->number;
                 $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
                 $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
             }

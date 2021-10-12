@@ -1,0 +1,29 @@
+extends ../../mixins/layout
+
+block title
+  title Semaines - Code Wars
+
+block header
+  +header()
+block body
+  +flash
+  #circle
+  #circleSmallRight
+  .student-form-container
+    h4 #{title}
+    hr
+    form(method='post', action=action)
+      .form-row
+        .form-group.col-12
+          label(for="number") Numéro
+          input.form-control(id="number" name="number" type="number")
+      .form-row
+        .form-group.col-12
+          label(for="startDate") Date de début
+          input.form-control(id="startDate" name="startDate" type="date")
+      .form-row
+        .form-group.col-12.text-muted
+          h6 Par défault la semaine est non activé. Rendez-dans la page précédente pour l'activé par la suite.
+      .form-row
+        button#submitBtn.btn(type='submit')
+          | Créer

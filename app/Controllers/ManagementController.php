@@ -8,6 +8,7 @@ use Models\Services\ExerciseService;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
+use Zephyrus\Application\Rule;
 use Zephyrus\Network\Response;
 
 class ManagementController extends Controller
@@ -46,6 +47,9 @@ class ManagementController extends Controller
         $this->post('/management/items/{id}/update', 'updateItem');
 
         $this->get('/management/week/{id}/activate', 'activateWeek');
+        $this->get('/management/week/create', 'createWeek');
+        $this->get('/management/week/{id}/delete', 'deleteWeek');
+        $this->post('/management/week/store', 'storeWeek');
 	}
 
 	public function management(): Response
@@ -283,4 +287,35 @@ class ManagementController extends Controller
         (new WeekBroker())->activate($id);
         return $this->redirect('/management/exercises');
     }
+
+    public function deleteWeek($id)
+    {
+        (new WeekBroker())->delete($id);
+        Flash::success("Semaine supprimé avec succès");
+        return $this->redirect('/management/exercises');
+    }
+
+    public function createWeek()
+    {
+        return $this->render('management/exercises/week_add', [
+            'title' => 'Créer une semaine',
+            'action' => '/management/week/store'
+        ]);
+    }
+
+    public function storeWeek()
+    {
+        $form = $this->buildForm();
+        $form->validate("number", Rule::notEmpty("Le numéro est requis"));
+        $form->validateWhenFieldHasNoError("number", Rule::integer("Le numéro doit être un chiffre"));
+        $form->validate("startDate", Rule::date("La date doit être valide"));
+        if (!$form->verify()) {
+            Flash::error($form->getErrorMessages());
+            return $this->redirect('/management/week/create');
+        }
+        (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
+        Flash::success("Semaine ajouté avec succès");
+        return $this->redirect('/management/exercises');
+    }
+
 }

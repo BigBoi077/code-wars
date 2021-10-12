@@ -119,7 +119,7 @@ class ExerciseService
         $exemple = $this->form->getValue('exemple');
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        $weekId = $this->form->getValue("week_id");
+        $weekId = $this->form->getValue("week");
         (new ExerciseBroker())->update($id, $exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
 
 
