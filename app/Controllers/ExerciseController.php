@@ -28,6 +28,8 @@ class ExerciseController extends Controller
 
     public function exerciseDetail($id): Response
     {
-        return $this->render('exercises/exercise_details');
+        return $this->render('exercises/exercise_details', [
+            'exercise' => ExerciseService::get($id)
+        ]);
     }
 }

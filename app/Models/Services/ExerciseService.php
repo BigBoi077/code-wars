@@ -54,6 +54,12 @@ class ExerciseService
         return (new ExerciseBroker())->findByID($id) != null;
     }
 
+    public static function get($id)
+    {
+        $broker = new ExerciseBroker();
+        return $broker->findByID($id);
+    }
+
     public function getErrorMessages()
     {
         return $this->errorMessages;
