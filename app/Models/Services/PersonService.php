@@ -55,8 +55,6 @@ class PersonService
             } else {
                 $this->form->validate('confirmPassword', Rule::notEmpty('La confirmation de mot de passe est requise.'));
             }
-        } else {
-            $this->form->validate('password', Rule::notEmpty('Le mot de passe est requis.'));
         }
 
         if (!$this->form->verify()) {
