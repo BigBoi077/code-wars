@@ -668,6 +668,7 @@ text-align: center;
     position: relative;
     background-color: var(--background);
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    grid-template-columns: 25% 25% 25% 25%;
     margin-top: 32px;
     grid-template-areas:
     "title            title            title            title"
@@ -677,7 +678,7 @@ text-align: center;
     "description      description      .                info"
     ".                .                .                info"
     "example          example          example          example"
-    "submit           submit           submit           submit";
+    "submit           submit           upload           upload";
 }
 
 .single-mission-detail h3 {
@@ -763,6 +764,9 @@ text-align: center;
 
 .single-mission-detail .mission-submit {
     grid-area: submit;
+}
+
+.single-mission-detail .mission-submit, .single-mission-detail .mission-upload {
     background-color: var(--accent);
     border-radius: 5px;
     padding: 16px 32px;
@@ -771,25 +775,37 @@ text-align: center;
     justify-content: center;
     align-items: center;
     transition: all 0.25s ease-in-out;
-    height: min-content;
-    width: 30%;
+    width: 75%;
+    height: 48px;
     margin: 34px auto auto;
 }
 
-.single-mission-detail .mission-submit:hover {
+.single-mission-detail .mission-submit:hover, .single-mission-detail .mission-upload:hover {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
     transform: scale(1.05);
 }
 
-.single-mission-detail .mission-submit i {
+.single-mission-detail label {
+    cursor: pointer;
+}
+
+.single-mission-detail .mission-submit i, .single-mission-detail .mission-upload i {
     margin-right: 12px;
 }
 
-.single-mission-detail .mission-submit label {
+.single-mission-detail label {
     margin: 0;
 }
 
 .single-mission-detail .mission-submit input[type="file"] {
+    display: none;
+}
+
+.single-mission-detail .mission-upload {
+    grid-area: upload;
+}
+
+.single-mission-detail .mission-upload input[type="submit"] {
     display: none;
 }
 

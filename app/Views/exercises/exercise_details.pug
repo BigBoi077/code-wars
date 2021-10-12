@@ -11,7 +11,7 @@ block body
   #circleSmall
   #circleSmallRight
   +flash
-  form.single-mission-detail(action="/submit/exercice" method="post")
+  form.single-mission-detail(action="/submit/exercise" method="post" enctype="multipart/form-data")
     h1#mission-title=exercise.name
     hr.separator
     h3 Debriefing
@@ -45,6 +45,11 @@ block body
       h3 Exemple d'éxécution
       pre=exercise.execution_exemple
     div.mission-submit
+      i.fas.fa-file-code
+      label(for='exercice-upload') Remise d'exercice
+      input#exercice-upload(type='file' name='exercise' accept='.zip,.rar,.7zip,.java')
+    div.mission-upload
       i.fas.fa-file-upload
-      label(for='exercice-submit') Remise d'exercice
-      input#exercice-submit(type='file' name='exercise' accept='.zip,.rar,.7zip,.java')
+      label(for='exercice-submit') Soumettre le/les fichier(s)
+      input#exercice-submit(type='submit')
+
