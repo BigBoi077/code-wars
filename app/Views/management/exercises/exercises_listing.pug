@@ -26,6 +26,8 @@ block body
           h4.student-header-element Argent
         .col-2
           h4.student-header-element Points
+        .col-2
+          h4.student-header-element Semaine
         .col-1
         .col-1
       each exercise in exercises
@@ -38,13 +40,15 @@ block body
             p.student-row-element #{format('money', exercise.cash_reward)}
           .col-2
             p.student-row-element #{exercise.point_reward}
+          .col-2
+            p.student-row-element Semaine #{exercise.number}
           .col-1
             a(href='/management/exercises/' + exercise.id + '/edit')
               i.fas.fa-edit.student-icons
           .col-1
             a(href='/management/exercises/' + exercise.id + '/delete')
               i.fas.fa-trash.student-icons
-    h1.mt-5 Semaine
+    h1.mt-5 Semaines
     a(href='/management/week/create')
       button.btn.btn-yellow#Btn
         p

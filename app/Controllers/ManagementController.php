@@ -171,29 +171,6 @@ class ManagementController extends Controller
 
     }
 
-    public function detailExercise($id){
-
-        $exerciseBroker = new ExerciseBroker();
-        $tipBroker = new TipBroker();
-        $weekBroker = new WeekBroker();
-
-        $exercise = $exerciseBroker->findByID($id);
-        $week = $weekBroker->findByID($id);
-        $tip = $tipBroker->findByID($id);
-
-
-        if(is_null($exercise)){
-            return $this->redirect("/management/exercises/");
-        }
-        return $this->render("management/exercises/temp_exercise_detail",
-        [
-            'exercise' => $exercise,
-            'tip' => $tip,
-            'week' => $week
-        ]);
-
-    }
-
     public function storeExercise()
     {
         $exercise = ExerciseService::create($this->buildForm());

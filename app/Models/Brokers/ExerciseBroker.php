@@ -10,7 +10,7 @@ class ExerciseBroker extends Broker
     public function findByID($id) : ?stdClass
     {
         $sql = "SELECT *
-                FROM codewars.exercise e 
+                FROM codewars.exercise e join codewars.week w on w.id = e.week_id
                 WHERE e.id = ?";
 
         return $this->selectSingle($sql, [$id]);

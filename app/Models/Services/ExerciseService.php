@@ -42,8 +42,6 @@ class ExerciseService
 
     public static function delete($id)
     {
-        /* TODO: Pop-up confirmation suppression d'exercise + mot de passe enseignant */
-        (new WeekBroker())->delete($id);
         (new TipBroker())->delete($id);
         (new ExerciseBroker())->delete($id);
 
