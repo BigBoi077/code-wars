@@ -19,7 +19,7 @@ class PersonBroker extends Broker
             $da,
             $firstname,
             $lastname,
-            $email
+            $email != null ? $email : $this->getPersonEmail($da)
         ]);
     }
 
@@ -32,7 +32,19 @@ class PersonBroker extends Broker
     public function update($da, $firstname, $lastname, $email = null)
     {
         $sql = "UPDATE codewars.person SET firstname = ?, lastname = ?, email = ? WHERE da = ?";
-        $this->query($sql, [$firstname, $lastname, $email, $da]);
+        $this->query($sql, [
+            $firstname,
+            $lastname,
+            $email != null ? $email : $this->getPersonEmail($da),
+            $da
+        ]);
+    }
+
+    public function getPersonEmail($da): string
+    {
+        $sql = "SELECT email FROM codewars.person WHERE da = ?";
+        $email = $this->selectSingle($sql, [$da]);
+        return $email->email;
     }
 }
 
