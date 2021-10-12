@@ -1,0 +1,47 @@
+extends ../../mixins/layout
+
+block title
+  title Exercises - Code Wars
+
+block header
+  +header()
+block body
+  #circle
+  #circleSmallRight
+  .main-container
+    +flash
+    h1 Exercises
+    a(href='/management/exercises/create')
+      button.btn.btn-yellow#Btn
+        p
+          i.fas.fa-plus-square
+          | Nouvel Exercise
+
+    .student-list
+      .row
+        .col-2
+          h4.student-header-element Nom
+        .col-2
+          h4.student-header-element Difficulté
+        .col-2
+          h4.student-header-element Argent
+        .col-2
+          h4.student-header-element Points
+        .col-1
+        .col-1
+      each exercise in exercises
+        .row.student-row.box-shadow.mb-4
+          .col-2
+            p.student-row-element #{exercise.name}
+          .col-2
+            p.student-row-element #{exercise.difficulty}
+          .col-2
+            p.student-row-element #{format('money', exercise.cash_reward)}
+          .col-2
+            p.student-row-element #{exercise.point_reward}
+          .col-1
+            a(href='/management/exercises/' + exercise.id + '/edit')
+              i.fas.fa-edit.student-icons
+          .col-1
+            a(href='/management/exercises/' + exercise.id + '/delete')
+              i.fas.fa-trash.student-icons

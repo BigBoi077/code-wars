@@ -1,0 +1,50 @@
+extends ../../mixins/layout
+
+block title
+  title Exercises - Code Wars
+
+block header
+  +header()
+block body
+  +flash
+  #circle
+  #circleSmallRight
+  .student-form-container
+    h4 #{title}
+    hr
+    form(method='post', action=action)
+      .form-row
+        .form-group.col-12.mb-1
+          label(for="exercisename") Nom de l'exercise
+          input.form-control(id='exercisename', name='exercisename', type='text' value=(exercise !== null) ? exercise.name: val('exercisename'))
+      .form-row
+        .form-group.col-6.mb-1
+          label(for="description") Description
+          textArea.form-control(id='description', name='description')
+           | #{(exercise !== null) ? exercise.description : val('description')}
+        .form-group.col-6.mb-1
+          label(for="exemple") Exemple d'exécution (optionel)
+          textArea.form-control(id='exemple', name='exemple')
+            | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
+      .form-row
+        .form-group.col-3
+          label(for="cash") Argent
+          input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(exercise !== null) ? exercise.cash_reward : val('cash'))
+        .form-group.col-3
+          label(for="point") Points
+          input.form-control(placeholder="0" id='point', name='point', type='number' value=(exercise !== null) ? exercise.point_reward : val('point'))
+        .form-group.col-3
+          label(for="difficulty") Difficulté
+          input.form-control(id='difficulty', name='difficulty', type='number', min='1', max='10', value=(exercise !== null) ? exercise.difficulty : val('difficulty'))
+        .form-group.col-3
+          label(for="week") Semaine
+          select.form-control(id="week", name="week")
+            each week in weeks
+              option(value=week.id)
+                | #{week.number}
+      .form-row
+        button#submitBtn.btn(type='submit')
+          if exercise !== null
+            | Modifier
+          else
+            | Créer

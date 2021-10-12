@@ -1,4 +1,3 @@
-include ../../mixins/base
 extends ../../mixins/layout
 
 block title
@@ -19,14 +18,14 @@ block body
         .form-row
           .form-group.col-12
             label DA
-            input.form-control(id='da', name='da', type='text' required value=val('da') placeholder="7777777")
+            input.form-control(id='da', name='da', type='text' value=val('da') placeholder="7777777")
       .form-row
         .form-group.col-6
           label(for="firstname") Prénom
-          input.form-control(placeholder="Joshua" id='firstname', name='firstname', type='text' required value=(editStudent !== null) ? editStudent.firstname: val('firstname'))
+          input.form-control(placeholder="Joshua" id='firstname', name='firstname', type='text' value=(editStudent !== null) ? editStudent.firstname: val('firstname'))
         .form-group.col-6
           label(for="lastname") Nom
-          input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' required value=(editStudent !== null) ? editStudent.lastname: val('lastname'))
+          input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' value=(editStudent !== null) ? editStudent.lastname: val('lastname'))
       .form-row
         .form-group.col-6
           label(for="cash") Argent (Optionnel)

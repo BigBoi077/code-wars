@@ -125,15 +125,16 @@ class ManagementController extends Controller
 
     public function listExercises(): Response
     {
-        return $this->render('management/exercises/temp_exercise_listing', [
-            'exercises' => (new ExerciseBroker())->getAll(),
+        $exercises = (new ExerciseBroker())->getAll();
+        return $this->render('management/exercises/exercises_listing', [
+            'exercises' => $exercises,
             'student' => null
         ]);
     }
 
     public function createExercise()
     {
-        return $this->render('management/exercises/temp_exercise_form', [
+        return $this->render('management/exercises/exercises_form', [
             'title' => 'Créer un exercise',
             'action' => '/management/exercises/store',
             'exercise' => null,
@@ -143,8 +144,8 @@ class ManagementController extends Controller
 
     public function editExercise($id)
     {
-        return $this->render('management/exercises/temp_exercise_form', [
-            'title' => 'Créer un exercise',
+        return $this->render('management/exercises/exercises_form', [
+            'title' => 'Modifier un exercise',
             'action' => '/management/exercises/' . $id . '/update',
             'exercise' => (new ExerciseBroker())->findByID($id),
             'weeks' => (new WeekBroker())->getAll()
@@ -201,7 +202,7 @@ class ManagementController extends Controller
     {
         if (ExerciseService::exists($id)) {
             ExerciseService::delete($id);
-            Flash::success('ExerciseService supprimé avec succès.');
+            Flash::success('Exercise supprimé avec succès.');
         } else {
             Flash::error('Une erreur est survenue.');
         }
