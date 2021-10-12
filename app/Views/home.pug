@@ -13,6 +13,9 @@ block body
   .container
     #score.d-flex.justify-content-center.my-5
       +scoreBoard()
+    if quote !== null
+      .m-5.text-center
+        h3.font-italic “ #{quote} ”
     .row.mt-5.p-4
       include mixins/notificationLayout
       if isTeacher === true

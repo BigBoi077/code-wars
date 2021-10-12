@@ -3,8 +3,9 @@
 use Models\Brokers\NotificationBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentItemBroker;
-use Models\Brokers\UserBroker;
+use Models\Services\ApiService;
 use Models\Services\StudentService;
+use Zephyrus\Network\HttpRequester;
 
 class HomeController extends Controller
 {
@@ -33,11 +34,13 @@ class HomeController extends Controller
             $teamMembers = (new StudentBroker())->sameTeamStudent($student->team_id);
         }
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
+        //$quote = (new HttpRequester("get", "http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote"))->execute();
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
             'teamPoints' => TeamController::getTeamPoints(),
             'teamMembers' => $teamMembers,
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'quote' => null
         ]);
     }
 

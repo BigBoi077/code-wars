@@ -16,8 +16,13 @@ class ExerciseController extends Controller
 
     public function exercises()
     {
+        $exercises = ExerciseService::getAll();
+        $exercisesByWeek = [];
+        foreach ($exercises as $exercise) {
+            $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
+        }
         return $this->render('exercises/exercises_listing', [
-            'exercises' => ExerciseService::getAll()
+            'exercisesByWeek' => $exercisesByWeek
         ]);
     }
 
