@@ -75,9 +75,8 @@ class ItemService
     private function applyRules(): bool
     {
         $this->form->validate('name', Rule::notEmpty('Le nom est requis.'));
-        $this->form->validate('name', Rule::name('Le nom ne doit pas contenir de chiffres.'));
         $this->form->validate('price', Rule::notEmpty('Le prix est requis.'));
-        $this->form->validate('price', Rule::integer('Le prix doit être un nombre.'));
+        $this->form->validateWhenFieldHasNoError('price', Rule::integer('Le prix doit être un nombre.'));
         $this->form->validate('description', Rule::notEmpty('La description est requise.'));
         if (!$this->form->verify()) {
             $this->errorMessages = $this->form->getErrorMessages();

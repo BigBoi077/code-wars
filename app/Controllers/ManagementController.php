@@ -211,14 +211,14 @@ class ManagementController extends Controller
 
     public function listItems()
     {
-        return $this->render('management/items/temp_item_listing', [
+        return $this->render('management/items/items_listing', [
             'items' => ItemService::getAll()
         ]);
     }
 
     public function createItem()
     {
-        return $this->render('management/items/temp_item_form', [
+        return $this->render('management/items/items_form', [
             'title' => 'Créer un article',
             'action' => '/management/items/store',
             'item' => null,
@@ -232,8 +232,8 @@ class ManagementController extends Controller
             return $this->redirect('/management/items');
         }
         $item = ItemService::get($id);
-        return $this->render('management/items/temp_item_form', [
-            'title' => 'Éditer ' . $item->name,
+        return $this->render('management/items/items_form', [
+            'title' => 'Modifier ' . $item->name,
             'action' => '/management/items/' . $item->id . '/update',
             'item' => $item,
         ]);

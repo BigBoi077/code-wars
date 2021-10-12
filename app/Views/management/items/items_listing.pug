@@ -1,0 +1,43 @@
+extends ../../mixins/layout
+
+block title
+  title Items - Code Wars
+
+block header
+  +header()
+block body
+  #circle
+  #circleSmallRight
+  .main-container
+    +flash
+    h1 Articles
+    a(href='/management/items/create')
+      button.btn.btn-yellow#Btn
+        p
+          i.fas.fa-plus-square
+          | Nouvel article
+
+    .items-list
+      .row
+        .col-3
+          h4.student-header-element Nom
+        .col-2
+          h4.student-header-element Prix
+        .col-4
+          h4.student-header-element Description
+        .col-1
+        .col-1
+      each item in items
+        .row.student-row.box-shadow.mb-4
+          .col-3
+            p.student-row-element #{item.name}
+          .col-2
+            p.student-row-element #{format('money', item.price)}
+          .col-4
+            p.student-row-element #{item.description}
+          .col-1
+            a(href='/management/items/' + item.id + '/edit')
+              i.fas.fa-edit.student-icons
+          .col-1
+            a(href='/management/items/' + item.id + '/delete')
+              i.fas.fa-trash.student-icons
