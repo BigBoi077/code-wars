@@ -81,7 +81,7 @@ class ExerciseService
     private function applyRules(): bool
     {
         $this->form->validate('exercisename', Rule::notEmpty('Le nom est requis.'));
-
+        $this->form->validate('description', Rule::notEmpty('La description est requise'));
         $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
         $this->form->validate('point', Rule::integer('Les points doivent etre un chiffre'));
         $this->form->validate('difficulty', Rule::integer('La difficulté doit spécifié'));
