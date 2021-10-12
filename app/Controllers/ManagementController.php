@@ -290,8 +290,11 @@ class ManagementController extends Controller
 
     public function deleteWeek($id)
     {
-        (new WeekBroker())->delete($id);
-        Flash::success("Semaine supprimé avec succès");
+        if ((new WeekBroker())->delete($id)) {
+            Flash::success("Semaine supprimé avec succès");
+        } else {
+            Flash::error("Cette semaine ne peut pas être supprimé, car elle appartient à des exercises");
+        }
         return $this->redirect('/management/exercises');
     }
 

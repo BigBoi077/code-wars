@@ -28,10 +28,14 @@ class WeekBroker extends Broker
         return $this->query($sql, [$number, $date]);
     }
 
-    public function delete($id)
+    public function delete($id): bool
     {
+        if ((new ExerciseBroker())->getAllByWeek($id) != null) {
+            return false;
+        }
         $sql = "DELETE FROM codewars.week WHERE id = ?;";
-        return $this->query($sql, [$id]);
+        $this->query($sql, [$id]);
+        return true;
     }
 
     public function activate($id)
