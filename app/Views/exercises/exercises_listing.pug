@@ -29,10 +29,12 @@ block body
           .mission-information-header
             h4 #{exercise.name}
             .mission-results
-              p Récompense de
-                span #{exercise.cash_reward} $
-                | et
-                span #{exercise.point_reward} points
+              .mission-cash-reward
+                img(src="/assets/images/credit_symbol.png")
+                span #{exercise.cash_reward}
+              .mission-point-reward
+                i.fab.fa-ethereum
+                span #{exercise.point_reward}
           hr
         .mission-detail
           p #{exercise.description}

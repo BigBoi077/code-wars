@@ -619,8 +619,8 @@ text-align: center;
     justify-content: space-between;
 }
 
-.single-mission-row .mission-information-header .mission-results p {
-    margin: 0 8px;
+.single-mission-row .mission-information-header .mission-results div {
+    display: flex;
 }
 
 .single-mission-row .mission-information-header .mission-results span {
@@ -680,6 +680,10 @@ text-align: center;
     "submit           submit           submit           submit";
 }
 
+.single-mission-detail h3 {
+    margin-bottom: 24px;
+}
+
 .single-mission-detail i {
     font-size: 20px;
 }
@@ -725,7 +729,7 @@ text-align: center;
     margin-right: 12px;
 }
 
-.single-mission-detail .mission-info .mission-cash-reward img {
+.single-mission-detail .mission-info .mission-cash-reward img, .single-mission-row .mission-results .mission-cash-reward img {
     height: 22px;
     width: 22px;
 }
