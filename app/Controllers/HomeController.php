@@ -4,7 +4,11 @@ use Models\Brokers\NotificationBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\UserBroker;
+use Models\Services\PersonService;
+use Models\Services\ApiService;
 use Models\Services\StudentService;
+use Zephyrus\Application\Flash;
+use Zephyrus\Network\HttpRequester;
 
 class HomeController extends Controller
 {
@@ -33,11 +37,13 @@ class HomeController extends Controller
             $teamMembers = (new StudentBroker())->sameTeamStudent($student->team_id);
         }
         $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
+        //$quote = (new HttpRequester("get", "http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote"))->execute();
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
             'teamPoints' => TeamController::getTeamPoints(),
             'teamMembers' => $teamMembers,
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'quote' => null
         ]);
     }
 
@@ -59,13 +65,19 @@ class HomeController extends Controller
     public function editProfile()
     {
         return $this->render('profile/edit_profile', [
-            'action' => 'updateProfile'
+            'action' => '/update_profile'
         ]);
     }
 
     public function updateProfile()
     {
-        // TODO : DON'T TOUCH, I GOT QUESTIONS.   -Sam
+        $profile = PersonService::update($this->getActiveStudent()->da, $this->buildForm());
+        if ($profile->hasSucceeded()) {
+            Flash::success('Profil edité avec succèss.');
+            return $this->redirect('/profile');
+        }
+        Flash::error($profile->getErrorMessages());
+        return $this->redirect('/edit_profile');
     }
 
     public function seenNotification($id)

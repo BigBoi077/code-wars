@@ -42,8 +42,6 @@ class ExerciseService
 
     public static function delete($id)
     {
-        /* TODO: Pop-up confirmation suppression d'exercise + mot de passe enseignant */
-        (new WeekBroker())->delete($id);
         (new TipBroker())->delete($id);
         (new ExerciseBroker())->delete($id);
 
@@ -101,7 +99,7 @@ class ExerciseService
         $tips = (isEmpty($this->form->getValue('tips'))) ? $this->form->getValue('tips') : null;
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        $weekId = $this->form->getValue("week_id");
+        $weekId = $this->form->getValue("week");
         $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple, $cash, $point, $weekId);
         if ($tips != null) {
             (new TipBroker())->insert($exerciseId, $tips);
@@ -119,7 +117,7 @@ class ExerciseService
         $exemple = $this->form->getValue('exemple');
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        $weekId = $this->form->getValue("week_id");
+        $weekId = $this->form->getValue("week");
         (new ExerciseBroker())->update($id, $exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
 
 

@@ -1,7 +1,7 @@
 extends ../../mixins/layout
 
 block title
-  title Exercises - Code Wars
+  title Articles - Code Wars
 
 block header
   +header()
@@ -16,7 +16,6 @@ block body
         p
           i.fas.fa-plus-square
           | Nouvel Exercise
-
     .exercises-list
       .row
         .col-2
@@ -27,6 +26,8 @@ block body
           h4.student-header-element Argent
         .col-2
           h4.student-header-element Points
+        .col-2
+          h4.student-header-element Semaine
         .col-1
         .col-1
       each exercise in exercises
@@ -39,9 +40,40 @@ block body
             p.student-row-element #{format('money', exercise.cash_reward)}
           .col-2
             p.student-row-element #{exercise.point_reward}
+          .col-2
+            p.student-row-element Semaine #{exercise.number}
           .col-1
             a(href='/management/exercises/' + exercise.id + '/edit')
               i.fas.fa-edit.student-icons
           .col-1
             a(href='/management/exercises/' + exercise.id + '/delete')
               i.fas.fa-trash.student-icons
+    h1.mt-5 Semaines
+    a(href='/management/week/create')
+      button.btn.btn-yellow#Btn
+        p
+          i.fas.fa-plus-square
+          | Nouvel semaine
+    .weeks
+      .row
+        .col-3
+          h4.student-header-element Date de début
+        .col-2
+          h4.student-header-element Numéro
+        .col-2
+          h4.student-header-element Activé
+      each week in weeks
+        .row.student-row.box-shadow.mb-4
+          .col-3
+            p.student-row-element #{week.start_date}
+          .col-2
+            p.student-row-element Semaine #{week.number}
+          .col-2
+            p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
+          .col-1
+            a(href='/management/week/' + week.id + '/activate')
+              i(class=week.is_active ? 'fa-eye-slash' : 'fa-eye').fas.student-icons
+          .col-1
+            a(href='/management/week/' + week.id + '/delete')
+              i.fas.fa-trash.student-icons
+

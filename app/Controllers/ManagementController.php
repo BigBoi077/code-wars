@@ -8,6 +8,7 @@ use Models\Services\ExerciseService;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
+use Zephyrus\Application\Rule;
 use Zephyrus\Network\Response;
 
 class ManagementController extends Controller
@@ -45,6 +46,10 @@ class ManagementController extends Controller
         $this->post('/management/items/store', 'storeItem');
         $this->post('/management/items/{id}/update', 'updateItem');
 
+        $this->get('/management/week/{id}/activate', 'activateWeek');
+        $this->get('/management/week/create', 'createWeek');
+        $this->get('/management/week/{id}/delete', 'deleteWeek');
+        $this->post('/management/week/store', 'storeWeek');
 	}
 
 	public function management(): Response
@@ -126,8 +131,10 @@ class ManagementController extends Controller
     public function listExercises(): Response
     {
         $exercises = (new ExerciseBroker())->getAll();
+        $weeks = (new WeekBroker())->getAll();
         return $this->render('management/exercises/exercises_listing', [
             'exercises' => $exercises,
+            'weeks' => $weeks,
             'student' => null
         ]);
     }
@@ -164,34 +171,11 @@ class ManagementController extends Controller
 
     }
 
-    public function detailExercise($id){
-
-        $exerciseBroker = new ExerciseBroker();
-        $tipBroker = new TipBroker();
-        $weekBroker = new WeekBroker();
-
-        $exercise = $exerciseBroker->findByID($id);
-        $week = $weekBroker->findByID($id);
-        $tip = $tipBroker->findByID($id);
-
-
-        if(is_null($exercise)){
-            return $this->redirect("/management/exercises/");
-        }
-        return $this->render("management/exercises/temp_exercise_detail",
-        [
-            'exercise' => $exercise,
-            'tip' => $tip,
-            'week' => $week
-        ]);
-
-    }
-
     public function storeExercise()
     {
         $exercise = ExerciseService::create($this->buildForm());
         if ($exercise->hasSucceeded()) {
-            Flash::success('Exercicse créé avec succès.');
+            Flash::success('Exercise créé avec succès.');
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
@@ -273,6 +257,45 @@ class ManagementController extends Controller
         }
         Flash::error('Une erreur est survenue.');
         return $this->redirect('/management/items/' . $id . '/edit');
+    }
+
+    public function activateWeek($id)
+    {
+        (new WeekBroker())->activate($id);
+        return $this->redirect('/management/exercises');
+    }
+
+    public function deleteWeek($id)
+    {
+        if ((new WeekBroker())->delete($id)) {
+            Flash::success("Semaine supprimé avec succès");
+        } else {
+            Flash::error("Cette semaine ne peut pas être supprimé, car elle appartient à des exercises");
+        }
+        return $this->redirect('/management/exercises');
+    }
+
+    public function createWeek()
+    {
+        return $this->render('management/exercises/week_add', [
+            'title' => 'Créer une semaine',
+            'action' => '/management/week/store'
+        ]);
+    }
+
+    public function storeWeek()
+    {
+        $form = $this->buildForm();
+        $form->validate("number", Rule::notEmpty("Le numéro est requis"));
+        $form->validateWhenFieldHasNoError("number", Rule::integer("Le numéro doit être un chiffre"));
+        $form->validate("startDate", Rule::date("La date doit être valide"));
+        if (!$form->verify()) {
+            Flash::error($form->getErrorMessages());
+            return $this->redirect('/management/week/create');
+        }
+        (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
+        Flash::success("Semaine ajouté avec succès");
+        return $this->redirect('/management/exercises');
     }
 
 }

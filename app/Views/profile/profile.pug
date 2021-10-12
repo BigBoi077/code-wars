@@ -33,6 +33,8 @@ block body
             hr
             +profileInfo("Équipe", student.team_name)
             hr
+            +profileInfo("E-mail", student.email)
+            hr
             +profileInfo("Mot de passe", "********")
             .row.justify-content-md-end.mx-3
               a.btn.btn-yellow.text-dark(href="/edit_profile")

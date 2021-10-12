@@ -139,6 +139,4 @@ class StudentService
         (new StudentBroker())->update($da, $team_id, $cash);
         $this->success = true;
     }
-
-
 }
