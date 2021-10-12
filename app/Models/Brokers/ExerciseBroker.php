@@ -18,7 +18,7 @@ class ExerciseBroker extends Broker
 
     public function getAll(): array
     {
-        $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple, w.id as week_id, w.number
+        $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple, w.id as week_id, w.number, w.is_active, w.start_date
                 FROM codewars.exercise e join codewars.week w on w.id = e.week_id
                 ORDER BY e.id";
         return $this->select($sql);

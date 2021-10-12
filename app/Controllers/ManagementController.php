@@ -45,6 +45,7 @@ class ManagementController extends Controller
         $this->post('/management/items/store', 'storeItem');
         $this->post('/management/items/{id}/update', 'updateItem');
 
+        $this->get('/management/week/{id}/activate', 'activateWeek');
 	}
 
 	public function management(): Response
@@ -126,8 +127,10 @@ class ManagementController extends Controller
     public function listExercises(): Response
     {
         $exercises = (new ExerciseBroker())->getAll();
+        $weeks = (new WeekBroker())->getAll();
         return $this->render('management/exercises/exercises_listing', [
             'exercises' => $exercises,
+            'weeks' => $weeks,
             'student' => null
         ]);
     }
@@ -191,7 +194,7 @@ class ManagementController extends Controller
     {
         $exercise = ExerciseService::create($this->buildForm());
         if ($exercise->hasSucceeded()) {
-            Flash::success('Exercicse créé avec succès.');
+            Flash::success('Exercise créé avec succès.');
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
@@ -275,4 +278,9 @@ class ManagementController extends Controller
         return $this->redirect('/management/items/' . $id . '/edit');
     }
 
+    public function activateWeek($id)
+    {
+        (new WeekBroker())->activate($id);
+        return $this->redirect('/management/exercises');
+    }
 }

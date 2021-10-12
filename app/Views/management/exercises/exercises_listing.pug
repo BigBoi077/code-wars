@@ -16,7 +16,6 @@ block body
         p
           i.fas.fa-plus-square
           | Nouvel Exercise
-
     .exercises-list
       .row
         .col-2
@@ -45,3 +44,32 @@ block body
           .col-1
             a(href='/management/exercises/' + exercise.id + '/delete')
               i.fas.fa-trash.student-icons
+    h1.mt-5 Semaine
+    a(href='/management/week/create')
+      button.btn.btn-yellow#Btn
+        p
+          i.fas.fa-plus-square
+          | Nouvel semaine
+    .weeks
+      .row
+        .col-3
+          h4.student-header-element Date de début
+        .col-2
+          h4.student-header-element Numéro
+        .col-2
+          h4.student-header-element Activé
+      each week in weeks
+        .row.student-row.box-shadow.mb-4
+          .col-3
+            p.student-row-element #{week.start_date}
+          .col-2
+            p.student-row-element #{week.number}
+          .col-2
+            p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
+          .col-1
+            a(href='/management/week/' + week.id + '/activate')
+              i(class=week.is_active ? 'fa-eye-slash' : 'fa-eye').fas.student-icons
+          .col-1
+            a(href='/management/week/' + week.id + '/delete')
+              i.fas.fa-trash.student-icons
+

@@ -19,7 +19,10 @@ class ExerciseController extends Controller
         $exercises = ExerciseService::getAll();
         $exercisesByWeek = [];
         foreach ($exercises as $exercise) {
-            $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
+            if ($exercise->is_active) {
+                $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
+                $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
+            }
         }
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek

@@ -38,7 +38,7 @@ class WeekBroker extends Broker
     //TODO: Change Update
     public function update($id,$date,$activate)
     {
-        $sql = "UPDATE codewars.week SET start_date = ?, is_active = ?  WHERE id = ?";
+        $sql = "UPDATE codewars.week SET start_date = ?, is_active = ? WHERE id = ?";
         $this->query($sql, [$id,$date,$activate]);
     }
 
@@ -46,5 +46,12 @@ class WeekBroker extends Broker
     {
         $sql = "DELETE FROM codewars.week WHERE id = ?;";
         return $this->query($sql, [$id]);
+    }
+
+    public function activate($id)
+    {
+        $week = $this->findByID($id);
+        $sql = "update codewars.week set is_active = ? where id = ?";
+        $this->query($sql, [!$week->is_active, $id]);
     }
 }
