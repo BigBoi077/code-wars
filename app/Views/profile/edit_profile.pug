@@ -15,19 +15,22 @@ block body
     h2.text-center.p-3 Modification Du Profile
     form(method='post', action=action)
       .form-row
-        .form-group.col-6
-          label(for="firstname") Prénom
-          input.form-control(placeholder="Dan" id='firstname', name='firstname', type='text' value=user.firstname)
-        .form-group.col-6
-          label(for="lastname") Nom
-          input.form-control(placeholder="Loader" id='lastname', name='lastname', type='text' value=user.lastname)
+        .form-group.col-4
+          label Prénom
+          input.form-control(placeholder="Dan" name='firstname', type='text' value=user.firstname)
+        .form-group.col-4
+          label Nom
+          input.form-control(placeholder="Loader" name='lastname', type='text' value=user.lastname)
+        .form-group.col-4
+          label E-mail
+          input.form-control(placeholder="beepboop@gmail.com", name='email', type='text' value=student.email)
       .form-row
         .form-group.col-6
-          label(for="firstname") Mot De Passe
-          input.form-control(placeholder="**********" id='password', name='password', type='password')
+          label Mot De Passe
+          input.form-control(placeholder="**********", name='password', type='password')
         .form-group.col-6
-          label(for="lastname") Confirmer Le Mot De Passe
-          input.form-control(id='confirmPassword', name='confirmPassword', type='password')
+          label Confirmer Le Mot De Passe
+          input.form-control(name='confirmPassword', type='password')
       .form-row
         button#submitBtn.btn(type='submit')
           | Modifier

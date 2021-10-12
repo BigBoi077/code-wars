@@ -45,8 +45,12 @@ class UserBroker extends Broker
         return $this->query($sql, [$da]);
     }
 
-    public function update($da)
+    public function update($da, $password)
     {
-
+        $sql = "UPDATE codewars.user SET password = ? WHERE da = ?";
+        $this->query($sql, [
+            $password,
+            $da
+        ]);
     }
 }
