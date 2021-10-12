@@ -32,8 +32,15 @@ block body
       .mission-difficulty-container
         span Difficulté
         div.difficulty-stars
-          each val in [1, 2, 3, 4, 5]
+          - var i = 0
+          - var difficultyDifference = 5 - exercise.difficulty;
+          while i < exercise.difficulty
             i.fas.fa-star.active
+            - i++
+          - var i = 0
+          while i < difficultyDifference
+            i.fas.fa-star
+            - i++
     div.mission-execution-example
       h3 Exemple d'éxécution
       pre=exercise.execution_exemple
