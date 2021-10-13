@@ -33,7 +33,7 @@ abstract class Controller extends SecurityController
     {
         $student = $this->getActiveStudent();
         $imageUrl= "/assets/images/profil_pic_default.png";
-        if ($student != null && $student->email != null) {
+        if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
             if ($gravatar->isAvailable()) {
                 $imageUrl = $gravatar->getUrl();

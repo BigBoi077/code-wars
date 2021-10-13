@@ -36,9 +36,10 @@ class CorrectionController extends Controller
 
     public function correctExercise($da, $id)
     {
+        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id);
+        $e = (new ExerciseBroker())->getCorrectionPath($id);
+        unlink($e->path);
         return $this->redirect('/management/correction');
-        //(new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id);
-        //delete file
     }
 
     public function downloadExercise($id)

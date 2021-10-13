@@ -12,6 +12,8 @@ block body
   .row.mission-header
     h1.mb-3 Corrections
   .container
+    if corrections == null
+      h4.text-muted.text-center Acune correction pour l'instant...
     each correction, index in corrections
       h2 #{index}
       hr
@@ -20,7 +22,6 @@ block body
           .col-2.text-center
             h6.mb-0 Nom de l'exercise
           .col-6
-
           .col-2.text-center
             h6.mb-0 Marquer corrigée
           .col-2.text-center
