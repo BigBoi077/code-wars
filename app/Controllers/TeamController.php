@@ -55,7 +55,7 @@ class TeamController extends Controller
         foreach ($students as $student) {
             $teamPoints[$student->team_name] += $broker->getPoints($student->da);
         }
-        $maxPoints = Floor(max($teamPoints) / 100) == 0 ? 100 : (Floor((max($teamPoints) / 100)) * 100) + min($teamPoints);
+        $maxPoints = Floor(max($teamPoints) / 100) == 0 ? 100 : (Floor((max($teamPoints) / 100)) * 100) + 100;
         $teamPoints['sithWidth'] = $teamPoints['Sith'] / $maxPoints * 100;
         $teamPoints['rebelWidth'] = $teamPoints['Rebel'] / $maxPoints * 100;
         return $teamPoints;

@@ -99,6 +99,7 @@ create table if not exists studentExercise (
     completed bool,
     corrected bool,
     comments varchar,
+    dir_path varchar,
     constraint fk_id_exercise foreign key (exercise_id) references exercise(id),
     constraint fk_da_student foreign key (student_da) references student(da),
     constraint pk_id_student_exercise primary key (id)

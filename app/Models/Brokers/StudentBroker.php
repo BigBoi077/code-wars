@@ -21,7 +21,7 @@ class StudentBroker extends Broker
 
     public function getPoints($da): int
     {
-        $sql = "select sum(e.point_reward) points from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.completed = true";
+        $sql = "select sum(e.point_reward) points from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.corrected = true";
         $points = $this->selectSingle($sql, [$da])->points;
         return $points == null ? 0 : $points;
     }
@@ -103,5 +103,13 @@ class StudentBroker extends Broker
         $points= array_column($teamMembers, 'points');
         array_multisort($points, SORT_DESC, $teamMembers);
         return $teamMembers;
+    }
+
+    public function addCash($da, $amount)
+    {
+        $student = $this->findByDa($da);
+        $student->cash += $amount;
+        $sql = "UPDATE codewars.student SET cash = ? WHERE da = ?";
+        $this->query($sql, [$student->cash, $da]);
     }
 }

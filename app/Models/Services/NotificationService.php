@@ -23,4 +23,9 @@ class NotificationService
     {
         (new NotificationBroker())->sendNotificationToStudents("Une nouvelle mission est disponible : " . $exerciseName,"Nouvelle mission disponible");
     }
+
+    public static function newCommentOnCorrection($userId)
+    {
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Un commentaire à été déposer sur une de vos remise", "nouveau commentaire");
+    }
 }

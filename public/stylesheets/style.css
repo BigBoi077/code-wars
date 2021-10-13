@@ -155,13 +155,13 @@ header .menu-items li a:hover {
     cursor: pointer;
 }
 
-header .disconnect {
     display: flex;
     align-items: center;
 }
 
 header .disconnect button {
     border: none;
+    border-radius: 15px;
     background-color: var(--background);
 }
 
@@ -673,7 +673,7 @@ text-align: center;
     grid-template-areas:
     "title            title            title            title"
     "separator        separator        separator        separator"
-    ".                .                .                info"
+    "debrief          debrief          .                info"
     "description      description      .                info"
     "description      description      .                info"
     ".                .                .                info"
@@ -682,7 +682,7 @@ text-align: center;
 }
 
 .single-mission-detail h3 {
-    margin-bottom: 24px;
+    grid-area: debrief;
 }
 
 .single-mission-detail i {
@@ -807,6 +807,15 @@ text-align: center;
 
 .single-mission-detail .mission-upload input[type="submit"] {
     display: none;
+}
+
+.not-submitted {
+    color: red;
+}
+
+.submitted {
+    color: green;
+    color: green;
 }
 
 /* Profile */

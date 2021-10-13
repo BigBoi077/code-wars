@@ -2,6 +2,7 @@
 
 namespace Models\Brokers;
 
+use Models\Services\NotificationService;
 use stdClass;
 
 class ExerciseBroker extends Broker
@@ -47,6 +48,21 @@ class ExerciseBroker extends Broker
         return $result->id;
     }
 
+    public function submitExercise($student, $exerciseId, $path)
+    {
+        $sql = "insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path) values (default, ?, ?, true, false, null, ?)";
+        $this->query($sql, [$student->da, $exerciseId, $path]);
+        NotificationService::newCorrectionAvailable($student);
+    }
+
+    public function correctExercise($userId, $student, $id)
+    {
+        $sql = "update codewars.studentexercise se set corrected = true where se.exercise_id = ? and se.student_da = ? and se.completed = true";
+        $this->query($sql, [$id, $student->da]);
+        (new StudentBroker())->addCash($student->da, $this->findByID($id)->cash_reward);
+        NotificationService::exerciseCorrected($userId);
+    }
+
     public function delete($id)
     {
         $sql = "DELETE FROM codewars.exercise WHERE id = ?;";
@@ -57,6 +73,12 @@ class ExerciseBroker extends Broker
     {
         $sql = "UPDATE codewars.exercise SET name = ?, difficulty = ?, description = ?, execution_exemple = ?, cash_reward = ?, point_reward = ?, week_id = ? WHERE id = ?";
         $this->query($sql, [$name,$difficulty,$description,$exemple,$cash,$point, $weekId, $id]);
+    }
+
+    public function isSubmitted($id, $da): bool
+    {
+        $sql = "select * from codewars.studentexercise se where se.exercise_id = ? and se.student_da = ? and se.completed = true";
+        return $this->selectSingle($sql, [$id, $da]) != null;
     }
 }
 

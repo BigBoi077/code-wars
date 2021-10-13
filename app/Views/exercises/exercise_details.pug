@@ -11,11 +11,12 @@ block body
   #circleSmall
   #circleSmallRight
   +flash
-  form.single-mission-detail(action="/submit/exercise" method="post" enctype="multipart/form-data")
+  form.single-mission-detail(action=action  method="post" enctype="multipart/form-data")
+    input(type="hidden" name="exerciseName" value=exercise.name)
     h1#mission-title=exercise.name
     hr.separator
-    h3 Debriefing
-    p.mission-description=exercise.description
+    h3.mb-2 Debriefing de la mission
+    p.mission-description.ml-2=exercise.description
     div.mission-info
       .mission-week
         i.fas.fa-calendar-alt
@@ -27,8 +28,12 @@ block body
         i.fab.fa-ethereum
         span #{exercise.point_reward}
       .mission-state
-        i.far.fa-times-circle.not-submitted
-        span Exercice non-remis
+        if !submitted
+          i.far.fa-times-circle.not-submitted
+          span Exercice non-remis
+        else
+          i.far.fa-check-circle.submitted
+          span Exercice remis
       .mission-difficulty-container
         span Difficulté
         div.difficulty-stars
@@ -46,10 +51,12 @@ block body
       pre=exercise.execution_exemple
     div.mission-submit
       i.fas.fa-file-code
-      label(for='exercice-upload') Remise d'exercice
-      input#exercice-upload(type='file' name='exercise' accept='.zip,.rar,.7zip,.java')
+      label#uploadLabel(for='exerciseUpload') Remise d'exercice
+      input#exerciseUpload(type='file' name='exercise' accept='.zip,.rar,.7zip,.java')
     div.mission-upload
       i.fas.fa-file-upload
-      label(for='exercice-submit') Soumettre le/les fichier(s)
+      label(for='exercice-submit') Soumettre le fichier
       input#exercice-submit(type='submit')
-
+block script
+  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
+  script(src='/javascripts/upload.js')
