@@ -7,7 +7,7 @@ use Models\Brokers\TipBroker;
 use Models\Brokers\WeekBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
-use function PHPUnit\Framework\isEmpty;
+use function isEmpty;
 
 class ExerciseService
 {
