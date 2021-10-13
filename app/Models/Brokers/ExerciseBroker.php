@@ -37,7 +37,7 @@ class ExerciseBroker extends Broker
         $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?,?,?,?, ?) RETURNING id";
 
         $result = $this->selectSingle($sql, [
-            $name,
+            ucfirst($name),
             $difficulty,
             $description,
             $exemple,

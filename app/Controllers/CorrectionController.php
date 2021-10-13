@@ -40,7 +40,7 @@ class CorrectionController extends Controller
         (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id);
         $e = (new ExerciseBroker())->getCorrectionPath($id);
         unlink($e->path);
-        Flash::success("Exercise marqué corigé avec succès. L'élève a bien reçu son argents et ses points");
+        Flash::success("Exercise marqué corrigé avec succès. L'élève a bien reçu son argents et ses points");
         return $this->redirect('/management/correction');
     }
 
