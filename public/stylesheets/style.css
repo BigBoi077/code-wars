@@ -155,6 +155,7 @@ header .menu-items li a:hover {
     cursor: pointer;
 }
 
+.disconnect {
     display: flex;
     align-items: center;
 }
@@ -592,10 +593,6 @@ text-align: center;
 }
 
 /* Missions */
-
-.all-missions {
-
-}
 
 .single-mission-row {
     display: flex;

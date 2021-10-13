@@ -5,6 +5,7 @@ namespace Controllers;
 use Models\Brokers\ExerciseBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
+use function Composer\Autoload\includeFile;
 use function PHPUnit\Framework\isEmpty;
 
 class ExerciseController extends Controller
@@ -37,7 +38,7 @@ class ExerciseController extends Controller
         return $this->render('exercises/exercise_details', [
             'exercise' => ExerciseService::get($id),
             'action' => "/submit/exercise/" . $id,
-            'submitted' => (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)
+            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
         ]);
     }
 
@@ -47,11 +48,6 @@ class ExerciseController extends Controller
 
         $targetDir = getcwd().DIRECTORY_SEPARATOR . "uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
-
-        if (file_exists($targetFile) || (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)) { //todo on veut pouvoir envoyer le fichier plus dune fois ?
-            Flash::error("Vous avez déja remis cette mission");
-            return $this->redirect('/exercises/' . $id);
-        }
 
         if ($this->request->getFile("exercise")["name"] == '') {
             Flash::error("Aucun fichier selectionné!");
@@ -66,7 +62,11 @@ class ExerciseController extends Controller
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
             Flash::success("La mission à bel et bien été remis");
-            (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $id, $targetFile);
+            if ((new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)) {
+                (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $id, $targetFile);
+            } else {
+                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $id, $targetFile);
+            }
             return $this->redirect('/exercises/' . $id);
         }
 

@@ -50,8 +50,15 @@ class ExerciseBroker extends Broker
 
     public function submitExercise($student, $exerciseId, $path)
     {
-        $sql = "insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path) values (default, ?, ?, true, false, null, ?)";
+        $sql = "insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date) values (default, ?, ?, true, false, null, ?, now())";
         $this->query($sql, [$student->da, $exerciseId, $path]);
+        NotificationService::newCorrectionAvailable($student);
+    }
+
+    public function updateSubmit($student, $exerciseId, $path)
+    {
+        $sql = "update codewars.studentexercise se set dir_path = ? where se.exercise_id = ? and se.student_da = ? and se.completed = true";
+        $this->query($sql, [$path, $student->da, $exerciseId]);
         NotificationService::newCorrectionAvailable($student);
     }
 
@@ -79,6 +86,18 @@ class ExerciseBroker extends Broker
     {
         $sql = "select * from codewars.studentexercise se where se.exercise_id = ? and se.student_da = ? and se.completed = true";
         return $this->selectSingle($sql, [$id, $da]) != null;
+    }
+
+    public function getCorrection(): array
+    {
+        $sql = "select * from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false";
+        return $this->select($sql);
+    }
+
+    public function getCorrectionPath($id): stdClass
+    {
+        $sql = "select dir_path as path, e.name as name from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id where se.id = ?";
+        return $this->selectSingle($sql, [$id]);
     }
 }
 

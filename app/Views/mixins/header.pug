@@ -13,6 +13,9 @@ mixin header()
           a(href="/exercises") Missions
         li
           a(href="/market") Magasin
+        if user.isTeacher
+          li
+            a(href="/management/correction") Correction
     .d-flex.flex-row
       #student.d-flex.align-items-center
         .text-right.pr-3.d-flex.flex-column

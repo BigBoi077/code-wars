@@ -1,0 +1,38 @@
+extends ../../mixins/layout
+
+block title
+  title Correction - Code Wars
+
+block header
+  +header()
+
+block body
+  #circleSmallRight
+  +flash
+  .row.mission-header
+    h1.mb-3 Corrections
+  .container
+    each correction, index in corrections
+      h2 #{index}
+      hr
+      .exercises-list
+        .row
+          .col-2.text-center
+            h6.mb-0 Nom de l'exercise
+          .col-6
+
+          .col-2.text-center
+            h6.mb-0 Marquer corrigée
+          .col-2.text-center
+            h6.mb-0 Télécharger
+      each exercise, index in correction
+        .row.student-row.box-shadow.mb-4
+          .col-8
+            a(href="/exercises/" + exercise.exercise_id).text-dark
+              p.student-row-element #{exercise.name}
+          .col-1
+            a(href='/management/correction/correct/' + exercise.student_da + "/" + exercise.id)
+              i.fas.fa-edit.student-icons
+          .col-1
+            a(href='/management/correction/download/' + exercise.id)
+              i.fas.fa-download.student-icons
