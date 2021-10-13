@@ -90,7 +90,7 @@ class ExerciseBroker extends Broker
 
     public function getCorrection(): array
     {
-        $sql = "select * from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false";
+        $sql = "select se.id, se.dir_path, se.submit_date, e.id as exercise_id, e.name, s.da, p.firstname, p.lastname from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false";
         return $this->select($sql);
     }
 

@@ -27,7 +27,7 @@ class CorrectionController extends Controller
         $exercises = (new ExerciseBroker())->getCorrection();
         $exercisesByStudent = [];
         foreach ($exercises as $exercise) {
-            $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->id] = $exercise;
+            $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->exercise_id] = $exercise;
         }
         return $this->render('/management/correction/correction_listing', [
             'corrections' => $exercisesByStudent
