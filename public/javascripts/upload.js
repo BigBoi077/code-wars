@@ -1,4 +1,5 @@
 
 $("#exerciseUpload").change(function() {
-    $("#uploadLabel").html("Fichier Selectionné")
+    let file = $("#exerciseUpload").val().split("\\");
+    $("#uploadLabel").html("Fichier Selectionné - " + file[2])
 });

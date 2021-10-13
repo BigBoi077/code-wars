@@ -44,6 +44,10 @@ class ExerciseController extends Controller
 
     public function exerciseUpload($id)
     {
+        if ($this->isUserTeacher()) {
+            Flash::error("Le professeur ne peut pas remettre des exercises");
+            return $this->redirect('/exercises/' . $id);
+        }
         $form = $this->buildForm();
 
         $targetDir = getcwd().DIRECTORY_SEPARATOR . "uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";

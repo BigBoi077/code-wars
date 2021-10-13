@@ -13,27 +13,46 @@ block body
     h1.mb-3 Corrections
   .container
     if corrections == null
-      h4.text-muted.text-center Acune correction pour l'instant...
+      h4.text-muted.text-center Aucune correction pour l'instant...
     each correction, index in corrections
       h2 #{index}
       hr
       .exercises-list
         .row
-          .col-2.text-center
-            h6.mb-0 Nom de l'exercise
-          .col-6
-          .col-2.text-center
-            h6.mb-0 Marquer corrigée
-          .col-2.text-center
-            h6.mb-0 Télécharger
+          .col-2.text-center.d-flex.align-items-end
+            h6.mb-0.w-100 Nom de l'exercise
+          .col-4
+          .col-2.text-center.d-flex.align-items-end
+            h6.mb-0.w-100 Ajouter un commentaire
+          .col-2.text-center.d-flex.align-items-end
+            h6.mb-0.w-100 Marquer corrigée
+          .col-2.text-center.d-flex.align-items-end
+            h6.mb-0.w-100 Télécharger
       each exercise, index in correction
         .row.student-row.box-shadow.mb-4
-          .col-8
+          .col-6
             a(href="/exercises/" + exercise.exercise_id).text-dark
               p.student-row-element #{exercise.name}
+          .col-1
+            button(data-toggle="modal" data-bs-target="#commentModal" data-id="ISBN564541").open-commentModal.bg-transparent.btn
+              i.fas.fa-comment-medical.student-icons
           .col-1
             a(href='/management/correction/correct/' + exercise.student_da + "/" + exercise.id)
               i.fas.fa-edit.student-icons
           .col-1
             a(href='/management/correction/download/' + exercise.id)
               i.fas.fa-download.student-icons
+  #commentModal.modal(tabindex='-1')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title Modal title
+          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        .modal-body
+          a(href='/management/correction/comment/')
+        .modal-footer
+          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+          button.btn.btn-primary(type='button') Save changes
+block script
+  script(src="/javascripts/vendor/bootstrap.min.js")
+
