@@ -19,7 +19,7 @@ class PersonBroker extends Broker
             $da,
             $firstname,
             $lastname,
-            $email != null ? $email : $this->getPersonEmail($da)
+            $email
         ]);
     }
 
