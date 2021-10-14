@@ -21,7 +21,9 @@ block body
         .row
           .col-2.text-center.d-flex.align-items-end
             h6.mb-0.w-100 Nom de l'exercise
-          .col-4
+          .col-2.text-center.d-flex.align-items-end
+            h6.mb-0.w-100 Date de remise
+          .col-2
           .col-2.text-center.d-flex.align-items-end
             h6.mb-0.w-100 Ajouter un commentaire
           .col-2.text-center.d-flex.align-items-end
@@ -30,9 +32,11 @@ block body
             h6.mb-0.w-100 Télécharger
       each exercise, index in correction
         .row.student-row.box-shadow.mb-4
-          .col-6
+          .col-2
             a(href="/exercises/" + exercise.exercise_id).text-dark
               p.student-row-element #{exercise.name}
+          .col-4.text-center.d-flex.align-items-end
+            p.student-row-element #{exercise.submit_date}
           .col-1
             button(data-toggle="modal" data-target="#commentModal").open-commentModal.bg-transparent.btn
               i.fas.fa-comment-medical.student-icons

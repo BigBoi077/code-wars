@@ -50,6 +50,11 @@ class ExerciseController extends Controller
         }
         $form = $this->buildForm();
 
+        if ((new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da)) {
+            Flash::error("L'exercise est déjà remis et corrigé. Impossible de le remettre une autre fois!");
+            return $this->redirect('/exercises/' . $id);
+        }
+
         $targetDir = getcwd().DIRECTORY_SEPARATOR . "uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
 

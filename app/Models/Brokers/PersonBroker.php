@@ -40,7 +40,7 @@ class PersonBroker extends Broker
         ]);
     }
 
-    public function getPersonEmail($da): string
+    public function getPersonEmail($da): ?string
     {
         $sql = "SELECT email FROM codewars.person WHERE da = ?";
         $email = $this->selectSingle($sql, [$da]);
