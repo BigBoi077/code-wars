@@ -1,0 +1,30 @@
+mixin exerciseRow(exercise, teacher)
+    .row.mb-2
+        .col-4.student-exercise-col
+            h6.student-exercise-element #{exercise.name}
+        .col-4.student-exercise-col
+            h6.student-exercise-element #{exercise.dir_path}
+        .col-3.student-exercise-col
+            if exercise.corrected
+                i.far.fa-check-circle.submitted.student-exercise-element
+            else
+                i.far.fa-times-circle.not-submitted.student-exercise-element
+        .col-1.student-exercise-col
+            if exercise.comments != null
+                button.bg-transparent.btn.student-exercise-element(data-toggle=exercise.id)
+                    i.mb-1.ml-3.fa.fa-chevron-down.fa-2x
+    if exercise.comments != null
+        .comment-container(id="comment" + exercise.id).d-none
+            hr
+            .row.mb-2
+                .col-6
+                    h5 Commentaire
+            .row.mb-2
+                .col-1
+                    img#commentatorImg(src="/assets/images/dark_vador.png")
+                .col-11
+                    h5#commentatorName #{teacher.firstname} #{teacher.lastname}
+            .row.mb-2
+                .col-1
+                .col-11
+                    p #{exercise.comments}

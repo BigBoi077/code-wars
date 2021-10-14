@@ -71,5 +71,31 @@ block body
                 else
                   each item in myItems
                     +itemRow(item)
+        .row
+          .card.mb-4.w-100
+            .card-body
+              h2.text-center.mb-3 Mes exercises faits
+              include ../mixins/myExercise
+              .m-4
+                .row
+                  .col-4.student-header-col
+                    h5.mb-0 Nom de la mission
+                  .col-4.student-header-col
+                    h5.mb-0 Fichier remis
+                  .col-3.student-header-col
+                    h5.mb-0 Corrigé
+                  .col-1
+                hr.mt-1
+                if myExercices == null
+                  h6.text-center Vous n'avez encore fait de missions
+                    .text-center.mt-3
+                      a.btn.btn-yellow.text-dark(href="/exercises")
+                        | Aller aux missions
+                else
+                  each exercise in myExercices
+                    +exerciseRow(exercise, teacher)
 
 
+block script
+  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
+  script(src='/javascripts/toggleComment.js')

@@ -411,6 +411,18 @@ body {
     margin: 1.75rem auto;
 }
 
+#commentatorImg {
+    width: 2rem;
+}
+
+.comment-container #commentatorName {
+    font-size: 1rem;
+}
+
+.comment-container p {
+    font-size: .75rem;
+}
+
 .shop-items-list {
     width: 90%;
     margin: auto;
@@ -456,9 +468,20 @@ body {
     justify-content: space-between;
 }
 
-.student-row .col-1 {
+.student-row [class*="col-"], .student-header-col {
     margin: auto;
     text-align: center;
+}
+
+.student-exercise-element {
+    margin: auto;
+    text-align: center;
+}
+
+.student-exercise-col {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .student-row i {

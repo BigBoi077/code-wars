@@ -1,7 +1,9 @@
 <?php namespace Controllers;
 
 use Models\Brokers\NotificationBroker;
+use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\UserBroker;
 use Models\Services\PersonService;
@@ -54,11 +56,22 @@ class HomeController extends Controller
         $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
         $indProgress = (new StudentBroker())->getProgression($da);
         $items = (new StudentItemBroker())->getAllWithDa($da);
+        $exercises = (new StudentExerciseBroker())->getAllWithDa($da);
+        $teacher = (new PersonBroker())->findByDa(0);
+
+	    foreach ($exercises as $exercise){
+		    $pieces = explode("_", $exercise->dir_path);
+		    $fileNameIndex = count($pieces) - 1;
+		    $newDirPath = $pieces[$fileNameIndex];
+		    $exercise->dir_path = $newDirPath;
+	    }
         return $this->render('profile/profile', [
             'notifications' => $notifications,
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
-            'myItems' => $items
+            'myItems' => $items,
+	        'myExercices' => $exercises,
+	        'teacher' => $teacher
         ]);
     }
 
