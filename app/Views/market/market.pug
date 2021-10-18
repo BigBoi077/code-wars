@@ -35,14 +35,16 @@ block body
 							each studentItem in studentItems
 								if studentItem.item_id === item.id
 									- contains = true
-							a(href=(!contains) ? '/market/buy/' + item.id: '#')
-								button(disabled=contains).btn.btn-yellow#buyBtn
-									p
-										| Acheter
-										i.fas.fa-shopping-basket
+							if !user.isTeacher
+								a(href=(!contains) ? '/market/buy/' + item.id: '#')
+									button(disabled=contains).btn.btn-yellow#buyBtn
+										p
+											| Acheter
+											i.fas.fa-shopping-basket
 						else
-							a(href='/market/buy/' + item.id)
-								button.btn.btn-yellow#buyBtn
-									p
-										| Acheter
-										i.fas.fa-shopping-basket
+							if !user.isTeacher
+								a(href='/market/buy/' + item.id)
+									button.btn.btn-yellow#buyBtn
+										p
+											| Acheter
+											i.fas.fa-shopping-basket
