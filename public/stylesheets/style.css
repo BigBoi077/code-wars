@@ -254,6 +254,11 @@ header .disconnect i:hover {
     border-radius: 1rem;
 }
 
+.notification-row {
+    display: flex;
+    justify-content: space-between;
+}
+
 .notification .time {
     font-size: xx-small;
 }
