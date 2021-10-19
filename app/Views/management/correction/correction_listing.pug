@@ -10,7 +10,7 @@ block body
   #circleSmallRight
   +flash
   .row.mission-header
-    h1.mb-3 Corrections
+    h1.mb-3 Correction
   .container
     if corrections == null
       h4.text-muted.text-center Aucune correction pour l'instant...
@@ -20,14 +20,14 @@ block body
       .exercises-list
         .row
           .col-2.text-center.d-flex.align-items-end
-            h6.mb-0.w-100 Nom de l'exercise
+            h6.mb-0.w-100 Nom de l'exercice
           .col-2.text-center.d-flex.align-items-end
             h6.mb-0.w-100 Date de remise
           .col-2
           .col-2.text-center.d-flex.align-items-end
             h6.mb-0.w-100 Ajouter un commentaire
           .col-2.text-center.d-flex.align-items-end
-            h6.mb-0.w-100 Marquer corrigée
+            h6.mb-0.w-100 Marquer corrigé
           .col-2.text-center.d-flex.align-items-end
             h6.mb-0.w-100 Télécharger
       each exercise, index in correction

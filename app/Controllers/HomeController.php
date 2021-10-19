@@ -14,7 +14,6 @@ use Zephyrus\Network\HttpRequester;
 
 class HomeController extends Controller
 {
-
     public function initializeRoutes()
     {
         $this->get('/', 'index');
@@ -86,7 +85,7 @@ class HomeController extends Controller
     {
         $profile = PersonService::update($this->getActiveStudent()->da, $this->buildForm());
         if ($profile->hasSucceeded()) {
-            Flash::success('Profil edité avec succèss.');
+            Flash::success('Profil modifié avec succèss.');
             return $this->redirect('/profile');
         }
         Flash::error($profile->getErrorMessages());

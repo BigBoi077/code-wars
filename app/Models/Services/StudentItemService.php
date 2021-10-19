@@ -1,13 +1,9 @@
-<?php
-
-namespace Models\Services;
+<?php namespace Models\Services;
 
 use Models\Brokers\StudentItemBroker;
 
 class StudentItemService
 {
-
-
     public static function getAllByDa($da)
     {
         return (new StudentItemBroker())->getAllWithDa($da);

@@ -1,6 +1,4 @@
-<?php
-
-namespace Models\Services;
+<?php namespace Models\Services;
 
 
 use Models\Brokers\ItemBroker;

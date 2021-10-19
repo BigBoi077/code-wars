@@ -15,7 +15,7 @@ block body
     form(method='post', action=action)
       .form-row
         .form-group.col-12.mb-1
-          label(for="exercisename") Nom de l'exercise
+          label(for="exercisename") Nom de l'exercice
           input.form-control(id='exercisename', name='exercisename', type='text' value=(exercise !== null) ? exercise.name: val('exercisename'))
       .form-row
         .form-group.col-6.mb-1
@@ -23,7 +23,7 @@ block body
           textArea.form-control(id='description', name='description')
            | #{(exercise !== null) ? exercise.description : val('description')}
         .form-group.col-6.mb-1
-          label(for="exemple") Exemple d'exécution (optionel)
+          label(for="exemple") Exemple d'exécution (optionnel)
           textArea.form-control(id='exemple', name='exemple')
             | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
       .form-row

@@ -1,6 +1,4 @@
-<?php
-
-namespace Controllers;
+<?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
 use Models\Services\ExerciseService;
@@ -45,13 +43,13 @@ class ExerciseController extends Controller
     public function exerciseUpload($id)
     {
         if ($this->isUserTeacher()) {
-            Flash::error("Le professeur ne peut pas remettre des exercises");
+            Flash::error("L' enseignant ne peut pas remettre des exercices.");
             return $this->redirect('/exercises/' . $id);
         }
         $form = $this->buildForm();
 
         if ((new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da)) {
-            Flash::error("L'exercise est déjà remis et corrigé. Impossible de le remettre une autre fois!");
+            Flash::error("L'exercice à déjà été remis et corrigé. Vous ne pouvez pas le remettre une seconde fois!");
             return $this->redirect('/exercises/' . $id);
         }
 
@@ -65,12 +63,12 @@ class ExerciseController extends Controller
 
         $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
-            Flash::warning("Type de fichier non accepté");
+            Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
             return $this->redirect('/exercises/' . $id);
         }
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
-            Flash::success("La mission à bel et bien été remis");
+            Flash::success("La mission à bel et bien été remise.");
             if ((new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)) {
                 (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $id, $targetFile);
             } else {
@@ -79,7 +77,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/' . $id);
         }
 
-        Flash::error("Une erreur s'est passé. Votre fichier n'a pas été remis");
+        Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
         return $this->redirect('/exercises/' . $id);
     }
 }

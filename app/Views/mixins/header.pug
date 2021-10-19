@@ -26,7 +26,7 @@ mixin header()
             h6 #{user.firstname} #{user.lastname}
             h6 #{format('money', student.cash)} | #{student.points} pts
           else
-            h6 Professeur
+            h6 Enseignant
       if !user.isTeacher
         a.profile-pic(href="/profile")
             img(src=profileImageUrl)
