@@ -19,12 +19,12 @@ block body
     .row.mt-5.p-4
       include mixins/notificationLayout
       if isTeacher === true
-        .col-8
+        .col-lg-8.col-md-12
           +notificationLayout(notifications)
       else
-        .col-5
+        .col-lg-5.col-md-12
           +notificationLayout(notifications)
-      .col-7
+      .col-lg-7.col-md-12
         if isTeacher === false
           h2.mb-4 Membres de mon équipe
           .card.py-3
