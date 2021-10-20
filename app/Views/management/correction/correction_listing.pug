@@ -7,7 +7,6 @@ block header
   +header()
 
 block body
-  #circle
   #circleSmallRight
   +flash
   .row.mission-header
@@ -57,13 +56,7 @@ block body
                 form(method="post", action="/password/addService")
                   .form-group
                     label.form-label() Username
-                    input.form-control(name="username" placeholder="Karn123")
-                  .form-group
-                    label.form-label Password
-                    input.form-control(name="password" type="password" placeholder="**************")
-                  .form-group
-                    label.form-label Service
-                    select.form-select(name="service")
+                    input.form-control(name="username")
                   .form-group
                     button.btn.btn-secondary(type="button"  data-dismiss="modal") Close
                     button.btn.btn-primary(type="submit") Save changes

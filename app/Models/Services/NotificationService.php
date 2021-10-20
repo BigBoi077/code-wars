@@ -16,7 +16,7 @@ class NotificationService
 
     public static function exerciseCorrected($userId)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Un de vos exercices vient d'être corrigé", "Exercice corrigé!");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Un de vos exercices vient d'être corrigé", "Exercice corrige!");
     }
 
     public static function newExerciseAvailable($exerciseName)
