@@ -1,0 +1,15 @@
+extends ../mixins/layout
+
+block title
+  title="Notifications - Code Wars"
+
+block header
+  +header()
+
+block body
+  #circle
+  #circleSmall
+  #circleSmallRight
+  .container.mt-5
+    include ../mixins/notificationLayout
+    +notificationLayout(notifications)

@@ -18,5 +18,13 @@ block body
         h3.font-italic “ #{quote} ”
     .row.mt-5.p-4
       include mixins/notificationLayout
-      .col-12
+      .col-6
         +notificationLayout(notifications)
+      .col-6
+        if isTeacher === false
+          h2.mb-4 Membres de mon équipe
+          .card.py-3
+            each member in teamMembers
+              +teamMember(member)
+
+            //this needs yellow somewhere nice! plz

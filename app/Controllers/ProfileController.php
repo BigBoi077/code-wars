@@ -14,7 +14,7 @@ class ProfileController extends Controller
         $this->get('/profile', 'profile');
         $this->get('/edit_profile', 'editProfile');
         $this->post('/update_profile', 'updateProfile');
-        $this->get('/profile/notifications', '');
+        $this->get('/profile/notifications', 'notifications');
     }
 
     public function profile()
@@ -29,6 +29,14 @@ class ProfileController extends Controller
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
             'myItems' => $items
+        ]);
+    }
+
+    public function notifications()
+    {
+        $notifications = (new NotificationBroker())->getStudentAllNotifications($this->getUser()['id']);
+        return $this->render('profile/notifications', [
+            'notifications' => $notifications,
         ]);
     }
 

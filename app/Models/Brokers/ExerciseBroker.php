@@ -66,10 +66,10 @@ class ExerciseBroker extends Broker
     {
         $sql = "update codewars.studentexercise se set corrected = true where se.id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$id, $student->da]);
-        $sql = "select cash_reward from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
-        $cashReward = $this->selectSingle($sql, [$id])->cash_reward;
-        (new StudentBroker())->addCash($student->da, $cashReward);
-        NotificationService::exerciseCorrected($userId);
+        $sql = "select cash_reward, point_reward from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
+        $reward = $this->selectSingle($sql, [$id]);
+        (new StudentBroker())->addCash($student->da, $reward->cash_reward);
+        NotificationService::exerciseCorrected($userId, $reward->cash_reward, $reward->point_reward);
     }
 
     public function delete($id)

@@ -1,13 +1,14 @@
 mixin notificationLayout(notifications)
   .row
-    .col-10
+    .col-9
       h2.mb-4 Mes notifications
-    .col-2.d-flex.align-items-end.justify-content-end
-      a(href="").text-dark
-        h6.mb-4 Voir tout
+    if notifications != null
+      .col-3.d-flex.align-items-end.justify-content-end
+        a(href="/notification/seenAll").text-dark
+          h6.mb-4 Voir tout
   #notifs.mx-2
     if notifications == null
-      h6 Vous n'avez aucune notification
+      h6 Vous n'avez aucune nouvelle notification
     else
       each notif in notifications
         +notification(notif)
