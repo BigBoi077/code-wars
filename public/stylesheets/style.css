@@ -322,6 +322,10 @@ body {
     transition: all 0.25s ease-in-out;
 }
 
+#editProfileBtn i {
+    padding-left: .75rem;
+}
+
 .btn-yellow:hover {
     transform: scale(1.15);
 }
@@ -384,6 +388,8 @@ body {
     margin-right: auto;
     margin-top: 3rem;
     width: 50%;
+    z-index: 10;
+    position: relative;
 }
 
 .student-form-container .form-group {
