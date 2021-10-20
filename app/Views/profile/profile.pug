@@ -20,8 +20,6 @@ block body
             h5.my-3 #{user.firstname} #{user.lastname}
             p.text-muted.mb-1 #{student.points} pts
             p.text-muted.mb-4 #{format('money', student.cash)}
-        include ../mixins/notificationLayout
-        +notificationLayout(notifications)
       .col-lg-8
         .card.mb-4
           include ../mixins/profileInfo

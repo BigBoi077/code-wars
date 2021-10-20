@@ -42,17 +42,9 @@ block body
           .col-1
             a(href='/management/correction/download/' + exercise.id)
               i.fas.fa-download.student-icons
-  #commentModal.modal(tabindex='-1')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          h5#exampleModalLabel.modal-title Modal title
-          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-        .modal-body
-          a(href='/management/correction/comment/')
-        .modal-footer
-          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
-          button.btn.btn-primary(type='button') Save changes
+  include ../../mixins/modal
+  +modal("title", "commentModal")
 block script
+  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src="/javascripts/vendor/bootstrap.min.js")
 

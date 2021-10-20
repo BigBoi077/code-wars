@@ -151,7 +151,7 @@ header .menu-items li a:hover {
     text-decoration: underline;
 }
 
-#bell:hover, #disconnect:hover {
+#bell:hover, #icon-header:hover {
     cursor: pointer;
 }
 
