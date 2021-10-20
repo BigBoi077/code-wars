@@ -12,8 +12,8 @@ class ProfileController extends Controller
     public function initializeRoutes()
     {
         $this->get('/profile', 'profile');
-        $this->get('/edit_profile', 'editProfile');
-        $this->post('/update_profile', 'updateProfile');
+        $this->get('/profile/edit', 'editProfile');
+        $this->post('/profile/update', 'updateProfile');
         $this->get('/profile/notifications', 'notifications');
     }
 
@@ -44,7 +44,7 @@ class ProfileController extends Controller
     public function editProfile()
     {
         return $this->render('profile/edit_profile', [
-            'action' => '/update_profile'
+            'action' => '/profile/update'
         ]);
     }
 
@@ -56,6 +56,6 @@ class ProfileController extends Controller
             return $this->redirect('/profile');
         }
         Flash::error($profile->getErrorMessages());
-        return $this->redirect('/edit_profile');
+        return $this->redirect('/profile/edit');
     }
 }

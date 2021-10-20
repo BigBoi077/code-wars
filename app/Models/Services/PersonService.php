@@ -40,8 +40,7 @@ class PersonService
 
     private function applyRules(): bool
     {
-        $this->form->validate('firstname', Rule::notEmpty('Le prénom est requis.'));
-        $this->form->validate('lastname', Rule::notEmpty('Le nom est requis.'));
+        $this->form->validate('username', Rule::notEmpty('Le nom d\'utilisateur est requis.'));
         if ($this->form->getValue('email') != '') {
             $this->form->validate('email', Rule::email('Le format du e-mail est invalide.'));
         } else {
@@ -65,11 +64,11 @@ class PersonService
 
     private function updateToDatabase($da)
     {
-        $firstname = $this->form->getValue('firstname');
-        $lastname = $this->form->getValue('lastname');
+        $username = $this->form->getValue('username');
+        $person = self::get($da);
         $email = $this->form->getValue('email');
         $password = $this->form->getValue('password') == '' ? (new UserBroker())->getHashedPassword($da) : password_hash($this->form->getValue('password') . PASSWORD_PEPPER, PASSWORD_DEFAULT);
-        (new PersonBroker())->update($da, $firstname, $lastname, $email);
+        (new PersonBroker())->update($da, $username, $person->firstname, $person->lastname, $email);
         (new UserBroker())->update($da, $password);
         SessionHelper::setUser((new UserBroker())->findByDa($da)->id, (new PersonBroker())->findByDa($da));
         $this->success = true;

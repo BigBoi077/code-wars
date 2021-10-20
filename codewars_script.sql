@@ -62,6 +62,7 @@ create table if not exists team (
 
 create table if not exists person (
     da int,
+    username varchar,
     firstname varchar,
     lastname varchar,
     email varchar,
@@ -162,6 +163,6 @@ create table if not exists log (
     constraint pk_id_log primary key (id)
 );
 
-insert into person(da, firstname, lastname, email) values (000000, 'big', 'boi', 'admin@gmail.com');
+insert into person(da, username, firstname, lastname, email) values (000000, 'Prof', 'big', 'boi', 'admin@gmail.com');
 insert into "user"(id, da, password) values (default, 000000, '$2y$10$B9bEPdKiHAl0uL/MrIQLsOCmEh4.PtGPZLaqKbODyTrytc.zW3e8y');
 insert into teacher(da) values (000000);
