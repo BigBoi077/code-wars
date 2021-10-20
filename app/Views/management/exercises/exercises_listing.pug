@@ -67,7 +67,7 @@ block body
       each week in weeks
         .row.student-row.box-shadow.mb-4
           .col-3
-            p.student-row-element #{week.start_date}
+            p.student-row-element #{format('date', week.start_date)}
           .col-2
             p.student-row-element Semaine #{week.number}
           .col-2

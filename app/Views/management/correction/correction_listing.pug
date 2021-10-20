@@ -35,7 +35,7 @@ block body
             a(href="/exercises/" + exercise.exercise_id).text-dark
               p.student-row-element #{exercise.name}
           .col-2.text-center.d-flex.align-items-end
-            p.student-row-element #{exercise.submit_date}
+            p.student-row-element #{format('date', exercise.submit_date)}
           .col-4
             button(data-toggle="modal" data-target="#comment-modal-" + index).open-commentModal.bg-transparent.btn
               i.fas.fa-comment-medical.student-icons
