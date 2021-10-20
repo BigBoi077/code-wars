@@ -20,10 +20,24 @@ class TokenBroker extends Broker
         ]);
     }
 
+    public function deleteWithUserId($user_id)
+    {
+        $this->query("DELETE FROM codewars.token WHERE user_id = ?;", [
+            $user_id
+        ]);
+    }
+
     public function findUserIdByToken($token): ?int
     {
         $sql = "SELECT * FROM codewars.token WHERE token = ?";
         $row = $this->selectSingle($sql, [$token]);
         return $row->user_id;
+    }
+
+    public function verifyUserActiveToken($user_id): bool
+    {
+        $sql = "SELECT * FROM codewars.token WHERE user_id = ?";
+        $row = $this->selectSingle($sql, [$user_id]);
+        return $row != null;
     }
 }

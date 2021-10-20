@@ -68,12 +68,15 @@ class Logger
 
     private function rememberUser()
     {
+        $tokenBroker = new TokenBroker();
+        if ($tokenBroker->verifyUserActiveToken($this->user->id)) {
+            $tokenBroker->deleteWithUserId($this->user->id);
+        }
         $tokenValue = Cryptography::randomString(32);
         $cookie = new Cookie(REMEMBER_ME);
         $cookie->setValue($tokenValue);
         $cookie->setLifetime(Cookie::DURATION_MONTH);
         $cookie->send();
-        $tokenBroker = new TokenBroker();
         $tokenBroker->insert($this->user->id, $tokenValue);
     }
 
