@@ -15,12 +15,12 @@ block body
     input(type="hidden" name="exerciseName" value=exercise.name)
     h1#mission-title=exercise.name
     hr.separator
-    h3.mb-2 Debriefing de la mission
+    h3.mb-2 Débriefing de la mission
     p.mission-description.ml-2=exercise.description
     div.mission-info
       .mission-week
         i.fas.fa-calendar-alt
-        span Semaine 2
+        span Semaine #{exercise.week_id}
       .mission-cash-reward
         img(src="/assets/images/credit_symbol.png")
         span #{exercise.cash_reward}
@@ -47,7 +47,7 @@ block body
             i.fas.fa-star
             - i++
     div.mission-execution-example
-      h3 Exemple d'éxécution
+      h3 Exemple d'exécution
       pre=exercise.execution_exemple
     div.mission-submit
       i.fas.fa-file-code

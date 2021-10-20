@@ -24,8 +24,8 @@ class Logger
 
     public function loginWithForm(Form $form)
     {
-        $form->validate(self::INPUT_NAME_DA, Rule::integer('Le DA doit etre un chiffre'));
-        $form->validate(self::INPUT_NAME_PASSWORD, Rule::notEmpty('Le mot de passe est requis'));
+        $form->validate(self::INPUT_NAME_DA, Rule::integer('Le DA doit etre un chiffre.'));
+        $form->validate(self::INPUT_NAME_PASSWORD, Rule::notEmpty('Le mot de passe est requis.'));
         if ($form->verify()) {
             $this->success = $this->tryCredentials($form);
         } else {
@@ -68,12 +68,15 @@ class Logger
 
     private function rememberUser()
     {
+        $tokenBroker = new TokenBroker();
+        if ($tokenBroker->verifyUserActiveToken($this->user->id)) {
+            $tokenBroker->deleteWithUserId($this->user->id);
+        }
         $tokenValue = Cryptography::randomString(32);
         $cookie = new Cookie(REMEMBER_ME);
         $cookie->setValue($tokenValue);
         $cookie->setLifetime(Cookie::DURATION_MONTH);
         $cookie->send();
-        $tokenBroker = new TokenBroker();
         $tokenBroker->insert($this->user->id, $tokenValue);
     }
 

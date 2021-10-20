@@ -1,7 +1,9 @@
 <?php namespace Controllers;
 
 use Models\Brokers\NotificationBroker;
+use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\UserBroker;
 use Models\Services\PersonService;
@@ -12,7 +14,6 @@ use Zephyrus\Network\HttpRequester;
 
 class HomeController extends Controller
 {
-
     public function initializeRoutes()
     {
         $this->get('/', 'index');

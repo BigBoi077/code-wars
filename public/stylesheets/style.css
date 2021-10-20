@@ -22,6 +22,10 @@ html, body {
     margin-right: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 .starwars-font {
     font-family: 'StarJedi', sans-serif;
 }
@@ -47,8 +51,7 @@ html, body {
     left: -300px;
     height: 500px;
     width: 600px;
-    background-color: var(--accent);
-    background-color: var(--dark);
+    background-color: #191919;
     border: 20px solid var(--accent);
     border-radius: 50%;
 }
@@ -59,8 +62,7 @@ html, body {
     left: 100px;
     height: 250px;
     width: 300px;
-    background-color: var(--accent);
-    background-color: var(--dark);
+    background-color: #191919;
     border: 20px solid var(--accent);
     border-radius: 50%;
 }
@@ -71,7 +73,7 @@ html, body {
     right: -100px;
     height: 300px;
     width: 300px;
-    background-color: var(--dark);
+    background-color: #191919;
     border: 20px solid var(--accent);
     border-radius: 50%;
 }
@@ -185,6 +187,14 @@ header .disconnect i:hover {
     max-width: 75vw;
 }
 
+.rebel h1 , .rebel h6 {
+    text-align: start;
+}
+
+.sith h1, .sith h6 {
+    text-align: end;
+}
+
 .rebel-sith {
     position: absolute;
     top: -135%;
@@ -254,6 +264,11 @@ header .disconnect i:hover {
     border-radius: 1rem;
 }
 
+.notification-row {
+    display: flex;
+    justify-content: space-between;
+}
+
 .notification .time {
     font-size: xx-small;
 }
@@ -301,6 +316,10 @@ body {
 .btn-yellow {
     background-color: var(--accent);
     transition: all 0.25s ease-in-out;
+}
+
+#editProfileBtn i {
+    padding-left: .75rem;
 }
 
 .btn-yellow:hover {
@@ -365,6 +384,8 @@ body {
     margin-right: auto;
     margin-top: 3rem;
     width: 50%;
+    z-index: 10;
+    position: relative;
 }
 
 .student-form-container .form-group {
@@ -394,6 +415,8 @@ body {
     background-color: #FFF;
     margin: 1rem 0;
     border-radius: .75rem;
+    position: relative;
+    z-index: 10;
 }
 
 .student-icons {
@@ -409,6 +432,18 @@ body {
 #productImg {
     width: 10rem;
     margin: 1.75rem auto;
+}
+
+#commentatorImg {
+    width: 2rem;
+}
+
+.comment-container #commentatorName {
+    font-size: 1rem;
+}
+
+.comment-container p {
+    font-size: .75rem;
 }
 
 .shop-items-list {
@@ -456,9 +491,20 @@ body {
     justify-content: space-between;
 }
 
-.student-row .col-1 {
+.student-row [class*="col-"], .student-header-col {
     margin: auto;
     text-align: center;
+}
+
+.student-exercise-element {
+    margin: auto;
+    text-align: center;
+}
+
+.student-exercise-col {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .student-row i {
@@ -567,6 +613,44 @@ body {
     .form-page #footer {
         align-self: flex-end;
     }
+
+    .rebel-sith {
+        top: -55%;
+    }
+
+    .student-header-element {
+        margin: 0;
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    #circleSmallRight {
+        display: none;
+    }
+
+    header #hamburger-menu  {
+        display: block;
+    }
+
+    header #hamburger-menu :hover {
+        cursor: pointer;
+    }
+
+    header nav .menu-items.active {
+        display: flex !important;
+        position: absolute;
+        bottom: -50px;
+        left: -50px;
+    }
+
+    .menu-items {
+        display: none !important;
+    }
+
+    .sith h1, .sith h6 {
+        text-align: start;
+    }
 }
 
 /* Exercise */
@@ -594,6 +678,11 @@ text-align: center;
 
 /* Missions */
 
+.week {
+    z-index: 10;
+    position: relative;
+}
+
 .single-mission-row {
     display: flex;
     flex-direction: column;
@@ -603,6 +692,9 @@ text-align: center;
     border: 1px solid var(--dark);
     border-radius: 10px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    background-color: var(--background);
+    z-index: 10;
+    position: relative;
 }
 
 .single-mission-row .mission-information-header {

@@ -1,6 +1,4 @@
-<?php
-
-namespace Models\Services;
+<?php namespace Models\Services;
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\TipBroker;
@@ -79,10 +77,10 @@ class ExerciseService
     private function applyRules(): bool
     {
         $this->form->validate('exercisename', Rule::notEmpty('Le nom est requis.'));
-        $this->form->validate('description', Rule::notEmpty('La description est requise'));
-        $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
-        $this->form->validate('point', Rule::integer('Les points doivent etre un chiffre'));
-        $this->form->validate('difficulty', Rule::integer('La difficulté doit spécifié'));
+        $this->form->validate('description', Rule::notEmpty('La description est requise.'));
+        $this->form->validate('cash', Rule::integer('L\'argent doit être un chiffre.'));
+        $this->form->validate('point', Rule::integer('Les points doivent être un chiffre.'));
+        $this->form->validate('difficulty', Rule::integer('La difficulté doit être spécifiée.'));
         if (!$this->form->verify()) {
             $this->errorMessages = $this->form->getErrorMessages();
             return false;
@@ -108,7 +106,6 @@ class ExerciseService
         $this->succes = true;
     }
 
-    //TODO: A faire
     private function updateToDatabase($id)
     {
         $exerciseName = $this->form->getValue('exercisename');

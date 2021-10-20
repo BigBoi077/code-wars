@@ -80,15 +80,15 @@ class StudentService
     private function applyRules(): bool
     {
         if ($this->form->isRegistered('da')) {
-            $this->form->validate('da', Rule::integer('Le DA doit etre un nombre.'));
-            $this->form->validate('da', Rule::maxLength(7, 'Le DA doit contenir 7 chiffres'));
-            $this->form->validate('da', Rule::minLength(7, 'Le DA doit contenir 7 chiffres'));
+            $this->form->validate('da', Rule::integer('Le DA doit être un nombre.'));
+            $this->form->validate('da', Rule::maxLength(7, 'Le DA doit contenir 7 chiffres.'));
+            $this->form->validate('da', Rule::minLength(7, 'Le DA doit contenir 7 chiffres.'));
         }
-        $this->form->validate('firstname', Rule::notEmpty('Le prenom est requis.'));
+        $this->form->validate('firstname', Rule::notEmpty('Le prénom est requis.'));
         $this->form->validate('lastname', Rule::notEmpty('Le nom est requis.'));
-        $this->form->validate('team_id', Rule::integer('Equipe non valide'));
+        $this->form->validate('team_id', Rule::integer('Équipe non valide'));
         if ($this->form->getValue('cash') != "") {
-            $this->form->validate('cash', Rule::integer('L\'argent doit etre un chiffre'));
+            $this->form->validate('cash', Rule::integer('L\'argent doit être un chiffre'));
         }
         if (!$this->form->verify()) {
             $this->errorMessages = $this->form->getErrorMessages();
@@ -100,7 +100,7 @@ class StudentService
     private function isDaAvailable(): bool
     {
         if ((new UserBroker())->findByDa($this->form->getValue('da')) != null) {
-            $this->errorMessages = 'Le DA est deja utilise.';
+            $this->errorMessages = 'Le DA est déjà utilisé.';
             return false;
         }
         return true;

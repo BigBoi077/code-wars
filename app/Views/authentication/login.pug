@@ -12,14 +12,14 @@ block body
       .container.text-center.vertical-center.login-container
         .form-container.w-75
           img.login-logo(src="/assets/images/trooper_helmet.png")
-          h1.mb-4 Se connnecter
+          h1.mb-4 Se connecter
           form(method='post', action='/login').container.login-form
             +flash
             input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.m-3
             input(id='password', type='password', name='password', placeholder='Mot de passe').form-control.m-3
             br
             .text-right.w-100.mb-4
-              .pretty.p-round.p-default.p-bigger.mr-0
+              .pretty.p-default.p-round.p-bigger.mr-0
                 input(id='remember_me', name='remember_me', type='checkbox')
                 .state.p-warning-o
                   label

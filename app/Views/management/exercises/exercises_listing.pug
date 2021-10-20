@@ -10,42 +10,42 @@ block body
   #circleSmallRight
   .main-container
     +flash
-    h1 Exercises
+    h1 Exercices
     a(href='/management/exercises/create')
       button.btn.btn-yellow#Btn
         p
           i.fas.fa-plus-square
-          | Nouvel Exercise
+          | Nouvel Exercice
     .exercises-list
       .row
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Nom
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Difficulté
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Argent
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Points
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Semaine
         .col-1
         .col-1
       each exercise in exercises
         .row.student-row.box-shadow.mb-4
-          .col-2
+          .col-lg-2.col-sm-4
             p.student-row-element #{exercise.name}
-          .col-2
+          .col-lg-2.col-sm-4
             p.student-row-element #{exercise.difficulty}
-          .col-2
+          .col-lg-2.col-sm-4
             p.student-row-element #{format('money', exercise.cash_reward)}
-          .col-2
+          .col-lg-2.col-sm-3
             p.student-row-element #{exercise.point_reward}
-          .col-2
+          .col-lg-2.col-sm-3
             p.student-row-element Semaine #{exercise.number}
-          .col-1
+          .col-lg-1.col-sm-3
             a(href='/management/exercises/' + exercise.id + '/edit')
               i.fas.fa-edit.student-icons
-          .col-1
+          .col-lg-1.col-sm-3
             a(href='/management/exercises/' + exercise.id + '/delete')
               i.fas.fa-trash.student-icons
     h1.mt-5 Semaines
@@ -53,15 +53,17 @@ block body
       button.btn.btn-yellow#Btn
         p
           i.fas.fa-plus-square
-          | Nouvel semaine
+          | Nouvelle semaine
     .weeks
       .row
-        .col-3
+        .col-3.student-header-col
           h4.student-header-element Date de début
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Numéro
-        .col-2
+        .col-2.student-header-col
           h4.student-header-element Activé
+        .col-1.student-header-col
+        .col-1.student-header-col
       each week in weeks
         .row.student-row.box-shadow.mb-4
           .col-3

@@ -77,7 +77,7 @@ class ManagementController extends Controller
     public function editStudent($da)
     {
         if (!StudentService::exists($da)) {
-            Flash::error('L\'étudiant n\'existe pas');
+            Flash::error('L\'étudiant n\'existe pas.');
             return $this->redirect('/management/students');
         }
         $student = StudentService::get($da);
@@ -96,7 +96,7 @@ class ManagementController extends Controller
                 ItemService::deleteAllStudentItem($da);
             }
             StudentService::delete($da);
-            Flash::success('Étudiant supprimé avec succès.');
+            Flash::success('Étudiant supprimé avec succès!');
         } else {
             Flash::error('Une erreur est survenue.');
         }
@@ -107,7 +107,7 @@ class ManagementController extends Controller
     {
         $student = StudentService::create($this->buildForm());
         if ($student->hasSucceeded()) {
-            Flash::success('Étudiant créé avec succès.');
+            Flash::success('Étudiant créé avec succès!');
             return $this->redirect('/management/students');
         }
         Flash::error($student->getErrorMessages());
@@ -119,7 +119,7 @@ class ManagementController extends Controller
         if (StudentService::exists($da)) {
             $student = StudentService::update($da, $this->buildForm());
             if ($student->hasSucceeded()) {
-                Flash::success('Étudiant edité avec succèss.');
+                Flash::success('Étudiant modifié avec succès!');
                 return $this->redirect('/management/students');
             }
             Flash::error($student->getErrorMessages());
@@ -142,7 +142,7 @@ class ManagementController extends Controller
     public function createExercise()
     {
         return $this->render('management/exercises/exercises_form', [
-            'title' => 'Créer un exercise',
+            'title' => 'Créer un exercice',
             'action' => '/management/exercises/store',
             'exercise' => null,
             'weeks' => ((new WeekBroker())->getAll())
@@ -152,7 +152,7 @@ class ManagementController extends Controller
     public function editExercise($id)
     {
         return $this->render('management/exercises/exercises_form', [
-            'title' => 'Modifier un exercise',
+            'title' => 'Modifier un exercice',
             'action' => '/management/exercises/' . $id . '/update',
             'exercise' => (new ExerciseBroker())->findByID($id),
             'weeks' => (new WeekBroker())->getAll()
@@ -163,7 +163,7 @@ class ManagementController extends Controller
     {
         $exercise = ExerciseService::update($id, $this->buildForm());
         if ($exercise->hasSucceeded()) {
-            Flash::success('Exercicse mis à jour avec succès.');
+            Flash::success('Exercice mis à jour avec succès!');
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
@@ -175,7 +175,7 @@ class ManagementController extends Controller
     {
         $exercise = ExerciseService::create($this->buildForm());
         if ($exercise->hasSucceeded()) {
-            Flash::success('Exercise créé avec succès.');
+            Flash::success('Exercice créé avec succès!');
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
@@ -186,7 +186,7 @@ class ManagementController extends Controller
     {
         if (ExerciseService::exists($id)) {
             ExerciseService::delete($id);
-            Flash::success('Exercise supprimé avec succès.');
+            Flash::success('Exercice supprimé avec succès!');
         } else {
             Flash::error('Une erreur est survenue.');
         }
@@ -212,7 +212,7 @@ class ManagementController extends Controller
     public function editItem($id)
     {
         if (!ItemService::exists($id)) {
-            Flash::error('L\'item n\'existe pas');
+            Flash::error('L\'article n\'existe pas.');
             return $this->redirect('/management/items');
         }
         $item = ItemService::get($id);
@@ -227,7 +227,7 @@ class ManagementController extends Controller
     {
         if (ItemService::exists($id)) {
             ItemService::delete($id);
-            Flash::success('Article supprimé avec succès.');
+            Flash::success('Article supprimé avec succès!');
         } else {
             Flash::error('Une erreur est survenue.');
         }
@@ -238,7 +238,7 @@ class ManagementController extends Controller
     {
         $item = ItemService::create($this->buildForm());
         if ($item->hasSucceeded()) {
-            Flash::success('Article créé avec succès.');
+            Flash::success('Article créé avec succès!');
             return $this->redirect('/management/items');
         }
         Flash::error($item->getErrorMessages());
@@ -250,7 +250,7 @@ class ManagementController extends Controller
         if (ItemService::exists($id)) {
             $item = ItemService::update($id, $this->buildForm());
             if ($item->hasSucceeded()) {
-                Flash::success('Article edité avec succèss.');
+                Flash::success('Article modifié avec succèss!');
                 return $this->redirect('/management/items');
             }
             Flash::error($item->getErrorMessages());
@@ -268,9 +268,9 @@ class ManagementController extends Controller
     public function deleteWeek($id)
     {
         if ((new WeekBroker())->delete($id)) {
-            Flash::success("Semaine supprimé avec succès");
+            Flash::success("Semaine supprimée avec succès!");
         } else {
-            Flash::error("Cette semaine ne peut pas être supprimé, car elle appartient à des exercises");
+            Flash::error("Cette semaine ne peut pas être supprimée, car elle appartient à des exercises.");
         }
         return $this->redirect('/management/exercises');
     }
@@ -286,15 +286,15 @@ class ManagementController extends Controller
     public function storeWeek()
     {
         $form = $this->buildForm();
-        $form->validate("number", Rule::notEmpty("Le numéro est requis"));
-        $form->validateWhenFieldHasNoError("number", Rule::integer("Le numéro doit être un chiffre"));
-        $form->validate("startDate", Rule::date("La date doit être valide"));
+        $form->validate("number", Rule::notEmpty("Le numéro est requis."));
+        $form->validateWhenFieldHasNoError("number", Rule::integer("Le numéro doit être un chiffre."));
+        $form->validate("startDate", Rule::date("La date doit être valide."));
         if (!$form->verify()) {
             Flash::error($form->getErrorMessages());
             return $this->redirect('/management/week/create');
         }
         (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
-        Flash::success("Semaine ajouté avec succès");
+        Flash::success("Semaine ajoutée avec succès!");
         return $this->redirect('/management/exercises');
     }
 

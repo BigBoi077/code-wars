@@ -1,6 +1,5 @@
 <?php namespace Models\Services;
 
-
 use Models\Brokers\Broker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\UserBroker;
@@ -41,7 +40,7 @@ class PersonService
 
     private function applyRules(): bool
     {
-        $this->form->validate('firstname', Rule::notEmpty('Le prenom est requis.'));
+        $this->form->validate('firstname', Rule::notEmpty('Le prénom est requis.'));
         $this->form->validate('lastname', Rule::notEmpty('Le nom est requis.'));
         if ($this->form->getValue('email') != '') {
             $this->form->validate('email', Rule::email('Le format du e-mail est invalide.'));

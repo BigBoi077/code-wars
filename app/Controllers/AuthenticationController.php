@@ -7,8 +7,6 @@ use Zephyrus\Network\Response;
 
 class AuthenticationController extends Controller
 {
-
-
     public function initializeRoutes()
     {
         $this->get('/login', 'showLogin');

@@ -3,6 +3,7 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\UserBroker;
+use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
 class CorrectionController extends Controller
@@ -39,6 +40,7 @@ class CorrectionController extends Controller
         (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id);
         $e = (new ExerciseBroker())->getCorrectionPath($id);
         unlink($e->path);
+        Flash::success("Exercice marqué corrigé avec succès. L' élève à bien reçu son argent et ses points.");
         return $this->redirect('/management/correction');
     }
 

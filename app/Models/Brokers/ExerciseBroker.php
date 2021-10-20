@@ -37,7 +37,7 @@ class ExerciseBroker extends Broker
         $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?,?,?,?, ?) RETURNING id";
 
         $result = $this->selectSingle($sql, [
-            $name,
+            ucfirst($name),
             $difficulty,
             $description,
             $exemple,
@@ -90,6 +90,12 @@ class ExerciseBroker extends Broker
         return $this->selectSingle($sql, [$id, $da]) != null;
     }
 
+    public function isCorrected($id, $da): bool
+    {
+        $sql = "select * from codewars.studentexercise se where se.exercise_id = ? and se.student_da = ? and se.completed = true and se.corrected = true";
+        return $this->selectSingle($sql, [$id, $da]) != null;
+    }
+
     public function getCorrection(): array
     {
         $sql = "select se.id, se.dir_path, se.submit_date, e.id as exercise_id, e.name, s.da as student_da, p.firstname, p.lastname from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false";
@@ -101,6 +107,8 @@ class ExerciseBroker extends Broker
         $sql = "select dir_path as path, e.name as name from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id where se.id = ?";
         return $this->selectSingle($sql, [$id]);
     }
+
+
 }
 
 
