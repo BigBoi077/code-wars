@@ -20,31 +20,30 @@ block body
       hr
       .exercises-list
         .row
-          .col-2.text-center.d-flex.align-items-end
+          .col-2.text-center.d-flex.align-items-end.student-header-col
             h6.mb-0.w-100 Nom de l'exercice
-          .col-2.text-center.d-flex.align-items-end
+          .col-2.text-center.d-flex.align-items-end.student-header-col
             h6.mb-0.w-100 Date de remise
-          .col-2
-          .col-2.text-center.d-flex.align-items-end
+          .col-4.text-center.d-flex.align-items-end.student-header-col
             h6.mb-0.w-100 Ajouter un commentaire
-          .col-2.text-center.d-flex.align-items-end
+          .col-2.text-center.d-flex.align-items-end.student-header-col
             h6.mb-0.w-100 Marquer corrigé
-          .col-2.text-center.d-flex.align-items-end
+          .col-2.text-center.d-flex.align-items-end.student-header-col
             h6.mb-0.w-100 Télécharger
       each exercise, index in correction
         .row.student-row.box-shadow.mb-4
           .col-2
             a(href="/exercises/" + exercise.exercise_id).text-dark
               p.student-row-element #{exercise.name}
-          .col-4.text-center.d-flex.align-items-end
+          .col-2.text-center.d-flex.align-items-end
             p.student-row-element #{exercise.submit_date}
-          .col-1
+          .col-4
             button(data-toggle="modal" data-target="#comment-modal-" + index).open-commentModal.bg-transparent.btn
               i.fas.fa-comment-medical.student-icons
-          .col-1
+          .col-2
             a(href='/management/correction/correct/' + exercise.student_da + "/" + exercise.id)
               i.fas.fa-edit.student-icons
-          .col-1
+          .col-2
             a(href='/management/correction/download/' + exercise.id)
               i.fas.fa-download.student-icons
         .modal.fade(id=("comment-modal-" + index) tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true")
