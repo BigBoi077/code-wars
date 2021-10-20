@@ -153,6 +153,10 @@ header .menu-items li a:hover {
     text-decoration: underline;
 }
 
+header #hamburger-menu {
+    display: none;
+}
+
 #bell:hover, #icon-header:hover {
     cursor: pointer;
 }
