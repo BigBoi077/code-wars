@@ -11,5 +11,7 @@ block body
   #circleSmall
   #circleSmallRight
   .container.mt-5
+    #score.d-flex.justify-content-center.my-5
+      +scoreBoard()
     include ../mixins/notificationLayout
     +notificationLayout(notifications)

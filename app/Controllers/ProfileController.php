@@ -37,6 +37,7 @@ class ProfileController extends Controller
         $notifications = (new NotificationBroker())->getStudentAllNotifications($this->getUser()['id']);
         return $this->render('profile/notifications', [
             'notifications' => $notifications,
+            'teamPoints' => TeamController::getTeamPoints()
         ]);
     }
 
