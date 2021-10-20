@@ -108,6 +108,6 @@ abstract class Controller extends SecurityController
 
     public function isUserTeacher(): bool
     {
-        return $this->getUser()['isTeacher'];
+        return $this->getUser() != null ? $this->getUser()['isTeacher'] : false;
     }
 }
