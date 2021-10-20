@@ -51,7 +51,7 @@ html, body {
     left: -300px;
     height: 500px;
     width: 600px;
-    background-color: var(--dark);
+    background-color: #191919;
     border: 20px solid var(--accent);
     border-radius: 50%;
 }
@@ -62,7 +62,7 @@ html, body {
     left: 100px;
     height: 250px;
     width: 300px;
-    background-color: var(--dark);
+    background-color: #191919;
     border: 20px solid var(--accent);
     border-radius: 50%;
 }
@@ -73,7 +73,7 @@ html, body {
     right: -100px;
     height: 300px;
     width: 300px;
-    background-color: var(--dark);
+    background-color: #191919;
     border: 20px solid var(--accent);
     border-radius: 50%;
 }
@@ -413,6 +413,8 @@ body {
     background-color: #FFF;
     margin: 1rem 0;
     border-radius: .75rem;
+    position: relative;
+    z-index: 10;
 }
 
 .student-icons {
@@ -674,6 +676,11 @@ text-align: center;
 
 /* Missions */
 
+.week {
+    z-index: 10;
+    position: relative;
+}
+
 .single-mission-row {
     display: flex;
     flex-direction: column;
@@ -683,6 +690,9 @@ text-align: center;
     border: 1px solid var(--dark);
     border-radius: 10px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    background-color: var(--background);
+    z-index: 10;
+    position: relative;
 }
 
 .single-mission-row .mission-information-header {
