@@ -9,6 +9,9 @@ block header
 
 block body
   +flash
+  .container
+    #score.d-flex.justify-content-center.my-5
+      +scoreBoard()
   .row.mission-header
     h1.mb-3 Missions
   if user.isTeacher
@@ -23,7 +26,7 @@ block body
         .week
           button.bg-transparent.btn.row.mb-4.d-flex.align-items-end(data-toggle=index)
             i.mb-1.ml-3.fa.fa-chevron-down.fa-2x
-            h2.ml-3.mb-0 Semaine #{week.number} - #{week.startDate}
+            h2.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
           .week-exercises(id="weekExercises" + index)
             each exercise, index in week
               if index !== 'startDate' && index !== 'number'

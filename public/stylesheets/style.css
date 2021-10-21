@@ -157,7 +157,7 @@ header #hamburger-menu {
     display: none;
 }
 
-#bell:hover, #disconnect:hover {
+#bell:hover, #icon-header:hover {
     cursor: pointer;
 }
 

@@ -54,7 +54,7 @@ class ManagementController extends Controller
 
 	public function management(): Response
     {
-        return $this->render('management/base');
+        return $this->render('management/exercises');
     }
 
 	public function listStudents(): Response

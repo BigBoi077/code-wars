@@ -19,17 +19,22 @@ mixin header()
         if user.isTeacher
           li
             a(href="/management/correction") Correction
+          li
+            a(href="/management/students") Étudiants
     .d-flex.flex-row
       #student.d-flex.align-items-center
         .text-right.pr-3.d-flex.flex-column
           if !user.isTeacher
-            h6 #{user.firstname} #{user.lastname}
+            h6 #{student.username}
             h6 #{format('money', student.cash)} | #{student.points} pts
           else
             h6 Enseignant
       if !user.isTeacher
         a.profile-pic(href="/profile")
             img(src=profileImageUrl)
+        a(href="/profile/notifications").disconnect.mr-2
+          button.ml-3
+            i#bell.fas.fa-bell
       form.disconnect.mr-2(action="/logout", method="post")
         button.ml-3
-          i#disconnect.fas.fa-power-off
+          i#icon-header.fas.fa-power-off

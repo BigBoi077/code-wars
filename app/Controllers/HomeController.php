@@ -18,11 +18,8 @@ class HomeController extends Controller
     {
         $this->get('/', 'index');
         $this->get('/home', 'home');
-        $this->get('/profile', 'profile');
-        $this->get('/edit_profile', 'editProfile');
         $this->get('/notification/seen/{id}', 'seenNotification');
-
-        $this->post('/update_profile', 'updateProfile');
+        $this->get('/notification/seenAll', 'seenAllNotification');
     }
 
     public function index()
@@ -41,60 +38,22 @@ class HomeController extends Controller
         //$quote = (new HttpRequester("get", "http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote"))->execute();
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
-            'teamPoints' => TeamController::getTeamPoints(),
             'teamMembers' => $teamMembers,
+            'teamPoints' => TeamController::getTeamPoints(),
             'notifications' => $notifications,
             'quote' => null
         ]);
     }
 
-    public function profile()
-    {
-        $da = $this->getActiveStudent()->da;
-        $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
-        $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
-        $indProgress = (new StudentBroker())->getProgression($da);
-        $items = (new StudentItemBroker())->getAllWithDa($da);
-        $exercises = (new StudentExerciseBroker())->getAllWithDa($da);
-        $teacher = (new PersonBroker())->findByDa(0);
-
-	    foreach ($exercises as $exercise){
-		    $pieces = explode("_", $exercise->dir_path);
-		    $fileNameIndex = count($pieces) - 1;
-		    $newDirPath = $pieces[$fileNameIndex];
-		    $exercise->dir_path = $newDirPath;
-	    }
-        return $this->render('profile/profile', [
-            'notifications' => $notifications,
-            'weeklyProgress' => $weeklyProgress,
-            'individualProgress' => $indProgress,
-            'myItems' => $items,
-	        'myExercices' => $exercises,
-	        'teacher' => $teacher
-        ]);
-    }
-
-    public function editProfile()
-    {
-        return $this->render('profile/edit_profile', [
-            'action' => '/update_profile'
-        ]);
-    }
-
-    public function updateProfile()
-    {
-        $profile = PersonService::update($this->getActiveStudent()->da, $this->buildForm());
-        if ($profile->hasSucceeded()) {
-            Flash::success('Profil modifié avec succèss.');
-            return $this->redirect('/profile');
-        }
-        Flash::error($profile->getErrorMessages());
-        return $this->redirect('/edit_profile');
-    }
-
     public function seenNotification($id)
     {
         (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
-        return $this->redirect('/home');
+        return $this->redirect('/profile/notifications');
+    }
+
+    public function seenAllNotification()
+    {
+        (new NotificationBroker())->seenAllNotification($this->getUser()['id']);
+        return $this->redirect('/profile/notifications');
     }
 }

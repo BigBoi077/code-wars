@@ -17,6 +17,7 @@ class SessionHelper
         Session::getInstance()->set('user', [
             'id' => $userId,
             'da' => $person->da,
+            'username' => $person->username,
             'firstname' => $person->firstname,
             'lastname' => $person->lastname,
             'isTeacher' => (new UserBroker())->isTeacher($person->da)

@@ -27,7 +27,8 @@ class ExerciseController extends Controller
             }
         }
         return $this->render('exercises/exercises_listing', [
-            'exercisesByWeek' => $exercisesByWeek
+            'exercisesByWeek' => $exercisesByWeek,
+            'teamPoints' => TeamController::getTeamPoints()
         ]);
     }
 

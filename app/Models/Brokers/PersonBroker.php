@@ -12,11 +12,12 @@ class PersonBroker extends Broker
         return $this->selectSingle($sql, [$da]);
     }
 
-    public function insert($da, $firstname, $lastname, $email = null)
+    public function insert($da, $username, $firstname, $lastname, $email = null)
     {
-        $sql = "INSERT INTO codewars.person (da, firstname, lastname, email) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO codewars.person (da, username, firstname, lastname, email) VALUES (?, ?, ?, ?, ?)";
         $this->query($sql, [
             $da,
+            $username,
             $firstname,
             $lastname,
             $email
@@ -29,10 +30,11 @@ class PersonBroker extends Broker
         return $this->query($sql, [$da]);
     }
 
-    public function update($da, $firstname, $lastname, $email = null)
+    public function update($da, $username, $firstname, $lastname, $email = null)
     {
-        $sql = "UPDATE codewars.person SET firstname = ?, lastname = ?, email = ? WHERE da = ?";
+        $sql = "UPDATE codewars.person SET username = ?, firstname = ?, lastname = ?, email = ? WHERE da = ?";
         $this->query($sql, [
+            $username,
             $firstname,
             $lastname,
             $email != null ? $email : $this->getPersonEmail($da),
