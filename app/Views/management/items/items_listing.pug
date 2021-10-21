@@ -11,12 +11,7 @@ block body
   .main-container
     +flash
     h1 Articles
-    a(href='/management/items/create')
-      button.btn.btn-yellow#Btn
-        p
-          i.fas.fa-plus-square
-          | Nouvel article
-
+    hr.separator
     .items-list
       .row
         .col-3
@@ -25,8 +20,12 @@ block body
           h4.student-header-element Prix
         .col-4
           h4.student-header-element Description
-        .col-1
-        .col-1
+        .col.d-flex.justify-content-end
+          a(href='/management/items/create')
+            button.btn.btn-yellow#Btn
+              p
+                i.fas.fa-plus-square
+                | Nouvel article
       each item in items
         .row.student-row.box-shadow.mb-4
           .col-3
@@ -35,9 +34,9 @@ block body
             p.student-row-element #{format('money', item.price)}
           .col-4
             p.student-row-element #{item.description}
-          .col-1
-            a(href='/management/items/' + item.id + '/edit')
-              i.fas.fa-edit.student-icons
-          .col-1
-            a(href='/management/items/' + item.id + '/delete')
-              i.fas.fa-trash.student-icons
+          .col.d-flex.justify-content-end
+            .row.d-flex.align-items-center
+              a.col(href='/management/items/' + item.id + '/edit')
+                i.fas.fa-edit.student-icons
+              a.col(href='/management/items/' + item.id + '/delete')
+                i.fas.fa-trash.student-icons

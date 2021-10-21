@@ -11,11 +11,7 @@ block body
   .main-container
     +flash
     h1 Exercices
-    a(href='/management/exercises/create')
-      button.btn.btn-yellow#Btn
-        p
-          i.fas.fa-plus-square
-          | Nouvel Exercice
+    hr.separator
     .exercises-list
       .row
         .col-2.student-header-col
@@ -28,13 +24,17 @@ block body
           h4.student-header-element Points
         .col-2.student-header-col
           h4.student-header-element Semaine
-        .col-1
-        .col-1
+        .col-2
+          a(href='/management/exercises/create')
+            button.btn.btn-yellow#Btn
+              p
+                i.fas.fa-plus-square
+                | Nouvel Exercice
       each exercise in exercises
         .row.student-row.box-shadow.mb-4
-          .col-lg-2.col-sm-4
+          .col-lg-3.col-sm-4
             p.student-row-element #{exercise.name}
-          .col-lg-2.col-sm-4
+          .col-lg-1.col-sm-4
             p.student-row-element #{exercise.difficulty}
           .col-lg-2.col-sm-4
             p.student-row-element #{format('money', exercise.cash_reward)}
@@ -42,18 +42,14 @@ block body
             p.student-row-element #{exercise.point_reward}
           .col-lg-2.col-sm-3
             p.student-row-element Semaine #{exercise.number}
-          .col-lg-1.col-sm-3
-            a(href='/management/exercises/' + exercise.id + '/edit')
-              i.fas.fa-edit.student-icons
-          .col-lg-1.col-sm-3
-            a(href='/management/exercises/' + exercise.id + '/delete')
-              i.fas.fa-trash.student-icons
+          .col.d-flex.justify-content-end
+            .row.d-flex.align-items-center
+              a.col(href='/management/exercises/' + exercise.id + '/edit')
+                i.fas.fa-edit.student-icons
+              a.col(href='/management/exercises/' + exercise.id + '/delete')
+                i.fas.fa-trash.student-icons
     h1.mt-5 Semaines
-    a(href='/management/week/create')
-      button.btn.btn-yellow#Btn
-        p
-          i.fas.fa-plus-square
-          | Nouvelle semaine
+    hr.separator
     .weeks
       .row
         .col-3.student-header-col
@@ -62,8 +58,12 @@ block body
           h4.student-header-element Numéro
         .col-2.student-header-col
           h4.student-header-element Activé
-        .col-1.student-header-col
-        .col-1.student-header-col
+        .col.d-flex.justify-content-end
+          a(href='/management/week/create')
+            button.btn.btn-yellow#Btn
+              p
+                i.fas.fa-plus-square
+                | Nouvelle semaine
       each week in weeks
         .row.student-row.box-shadow.mb-4
           .col-3
@@ -72,10 +72,10 @@ block body
             p.student-row-element Semaine #{week.number}
           .col-2
             p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
-          .col-1
-            a(href='/management/week/' + week.id + '/activate')
-              i(class=week.is_active ? 'fa-eye-slash' : 'fa-eye').fas.student-icons
-          .col-1
-            a(href='/management/week/' + week.id + '/delete')
-              i.fas.fa-trash.student-icons
+          .col.d-flex.justify-content-end
+            .row.d-flex.align-items-center
+              a.col(href='/management/week/' + week.id + '/activate')
+                i(class=week.is_active ? 'fa-eye-slash' : 'fa-eye').fas.student-icons
+              a.col(href='/management/week/' + week.id + '/delete')
+                i.fas.fa-trash.student-icons
 

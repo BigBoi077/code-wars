@@ -11,12 +11,7 @@ block body
 	.main-container
 		+flash
 		h1 Étudiants
-		a(href='/management/students/create')
-			button.btn.btn-yellow#Btn
-				p
-					i.fas.fa-plus-square
-					| Nouvel étudiant
-
+		hr.separator
 		.student-list
 			.row
 				.col-2.student-header-col
@@ -27,8 +22,12 @@ block body
 					h4.student-header-element Équipe
 				.col-3.student-header-col
 					h4.student-header-element Balance
-				.col-1
-				.col-1
+				.col-2
+					a(href='/management/students/create')
+						button.btn.btn-yellow#Btn
+							p
+								i.fas.fa-plus-square
+								| Nouvel étudiant
 			each student in students
 				.row.student-row.box-shadow.mb-4
 					.col-2
@@ -39,9 +38,9 @@ block body
 						p.student-row-element #{student.team_name}
 					.col-3
 						p.student-row-element #{format('money', student.cash)}
-					.col-1
-						a(href='/management/students/' + student.da + '/edit')
-							i.fas.fa-edit.student-icons
-					.col-1
-						a(href='/management/students/' + student.da + '/delete')
-							i.fas.fa-trash.student-icons
+					.col.d-flex.justify-content-end
+						.row.d-flex.align-items-center
+							a.col(href='/management/students/' + student.da + '/edit')
+								i.fas.fa-edit.student-icons
+							a.col(href='/management/students/' + student.da + '/delete')
+								i.fas.fa-trash.student-icons
