@@ -19,6 +19,7 @@ class HomeController extends Controller
         $this->get('/', 'index');
         $this->get('/home', 'home');
         $this->get('/notification/seen/{id}', 'seenNotification');
+        $this->get('/notification/seenAll', 'seenAllNotification');
     }
 
     public function index()
@@ -37,6 +38,7 @@ class HomeController extends Controller
         //$quote = (new HttpRequester("get", "http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote"))->execute();
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
+            'teamMembers' => $teamMembers,
             'teamPoints' => TeamController::getTeamPoints(),
             'notifications' => $notifications,
             'quote' => null
@@ -46,6 +48,12 @@ class HomeController extends Controller
     public function seenNotification($id)
     {
         (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
-        return $this->redirect('/home');
+        return $this->redirect('/profile/notifications');
+    }
+
+    public function seenAllNotification()
+    {
+        (new NotificationBroker())->seenAllNotification($this->getUser()['id']);
+        return $this->redirect('/profile/notifications');
     }
 }

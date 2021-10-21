@@ -120,10 +120,11 @@ class StudentService
         $da = $this->form->getValue('da');
         $firstname = $this->form->getValue('firstname');
         $lastname = $this->form->getValue('lastname');
+        $username = $firstname . ' ' . $lastname;
         $password = password_hash($this->form->getValue('da') . 'Cegep' . PASSWORD_PEPPER, PASSWORD_DEFAULT);
         $team_id = $this->form->getValue('team_id');
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        (new PersonBroker())->insert($da, $firstname, $lastname);
+        (new PersonBroker())->insert($da, $username, $firstname, $lastname);
         (new UserBroker())->insert($da, $password);
         (new StudentBroker())->insert($da, $team_id, $cash);
         $this->success = true;
@@ -131,11 +132,12 @@ class StudentService
 
     private function updateToDatabase($da)
     {
+        $username = StudentService::get($da)->username;
         $firstname = $this->form->getValue('firstname');
         $lastname = $this->form->getValue('lastname');
         $team_id = $this->form->getValue('team_id');
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
-        (new PersonBroker())->update($da, $firstname, $lastname);
+        (new PersonBroker())->update($da, $username, $firstname, $lastname);
         (new StudentBroker())->update($da, $team_id, $cash);
         $this->success = true;
     }

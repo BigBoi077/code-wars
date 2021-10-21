@@ -7,7 +7,7 @@ class StudentBroker extends Broker
 
     public function findByDa($da) : ?stdClass
     {
-        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, p.firstname, p.lastname, p.email from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, p.username, p.firstname, p.lastname, p.email from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
                 join codewars.team t on t.id = s.team_id
@@ -54,7 +54,7 @@ class StudentBroker extends Broker
 
     public function getAll()
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, s.cash, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
 				join codewars.team t on s.team_id = t.id
@@ -95,7 +95,7 @@ class StudentBroker extends Broker
 
     public function sameTeamStudent($teamId): array
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
+        $sql = "SELECT s.da, s.team_id, s.cash, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
         $teamMembers =  $this->select($sql, [$teamId]);
         foreach ($teamMembers as $member) {
             $member->points = $this->getPoints($member->da);

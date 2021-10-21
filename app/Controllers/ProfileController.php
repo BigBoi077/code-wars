@@ -12,9 +12,9 @@ class ProfileController extends Controller
     public function initializeRoutes()
     {
         $this->get('/profile', 'profile');
-        $this->get('/edit_profile', 'editProfile');
-        $this->post('/update_profile', 'updateProfile');
-        $this->get('/profile/notifications', '');
+        $this->get('/profile/edit', 'editProfile');
+        $this->post('/profile/update', 'updateProfile');
+        $this->get('/profile/notifications', 'notifications');
     }
 
     public function profile()
@@ -32,10 +32,19 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function notifications()
+    {
+        $notifications = (new NotificationBroker())->getStudentAllNotifications($this->getUser()['id']);
+        return $this->render('profile/notifications', [
+            'notifications' => $notifications,
+            'teamPoints' => TeamController::getTeamPoints()
+        ]);
+    }
+
     public function editProfile()
     {
         return $this->render('profile/edit_profile', [
-            'action' => '/update_profile'
+            'action' => '/profile/update'
         ]);
     }
 
@@ -47,6 +56,6 @@ class ProfileController extends Controller
             return $this->redirect('/profile');
         }
         Flash::error($profile->getErrorMessages());
-        return $this->redirect('/edit_profile');
+        return $this->redirect('/profile/edit');
     }
 }

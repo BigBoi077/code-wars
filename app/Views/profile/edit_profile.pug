@@ -12,16 +12,13 @@ block body
   #circleSmallRight
   +flash
   .student-form-container
-    h2.text-center.p-3 Modification Du Profile
+    h2.text-center.p-3 Modification du profil
     form(method='post', action=action)
       .form-row
-        .form-group.col-4
-          label Prénom
-          input.form-control(placeholder="Dan" name='firstname', type='text' value=user.firstname)
-        .form-group.col-4
-          label Nom
-          input.form-control(placeholder="Loader" name='lastname', type='text' value=user.lastname)
-        .form-group.col-4
+        .form-group.col-6
+          label Nom d'utilisateur
+          input.form-control(placeholder='E.g. : Yoda', name='username', type='text', value=student.username)
+        .form-group.col-6
           label E-mail
           input.form-control(placeholder="beepboop@gmail.com", name='email', type='text' value=student.email)
       .form-row

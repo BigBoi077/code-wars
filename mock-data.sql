@@ -3,16 +3,16 @@ insert into team(id, color, name) values (default, 'Red', 'Sith');
 insert into team(id, color, name) values (default, 'Blue', 'Rebel');
 
 /*insert student*/
-insert into person(da, firstname, lastname, email) values (1111111, 'Joshua', 'Leblanc', 'leblancjoshua077@gmail.com');
+insert into person(da, username, firstname, lastname, email) values (1111111, 'Joshua Leblanc', 'Joshua', 'Leblanc', 'leblancjoshua077@gmail.com');
 insert into "user"(id, da, password) values(default, 1111111, '$2y$10$CJAhNUuCUlyUxWStg83nbuNK.Gpbd8o1nRLxnfwc47CwvLcIpgFBC');
 insert into student(da, team_id, cash) values (1111111, 1, 0);
-insert into person(da, firstname, lastname, email) values (2222222, 'Jérémy', 'Bouchard', 'leblancjoshua077@gmail.com');
+insert into person(da, username, firstname, lastname, email) values (2222222, 'Jeremy Bouchard', 'Jérémy', 'Bouchard', 'leblancjoshua077@gmail.com');
 insert into "user"(id, da, password) values(default, 2222222, '$2y$10$sqSDweGhocBtjzxkFqeNmeIksEdEIHCzv4zLA44yTk1Je0ZPJyfoi');
 insert into student(da, team_id, cash) values (2222222, 1, 0);
-insert into person(da, firstname, lastname, email) values (3333333, 'Tommy-Lee', 'Pigeon', 'leblancjoshua077@gmail.com');
+insert into person(da, username, firstname, lastname, email) values (3333333, 'Tommy-Lee Pigeon', 'Tommy-Lee', 'Pigeon', 'leblancjoshua077@gmail.com');
 insert into "user"(id, da, password) values(default, 3333333, '$2y$10$ancZUqfr.TVoTV4g6UQvHOJlIWSbimuct5wxPACa0rN/LCWFKrH0C');
 insert into student(da, team_id, cash) values (3333333, 2, 0);
-insert into person(da, firstname, lastname, email) values (4444444, 'Samuel', 'Tessier', 'leblancjoshua077@gmail.com');
+insert into person(da, username, firstname, lastname, email) values (4444444, 'Samuel Tessier', 'Samuel', 'Tessier', 'leblancjoshua077@gmail.com');
 insert into "user"(id, da, password) values(default, 4444444, '$2y$10$UDJujooasG4snjI09wKDsehOVFXc7qsJv1rQz0ePZIQSNbLl55tja');
 insert into student(da, team_id, cash) values (4444444, 2, 0);
 

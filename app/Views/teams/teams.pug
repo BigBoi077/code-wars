@@ -13,26 +13,19 @@ block body
   .container
     #score.d-flex.justify-content-center.my-5
       +scoreBoard()
-    if user.isTeacher
-      .container.d-flex.justify-content-end
-        a(href='/management/students')
-          button.btn.btn-yellow#Btn
-            p
-              i.fas.fa-plus-square
-              | Gestion des étudiants
     #teams
       .row.justify-content-between
         .col-lg-5.col-sm-12.mx-4.mb-3.rebel
           h1.rebel-sith-logo.starwars-font Rebel
             img(src='assets/images/rebel.png').ml-3
-          h6 #{teamProgress.Rebel} % des missions totales complétées
+          h6.mb-3 #{teamProgress.Rebel} % des missions totales complétées
           .card.py-3.box-shadow-rebel
             each rebel, index in teams.rebels
               +teamMember(rebel, index)
         .col-lg-5.col-sm-12.mx-4.mb-3.sith
           h1.rebel-sith-logo.starwars-font Sith
             img(src='assets/images/sith.png').ml-3
-          h6 #{teamProgress.Sith} % des missions totales complétées
+          h6.mb-3 #{teamProgress.Sith} % des missions totales complétées
           .card.py-3.box-shadow-sith
             each sith, index in teams.siths
               +teamMember(sith, index)

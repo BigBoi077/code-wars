@@ -17,7 +17,7 @@ block body
         .card.mb-4
           .card-body.text-center
             img.rounded-img.mt-2(src=profileImageUrl)
-            h5.my-3 #{user.firstname} #{user.lastname}
+            h5.my-3 #{student.username}
             p.text-muted.mb-1 #{student.points} pts
             p.text-muted.mb-4 #{format('money', student.cash)}
       .col-lg-8
@@ -35,7 +35,7 @@ block body
             hr
             +profileInfo("Mot de passe", "********")
             .row.justify-content-md-end.mx-3
-              a#editProfileBtn.btn.btn-yellow.text-dark(href="/edit_profile")
+              a#editProfileBtn.btn.btn-yellow.text-dark(href="/profile/edit")
                 | Modifier le compte
                 i.fas.fa-edit
         .row
