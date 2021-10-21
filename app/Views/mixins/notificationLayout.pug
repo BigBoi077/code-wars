@@ -7,7 +7,7 @@ mixin notificationLayout(notifications)
         h6.mb-4 Voir tout
   #notifs.mx-2
     if notifications == null
-      h6 Vous n'avez aucune notification
+      h6.ml-2 Vous n'avez aucune notification
     else
       each notif in notifications
         +notification(notif)

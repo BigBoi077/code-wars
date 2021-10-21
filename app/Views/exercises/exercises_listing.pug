@@ -33,19 +33,18 @@ block body
                   .mission-information
                     .mission-information-header
                       h4 #{exercise.name}
-                      .mission-results
-                        .mission-cash-reward
-                          img(src="/assets/images/credit_symbol.png")
-                          span #{exercise.cash_reward}
-                        .mission-point-reward
-                          i.fab.fa-ethereum
-                          span #{exercise.point_reward}
-                    hr
-                  .mission-detail
-                    p #{exercise.description}
-                    .detail-link
-                      a(href="/exercises/" + exercise.id)
-                        i.fas.fa-info-circle.fa-2x
+                      .mission-detail
+                        .mission-results
+                          .mission-cash-reward
+                            img(src="/assets/images/credit_symbol.png")
+                            span #{exercise.cash_reward}
+                          .mission-point-reward
+                            i.fab.fa-ethereum
+                            span #{exercise.point_reward}
+                        .mission-detail
+                          .detail-link
+                            a(href="/exercises/" + exercise.id)
+                              i.fas.fa-info-circle.fa-2x
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src='/javascripts/toggleWeek.js')

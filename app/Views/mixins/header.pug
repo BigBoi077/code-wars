@@ -30,7 +30,7 @@ mixin header()
       if !user.isTeacher
         a.profile-pic(href="/profile")
             img(src=profileImageUrl)
-        a(href="/profile/notifications").disconnect.mr-2
+        a(href="/profile/notifications").bell.mr-2
           button.ml-3
             i#bell.fas.fa-bell
       form.disconnect.mr-2(action="/logout", method="post")

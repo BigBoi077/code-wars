@@ -1,0 +1,42 @@
+extends ../mixins/layout
+
+block title
+  title #{exercise.name} - Code Wars
+
+block header
+  +header()
+
+block body
+  #circle
+  #circleSmall
+  #circleSmallRight
+  +flash
+  form.single-mission-submit(action=action  method="post" enctype="multipart/form-data")
+    input(type="hidden" name="exerciseName" value=exercise.name)
+    h1 Fichier(s) à soumettre
+    hr.separator
+    p
+    | Vous vous aprêter à soumettre une solution pour le contrat « #{exercise.name} »
+    | de la semaine #{exercise.week_id}. La réussite de cette mission vous octroiera
+    div.mission-results.mt-3.mb-3
+      +starWarsMoney(exercise.cash_reward)
+      +starWarsPoints(exercise.point_reward)
+    p La correction peut prendre jusqu'à 14 jours ouvrables.
+    p Pour procéder, sélectionnez simplement le fichier que vous désirez téléversé depuis votre disque personnel. Si vous voulez soumettre un ensemble de fichiers, veuillez les archiver préalablement sous format ZIP.
+    ul
+      li Seuls les extensions .java et .zip sont acceptées pour la remise.
+      li La taille maximale du fichier est 20 Mo.
+    p Si vous avez des précisions à apporter ou tout autre commentaire que vous désirez transmettre avec la solution, veillez utiliser la zone commentaire ci-dessous.
+    textarea(rows=6 placeholder="Commentaires")
+    div.d-flex.justify-content-around
+      div.mission-submit
+        i.fas.fa-file-code
+        label#uploadLabel(for='exerciseUpload') Remise d'exercice
+        input#exerciseUpload(type='file' name='exercise' accept='.zip,.java')
+      div.mission-upload
+        i.fas.fa-file-upload
+        label(for='exercice-submit') Soumettre le fichier
+        input#exercice-submit(type='submit')
+block script
+  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
+  script(src='/javascripts/upload.js')

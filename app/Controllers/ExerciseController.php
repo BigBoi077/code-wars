@@ -12,6 +12,7 @@ class ExerciseController extends Controller
     {
         $this->get('/exercises', 'exercises');
         $this->get('/exercises/{id}', 'exerciseDetail');
+        $this->get('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
     }
 
@@ -37,6 +38,14 @@ class ExerciseController extends Controller
             'exercise' => ExerciseService::get($id),
             'action' => "/submit/exercise/" . $id,
             'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
+        ]);
+    }
+
+    public function exerciseSubmit($id)
+    {
+        return $this->render('exercises/exercise_submit', [
+            'exercise' => ExerciseService::get($id),
+            'action' => "/submit/exercise/" . $id
         ]);
     }
 

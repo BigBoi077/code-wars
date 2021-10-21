@@ -11,6 +11,7 @@
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --red: #fd5a5a;
+    --blue: #367bc4;
 }
 
 html, body {
@@ -18,7 +19,7 @@ html, body {
 }
 
 .row {
-    margin-left: 0; /* Bootstrap met de la margin negative par défaut */
+    margin-left: 0;
     margin-right: 0;
 }
 
@@ -28,6 +29,25 @@ html, body {
 
 .starwars-font {
     font-family: 'StarJedi', sans-serif;
+}
+
+.fa-ethereum {
+    margin-top: 4px;
+}
+
+.star-wars-money img, .star-wars-money i {
+    height: 24px;
+    width: 24px;
+}
+
+.star-wars-money, .star-wars-points {
+    display: flex;
+    align-items: center;
+}
+
+.star-wars-money span, .star-wars-points span {
+    margin-top: 4px;
+    margin-left: 8px;
 }
 
 @font-face {
@@ -161,23 +181,23 @@ header #hamburger-menu {
     cursor: pointer;
 }
 
-.disconnect {
+.disconnect, .bell {
     display: flex;
     align-items: center;
 }
 
-header .disconnect button {
+header .disconnect button, header .bell button {
     border: none;
     border-radius: 15px;
     background-color: var(--background);
 }
 
-header .header-right i {
-    transition: all 0.15s ease-in-out;
-}
-
 header .disconnect i:hover {
     color: var(--red);
+}
+
+header .bell i:hover {
+    color: var(--blue);
 }
 
 /*ScoreBoard*/
@@ -288,14 +308,6 @@ header .disconnect i:hover {
     border-radius: 1rem;
 }
 
-/*#team .border-team {
-    border-bottom: var(--accent) 1px solid;
-}*/
-
-#team .team-member {
-
-}
-
 .menu-items > li{
     font-family: 'Starjedi', sans-serif;
     color: var(--dark);
@@ -319,15 +331,10 @@ body {
 
 .btn-yellow {
     background-color: var(--accent);
-    transition: all 0.25s ease-in-out;
 }
 
 #editProfileBtn i {
     padding-left: .75rem;
-}
-
-.btn-yellow:hover {
-    transform: scale(1.15);
 }
 
 #submitBtn {
@@ -336,24 +343,10 @@ body {
     margin: 1rem auto;
     border-radius: 1rem;
     width: 50%;
-    transition: all 0.25s ease-in-out;
-}
-
-#submitBtn:hover {
-    transform: scale(1.1);
 }
 
 #Btn {
     margin: 1.5rem 0;
-    transition: all 0.25s ease-in-out;
-}
-
-#Btn:hover {
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
-}
-
-#Btn:active {
-    transform: scale(0.75);
 }
 
 #buyBtn {
@@ -425,11 +418,9 @@ body {
 
 .student-icons {
     color: var(--dark) !important;
-    transition: all 0.25s ease-in-out;
 }
 
 .student-icons:hover {
-    transform: scale(1.25);
     color: var(--accent) !important;
 }
 
@@ -544,7 +535,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0px 5% 28px;
+    padding: 0 5% 28px;
 }
 
 .login-logo {
@@ -569,7 +560,7 @@ body {
 
 .login-form #password {
     background-image: url("images/padlock.png");
-    margin-bottom: 0px !important;
+    margin-bottom: 0 !important;
 }
 
 .login-form #da, .login-form #password {
@@ -693,7 +684,6 @@ text-align: center;
     margin: auto;
     max-width: 1000px;
     padding: 26px;
-    border: 1px solid var(--dark);
     border-radius: 10px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
     background-color: var(--background);
@@ -710,6 +700,7 @@ text-align: center;
 .single-mission-row .mission-information-header .mission-results {
     display: flex;
     justify-content: space-between;
+    margin-right: 16px;
 }
 
 .single-mission-row .mission-information-header .mission-results div {
@@ -726,15 +717,7 @@ text-align: center;
     align-items: center;
 }
 
-.single-mission-row .mission-detail p {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 .single-mission-row .mission-detail .detail-link {
-    width: 25%;
     height: 100%;
     margin: auto;
     display: flex;
@@ -743,11 +726,9 @@ text-align: center;
 
 .single-mission-row .mission-detail a i  {
     color: var(--accent);
-    transition: all 0.25s ease-in-out;
 }
 
 .single-mission-row .mission-detail a i:hover {
-    transform: scale(1.5);
     color: var(--dark);
 }
 
@@ -756,7 +737,6 @@ text-align: center;
     margin: auto;
     display: grid;
     padding: 32px;
-    border: 1px solid var(--dark);
     border-radius: 10px;
     position: relative;
     background-color: var(--background);
@@ -771,7 +751,29 @@ text-align: center;
     "description      description      .                info"
     ".                .                .                info"
     "example          example          example          example"
-    "submit           submit           upload           upload";
+    ".                submit           submit           .";
+}
+
+.single-mission-submit {
+    max-width: 1000px;
+    padding: 32px;
+    border-radius: 10px;
+    position: relative;
+    background-color: var(--background);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    margin: 32px auto auto;
+}
+
+.single-mission-submit .mission-results {
+    padding: 18px;
+    border-left: 4px solid var(--accent);
+}
+
+.single-mission-submit textarea {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 5px;
+    border: 1px solid rgb(169, 169, 169);
 }
 
 .single-mission-detail h3 {
@@ -855,11 +857,8 @@ text-align: center;
     margin: 6px 6px 6px 0;
 }
 
-.single-mission-detail .mission-submit {
-    grid-area: submit;
-}
-
-.single-mission-detail .mission-submit, .single-mission-detail .mission-upload {
+.single-mission-detail .mission-submit, .single-mission-detail .mission-upload,
+.single-mission-submit .mission-submit, .single-mission-submit .mission-upload {
     background-color: var(--accent);
     border-radius: 5px;
     padding: 16px 32px;
@@ -867,15 +866,27 @@ text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.25s ease-in-out;
-    width: 75%;
     height: 48px;
     margin: 34px auto auto;
 }
 
-.single-mission-detail .mission-submit:hover, .single-mission-detail .mission-upload:hover {
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
-    transform: scale(1.05);
+.single-mission-detail .mission-submit a {
+    display: flex;
+    align-items: center;
+}
+
+.single-mission-detail .mission-submit a:hover {
+    text-decoration: none;
+}
+
+.single-mission-detail .mission-submit img.submit-team {
+    height: 28px;
+    width: 28px;
+    margin-right: 12px;
+}
+
+.single-mission-detail .mission-submit span {
+    color: var(--dark);
 }
 
 .single-mission-detail label {
@@ -886,29 +897,24 @@ text-align: center;
     margin-right: 12px;
 }
 
-.single-mission-detail label {
-    margin: 0;
+.single-mission-submit label {
+    margin: 0 0 0 8px;
 }
 
-.single-mission-detail .mission-submit input[type="file"] {
+.single-mission-submit .mission-submit input[type="file"] {
     display: none;
 }
 
-.single-mission-detail .mission-upload {
-    grid-area: upload;
-}
-
-.single-mission-detail .mission-upload input[type="submit"] {
+.single-mission-submit .mission-upload input[type="submit"] {
     display: none;
 }
 
 .not-submitted {
-    color: red;
+    color: var(--red);
 }
 
 .submitted {
-    color: green;
-    color: green;
+    color: var(--green);
 }
 
 /* Profile */
@@ -921,4 +927,6 @@ text-align: center;
     border-radius: 50%;
     background-size:cover;
 }
+
+
 /* endregion */
