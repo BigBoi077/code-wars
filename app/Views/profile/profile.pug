@@ -9,37 +9,51 @@ block header
 block body
   +flash
   .container.py-5
+    if isTeacher
+      .row
+        .col-4.p-4
+          a.btn.btn-yellow.text-dark(href="/management/students")
+            i.fas.fa-arrow-left
+            |  Retour
     .row
       .col-lg-4
         .card.mb-4
           .card-body.text-center
-            img.rounded-img.mt-2(src=profileImageUrl)
-            h5.my-3 #{student.username}
-            p.text-muted.mb-1 #{student.points} pts
-            p.text-muted.mb-4 #{format('money', student.cash)}
+            if isTeacher
+              img.rounded-img.mt-2(src=gravatarUrl)
+            else
+              img.rounded-img.mt-2(src=profileImageUrl)
+            h5.my-3 #{studentProfile.username}
+            p.text-muted.mb-1 #{studentProfile.points} pts
+            p.text-muted.mb-4 #{format('money', studentProfile.cash)}
       .col-lg-8
         .card.mb-4
           include ../mixins/profileInfo
           .card-body
             h2.text-center.mb-4 Informations du compte
-            +profileInfo("Nom", user.lastname)
+            +profileInfo("Nom", studentProfile.lastname)
             hr
-            +profileInfo("Prénom", user.firstname)
+            +profileInfo("Prénom", studentProfile.firstname)
             hr
-            +profileInfo("Équipe", student.team_name)
+            +profileInfo("Équipe", studentProfile.team_name)
             hr
-            +profileInfo("E-mail", student.email)
+            +profileInfo("E-mail", studentProfile.email)
             hr
-            +profileInfo("Mot de passe", "********")
-            .row.justify-content-md-end.mx-3
-              a#editProfileBtn.btn.btn-yellow.text-dark(href="/profile/edit")
-                | Modifier le compte
-                i.fas.fa-edit
+            if !isTeacher
+              +profileInfo("Mot de passe", "********")
+            if !isTeacher
+              .row.justify-content-md-end.mx-3
+                a#editProfileBtn.btn.btn-yellow.text-dark(href="/profile/edit")
+                  | Modifier le compte
+                  i.fas.fa-edit
         .row
           .card.mb-4.w-100
             .card-body
               h2.text-center.mb-3 Progression individuelle
-              p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+              if isTeacher
+                p.text-center.mb-0 #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
+              else
+                p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
               include ../mixins/weekProgress
               .m-4
                 each week in weeklyProgress
@@ -47,7 +61,10 @@ block body
         .row
           .card.mb-4.w-100
             .card-body
-              h2.text-center.mb-3 Mes achats
+              if isTeacher
+                h2.text-center.mb-3 Achats
+              else
+                h2.text-center.mb-3 Mes achats
               include ../mixins/myItem
               .m-4
                 .row
@@ -58,37 +75,40 @@ block body
                   .col-2
                     h5.mb-0 Date
                 hr.mt-1
-                if myItems == null
-                  h6.text-center Vous n'avez encore fait aucun achat
+                if items == null
+                  if isTeacher
+                    h2.text-center.mb-3 Aucun achat
+                  else
+                    h6.text-center Vous n'avez encore fait aucun achat
                     .text-center.mt-3
                       a.btn.btn-yellow.text-dark(href="/exercises")
                         | Aller aux missions
                 else
-                  each item in myItems
+                  each item in items
                     +itemRow(item)
-        .row
-          .card.mb-4.w-100
-            .card-body
-              h2.text-center.mb-3 Mes exercices faits
-              include ../mixins/myExercise
-              .m-4
-                .row
-                  .col-4.student-header-col
-                    h5.mb-0 Nom de la mission
-                  .col-4.student-header-col
-                    h5.mb-0 Fichier remis
-                  .col-3.student-header-col
-                    h5.mb-0 Corriger
-                  .col-1
-                hr.mt-1
-                if myExercices == null
-                  h6.text-center Vous n'avez encore fait de missions
-                    .text-center.mt-3
-                      a.btn.btn-yellow.text-dark(href="/exercises")
-                        | Aller aux missions
-                else
-                  each exercise in myExercices
-                    +exerciseRow(exercise, teacher)
+        //.row
+        //  .card.mb-4.w-100
+        //    .card-body
+        //      h2.text-center.mb-3 Mes exercices faits
+        //      include ../mixins/myExercise
+        //      .m-4
+        //        .row
+        //          .col-4.studentProfile-header-col
+        //            h5.mb-0 Nom de la mission
+        //          .col-4.studentProfile-header-col
+        //            h5.mb-0 Fichier remis
+        //          .col-3.studentProfile-header-col
+        //            h5.mb-0 Corriger
+        //          .col-1
+        //        hr.mt-1
+        //        if myExercices == null
+        //          h6.text-center Vous n'avez encore fait de missions
+        //            .text-center.mt-3
+        //              a.btn.btn-yellow.text-dark(href="/exercises")
+        //                | Aller aux missions
+        //        else
+        //          each exercise in myExercices
+        //            +exerciseRow(exercise, teacher)
 
 
 block script

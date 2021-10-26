@@ -31,7 +31,9 @@ block body
 					.col-2
 						p.student-row-element #{student.da}
 					.col-3
-						p.student-row-element #{student.firstname} #{student.lastname}
+						p.student-row-element
+							a.student-link(href='/management/students/' + student.da + '/profile')
+								| #{student.firstname} #{student.lastname}
 					.col-2
 						p.student-row-element #{student.team_name}
 					.col-3

@@ -3,6 +3,7 @@
 use Models\Brokers\NotificationBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentItemBroker;
+use Models\Services\ExerciseService;
 use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
 
@@ -19,16 +20,16 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        $da = $this->getActiveStudent()->da;
-        $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
-        $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
-        $indProgress = (new StudentBroker())->getProgression($da);
-        $items = (new StudentItemBroker())->getAllWithDa($da);
+        $student = $this->getActiveStudent();
+        $weeklyProgress = (new StudentBroker())->getProgressionByWeek($student->da);
+        $indProgress = (new StudentBroker())->getProgression($student->da);
+        $items = (new StudentItemBroker())->getAllWithDa($student->da);
         return $this->render('profile/profile', [
-            'notifications' => $notifications,
+            'isTeacher' => false,
+            'studentProfile' => $student,
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
-            'myItems' => $items
+            'items' => $items
         ]);
     }
 

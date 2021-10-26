@@ -505,6 +505,11 @@ body {
     margin: 1.75rem;
 }
 
+.student-link {
+    color: black;
+    text-decoration: underline;
+}
+
 .heading-row {
     border-bottom: 2px solid #e1e1e1;
 }
