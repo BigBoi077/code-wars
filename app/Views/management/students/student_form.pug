@@ -25,23 +25,27 @@ block body
           label(for="lastname") Nom
           input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' value=(editStudent !== null) ? editStudent.lastname: val('lastname'))
       .form-row
+        .form-group.col-12
+          label(for="team_id") Équipe
+          select.form-control(id='team_id', name='team_id' required)
+              each team in teams
+                if editStudent !== null
+                  if editStudent.team_id === team.id
+                    option(value=team.id, selected)
+                      | #{team.name}
+                  else
+                    option(value=team.id)
+                      | #{team.name}
+                else
+                  option(value=team.id)
+                    | #{team.name}
+      .form-row
         .form-group.col-6
           label(for="cash") Argent (Optionnel)
           input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(editStudent !== null) ? editStudent.cash : val('cash'))
         .form-group.col-6
-          label(for="team_id") Équipe
-          select.form-control(id='team_id', name='team_id' required)
-            each team in teams
-              if editStudent !== null
-                if editStudent.team_id === team.id
-                  option(value=team.id, selected)
-                    | #{team.name}
-                else
-                  option(value=team.id)
-                    | #{team.name}
-              else
-                option(value=team.id)
-                  | #{team.name}
+          label(for="points") Points (Optionnel)
+          input.form-control(placeholder="0" id='points', name='points', type='number' value=(editStudent !== null) ? editStudent.points : val('points'))
 
       .form-row
         button#submitBtn.btn(type='submit')

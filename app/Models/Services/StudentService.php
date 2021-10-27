@@ -124,9 +124,10 @@ class StudentService
         $password = password_hash($this->form->getValue('da') . 'Cegep' . PASSWORD_PEPPER, PASSWORD_DEFAULT);
         $team_id = $this->form->getValue('team_id');
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
+        $points = ($this->form->getValue('points') != "") ? $this->form->getValue('points') : 0;
         (new PersonBroker())->insert($da, $username, $firstname, $lastname);
         (new UserBroker())->insert($da, $password);
-        (new StudentBroker())->insert($da, $team_id, $cash);
+        (new StudentBroker())->insert($da, $team_id, $cash, $points);
         $this->success = true;
     }
 
@@ -137,8 +138,9 @@ class StudentService
         $lastname = $this->form->getValue('lastname');
         $team_id = $this->form->getValue('team_id');
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
+        $points = ($this->form->getValue('points') != "") ? $this->form->getValue('points') : 0;
         (new PersonBroker())->update($da, $username, $firstname, $lastname);
-        (new StudentBroker())->update($da, $team_id, $cash);
+        (new StudentBroker())->update($da, $team_id, $cash, $points);
         $this->success = true;
     }
 }
