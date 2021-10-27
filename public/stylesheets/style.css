@@ -182,6 +182,7 @@ header #hamburger-menu {
 }
 
 .disconnect, .bell {
+    margin: 0;
     display: flex;
     align-items: center;
 }
