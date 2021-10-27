@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
+use Models\Brokers\StudentBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
 use function Composer\Autoload\includeFile;
@@ -27,9 +28,17 @@ class ExerciseController extends Controller
                 $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
             }
         }
+        $weeklyProgress = null;
+        $indProgress = null;
+        if (!$this->isUserTeacher()) {
+            $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
+            $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
+        }
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
-            'teamPoints' => TeamController::getTeamPoints()
+            'teamPoints' => TeamController::getTeamPoints(),
+            'weeklyProgress' => $weeklyProgress,
+            'individualProgress' => $indProgress,
         ]);
     }
 
