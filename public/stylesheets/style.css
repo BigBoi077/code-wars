@@ -594,6 +594,10 @@ body {
     transform: translateY(-50%);
 }
 
+#managementDropdown {
+    outline: none;
+}
+
 @media only screen and (max-width: 800px) {
     .image-container {
         display: none;
