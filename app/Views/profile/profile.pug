@@ -80,29 +80,26 @@ block body
                 else
                   each item in items
                     +itemRow(item)
-        //.row
-        //  .card.mb-4.w-100
-        //    .card-body
-        //      h2.text-center.mb-3 Mes exercices faits
-        //      include ../mixins/myExercise
-        //      .m-4
-        //        .row
-        //          .col-4.studentProfile-header-col
-        //            h5.mb-0 Nom de la mission
-        //          .col-4.studentProfile-header-col
-        //            h5.mb-0 Fichier remis
-        //          .col-3.studentProfile-header-col
-        //            h5.mb-0 Corriger
-        //          .col-1
-        //        hr.mt-1
-        //        if myExercices == null
-        //          h6.text-center Vous n'avez encore fait de missions
-        //            .text-center.mt-3
-        //              a.btn.btn-yellow.text-dark(href="/exercises")
-        //                | Aller aux missions
-        //        else
-        //          each exercise in myExercices
-        //            +exerciseRow(exercise, teacher)
+        .row
+          .card.mb-4.w-100
+            .card-body
+              h2.text-center.mb-3 Mes exercices faits
+              include ../mixins/myExercise
+              .m-4
+                .row
+                  .col-6.studentProfile-header-col
+                    h5.mb-0 Nom de la mission
+                  .col-6.student-header-col
+                    h5.mb-0.text-center État
+                hr.mt-1
+                if exercises == null
+                  h6.text-center Vous n'avez encore fait de missions
+                    .text-center.mt-3
+                      a.btn.btn-yellow.text-dark(href="/exercises")
+                        | Aller aux missions
+                else
+                  each exercise in exercises
+                    +exerciseRow(exercise, teacher)
 
 
 block script

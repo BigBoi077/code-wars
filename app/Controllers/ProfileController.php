@@ -1,7 +1,9 @@
 <?php namespace Controllers;
 
 use Models\Brokers\NotificationBroker;
+use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Services\ExerciseService;
 use Models\Services\PersonService;
@@ -24,12 +26,16 @@ class ProfileController extends Controller
         $weeklyProgress = (new StudentBroker())->getProgressionByWeek($student->da);
         $indProgress = (new StudentBroker())->getProgression($student->da);
         $items = (new StudentItemBroker())->getAllWithDa($student->da);
+        $studentExercises = (new StudentExerciseBroker())->getAllWithDa($student->da);
+        $teacher = (new PersonBroker())->findByDa(0);
         return $this->render('profile/profile', [
             'isTeacher' => false,
             'studentProfile' => $student,
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
-            'items' => $items
+            'items' => $items,
+            'exercises' => $studentExercises,
+            'teacher' => $teacher
         ]);
     }
 
