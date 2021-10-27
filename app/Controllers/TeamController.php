@@ -3,6 +3,7 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
+use Models\Services\StudentService;
 use Zephyrus\Network\Response;
 
 class TeamController extends Controller
@@ -11,6 +12,7 @@ class TeamController extends Controller
     public function initializeRoutes()
     {
         $this->get('/teams', 'teams');
+        $this->get('/leaderboard', 'leaderboard');
     }
 
     public function teams(): Response
@@ -32,6 +34,15 @@ class TeamController extends Controller
             'teams' => $teams
         ]);
     }
+
+    public function leaderboard()
+    {
+        return $this->render('teams/leaderboard', [
+            'teamPoints' => TeamController::getTeamPoints(),
+            'students' => StudentService::getAll(),
+        ]);
+    }
+
 
     public static function getTeamProgression($nbSith, $nbRebel): array
     {

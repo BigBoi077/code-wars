@@ -26,6 +26,10 @@ mixin header()
                 a(href="/management/correction").dropdown-item Correction
               li.p-1
                 a(href="/management/students").dropdown-item Étudiants
+              li.p-1
+                a(href="/management/items").dropdown-item Magasin
+              li.p-1
+                a(href="/management/exercises").dropdown-item Missions
     .d-flex.flex-row
       #student.d-flex.align-items-center
         .text-right.pr-3.d-flex.flex-column
@@ -44,6 +48,5 @@ mixin header()
         button.ml-3
           i#icon-header.fas.fa-power-off
 
-block script
   script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js")
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js")

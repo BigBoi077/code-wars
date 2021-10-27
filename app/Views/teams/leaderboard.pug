@@ -1,0 +1,35 @@
+extends ../mixins/layout
+
+block title
+  title="Classement - Code Wars"
+
+block header
+  +header()
+
+block body
+  .container
+    #score.d-flex.justify-content-center.my-5
+      +scoreBoard()
+    .row.mission-header
+      h1.mb-2 Classement
+    .container
+      .student-row.box-shadow
+        each student, index in students
+          .row.py-3.px-5
+            if index < 3
+              .col-1
+                .fas.fa-medal.fa-2x(class="position" + index).mt-2
+              .col-1.d-flex.align-items-center.justify-content-end
+                h3.mt-2.mr-4 ##{index + 1}
+              .col-6
+                h3.mt-2 #{student.username}
+            else
+              .col-2.d-flex.align-items-center.justify-content-end
+                h6.mt-2.mr-4 ##{index + 1}
+              .col-6.d-flex.align-items-center
+                h6.mt-2 #{student.username}
+            .col-2.d-flex.align-items-center
+              p.m-0 #{student.points} pts
+            .col-2.d-flex.align-items-center
+              p.m-0 #{student.team_name}
+          hr.m-0.mx-4

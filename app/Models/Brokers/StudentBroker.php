@@ -53,7 +53,7 @@ class StudentBroker extends Broker
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
 				join codewars.team t on s.team_id = t.id
-                ORDER BY s.da";
+                ORDER BY s.points desc";
         return $this->select($sql);
     }
 

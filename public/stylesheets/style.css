@@ -269,6 +269,18 @@ header .bell i:hover {
     top: 50px;
 }
 
+.position0 {
+    color: gold;
+}
+
+.position1 {
+    color: silver;
+}
+
+.position2 {
+    color: #cd7f32;
+}
+
 /*notifications*/
 .card, .box-shadow {
     border-radius: 1rem; !important;
@@ -594,8 +606,16 @@ body {
     transform: translateY(-50%);
 }
 
-#managementDropdown {
-    outline: none;
+#managementDropdown:hover {
+    text-decoration: underline;
+}
+
+#managementDropdown:focus {
+    box-shadow: none;
+}
+
+.dropdown-menu {
+    z-index: 1000;
 }
 
 @media only screen and (max-width: 800px) {
