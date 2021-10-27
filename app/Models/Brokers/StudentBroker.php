@@ -17,7 +17,7 @@ class StudentBroker extends Broker
 
     public function getPoints($da): int
     {
-        $sql = "select s.points from codewars.student s where s.da";
+        $sql = "select s.points from codewars.student s where s.da = ?";
         return $this->selectSingle($sql, [$da])->points;
     }
 
