@@ -39,7 +39,6 @@ abstract class Controller extends SecurityController
                 $imageUrl = $gravatar->getUrl();
             }
         }
-
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),
             'user' => $this->getUser(),

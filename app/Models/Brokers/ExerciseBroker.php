@@ -59,7 +59,7 @@ class ExerciseBroker extends Broker
     {
         $sql = "update codewars.studentexercise se set dir_path = ? where se.exercise_id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$path, $student->da, $exerciseId]);
-        NotificationService::newCorrectionAvailable($student);
+        NotificationService::newCorrectionAvailable($student, $this->findByID($exerciseId)->name);
     }
 
     public function correctExercise($userId, $student, $id)

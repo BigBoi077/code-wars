@@ -182,6 +182,7 @@ header #hamburger-menu {
 }
 
 .disconnect, .bell {
+    margin: 0;
     display: flex;
     align-items: center;
 }
@@ -250,7 +251,7 @@ header .bell i:hover {
     right: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #0000ff;
+    background: #367BC4;
     height: 30px;
 }
 
@@ -259,7 +260,7 @@ header .bell i:hover {
     left: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #ff0000;
+    background: #D1463D;
     height: 30px;
 }
 
@@ -267,6 +268,18 @@ header .bell i:hover {
     position: absolute;
     width: 100%;
     top: 50px;
+}
+
+.position0 {
+    color: gold;
+}
+
+.position1 {
+    color: silver;
+}
+
+.position2 {
+    color: #cd7f32;
 }
 
 /*notifications*/
@@ -592,6 +605,27 @@ body {
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+#managementDropdown:hover {
+    text-decoration: underline;
+}
+
+#managementDropdown:focus {
+    box-shadow: none;
+}
+
+.dropdown-menu {
+    z-index: 1000;
+}
+
+.main-ct {
+    position: relative;
+}
+
+.fixed-ct {
+    position: sticky;
+    top: 10px;
 }
 
 @media only screen and (max-width: 800px) {

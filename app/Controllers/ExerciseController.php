@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
+use Models\Brokers\StudentBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
 use function Composer\Autoload\includeFile;
@@ -27,9 +28,17 @@ class ExerciseController extends Controller
                 $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
             }
         }
+        $weeklyProgress = null;
+        $indProgress = null;
+        if (!$this->isUserTeacher()) {
+            $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
+            $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
+        }
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
-            'teamPoints' => TeamController::getTeamPoints()
+            'teamPoints' => TeamController::getTeamPoints(),
+            'weeklyProgress' => $weeklyProgress,
+            'individualProgress' => $indProgress,
         ]);
     }
 
@@ -52,6 +61,7 @@ class ExerciseController extends Controller
 
     public function exerciseUpload($id)
     {
+        $maxsize = 20971520;
         if ($this->isUserTeacher()) {
             Flash::error("L' enseignant ne peut pas remettre des exercices.");
             return $this->redirect('/exercises/' . $id);
@@ -70,6 +80,11 @@ class ExerciseController extends Controller
             Flash::error("Aucun fichier selectionné!");
             return $this->redirect('/exercises/' . $id);
         }
+
+        if ($this->request->getFile("exercise")["size"] >= $maxsize || $this->request->getFile("exercise")["size"] == 0) {
+            Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo");
+            return $this->redirect('/exercises/' . $id);
+            }
 
         $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {

@@ -53,7 +53,7 @@ class StudentBroker extends Broker
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
 				join codewars.team t on s.team_id = t.id
-                ORDER BY s.da";
+                ORDER BY s.points desc";
         return $this->select($sql);
     }
 
@@ -86,14 +86,8 @@ class StudentBroker extends Broker
 
     public function sameTeamStudent($teamId): array
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
-        $teamMembers =  $this->select($sql, [$teamId]);
-        foreach ($teamMembers as $member) {
-            $member->points = $this->getPoints($member->da);
-        }
-        $points= array_column($teamMembers, 'points');
-        array_multisort($points, SORT_DESC, $teamMembers);
-        return $teamMembers;
+        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
+        return $this->select($sql, [$teamId]);
     }
 
     public function addCash($da, $amount)

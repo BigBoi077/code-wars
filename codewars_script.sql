@@ -82,6 +82,7 @@ create table if not exists student (
     da int,
     team_id int,
     cash int,
+    points int,
     constraint fk_team_id foreign key (team_id) references team(id),
     constraint fk_da_student foreign key (da) references "user"(da),
     constraint pk_da_student primary key (da)

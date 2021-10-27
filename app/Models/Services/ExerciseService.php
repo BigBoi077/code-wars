@@ -94,7 +94,7 @@ class ExerciseService
         $difficulty = $this->form->getValue('difficulty');
         $description = $this->form->getValue('description');
         $exemple = $this->form->getValue('exemple');
-        $tips = (isEmpty($this->form->getValue('tips'))) ? $this->form->getValue('tips') : null;
+        $tips = ($this->form->getValue('tips') == "") ? $this->form->getValue('tips') : null;
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week");
