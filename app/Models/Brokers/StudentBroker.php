@@ -7,23 +7,18 @@ class StudentBroker extends Broker
 
     public function findByDa($da) : ?stdClass
     {
-        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, p.username, p.firstname, p.lastname, p.email from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
                 join codewars.team t on t.id = s.team_id
                 WHERE s.da = ?";
-        $student = $this->selectSingle($sql, [$da]);
-        if ($student != null) {
-            $student->points = $this->getPoints($da);
-        }
-        return $student;
+        return $this->selectSingle($sql, [$da]);
     }
 
     public function getPoints($da): int
     {
-        $sql = "select sum(e.point_reward) points from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.corrected = true";
-        $points = $this->selectSingle($sql, [$da])->points;
-        return $points == null ? 0 : $points;
+        $sql = "select s.points from codewars.student s where s.da";
+        return $this->selectSingle($sql, [$da])->points;
     }
 
     public function getProgression($da): array
@@ -54,7 +49,7 @@ class StudentBroker extends Broker
 
     public function getAll()
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
 				join codewars.team t on s.team_id = t.id
@@ -62,14 +57,10 @@ class StudentBroker extends Broker
         return $this->select($sql);
     }
 
-    public function insert($da, $team_id, $cash)
+    public function insert($da, $team_id, $cash, $points)
     {
-        $sql = "INSERT INTO codewars.student (da, team_id, cash) VALUES (?, ?, ?)";
-        $this->query($sql, [
-            $da,
-            $team_id,
-            $cash
-        ]);
+        $sql = "INSERT INTO codewars.student (da, team_id, cash, points) VALUES (?, ?, ?, ?)";
+        $this->query($sql, [$da, $team_id, $cash, $points]);
     }
 
     public function delete($da)
@@ -78,10 +69,10 @@ class StudentBroker extends Broker
         return $this->query($sql, [$da]);
     }
 
-    public function update($da, $team_id, $cash)
+    public function update($da, $team_id, $cash, $points)
     {
-        $sql = "UPDATE codewars.student SET team_id = ?, cash = ? WHERE da = ?";
-        $this->query($sql, [$team_id, $cash, $da]);
+        $sql = "UPDATE codewars.student SET team_id = ?, cash = ?, points = ? WHERE da = ?";
+        $this->query($sql, [$team_id, $cash, $points, $da]);
     }
 
     public function hasItem($da): bool
@@ -111,5 +102,13 @@ class StudentBroker extends Broker
         $student->cash += $amount;
         $sql = "UPDATE codewars.student SET cash = ? WHERE da = ?";
         $this->query($sql, [$student->cash, $da]);
+    }
+
+    public function addPoints($da, $amount)
+    {
+        $student = $this->findByDa($da);
+        $student->points += $amount;
+        $sql = "UPDATE codewars.student SET points = ? WHERE da = ?";
+        $this->query($sql, [$student->points, $da]);
     }
 }
