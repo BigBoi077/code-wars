@@ -23,14 +23,7 @@ class TeamBroker extends Broker
 
     public function findAllStudentByTeam($id): array
     {
-        $sql = "select * from codewars.team join codewars.student s on team.id = s.team_id join codewars.person p on p.da = s.da where s.team_id = ?";
-        $students = $this->select($sql, [$id]);
-        $broker = new StudentBroker();
-        foreach ($students as $student) {
-            $student->points = $broker->getPoints($student->da);
-        }
-        $points= array_column($students, 'points');
-        array_multisort($points, SORT_DESC, $students);
-        return $students;
+        $sql = "select * from codewars.team join codewars.student s on team.id = s.team_id join codewars.person p on p.da = s.da where s.team_id = ? order by s.points desc";
+        return $this->select($sql, [$id]);
     }
 }

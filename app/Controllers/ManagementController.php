@@ -113,7 +113,7 @@ class ManagementController extends Controller
             'title' => 'Modification de ' . $student->firstname . ' ' . $student->lastname,
             'action' => '/management/students/' . $student->da . '/update',
             'editStudent' => $student,
-            'teams' => (new TeamBroker())->getAll(),
+            'teams' => (new TeamBroker())->getAll()
         ]);
     }
 
