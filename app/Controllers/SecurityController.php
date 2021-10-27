@@ -162,6 +162,7 @@ abstract class SecurityController extends ZephyrusBaseController
             'https://www.google-analytics.com', 'http://connect.facebook.net']);
         $csp->setChildSources(["'self'", 'http://staticxx.facebook.com']);
         $csp->setImageSources(["'self'", 'data:']);
+        $csp->setScriptSources(["'self'", 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js']);
         $csp->setImageSources(["'self'", 'data:', 'https://www.gravatar.com/', 'https://api.qrserver.com/']);
         $csp->setBaseUri([$this->request->getBaseUrl()]);
 
