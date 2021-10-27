@@ -16,7 +16,7 @@ block body
     .row.mt-5.p-4
       include mixins/notificationLayout
       .col-6
-        +notificationLayout(notifications)
+        +notificationLayout(notifications, true)
       .col-6
         if isTeacher === false
           h2.mb-4 Membres de mon équipe
