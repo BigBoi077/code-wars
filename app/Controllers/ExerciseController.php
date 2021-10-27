@@ -52,6 +52,7 @@ class ExerciseController extends Controller
 
     public function exerciseUpload($id)
     {
+        $maxsize = 20971520;
         if ($this->isUserTeacher()) {
             Flash::error("L' enseignant ne peut pas remettre des exercices.");
             return $this->redirect('/exercises/' . $id);
@@ -70,6 +71,11 @@ class ExerciseController extends Controller
             Flash::error("Aucun fichier selectionné!");
             return $this->redirect('/exercises/' . $id);
         }
+
+        if ($this->request->getFile("exercise")["size"] >= $maxsize || $this->request->getFile("exercise")["size"] == 0) {
+            Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo");
+            return $this->redirect('/exercises/' . $id);
+            }
 
         $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
