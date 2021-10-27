@@ -18,6 +18,7 @@ class HomeController extends Controller
     {
         $this->get('/', 'index');
         $this->get('/home', 'home');
+        $this->get('/leaderboard', 'leaderboard');
         $this->get('/notification/seen/{id}', 'seenNotification');
         $this->get('/notification/seenAll', 'seenAllNotification');
     }
@@ -42,6 +43,14 @@ class HomeController extends Controller
             'teamPoints' => TeamController::getTeamPoints(),
             'notifications' => $notifications,
             'quote' => null
+        ]);
+    }
+
+    public function leaderboard()
+    {
+        return $this->render('leaderboard', [
+            'teamPoints' => TeamController::getTeamPoints(),
+            'students' => StudentService::getAll(),
         ]);
     }
 

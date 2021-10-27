@@ -1,0 +1,27 @@
+extends mixins/layout
+
+block title
+  title="Accueil - Code Wars"
+
+block header
+  +header()
+
+block body
+  .main-container
+    #score.d-flex.justify-content-center.my-5
+      +scoreBoard()
+    .row.mission-header
+      h1 Classement
+    .student-list
+      each student, index in students
+        .row.student-row.box-shadow.mb-4
+          .col-2
+            p.student-row-element
+                | #{index + 1}
+                if index === 0
+                  i.fa.fa-medal.alert
+          .col-4
+            p.student-row-element
+              | #{student.firstname} #{student.lastname}
+          .col-2
+            p.student-row-element #{student.team_name}
