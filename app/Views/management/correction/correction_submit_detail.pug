@@ -12,40 +12,25 @@ block body
     h1.mb-3 #{exercise.name} - #{user.firstname} #{user.lastname}
   .container
     .exercise-submit-detail.box-shadow.mb-4
-      h3.p-4 #{user.firstname} #{user.lastname} a remis cette mission le #{format('date', studentExercise.submit_date)}
+      .row
+        .col.pl-0.pt-4.w-75
+          h3.p-4 #{user.firstname} #{user.lastname} a remis cette mission le #{format('date', studentExercise.submit_date)}
+        .col-3.d-flex.m-4.align-items-center.justify-content-end.w-25
+          a(href='/management/correction/download/' + exercise.id).download-button.align-self-end.pl-4.pr-4.pt-3.pb-3
+            span.mr-3 Télécharger
+            i.fas.fa-download
       .d-flex
-        .exercise-content.p-4.w-100
-          pre
+        .exercise-content.p-4.w-75
+          pre.mb-0
             code.p-4.language-java=fileContent
-        .row.side-options.d-flex.flex-column.align-items-start.w-auto
-          div.text-center.w-100.pl-0.pt-4.pr-4.pb-4
-            h4.w-100 Laisser un commentaire
-            button(data-toggle="modal" data-target="#comment-modal-1").open-commentModal.bg-transparent.btn
-              i.fas.fa-comment-medical.student-icons.fa-2x
-          div.text-center.w-100.pl-0.pt-4.pr-4.pb-4
-            h4.w-100 Marquer corrigé
-            a(href='/management/correction/correct/' + exercise.student_da + "/" + exercise.id)
-              i.fas.fa-edit.student-icons.fa-2x
-          div.text-center.w-100.pl-0.pt-4.pr-4.pb-4
-            h4.w-100 Télécharger
-            a(href='/management/correction/download/' + exercise.id)
-              i.fas.fa-download.student-icons.fa-2x
-        .modal.fade(id=("comment-modal-1") tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true")
-          .modal-dialog(role="document")
-            .modal-content
-              .modal-header
-                h5.modal-title(id="addModalLabel") Add a service
-                button.close(type="button" data-dismiss="modal" aria-label="Close")
-                  span(aria-hidden="true") &times;
-              .modal-body
-                form(method="post", action="/password/addService")
-                  .form-group
-                    label.form-label() Username
-                    input.form-control(name="username")
-                  .form-group
-                    button.btn.btn-secondary(type="button"  data-dismiss="modal") Close
-                    button.btn.btn-primary(type="submit") Save changes
 
+        - var action = "/management/correction/correct/" + studentExercise.student_da + "/" + studentExercise.id
+        form.correct-form(action=action method="get").row.side-options.w-25
+          h4 Laisser un commentaire
+          textarea.p-2.pb-0(name="comment" placeholder="Commentaire").h-75
+          button(type="submit").pl-4.pr-4.pt-1.pb-1.w-100.ml-0.mr-4.mt-0.mb-4
+            span.mr-3 Marquer corrigé
+            i.fas.fa-edit.student-icons
 
 
 block script

@@ -10,6 +10,7 @@
     --dark: #000000;
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
+    --grey: rgb(169, 169, 169);
     --red: #fd5a5a;
     --blue: #367bc4;
 }
@@ -967,13 +968,34 @@ text-align: center;
     border-radius: 5px;
 }
 
-.exercise-submit-detail .side-options {
+.exercise-submit-detail .side-options textarea {
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
+.exercise-submit-detail .side-options a {
     height: min-content;
 }
 
-.exercise-submit-detail .side-options div.col
+.correct-form button[type="submit"] {
+    background-color: var(--accent);
+    border: none;
+    border-radius: 5px;
+}
 
-/* Profile */
+.exercise-submit-detail .download-button {
+    background-color: var(--accent);
+    border-radius: 5px;
+}
+
+.exercise-submit-detail .download-button span, .exercise-submit-detail .download-button i {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+
+
+    /* Profile */
 
 .rounded-img {
     height: 150px;
