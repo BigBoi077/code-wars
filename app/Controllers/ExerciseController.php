@@ -35,28 +35,12 @@ class ExerciseController extends Controller
             $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
             $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
         }
+
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
             'teamPoints' => TeamController::getTeamPoints(),
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
-        ]);
-    }
-
-    public function exerciseSubmitDetail($id, $submitId)
-    {
-        $fileBroker = new FileBroker();
-        $file = $fileBroker->findById($id);
-        var_dump($file);
-        $file = fopen("management/correction/download/1", "r") or die ("Unable to open file!");
-        echo fread($file, filesize("management/correction/download/1"));
-        fclose($file);
-        var_dump($this);
-        exit();
-        return $this->render('management/correction/correction_listing', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id,
-            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
         ]);
     }
 

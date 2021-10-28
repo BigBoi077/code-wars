@@ -731,6 +731,10 @@ text-align: center;
     justify-content: space-between;
 }
 
+.single-mission-row .mission-information-header h4 {
+    margin: 0;
+}
+
 .single-mission-row .mission-information-header .mission-results {
     display: flex;
     justify-content: space-between;
@@ -891,6 +895,10 @@ text-align: center;
     margin: 6px 6px 6px 0;
 }
 
+.mission-submit label:hover, .mission-upload labels:hover {
+    cursor: pointer !important;
+}
+
 .single-mission-detail .mission-submit, .single-mission-detail .mission-upload,
 .single-mission-submit .mission-submit, .single-mission-submit .mission-upload {
     background-color: var(--accent);
@@ -954,6 +962,16 @@ text-align: center;
 .submitted {
     color: var(--green);
 }
+
+.exercise-submit-detail .exercise-content pre {
+    border-radius: 5px;
+}
+
+.exercise-submit-detail .side-options {
+    height: min-content;
+}
+
+.exercise-submit-detail .side-options div.col
 
 /* Profile */
 

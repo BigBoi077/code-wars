@@ -31,7 +31,7 @@ block body
       each exercise, index in correction
         .row.student-row.box-shadow.mb-4
           .col-4
-            a(href="/exercises/" + exercise.exercise_id).text-dark
+            a(href="/exercises/submit/detail/" + exercise.exercise_id + "/" + exercise.id).text-dark
               p.ml-0.student-row-element #{exercise.name}
           .col-3.pr-0.text-center.d-flex.align-items-end
             p.ml-0.student-row-element #{format('date', exercise.submit_date)}
