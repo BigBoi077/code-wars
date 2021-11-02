@@ -251,7 +251,7 @@ header .bell i:hover {
     right: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #367BC4;
+    background: #505253;
     height: 30px;
 }
 
@@ -260,7 +260,7 @@ header .bell i:hover {
     left: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #D1463D;
+    background: #d0463d;
     height: 30px;
 }
 
