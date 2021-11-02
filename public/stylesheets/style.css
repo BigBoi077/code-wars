@@ -10,6 +10,7 @@
     --dark: #000000;
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
+    --grey: rgb(169, 169, 169);
     --red: #fd5a5a;
     --blue: #367bc4;
 }
@@ -731,6 +732,10 @@ text-align: center;
     justify-content: space-between;
 }
 
+.single-mission-row .mission-information-header h4 {
+    margin: 0;
+}
+
 .single-mission-row .mission-information-header .mission-results {
     display: flex;
     justify-content: space-between;
@@ -891,6 +896,10 @@ text-align: center;
     margin: 6px 6px 6px 0;
 }
 
+.mission-submit label:hover, .mission-upload labels:hover {
+    cursor: pointer !important;
+}
+
 .single-mission-detail .mission-submit, .single-mission-detail .mission-upload,
 .single-mission-submit .mission-submit, .single-mission-submit .mission-upload {
     background-color: var(--accent);
@@ -955,7 +964,38 @@ text-align: center;
     color: var(--green);
 }
 
-/* Profile */
+.exercise-submit-detail .exercise-content pre {
+    border-radius: 5px;
+}
+
+.exercise-submit-detail .side-options textarea {
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
+.exercise-submit-detail .side-options a {
+    height: min-content;
+}
+
+.correct-form button[type="submit"] {
+    background-color: var(--accent);
+    border: none;
+    border-radius: 5px;
+}
+
+.exercise-submit-detail .download-button {
+    background-color: var(--accent);
+    border-radius: 5px;
+}
+
+.exercise-submit-detail .download-button span, .exercise-submit-detail .download-button i {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+
+
+    /* Profile */
 
 .rounded-img {
     height: 150px;

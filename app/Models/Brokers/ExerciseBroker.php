@@ -48,11 +48,11 @@ class ExerciseBroker extends Broker
         return $result->id;
     }
 
-    public function submitExercise($student, $exerciseId, $path)
+    public function submitExercise($student, $exerciseId, $path, $fileName)
     {
         $sql = "insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date) values (default, ?, ?, true, false, null, ?, now())";
         $this->query($sql, [$student->da, $exerciseId, $path]);
-        NotificationService::newCorrectionAvailable($student);
+        NotificationService::newCorrectionAvailable($student, $fileName);
     }
 
     public function updateSubmit($student, $exerciseId, $path)

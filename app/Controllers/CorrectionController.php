@@ -2,7 +2,9 @@
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\UserBroker;
+use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
@@ -21,6 +23,7 @@ class CorrectionController extends Controller
         $this->get('/management/correction', 'correctionList');
         $this->get('/management/correction/correct/{userId}/{id}', 'correctExercise');
         $this->get('/management/correction/download/{id}', 'downloadExercise');
+        $this->get('/exercises/submit/detail/{id}/{$submitId}', 'exerciseSubmitDetail');
     }
 
     public function correctionList()
@@ -40,7 +43,7 @@ class CorrectionController extends Controller
         (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id);
         $e = (new ExerciseBroker())->getCorrectionPath($id);
         unlink($e->path);
-        Flash::success("Exercice marqué corrigé avec succès. L' élève à bien reçu son argent et ses points.");
+        Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
         return $this->redirect('/management/correction');
     }
 
@@ -60,5 +63,21 @@ class CorrectionController extends Controller
         } else {
             die("Error: File not found.");
         }
+    }
+
+    public function exerciseSubmitDetail($id, $submitId)
+    {
+        $studentExerciseBroker = new StudentExerciseBroker();
+        $studentExercise = $studentExerciseBroker->findById($submitId);
+        $file = fopen($studentExercise->dir_path, "r");
+        $fileContent =  fread($file, filesize($studentExercise->dir_path));
+        fclose($file);
+
+        return $this->render('management/correction/correction_submit_detail', [
+            'exercise' => ExerciseService::get($id),
+            'action' => "/submit/exercise/" . $id,
+            'studentExercise' => $studentExercise,
+            'fileContent' => $fileContent
+        ]);
     }
 }

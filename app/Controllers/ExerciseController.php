@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
+use Models\Brokers\FileBroker;
 use Models\Brokers\StudentBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
@@ -34,11 +35,20 @@ class ExerciseController extends Controller
             $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
             $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
         }
+
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
             'teamPoints' => TeamController::getTeamPoints(),
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
+        ]);
+    }
+
+    public function exerciseSubmit($id)
+    {
+        return $this->render('exercises/exercise_submit', [
+            'exercise' => ExerciseService::get($id),
+            'action' => "/submit/exercise/" . $id
         ]);
     }
 
@@ -51,21 +61,15 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function exerciseSubmit($id)
-    {
-        return $this->render('exercises/exercise_submit', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id
-        ]);
-    }
-
     public function exerciseUpload($id)
     {
         $maxsize = 20971520;
+
         if ($this->isUserTeacher()) {
-            Flash::error("L' enseignant ne peut pas remettre des exercices.");
+            Flash::error("L'enseignant ne peut pas remettre des exercices.");
             return $this->redirect('/exercises/' . $id);
         }
+
         $form = $this->buildForm();
 
         if ((new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da)) {
@@ -84,9 +88,10 @@ class ExerciseController extends Controller
         if ($this->request->getFile("exercise")["size"] >= $maxsize || $this->request->getFile("exercise")["size"] == 0) {
             Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo");
             return $this->redirect('/exercises/' . $id);
-            }
+        }
 
         $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
         if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
             return $this->redirect('/exercises/' . $id);
@@ -97,7 +102,7 @@ class ExerciseController extends Controller
             if ((new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)) {
                 (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $id, $targetFile);
             } else {
-                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $id, $targetFile);
+                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $id, $targetFile, $form->getValue("exerciseName"));
             }
             return $this->redirect('/exercises/' . $id);
         }
