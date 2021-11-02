@@ -252,7 +252,7 @@ header .bell i:hover {
     right: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #505253;
+    background: #367bc4;
     height: 30px;
 }
 
@@ -261,7 +261,7 @@ header .bell i:hover {
     left: 0;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
-    background: #d0463d;
+    background: #d1463d;
     height: 30px;
 }
 
@@ -379,6 +379,20 @@ body {
 #Btn p, #buyBtn p {
     color: var(--dark);
     margin: 0;
+}
+
+.modal-content {
+    border-radius: 0.75rem;
+}
+
+#modalCloseBtn {
+    background-color: white;
+    border: none;
+}
+
+#modalCloseBtn:focus {
+    border: none;
+    outline: none;
 }
 
 .main-container {

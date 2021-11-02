@@ -44,7 +44,7 @@ block body
             .row.d-flex.align-items-center
               a.col(href='/management/exercises/' + exercise.id + '/edit')
                 i.fas.fa-edit.student-icons
-              a.col(href='/management/exercises/' + exercise.id + '/delete')
+              a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal")
                 i.fas.fa-trash.student-icons
     h1.mt-5 Semaines
     hr.separator
@@ -74,6 +74,10 @@ block body
             .row.d-flex.align-items-center
               a.col(href='/management/week/' + week.id + '/activate')
                 i(class=week.is_active ? 'fa-eye-slash' : 'fa-eye').fas.student-icons
-              a.col(href='/management/week/' + week.id + '/delete')
+              a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal")
                 i.fas.fa-trash.student-icons
 
+  +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+    '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal')
+  +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine ?',
+    '/management/week/' + week.id + '/delete', 'weekDeleteModal')

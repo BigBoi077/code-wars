@@ -1,13 +1,15 @@
-mixin confirmationModal(title, message, actionRoute)
-	.modal.fade#confirmationModal(, tabindex="-1", role="dialog", aria-labelledby=id+"Label" aria-hidden="true")
+mixin confirmationModal(title, message, route, modalID)
+	.modal.fade(id=modalID tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true")
 		.modal-dialog
 			.modal-content
 				.modal-header
-					button.close(type="button", data-dismiss="modal")
+					h5(class="modal-title" id="modalLabel")= title
+					button.btn-close#modalCloseBtn(type="button" data-bs-dismiss="modal" aria-label="Close")
 						span(aria-hidden="true") &times;
-						span.sr-only Confirm
-					h4.modal-title(id=id+"Label")= title
+						span.sr-only Close
 				.modal-body
-					block
+					p= message
 				.modal-footer
-					button.btn.btn-default(type="button", data-dismiss="modal") Cancel
+					button(type="button" class="btn btn-secondary" data-bs-dismiss="modal" ) Annuler
+					a(href=route)
+						button(type="button" class="btn btn-danger") Confirmer
