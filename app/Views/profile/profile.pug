@@ -18,6 +18,7 @@ block body
             else
               img.rounded-img.mt-2(src=profileImageUrl)
             h5.my-3 #{studentProfile.username}
+            h6.my-2 #{user.da}
             p.text-muted.mb-1 #{studentProfile.points} pts
             p.text-muted.mb-4 #{format('money', studentProfile.cash)}
       .col-lg-8
@@ -99,7 +100,7 @@ block body
                         | Aller aux missions
                 else
                   each exercise in exercises
-                    +exerciseRow(exercise, teacher)
+                    +exerciseRow(exercise)
 
 
 block script
