@@ -2,6 +2,7 @@
 
 use Models\Brokers\NotificationBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
 use Models\Brokers\ExerciseBroker;
@@ -92,12 +93,14 @@ class ManagementController extends Controller
         $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
         $indProgress = (new StudentBroker())->getProgression($da);
         $items = (new StudentItemBroker())->getAllWithDa($da);
+        $studentExercises = (new StudentExerciseBroker())->getAllWithDa($student->da);
         return $this->render('profile/profile', [
             'isTeacher' => $this->isUserTeacher(),
             'studentProfile' => $student,
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
             'items' => $items,
+            'exercises' => $studentExercises,
             'gravatarUrl' => $imageUrl
         ]);
     }
