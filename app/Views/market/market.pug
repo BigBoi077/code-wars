@@ -29,7 +29,9 @@ block body
 					h3.card-title #{item.name}
 					p.card-text #{item.description}
 					.row.buying-element-row
-						h5 #{item.price} $
+						div.d-flex.align-items-center
+							img.m-1.mb-2(src="/assets/images/credit_symbol.png" width="20px" height="20px")
+							h5 #{item.price}
 						if studentItems !== null
 							- var contains = false;
 							each studentItem in studentItems
