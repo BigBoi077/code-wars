@@ -85,7 +85,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/' . $id);
         }
 
-        if ($this->request->getFile("exercise")["size"] >= $maxsize) {
+        if ($this->request->getFile("exercise")["size"] > $maxsize) {
             Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo.");
             return $this->redirect('/exercises/' . $id);
         }
