@@ -10,6 +10,6 @@ mixin teamMember(member, index)
         .col-1
           i.fas.fa-medal.text-warning
       else
-        .col-6.pr-2
-          h6.text-right.m-0
-            | #{member.cash} $ | #{member.points} pts
+        .col-6.pr-2.d-flex.align-items-center.justify-content-end
+          +star_wars_money(member.cash)
+          +star_wars_points(member.points)
