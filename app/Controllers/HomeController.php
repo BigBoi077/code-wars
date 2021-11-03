@@ -48,12 +48,12 @@ class HomeController extends Controller
     public function seenNotification($id)
     {
         (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
-        return $this->redirect('/profile/notifications');
+        return $this->redirect('/');
     }
 
     public function seenAllNotification()
     {
         (new NotificationBroker())->seenAllNotification($this->getUser()['id']);
-        return $this->redirect('/profile/notifications');
+        return $this->redirect('/');
     }
 }
