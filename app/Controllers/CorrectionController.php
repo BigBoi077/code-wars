@@ -65,19 +65,35 @@ class CorrectionController extends Controller
         }
     }
 
-    public function exerciseSubmitDetail($id, $submitId)
+    public function exerciseSubmitDetail($id, $submitId): Response
     {
         $studentExerciseBroker = new StudentExerciseBroker();
         $studentExercise = $studentExerciseBroker->findById($submitId);
-        $file = fopen($studentExercise->dir_path, "r");
-        $fileContent =  fread($file, filesize($studentExercise->dir_path));
-        fclose($file);
 
-        return $this->render('management/correction/correction_submit_detail', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id,
-            'studentExercise' => $studentExercise,
-            'fileContent' => $fileContent
-        ]);
+        if (file_exists($studentExercise->dir_path)) {
+            $file = fopen($studentExercise->dir_path, "r");
+            if (!$file) {
+                Flash::error("Impossible d'ouvrir le fichier");
+                return $this->redirect('/management/correction');
+            }
+            if (filesize($studentExercise->dir_path) == 0) {
+                Flash::error("Impossible d'ouvrir le fichier");
+                return $this->redirect('/management/correction');
+            }
+
+            $fileContent = fread($file, filesize($studentExercise->dir_path));
+
+            fclose($file);
+
+            return $this->render('management/correction/correction_submit_detail', [
+                'exercise' => ExerciseService::get($id),
+                'action' => "/submit/exercise/" . $id,
+                'studentExercise' => $studentExercise,
+                'fileContent' => $fileContent
+            ]);
+        } else {
+            Flash::error("Impossible d'ouvrir le fichier");
+            return $this->redirect('/management/correction');
+        }
     }
 }

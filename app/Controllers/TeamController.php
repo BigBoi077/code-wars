@@ -53,8 +53,10 @@ class TeamController extends Controller
             $teamProgress[$student->team_name] += $broker->getExerciseDone($student->da);
         }
         $nbExercise = Count((new ExerciseBroker())->getAll());
-        $teamProgress['Sith'] = Floor(($teamProgress['Sith'] / ($nbSith * $nbExercise)) * 100);
-        $teamProgress['Rebel'] = Floor(($teamProgress['Rebel'] / ($nbRebel * $nbExercise)) * 100);
+
+        $teamProgress['Sith'] = ($nbSith == 0) ? 0 : Floor(($teamProgress['Sith'] / ($nbSith * $nbExercise)) * 100);
+        $teamProgress['Rebel'] = ($nbRebel == 0) ? 0 : Floor(($teamProgress['Rebel'] / ($nbRebel * $nbExercise)) * 100);
+
         return $teamProgress;
     }
 
