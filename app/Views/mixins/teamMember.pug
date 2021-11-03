@@ -1,15 +1,15 @@
 mixin teamMember(member, index)
-  .team-member.mx-4.my-3
-    .row.border-bottom
+  .team-member.mx-4.my-2
+    .row.border-bottom.d-flex.justify-content-between.align-items-center.py-2
       .col-6.p-0
-        h6 #{member.username}
+        h6.m-0 #{member.username}
       if index === 0
-        .col-5.pr-0
-          h6.text-right
-            +star_wars_money(member.cash)+star_wars_points(member.points)
+        .col-5.pr-0.d-flex.align-items-center.justify-content-end
+          +star_wars_money(member.cash)
+          +star_wars_points(member.points)
         .col-1
           i.fas.fa-medal.text-warning
       else
         .col-6.pr-2
-          h6.text-right
+          h6.text-right.m-0
             | #{member.cash} $ | #{member.points} pts

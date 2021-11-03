@@ -20,7 +20,7 @@ mixin header()
           a(href="/market") Magasin
         if user.isTeacher
           .dropdown.d-flex.align-items-center
-            button(id="managementDropdown" type="button" data-bs-toggle="dropdown").btn.bg-transparent.dropdown-toggle Gestion
+            button(id="managementDropdown" type="button" data-bs-toggle="dropdown").btn.bg-transparent.dropdown-toggle.gestion-button Gestion
             ul(aria-labelledby="managementDropdown").dropdown-menu.dropdown-menu-end
               li.p-1
                 a(href="/management/correction").dropdown-item Correction

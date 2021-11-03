@@ -22,7 +22,7 @@ block body
         .col-lg-5.col-sm-12.mx-4.mb-3.sith
           h1.rebel-sith-logo.starwars-font Sith
             img(src='assets/images/sith.png').ml-3
-          h6.mb-3 #{teamProgress.Sith} % des missions totales complétées
+          h6.mb-3.text-right #{teamProgress.Sith} % des missions totales complétées
           .card.py-3.box-shadow-sith
             each sith, index in teams.siths
               +teamMember(sith, index)

@@ -202,6 +202,10 @@ header .bell i:hover {
     color: var(--blue);
 }
 
+header .gestion-button {
+    font-size: 1.1rem;
+}
+
 /*ScoreBoard*/
 #scoreBoard {
     position: relative;
@@ -217,7 +221,7 @@ header .bell i:hover {
     text-align: start;
 }
 
-.sith h1, .sith h6 {
+.sith h1 {
     text-align: end;
 }
 
@@ -1007,9 +1011,7 @@ text-align: center;
     color: var(--dark);
 }
 
-
-
-    /* Profile */
+/* Profile */
 
 .rounded-img {
     height: 150px;
