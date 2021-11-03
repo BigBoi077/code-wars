@@ -3,11 +3,13 @@ mixin scoreBoard()
     .d-flex.justify-content-between
       .score-bar
         .score-points
-          h4 #{teamPoints.Rebel} pts
+          h4 #{teamPoints.Rebel}
+            i.fab.fa-ethereum.m-1
         .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
       .score-bar
         .score-points.text-right
-          h4 #{teamPoints.Sith} pts
+          h4 #{teamPoints.Sith}
+            i.fab.fa-ethereum.m-1
         .score-value-right(style="width: " + teamPoints.sithWidth + "%")
     .rebel-sith.text-center.w-100
       img(src='/assets/images/rebelvsith.png')
