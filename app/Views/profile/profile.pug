@@ -19,8 +19,10 @@ block body
               img.rounded-img.mt-2(src=profileImageUrl)
             h5.my-3 #{studentProfile.username}
             h6.my-2 #{user.da}
-            p.text-muted.mb-1 #{studentProfile.points} pts
-            p.text-muted.mb-4 #{format('money', studentProfile.cash)}
+            div.d-flex.justify-content-center
+              +star_wars_money(studentProfile.cash)
+            div.d-flex.justify-content-center
+              +star_wars_points(studentProfile.points)
       .col-lg-8
         .card.mb-4
           include ../mixins/profileInfo
