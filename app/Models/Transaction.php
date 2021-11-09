@@ -64,7 +64,7 @@ class Transaction
             return;
         }
         StudentItemService::create($item_id, $da);
-        (new StudentBroker())->update($student->da, $student->team_id, $student->cash - $item->price); //TODO mettre dans le service ?
+        (new StudentBroker())->update($student->da, $student->team_id, $student->cash - $item->price, $student->points); //TODO mettre dans le service ?
         NotificationService::studentBoughtItem($student, $item); //notification d'achat
         $this->success = true;
     }

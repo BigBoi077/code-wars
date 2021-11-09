@@ -6,7 +6,7 @@ class NotificationService
 {
     public static function newCorrectionAvailable($student, $exerciseName)
     {
-        (new NotificationBroker())->sendNotificationToTeachers($student->firstname . " a remis " . $exerciseName, "Nouvelle correction");
+        (new NotificationBroker())->sendNotificationToTeachers($student->firstname . " " . $student->lastname . " a remis " . $exerciseName, "Nouvelle correction");
     }
 
     public static function studentBoughtItem($student, $item)
