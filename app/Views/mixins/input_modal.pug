@@ -1,0 +1,18 @@
+mixin input_modal(img, title, text, inputName, inputType, modalID, action)
+.modal.fade(id=modalID tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true")
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header.d-flex.align-items-center
+        =img
+        h5.modal-title.pl-2(id="addModalLabel")= title
+        button.close(type="button" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times;
+      form(method="post", action=action)
+        .modal-body
+          .form-group
+            p.text-muted=text
+            input.form-control(name=inputName type=inputType)
+        .modal-footer
+          .form-group.pt-2
+            button.btn.btn-secondary(type="button"  data-dismiss="modal") Annuler
+            button.btn.btn-yellow.ml-2(type="submit") Soumettre
