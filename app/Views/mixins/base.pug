@@ -36,12 +36,3 @@ mixin form(method, action)
       input(type="hidden", name="__method", value=method)
     block
 
-mixin starWarsMoney(money)
-  .star-wars-money
-    img(src="/assets/images/credit_symbol.png")
-    span=format('money', money)
-
-mixin starWarsPoints(points)
-  .star-wars-points
-    i.fab.fa-ethereum
-    span=points
