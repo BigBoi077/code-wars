@@ -23,7 +23,7 @@ class CorrectionController extends Controller
         $this->get('/management/correction', 'correctionList');
         $this->get('/management/correction/correct/{userId}/{id}', 'correctExercise');
         $this->get('/management/correction/download/{id}', 'downloadExercise');
-        $this->get('/exercises/submit/detail/{id}/{$submitId}', 'exerciseSubmitDetail');
+        $this->get('/exercises/submit/detail/{studentName}/{id}/{submitId}', 'exerciseSubmitDetail');
     }
 
     public function correctionList()
@@ -65,8 +65,11 @@ class CorrectionController extends Controller
         }
     }
 
-    public function exerciseSubmitDetail($id, $submitId): Response
+    public function exerciseSubmitDetail($studentName, $id, $submitId): Response
     {
+        $studentName = str_replace("%20", " ", $studentName);
+        $studentArrayName = explode(" ", $studentName);
+
         $studentExerciseBroker = new StudentExerciseBroker();
         $studentExercise = $studentExerciseBroker->findById($submitId);
 
@@ -89,7 +92,9 @@ class CorrectionController extends Controller
                 'exercise' => ExerciseService::get($id),
                 'action' => "/submit/exercise/" . $id,
                 'studentExercise' => $studentExercise,
-                'fileContent' => $fileContent
+                'fileContent' => $fileContent,
+                'studentFirstname' => $studentArrayName[0],
+                'studentLastname' => $studentArrayName[1]
             ]);
         } else {
             Flash::error("Impossible d'ouvrir le fichier");
