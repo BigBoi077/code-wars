@@ -28,8 +28,8 @@ block body
         .row.student-row.box-shadow.mb-4
           .col-3
             p.student-row-element #{item.name}
-          .col-2
-            p.student-row-element #{format('money', item.price)}
+          .col-2.d-flex.justify-content-start.pl-4
+            +star_wars_money(item.price)
           .col-4
             p.student-row-element #{item.description}
           .col.d-flex.justify-content-end

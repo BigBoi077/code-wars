@@ -39,9 +39,9 @@ block body
 					.col-2
 						p.student-row-element #{student.team_name}
 					.col-2
-						p.student-row-element #{format('money', student.cash)}
+						p.student-row-element #{format('decimal', student.cash, 0, 0)}
 					.col-1
-						p.student-row-element #{student.points}
+						p.student-row-element #{format('decimal', student.points, 0, 0)}
 					.col.d-flex.justify-content-end
 						.row.d-flex.align-items-center
 							a.col(href='/management/students/' + student.da + '/edit')
