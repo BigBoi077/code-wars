@@ -1,5 +1,7 @@
 <?php namespace Models\Brokers;
 
+use Models\Services\NotificationService;
+use mysql_xdevapi\Result;
 use stdClass;
 
 class StudentBroker extends Broker
@@ -13,6 +15,12 @@ class StudentBroker extends Broker
                 join codewars.team t on t.id = s.team_id
                 WHERE s.da = ?";
         return $this->selectSingle($sql, [$da]);
+    }
+
+    public function getCash($da): int
+    {
+        $sql = "select s.cash from codewars.student s where s.da = ?";
+        return $this->selectSingle($sql, [$da])->cash;
     }
 
     public function getPoints($da): int
@@ -71,8 +79,11 @@ class StudentBroker extends Broker
 
     public function update($da, $team_id, $cash, $points)
     {
+        $notify = $this->isCashDifferent($da, $cash);
+        $addedCash = $this->getAddedCash($da, $cash);
         $sql = "UPDATE codewars.student SET team_id = ?, cash = ?, points = ? WHERE da = ?";
         $this->query($sql, [$team_id, $cash, $points, $da]);
+        if ($notify) NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
     }
 
     public function hasItem($da): bool
@@ -104,5 +115,28 @@ class StudentBroker extends Broker
         $student->points += $amount;
         $sql = "UPDATE codewars.student SET points = ? WHERE da = ?";
         $this->query($sql, [$student->points, $da]);
+    }
+
+    private function getStudentId($da)
+    {
+        $sql = "SELECT s.da, u.id FROM codewars.student s 
+                    JOIN codewars.user u on s.da = u.da 
+                    WHERE s.da = ?";
+        $result = $this->selectSingle($sql, [ $da ]);
+        return $result->id;
+    }
+
+    private function isCashDifferent($da, $cash): bool
+    {
+        $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
+        $result = $this->selectSingle($sql, [ $da ]);
+        return $result->cash != $cash;
+    }
+
+    private function getAddedCash($da, $cash)
+    {
+        $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
+        $result = $this->selectSingle($sql, [ $da ]);
+        return $cash - $result->cash;
     }
 }
