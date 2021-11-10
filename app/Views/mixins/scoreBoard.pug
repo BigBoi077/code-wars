@@ -3,12 +3,12 @@ mixin scoreBoard()
     .d-flex.justify-content-between
       .score-bar
         .score-points
-          h4 #{teamPoints.Rebel}
+          .d-flex
             i.fab.fa-ethereum.m-1
         .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
       .score-bar
-        .score-points.text-right
-          h4 #{teamPoints.Sith}
+        .score-points
+          .d-flex.justify-content-end.mr-3
             i.fab.fa-ethereum.m-1
         .score-value-right(style="width: " + teamPoints.sithWidth + "%")
     .rebel-sith.text-center.w-100
