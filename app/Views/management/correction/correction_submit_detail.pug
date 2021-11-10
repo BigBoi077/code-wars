@@ -22,7 +22,10 @@ block body
       .d-flex
         .exercise-content.p-4.w-75
           pre.mb-0
-            code.p-4.language-java=fileContent
+            if fileContent == null
+              code.p-4.language-java Le fichier remis ne peut être lu
+            else
+              code.p-4.language-java=fileContent
 
         - var action = "/management/correction/correct/" + studentExercise.student_da + "/" + studentExercise.id
         form.correct-form(action=action method="get").row.side-options.w-25
