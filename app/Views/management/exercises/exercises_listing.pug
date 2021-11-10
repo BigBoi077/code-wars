@@ -34,12 +34,10 @@ block body
             p.student-row-element #{exercise.name}
           .col-lg-2.col-sm-4
             p.student-row-element #{exercise.difficulty}
-          .col-lg-2.col-sm-4
-            p.student-row-element
-              +star_wars_money(exercise.cash_reward)
-          .col-lg-1.col-sm-3
-            p.student-row-element
-              +star_wars_points(exercise.point_reward)
+          .col-lg-2.col-sm-4.d-flex.align-items-center
+            +star_wars_money(exercise.cash_reward)
+          .col-lg-1.col-sm-3.d-flex.align-items-center
+            +star_wars_points(exercise.point_reward)
           .col-lg-2.col-sm-3
             p.student-row-element Semaine #{exercise.number}
           .col.d-flex.justify-content-end

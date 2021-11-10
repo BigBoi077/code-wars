@@ -29,7 +29,8 @@ block body
               .col-6.d-flex.align-items-center
                 h5.mt-2 #{student.username}
             .col-2.d-flex.align-items-center
-              p.m-0 #{student.points} pts
+              p.m-0
+                +star_wars_points(student.points)
             .col-2.d-flex.align-items-center
               p.m-0 #{student.team_name}
           hr.m-0.mx-4
