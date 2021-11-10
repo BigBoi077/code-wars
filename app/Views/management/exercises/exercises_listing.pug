@@ -12,14 +12,14 @@ block body
     hr.separator
     .exercises-list
       .row
-        .col-2.student-header-col
+        .col-3.student-header-col
           h4.student-header-element Nom
         .col-2.student-header-col
           h4.student-header-element Difficulté
         .col-2.student-header-col
-          h4.student-header-element Argent
-        .col-2.student-header-col
-          h4.student-header-element Points
+          h4.student-header-element.ml-0 Argent
+        .col-1.student-header-col
+          h4.student-header-element.ml-0 Points
         .col-2.student-header-col
           h4.student-header-element Semaine
         .col.d-flex.justify-content-end
@@ -32,12 +32,14 @@ block body
         .row.student-row.box-shadow.mb-4
           .col-lg-3.col-sm-4
             p.student-row-element #{exercise.name}
-          .col-lg-1.col-sm-4
+          .col-lg-2.col-sm-4
             p.student-row-element #{exercise.difficulty}
           .col-lg-2.col-sm-4
-            p.student-row-element #{format('decimal', exercise.cash_reward, 0, 0)}
-          .col-lg-2.col-sm-3
-            p.student-row-element #{format('decimal', exercise.point_reward, 0, 0)}
+            p.student-row-element
+              +star_wars_money(exercise.cash_reward)
+          .col-lg-1.col-sm-3
+            p.student-row-element
+              +star_wars_points(exercise.point_reward)
           .col-lg-2.col-sm-3
             p.student-row-element Semaine #{exercise.number}
           .col.d-flex.justify-content-end

@@ -1033,5 +1033,12 @@ text-align: center;
     background-size:cover;
 }
 
+.correction-listing-header h6 {
+    text-align: start !important;
+}
+
+.mission-point-reward i {
+    color: var(--dark);
+}
 
 /* endregion */

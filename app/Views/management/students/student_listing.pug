@@ -38,10 +38,12 @@ block body
 								| #{student.firstname} #{student.lastname}
 					.col-2
 						p.student-row-element #{student.team_name}
-					.col-2
-						p.student-row-element #{format('decimal', student.cash, 0, 0)}
+					.col-2.ml-4
+						p.student-row-element
+						 +star_wars_money(student.cash)
 					.col-1
-						p.student-row-element #{format('decimal', student.points, 0, 0)}
+						p.student-row-element
+							+star_wars_points(student.points)
 					.col.d-flex.justify-content-end
 						.row.d-flex.align-items-center
 							a.col(href='/management/students/' + student.da + '/edit')

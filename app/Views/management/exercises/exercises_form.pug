@@ -16,13 +16,14 @@ block body
           label(for="exercisename") Nom de l'exercice
           input.form-control(id='exercisename', name='exercisename', type='text' value=(exercise !== null) ? exercise.name: val('exercisename'))
       .form-row
-        .form-group.col-6.mb-1
+        .form-group.col-12.mb-1
           label(for="description") Description
-          textArea.form-control(id='description', name='description')
+          textArea.form-control(id='description', name='description' rows='10')
            | #{(exercise !== null) ? exercise.description : val('description')}
-        .form-group.col-6.mb-1
+      .form-row
+        .form-group.col-12.mb-1
           label(for="exemple") Exemple d'exécution (optionnel)
-          textArea.form-control(id='exemple', name='exemple')
+          textArea.form-control(id='exemple', name='exemple' rows='5')
             | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
       .form-row
         .form-group.col-3
