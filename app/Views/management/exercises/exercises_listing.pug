@@ -35,9 +35,9 @@ block body
           .col-lg-1.col-sm-4
             p.student-row-element #{exercise.difficulty}
           .col-lg-2.col-sm-4
-            p.student-row-element #{format('money', exercise.cash_reward)}
+            p.student-row-element #{format('decimal', exercise.cash_reward, 0, 0)}
           .col-lg-2.col-sm-3
-            p.student-row-element #{exercise.point_reward}
+            p.student-row-element #{format('decimal', exercise.point_reward, 0, 0)}
           .col-lg-2.col-sm-3
             p.student-row-element Semaine #{exercise.number}
           .col.d-flex.justify-content-end

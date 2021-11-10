@@ -40,10 +40,10 @@ block body
                               .mission-results
                                 .mission-cash-reward
                                   img(src="/assets/images/credit_symbol.png")
-                                  span #{exercise.cash_reward}
+                                  span #{format('decimal', exercise.cash_reward, 0, 0)}
                                 .mission-point-reward
                                   i.fab.fa-ethereum
-                                  span #{exercise.point_reward}
+                                  span #{format('decimal', exercise.point_reward, 0, 0)}
                               .mission-detail
                                 .detail-link
                                   a(href="/exercises/" + exercise.id)

@@ -31,7 +31,7 @@ block body
 					.row.buying-element-row
 						div.d-flex.align-items-center
 							img.m-1.mb-2(src="/assets/images/credit_symbol.png" width="20px" height="20px")
-							h5 #{item.price}
+							h5 #{format('decimal', item.price, 0, 0)}
 						if studentItems !== null
 							- var contains = false;
 							each studentItem in studentItems
