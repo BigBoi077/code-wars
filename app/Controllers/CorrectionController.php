@@ -67,8 +67,7 @@ class CorrectionController extends Controller
 
     public function exerciseSubmitDetail($studentName, $id, $submitId): Response
     {
-        $studentName = str_replace("%20", " ", $studentName);
-        $studentArrayName = explode(" ", $studentName);
+        $studentArrayName = explode(" ", rawurldecode($studentName));
 
         $studentExerciseBroker = new StudentExerciseBroker();
         $studentExercise = $studentExerciseBroker->findById($submitId);
@@ -85,6 +84,11 @@ class CorrectionController extends Controller
             }
 
             $fileContent = fread($file, filesize($studentExercise->dir_path));
+            $fileExtention = pathinfo($studentExercise->dir_path, PATHINFO_EXTENSION);
+
+            if ($fileExtention != "java") {
+                $fileContent = null;
+            }
 
             fclose($file);
 
