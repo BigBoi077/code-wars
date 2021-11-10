@@ -20,10 +20,10 @@ block body
         span Semaine #{exercise.week_id}
       .mission-cash-reward
         img(src="/assets/images/credit_symbol.png")
-        span #{exercise.cash_reward}
+        span #{format('decimal', exercise.cash_reward, 0, 0)}
       .mission-point-reward
         i.fab.fa-ethereum
-        span #{exercise.point_reward}
+        span #{format('decimal', exercise.point_reward, 0, 0)}
       .mission-state
         if !submitted
           i.far.fa-times-circle.not-submitted

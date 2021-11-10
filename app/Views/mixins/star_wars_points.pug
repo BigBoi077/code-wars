@@ -1,4 +1,4 @@
 mixin star_wars_points(points)
   .mission-point-reward.d-flex.align-items-center
     i.fab.fa-ethereum.m-1
-    span.m-1 #{points}
+    span.m-1 #{format('decimal', points, 0, 0)}
