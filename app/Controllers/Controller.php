@@ -35,9 +35,7 @@ abstract class Controller extends SecurityController
         $imageUrl= "/assets/images/profil_pic_default.png";
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
-            if ($gravatar->isAvailable()) {
-                $imageUrl = $gravatar->getUrl();
-            }
+            $imageUrl = $gravatar->getUrl();
         }
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),

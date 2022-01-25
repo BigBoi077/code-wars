@@ -3,14 +3,9 @@
 use Models\Brokers\NotificationBroker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
-use Models\Brokers\StudentExerciseBroker;
-use Models\Brokers\StudentItemBroker;
-use Models\Brokers\UserBroker;
-use Models\Services\PersonService;
 use Models\Services\ApiService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
-use Zephyrus\Network\HttpRequester;
 
 class HomeController extends Controller
 {
@@ -18,8 +13,8 @@ class HomeController extends Controller
     {
         $this->get('/', 'index');
         $this->get('/home', 'home');
-        $this->get('/notification/seen/{id}', 'seenNotification');
-        $this->get('/notification/seenAll', 'seenAllNotification');
+        $this->get('/notification/seen/{id}', 'seeNotification');
+        $this->get('/notification/seeAll', 'seeAllNotifications');
     }
 
     public function index()
@@ -45,15 +40,16 @@ class HomeController extends Controller
         ]);
     }
 
-    public function seenNotification($id)
+    public function seeNotification($id)
     {
         (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
         return $this->redirect('/');
     }
 
-    public function seenAllNotification()
+    public function seeAllNotifications()
     {
-        (new NotificationBroker())->seenAllNotification($this->getUser()['id']);
+        (new NotificationBroker())->seeAllNotification($this->getUser()['id']);
+        Flash::success("Action effectuée");
         return $this->redirect('/');
     }
 }

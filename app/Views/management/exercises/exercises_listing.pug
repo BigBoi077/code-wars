@@ -42,6 +42,8 @@ block body
             p.student-row-element Semaine #{exercise.number}
           .col.d-flex.justify-content-end
             .row.d-flex.align-items-center
+              a.col(href='/management/exercises/' + exercise.id + '/tips')
+                i.fas.fa-lightbulb.student-icons
               a.col(href='/management/exercises/' + exercise.id + '/edit')
                 i.fas.fa-edit.student-icons
               a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal")
@@ -55,7 +57,7 @@ block body
         .col-2.student-header-col
           h4.student-header-element Numéro
         .col-2.student-header-col
-          h4.student-header-element Activé
+          h4.student-header-element Activée
         .col.d-flex.justify-content-end
           a(href='/management/week/create')
             button.btn.btn-yellow#Btn

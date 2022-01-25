@@ -10,7 +10,7 @@ class NotificationBroker extends Broker
 
     public function getStudentAllNotifications($userId): array
     {
-        $sql = "select * from codewars.notification n where n.user_id = ?";
+        $sql = "select * from codewars.notification n where n.user_id = ? and n.is_seen = false";
         return $this->select($sql, [$userId]);
     }
 
@@ -20,9 +20,9 @@ class NotificationBroker extends Broker
         $this->query($sql, [$notificationId, $userId]);
     }
 
-    public function seenAllNotification($userId)
+    public function seeAllNotification($userId)
     {
-        $sql = "update codewars.notification set is_seen = true where user_id = ?";
+        $sql = "update codewars.notification n set is_seen = true where n.user_id = ? and n.is_seen = false";
         $this->query($sql, [$userId]);
     }
 

@@ -19,6 +19,10 @@ html, body {
     background-color: var(--background);
 }
 
+.letter-space-1 {
+    letter-spacing: 0.1em;
+}
+
 .row {
     margin-left: 0;
     margin-right: 0;
@@ -1039,6 +1043,23 @@ text-align: center;
 
 .mission-point-reward i {
     color: #212529;
+}
+
+.pretty.p-switch .state:before {
+    height: calc(1em + 4px);
+    width: 2.2em;
+}
+
+.pretty .state label:after, .pretty .state label:before {
+    margin: 0 2px;
+}
+
+.pretty.p-switch input:checked~.state:before {
+    border-color: var(--accent) !important;
+}
+
+.pretty.p-default:not(.p-fill) input:checked~.state.p-warning-o label:after {
+    background-color: var(--accent) !important;
 }
 
 /* endregion */
