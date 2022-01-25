@@ -19,7 +19,7 @@ abstract class Controller extends SecurityController
 {
 
     private const LOGIN_ROUTE = '/login';
-    public const SESSION_IS_LOGGED = 'is_logged'; //TODO mettre dans un fichier de constantes
+    public const SESSION_IS_LOGGED = 'is_logged';
 
     /**
      * Override example of the render method to automatically include arguments to be sent to any views for any

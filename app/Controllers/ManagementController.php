@@ -86,9 +86,7 @@ class ManagementController extends Controller
         $imageUrl= "/assets/images/profil_pic_default.png";
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
-            if ($gravatar->isAvailable()) {
-                $imageUrl = $gravatar->getUrl();
-            }
+            $imageUrl = $gravatar->getUrl();
         }
         $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
         $indProgress = (new StudentBroker())->getProgression($da);

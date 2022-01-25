@@ -1,9 +1,11 @@
 mixin exerciseRow(exercise)
-    .row.mb-2
-        .col-6
-            h6 #{exercise.name}
-        .col-6.student-exercise-col
-            if exercise.corrected
-                i.far.fa-check-circle.submitted.student-exercise-element
-            else
-                i.far.fa-times-circle.not-submitted.student-exercise-element
+  .row.mb-2
+    .col-4
+      h6 #{exercise.name}
+    .col-3
+      h6=exercise.submit_date
+    .col-4.student-exercise-col
+      if exercise.corrected
+        i.far.fa-check-circle.submitted.student-exercise-element
+      else
+        i.far.fa-times-circle.not-submitted.student-exercise-element

@@ -35,14 +35,16 @@ block body
             +profileInfo("Équipe", studentProfile.team_name)
             hr
             +profileInfo("E-mail", studentProfile.email)
-            hr
             if !isTeacher
+              hr
               +profileInfo("Mot de passe", "********")
             if !isTeacher
               .row.justify-content-md-end.mx-3
                 a#editProfileBtn.btn.btn-yellow.text-dark(href="/profile/edit")
                   | Modifier le compte
                   i.fas.fa-edit
+    .row
+      .col
         .row
           .card.mb-4.w-100
             .card-body
@@ -59,7 +61,7 @@ block body
           .card.mb-4.w-100
             .card-body
               if isTeacher
-                h2.text-center.mb-3 Achats
+                h2.text-center.mb-3 Achats de l'élève
               else
                 h2.text-center.mb-3 Mes achats
               include ../mixins/myItem
@@ -67,22 +69,23 @@ block body
                 .row
                   .col-4
                     h5.mb-0 Nom de l'item
-                  .col-6
+                  .col-5
                     h5.mb-0 Description
                   .col-2
                     h5.mb-0 Date
                 hr.mt-1
                 if items == null
                   if isTeacher
-                    h2.text-center.mb-3 Aucun achat
+                    h6.text-center.mb-3 Aucun achat
                   else
                     h6.text-center Vous n'avez encore fait aucun achat
-                    .text-center.mt-3
-                      a.btn.btn-yellow.text-dark(href="/market")
-                        | Aller au magasin
                 else
                   each item in items
                     +itemRow(item)
+                if !isTeacher
+                  .text-center.mt-3
+                    a.btn.btn-yellow.text-dark(href="/market")
+                      | Aller au magasin
         .row
           .card.mb-4.w-100
             .card-body
@@ -90,19 +93,25 @@ block body
               include ../mixins/myExercise
               .m-4
                 .row
-                  .col-6.studentProfile-header-col
+                  .col-4
                     h5.mb-0 Nom de la mission
-                  .col-6.student-header-col
-                    h5.mb-0.text-center État
+                  .col-3
+                    h5.mb-0 Date de remise
+                  .col-4
+                    h5.mb-0.text-center Corrigé
                 hr.mt-1
                 if exercises == null
-                  h6.text-center Vous n'avez encore fait de missions
-                    .text-center.mt-3
-                      a.btn.btn-yellow.text-dark(href="/exercises")
-                        | Aller aux missions
+                  if isTeacher
+                    h6.text-center.mb-3 Aucune mission complétée
+                  else
+                    h6.text-center Vous n'avez complété aucune mission
                 else
                   each exercise in exercises
                     +exerciseRow(exercise)
+                if !isTeacher
+                  .text-center.mt-3
+                    a.btn.btn-yellow.text-dark(href="/exercises")
+                      | Aller aux missions
 
 
 block script

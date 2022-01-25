@@ -15,6 +15,14 @@
     --blue: #367bc4;
 }
 
+.selected {
+    border-bottom: 2.5px var(--accent) solid;
+}
+
+.selected:hover {
+    text-decoration: none !important;
+}
+
 html, body {
     background-color: var(--background);
 }
