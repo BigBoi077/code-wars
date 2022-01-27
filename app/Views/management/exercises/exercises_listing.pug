@@ -9,7 +9,7 @@ block header
 block body
   .main-container
     +flash
-    h1 Exercices
+    h1 Missions
     hr.separator
     .exercises-list
       .row
@@ -49,38 +49,6 @@ block body
                 i.fas.fa-edit.student-icons
               a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal")
                 i.fas.fa-trash.student-icons
-    h1.mt-5 Semaines
-    hr.separator
-    .weeks
-      .row
-        .col-3.student-header-col
-          h4.student-header-element Date de début
-        .col-2.student-header-col
-          h4.student-header-element Numéro
-        .col-2.student-header-col
-          h4.student-header-element Activée
-        .col.d-flex.justify-content-end
-          a(href='/management/week/create')
-            button.btn.btn-yellow#Btn
-              p
-                i.fas.fa-plus-square
-                | Nouvelle semaine
-      each week in weeks
-        .row.student-row.box-shadow.mb-4
-          .col-3
-            p.student-row-element #{format('date', week.start_date)}
-          .col-2
-            p.student-row-element Semaine #{week.number}
-          .col-2
-            p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
-          .col.d-flex.justify-content-end
-            .row.d-flex.align-items-center
-              a.col(href='/management/week/' + week.id + '/activate')
-                i(class=week.is_active ? 'fa-eye-slash' : 'fa-eye').fas.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal")
-                i.fas.fa-trash.student-icons
 
   +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
     '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal')
-  +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine ?',
-    '/management/week/' + week.id + '/delete', 'weekDeleteModal')
