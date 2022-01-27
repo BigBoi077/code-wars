@@ -52,10 +52,11 @@ class ManagementController extends Controller
         $this->post('/management/items/store', 'storeItem');
         $this->post('/management/items/{id}/update', 'updateItem');
 
-        $this->get('/management/week/{id}/activate', 'activateWeek');
-        $this->get('/management/week/create', 'createWeek');
-        $this->get('/management/week/{id}/delete', 'deleteWeek');
-        $this->post('/management/week/store', 'storeWeek');
+        $this->get('/management/weeks', "weeksListing");
+        $this->get('/management/weeks/{id}/activate', 'activateWeek');
+        $this->get('/management/weeks/create', 'createWeek');
+        $this->get('/management/weeks/{id}/delete', 'deleteWeek');
+        $this->post('/management/weeks/store', 'storeWeek');
 	}
 
 	public function management(): Response
@@ -160,10 +161,8 @@ class ManagementController extends Controller
     public function listExercises(): Response
     {
         $exercises = (new ExerciseBroker())->getAll();
-        $weeks = (new WeekBroker())->getAll();
         return $this->render('management/exercises/exercises_listing', [
             'exercises' => $exercises,
-            'weeks' => $weeks,
             'student' => null
         ]);
     }
@@ -288,10 +287,18 @@ class ManagementController extends Controller
         return $this->redirect('/management/items/' . $id . '/edit');
     }
 
+    public function weeksListing(): Response
+    {
+        return $this->render('management/exercises/week_listing', [
+            'weeks' => (new WeekBroker())->getAll(),
+            'student' => null
+        ]);
+    }
+
     public function activateWeek($id)
     {
         (new WeekBroker())->activate($id);
-        return $this->redirect('/management/exercises');
+        return $this->redirect('/management/weeks');
     }
 
     public function deleteWeek($id)
@@ -301,14 +308,14 @@ class ManagementController extends Controller
         } else {
             Flash::error("Cette semaine ne peut pas être supprimée, car elle appartient à des exercises.");
         }
-        return $this->redirect('/management/exercises');
+        return $this->redirect('/management/weeks');
     }
 
     public function createWeek()
     {
         return $this->render('management/exercises/week_add', [
             'title' => 'Créer une semaine',
-            'action' => '/management/week/store'
+            'action' => '/management/weeks/store'
         ]);
     }
 
@@ -320,11 +327,11 @@ class ManagementController extends Controller
         $form->validate("startDate", Rule::date("La date doit être valide."));
         if (!$form->verify()) {
             Flash::error($form->getErrorMessages());
-            return $this->redirect('/management/week/create');
+            return $this->redirect('/management/weeks/create');
         }
         (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
         Flash::success("Semaine ajoutée avec succès!");
-        return $this->redirect('/management/exercises');
+        return $this->redirect('/management/weeks');
     }
 
 }
