@@ -3,7 +3,6 @@
 use Models\Brokers\TokenBroker;
 use Models\Logger;
 use Zephyrus\Application\Flash;
-use Zephyrus\Network\Response;
 
 class AuthenticationController extends Controller
 {
@@ -51,6 +50,4 @@ class AuthenticationController extends Controller
         setcookie(REMEMBER_ME, '', 1, '/');
         unset($_COOKIE[REMEMBER_ME]);
     }
-
-
 }

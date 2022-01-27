@@ -17,7 +17,6 @@ use Zephyrus\Security\CrossOriginResourcePolicy;
  * have (CSRF, security headers and authorization engine).
  *
  * Class SecurityController
- * @package Controllers
  */
 abstract class SecurityController extends ZephyrusBaseController
 {

@@ -1,6 +1,5 @@
 <?php namespace Models\Services;
 
-use Models\Brokers\Broker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\UserBroker;
 use Models\SessionHelper;
@@ -13,7 +12,7 @@ class PersonService
     private Form $form;
     private $errorMessages;
 
-    public static function update($da,Form $form): PersonService
+    public static function update($da, Form $form): PersonService
     {
         $instance = new self();
         $instance->form = $form;

@@ -9,7 +9,6 @@ use Zephyrus\Database\DatabaseBroker;
  * this class that every other brokers shall inherit.
  *
  * Class Broker
- * @package Models\Brokers
  */
 abstract class Broker extends DatabaseBroker
 {

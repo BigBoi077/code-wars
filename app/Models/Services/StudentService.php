@@ -24,7 +24,6 @@ class StudentService
         return $instance;
     }
 
-
     public static function update($da, Form $form): StudentService
     {
         $instance = new self();

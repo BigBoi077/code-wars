@@ -21,7 +21,7 @@ class NotificationService
 
     public static function newExerciseAvailable($exerciseName, $cash, $points, $id)
     {
-        (new NotificationBroker())->sendNotificationToStudents("Une nouvelle mission est disponible : " . $exerciseName . ". Vous recevrez " . $cash . "$ et " . $points . " pts en la complétant.","Nouvelle mission disponible");
+        (new NotificationBroker())->sendNotificationToStudents("Une nouvelle mission est disponible : " . $exerciseName . ". Vous recevrez " . $cash . "$ et " . $points . " pts en la complétant.", "Nouvelle mission disponible");
     }
 
     public static function newBalance($userId, $add, $newBalance)

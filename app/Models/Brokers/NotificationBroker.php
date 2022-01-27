@@ -26,7 +26,8 @@ class NotificationBroker extends Broker
         $this->query($sql, [$userId]);
     }
 
-    public function cleanseNotifications() {
+    public function cleanseNotifications()
+    {
         $sql = "delete from codewars.notification n where n.date < CURRENT_DATE - 30 and n.is_seen = true";
     }
 
