@@ -4,7 +4,6 @@ block title
   title Étudiants - Code Wars
 
 block header
-  include ../../mixins/header
   +header()
 block body
   +flash
@@ -28,17 +27,17 @@ block body
         .form-group.col-12
           label(for="team_id") Équipe
           select.form-control(id='team_id', name='team_id' required)
-              each team in teams
-                if editStudent !== null
-                  if editStudent.team_id === team.id
-                    option(value=team.id, selected)
-                      | #{team.name}
-                  else
-                    option(value=team.id)
-                      | #{team.name}
+            each team in teams
+              if editStudent !== null
+                if editStudent.team_id === team.id
+                  option(value=team.id, selected)
+                    | #{team.name}
                 else
                   option(value=team.id)
                     | #{team.name}
+              else
+                option(value=team.id)
+                  | #{team.name}
       .form-row
         .form-group.col-6
           label(for="cash") Argent (Optionnel)

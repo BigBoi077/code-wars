@@ -939,7 +939,11 @@ text-align: center;
     justify-content: center;
     align-items: center;
     height: 48px;
-    margin: 34px auto auto;
+}
+
+.mission-upload.disabled {
+    background-color: var(--grey);
+    opacity: 50%;
 }
 
 .single-mission-detail .mission-submit label:hover, .single-mission-detail .mission-upload label:hover,
