@@ -15,6 +15,15 @@
     --blue: #367bc4;
 }
 
+.no-decoration {
+    text-decoration: none;
+    list-style: none;
+}
+
+.text-dark {
+    color: var(--dark);
+}
+
 .selected {
     border-bottom: 2.5px var(--accent) solid;
 }
@@ -1067,6 +1076,19 @@ text-align: center;
 
 .pretty.p-default:not(.p-fill) input:checked~.state.p-warning-o label:after {
     background-color: var(--accent) !important;
+}
+
+/* Footer */
+
+footer {
+    width: 100vw;
+    background-color: var(--accent);
+    margin-top: 86px;
+    padding: 42px 15% 22px;
+}
+
+footer h1 {
+    font-size: 52px;
 }
 
 /* endregion */
