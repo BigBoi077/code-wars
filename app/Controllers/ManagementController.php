@@ -1,12 +1,10 @@
 <?php namespace Controllers;
 
-use Models\Brokers\NotificationBroker;
+use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
-use Models\Brokers\ExerciseBroker;
-use Models\Brokers\TipBroker;
 use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use Models\Services\ItemService;
@@ -27,10 +25,10 @@ class ManagementController extends Controller
     }
 
     public function initializeRoutes()
-	{
-	    $this->get('/management', 'management');
+    {
+        $this->get('/management', 'management');
 
-		$this->get('/management/students', 'listStudents');
+        $this->get('/management/students', 'listStudents');
         $this->get('/management/students/create', 'createStudent');
         $this->get('/management/students/{da}/edit', 'editStudent');
         $this->get('/management/students/{da}/delete', 'deleteStudent');
@@ -57,19 +55,19 @@ class ManagementController extends Controller
         $this->get('/management/weeks/create', 'createWeek');
         $this->get('/management/weeks/{id}/delete', 'deleteWeek');
         $this->post('/management/weeks/store', 'storeWeek');
-	}
+    }
 
-	public function management(): Response
+    public function management(): Response
     {
         return $this->render('management/exercises');
     }
 
-	public function listStudents(): Response
-	{
-		return $this->render('management/students/student_listing', [
+    public function listStudents(): Response
+    {
+        return $this->render('management/students/student_listing', [
             'students' => StudentService::getAll(),
         ]);
-	}
+    }
 
     public function createStudent()
     {
@@ -84,7 +82,7 @@ class ManagementController extends Controller
     public function viewStudent($da)
     {
         $student = StudentService::get($da);
-        $imageUrl= "/assets/images/profil_pic_default.png";
+        $imageUrl = "/assets/images/profil_pic_default.png";
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
             $imageUrl = $gravatar->getUrl();
@@ -196,7 +194,6 @@ class ManagementController extends Controller
         }
         Flash::error($exercise->getErrorMessages());
         return $this->redirect('/management/exercises/' . $id . '/update');
-
     }
 
     public function storeExercise()
@@ -333,5 +330,4 @@ class ManagementController extends Controller
         Flash::success("Semaine ajoutée avec succès!");
         return $this->redirect('/management/weeks');
     }
-
 }

@@ -1,12 +1,9 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
-use Models\Brokers\FileBroker;
 use Models\Brokers\StudentBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
-use function Composer\Autoload\includeFile;
-use function PHPUnit\Framework\isEmpty;
 
 class ExerciseController extends Controller
 {
@@ -94,9 +91,9 @@ class ExerciseController extends Controller
             Flash::error("La taille des fichiers ne peut pas être de 0 octet.");
         }
 
-        $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
+        if ($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java") {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
             return $this->redirect('/exercises/' . $id);
         }

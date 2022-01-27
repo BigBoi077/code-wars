@@ -7,8 +7,7 @@ use stdClass;
 
 class ExerciseBroker extends Broker
 {
-
-    public function findByID($id) : ?stdClass
+    public function findByID($id): ?stdClass
     {
         $sql = "SELECT e.id, week_id, name, description, cash_reward, difficulty, execution_exemple, point_reward
                 FROM codewars.exercise e join codewars.week w on w.id = e.week_id
@@ -31,7 +30,7 @@ class ExerciseBroker extends Broker
         return $this->select($sql, [$weekId]);
     }
 
-    public function insert($name,$difficulty,$description,$exemple, $cash, $point, $weekId): int
+    public function insert($name, $difficulty, $description, $exemple, $cash, $point, $weekId): int
     {
         $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?,?,?,?, ?) RETURNING id";
 
@@ -79,10 +78,10 @@ class ExerciseBroker extends Broker
         return $this->query($sql, [$id]);
     }
 
-    public function update($id,$name,$difficulty,$description,$exemple,$cash,$point, $weekId)
+    public function update($id, $name, $difficulty, $description, $exemple, $cash, $point, $weekId)
     {
         $sql = "UPDATE codewars.exercise SET name = ?, difficulty = ?, description = ?, execution_exemple = ?, cash_reward = ?, point_reward = ?, week_id = ? WHERE id = ?";
-        $this->query($sql, [$name,$difficulty,$description,$exemple,$cash,$point, $weekId, $id]);
+        $this->query($sql, [$name, $difficulty, $description, $exemple, $cash, $point, $weekId, $id]);
     }
 
     public function isSubmitted($id, $da): bool
@@ -108,8 +107,4 @@ class ExerciseBroker extends Broker
         $sql = "select dir_path as path, e.name as name from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id where se.id = ?";
         return $this->selectSingle($sql, [$id]);
     }
-
-
 }
-
-

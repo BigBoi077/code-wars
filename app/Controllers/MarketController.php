@@ -1,36 +1,33 @@
 <?php
 
-
 namespace Controllers;
 
-
-use Models\Brokers\StudentBroker;
 use Models\Services\ItemService;
 use Models\Services\StudentItemService;
-use Models\Services\StudentService;
 use Models\Transaction;
 use Zephyrus\Application\Flash;
 
 class MarketController extends Controller
 {
-	public function initializeRoutes()
-	{
-		$this->get('/market', 'market');
+    public function initializeRoutes()
+    {
+        $this->get('/market', 'market');
 
         $this->get('/market/buy/{id}', 'buy');
-	}
+    }
 
-	public function market() {
+    public function market()
+    {
         $studentItems = null;
-	    if (!$this->isUserTeacher()) {
+        if (!$this->isUserTeacher()) {
             $studentItems = StudentItemService::getAllByDa($this->getUser()['da']);
         }
-		return $this->render('market/market', [
-			'items' => ItemService::getAll(),
+        return $this->render('market/market', [
+            'items' => ItemService::getAll(),
             'teamPoints' => TeamController::getTeamPoints(),
             'studentItems' => $studentItems
-		]);
-	}
+        ]);
+    }
 
     public function buy($id)
     {
@@ -42,6 +39,4 @@ class MarketController extends Controller
         }
         return $this->redirect('/market');
     }
-
-
 }

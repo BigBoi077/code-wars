@@ -2,9 +2,6 @@
 
 namespace Models\Brokers;
 
-
-use stdClass;
-
 class StudentItemBroker extends Broker
 {
     public function deleteWithItemId($itemId)
@@ -16,7 +13,7 @@ class StudentItemBroker extends Broker
     public function deleteAllStudentItem($da)
     {
         $sql = "DELETE FROM codewars.studentitem WHERE student_da = ?";
-        $this->query($sql, [ $da ]);
+        $this->query($sql, [$da]);
     }
 
     public function getAllWithDa($da)

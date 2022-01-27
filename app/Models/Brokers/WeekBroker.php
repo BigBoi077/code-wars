@@ -6,7 +6,7 @@ use stdClass;
 
 class WeekBroker extends Broker
 {
-    public function findByID($id) : ?stdClass
+    public function findByID($id): ?stdClass
     {
         $sql = "SELECT w.id, w.start_date, w.is_active
                 FROM codewars.week w

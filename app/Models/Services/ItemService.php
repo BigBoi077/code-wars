@@ -1,6 +1,5 @@
 <?php namespace Models\Services;
 
-
 use Models\Brokers\ItemBroker;
 use Models\Brokers\StudentItemBroker;
 use stdClass;
@@ -9,7 +8,6 @@ use Zephyrus\Application\Rule;
 
 class ItemService
 {
-
     private $success = false;
     private Form $form;
     private $errorMessages;
@@ -100,6 +98,4 @@ class ItemService
         (new ItemBroker())->update($id, $name, $price, $description);
         $this->success = true;
     }
-
-
 }

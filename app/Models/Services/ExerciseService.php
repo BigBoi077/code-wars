@@ -2,10 +2,8 @@
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\TipBroker;
-use Models\Brokers\WeekBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
-use function PHPUnit\Framework\isEmpty;
 
 class ExerciseService
 {
@@ -22,7 +20,7 @@ class ExerciseService
     {
         $instance = new self();
         $instance->form = $form;
-        if ($instance->areFieldsValid()){
+        if ($instance->areFieldsValid()) {
             $instance->insertToDatabase();
         }
         return $instance;
@@ -42,7 +40,6 @@ class ExerciseService
     {
         (new TipBroker())->delete($id);
         (new ExerciseBroker())->delete($id);
-
     }
 
     public static function exists($id): bool
@@ -98,7 +95,7 @@ class ExerciseService
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week");
-        $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple, $cash, $point, $weekId);
+        $exerciseId = (new ExerciseBroker())->insert($exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
         if ($tips != null) {
             (new TipBroker())->insert($exerciseId, $tips);
         }
@@ -117,8 +114,6 @@ class ExerciseService
         $weekId = $this->form->getValue("week");
         (new ExerciseBroker())->update($id, $exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
 
-
         $this->succes = true;
     }
 }
-

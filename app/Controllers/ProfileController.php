@@ -5,13 +5,11 @@ use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
-use Models\Services\ExerciseService;
 use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
 
 class ProfileController extends Controller
 {
-
     public function initializeRoutes()
     {
         $this->get('/profile', 'profile');

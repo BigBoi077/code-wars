@@ -59,9 +59,9 @@ class CorrectionController extends Controller
             header("Content-Length:".filesize($e->path));
             header("Content-Disposition: attachment; filename=" . substr($e->path, 40));
             readfile($e->path);
-            die();
+            exit();
         } else {
-            die("Error: File not found.");
+            exit("Error: File not found.");
         }
     }
 

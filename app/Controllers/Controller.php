@@ -13,11 +13,9 @@ use Zephyrus\Utilities\Gravatar;
  * all views should have. You can have as much middleware as you want (through extends).
  *
  * Class Controller
- * @package Controllers
  */
 abstract class Controller extends SecurityController
 {
-
     private const LOGIN_ROUTE = '/login';
     public const SESSION_IS_LOGGED = 'is_logged';
 
@@ -32,7 +30,7 @@ abstract class Controller extends SecurityController
     public function render($page, $args = []): Response
     {
         $student = $this->getActiveStudent();
-        $imageUrl= "/assets/images/profil_pic_default.png";
+        $imageUrl = "/assets/images/profil_pic_default.png";
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
             $imageUrl = $gravatar->getUrl();

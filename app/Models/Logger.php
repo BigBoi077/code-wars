@@ -1,16 +1,12 @@
 <?php namespace Models;
 
-use Controllers\Controller;
-use Models\Brokers\Broker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\TokenBroker;
 use Models\Brokers\UserBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
-use Zephyrus\Application\Session;
 use Zephyrus\Network\Cookie;
 use Zephyrus\Security\Cryptography;
-
 
 class Logger
 {
@@ -20,7 +16,6 @@ class Logger
     private $user;
     private $success = false;
     private $errorMessages;
-
 
     public function loginWithForm(Form $form)
     {
@@ -33,7 +28,7 @@ class Logger
         }
     }
 
-    private function tryCredentials($form) : bool
+    private function tryCredentials($form): bool
     {
         $userBroker = new UserBroker();
         $this->user = $userBroker->findByDa($form->getValue(self::INPUT_NAME_DA));
@@ -49,7 +44,7 @@ class Logger
         return false;
     }
 
-    public function hasSucceeded() : bool
+    public function hasSucceeded(): bool
     {
         return $this->success;
     }
@@ -80,7 +75,6 @@ class Logger
         $tokenBroker->insert($this->user->id, $tokenValue);
     }
 
-
     public function automaticLogin(): bool
     {
         $tokenBroker = new TokenBroker();
@@ -103,5 +97,4 @@ class Logger
         setcookie(REMEMBER_ME, '', 1, '/');
         unset($_COOKIE[REMEMBER_ME]);
     }
-
 }

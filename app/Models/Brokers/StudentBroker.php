@@ -1,13 +1,11 @@
 <?php namespace Models\Brokers;
 
 use Models\Services\NotificationService;
-use mysql_xdevapi\Result;
 use stdClass;
 
 class StudentBroker extends Broker
 {
-
-    public function findByDa($da) : ?stdClass
+    public function findByDa($da): ?stdClass
     {
         $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email from codewars.student s 
                 join codewars.user u on s.da = u.da
@@ -33,7 +31,7 @@ class StudentBroker extends Broker
     {
         $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true";
         $done = $this->selectSingle($sql, [$da])->done;
-        $nbExercises = Count((new ExerciseBroker())->getAll());
+        $nbExercises = count((new ExerciseBroker())->getAll());
         $totalDone = ($done / $nbExercises) * 100;
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
@@ -44,7 +42,7 @@ class StudentBroker extends Broker
         $weeks = $this->select($sql, [$da]);
         $broker = new ExerciseBroker();
         foreach ($weeks as $week) {
-            $week->progress = number_format(($week->done / Count($broker->getAllByWeek($week->id))) * 100, 0);
+            $week->progress = number_format(($week->done / count($broker->getAllByWeek($week->id))) * 100, 0);
         }
         return $weeks;
     }
@@ -83,7 +81,9 @@ class StudentBroker extends Broker
         $addedCash = $this->getAddedCash($da, $cash);
         $sql = "UPDATE codewars.student SET team_id = ?, cash = ?, points = ? WHERE da = ?";
         $this->query($sql, [$team_id, $cash, $points, $da]);
-        if ($notify) NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
+        if ($notify) {
+            NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
+        }
     }
 
     public function hasItem($da): bool
@@ -122,21 +122,21 @@ class StudentBroker extends Broker
         $sql = "SELECT s.da, u.id FROM codewars.student s 
                     JOIN codewars.user u on s.da = u.da 
                     WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $result->id;
     }
 
     private function isCashDifferent($da, $cash): bool
     {
         $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $result->cash != $cash;
     }
 
     private function getAddedCash($da, $cash)
     {
         $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $cash - $result->cash;
     }
 }

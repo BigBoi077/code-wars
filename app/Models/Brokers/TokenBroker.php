@@ -1,10 +1,7 @@
 <?php namespace Models\Brokers;
 
-use stdClass;
-
 class TokenBroker extends Broker
 {
-
     public function insert($user_id, $token)
     {
         $this->query("INSERT INTO codewars.token(user_id, token) VALUES (?, ?)", [
