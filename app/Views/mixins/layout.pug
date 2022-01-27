@@ -6,6 +6,7 @@ include scoreBoard
 include star_wars_money
 include star_wars_points
 include confirmationModal
+include footer
 //include input_modal
 
 doctype html
@@ -17,7 +18,7 @@ html
   body
     block header
     block body
-    block footer
+    +footer
     block script
     script(src='/javascripts/vendor/jquery-3.5.1.min.js')
     script(src='/javascripts/toggleMenu.js')
