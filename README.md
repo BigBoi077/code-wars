@@ -1,6 +1,7 @@
 # Code Wars
 [![Maintainability](https://api.codeclimate.com/v1/badges/24f7d94b96d3412089fe/maintainability)](https://codeclimate.com/github/cegepst/code-wars/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/24f7d94b96d3412089fe/test_coverage)](https://codeclimate.com/github/cegepst/code-wars/test_coverage)
+[![StyleCI](https://github.styleci.io/repos/403798502/shield?style=flat&branch=dev)]
 
 ## Configurations
 
