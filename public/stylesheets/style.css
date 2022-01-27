@@ -923,7 +923,6 @@ text-align: center;
 
 .single-mission-detail .mission-info .mission-difficulty-container i.active {
     color: var(--accent);
-    margin: 6px 6px 6px 0;
 }
 
 .mission-submit label:hover, .mission-upload labels:hover {

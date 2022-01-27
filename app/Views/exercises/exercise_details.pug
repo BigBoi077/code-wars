@@ -14,26 +14,36 @@ block body
     hr.separator
     h3.mb-2 Débriefing de la mission
     p.mission-description=exercise.description
-    div.mission-info
-      .mission-week
-        i.fas.fa-calendar-alt
-        span Semaine #{exercise.week_id}
-      .mission-cash-reward
-        img(src="/assets/images/credit_symbol.png")
-        span #{format('decimal', exercise.cash_reward, 0, 0)}
-      .mission-point-reward
-        i.fab.fa-ethereum
-        span #{format('decimal', exercise.point_reward, 0, 0)}
-      .mission-state
+    .mission-info.px-0
+      .row.mission-week
+        .col-2.mb-0
+          i.fas.fa-calendar-alt
+        .col-8.mb-0
+          span Semaine #{exercise.week_id}
+      .row.mission-cash-reward
+        .col-2.mb-0
+          img(src="/assets/images/credit_symbol.png")
+        .col-8.mb-0
+          span #{format('decimal', exercise.cash_reward, 0, 0)}
+      .row.mission-point-reward
+        .col-2.mb-0
+          i.fab.fa-ethereum
+        .col-8.mb-0
+          span #{format('decimal', exercise.point_reward, 0, 0)}
+      .row.mission-state
         if !submitted
-          i.far.fa-times-circle.not-submitted
-          span Exercice non-remis
+          .col-2.mb-0
+            i.far.fa-times-circle.not-submitted
+          .col-8.mb-0
+            span.font-weight-light Non-remis
         else
-          i.far.fa-check-circle.submitted
-          span Exercice remis
-      .mission-difficulty-container
+          .col-2.mb-0
+            i.far.fa-check-circle.submitted
+          .col-8.mb-0
+            span Remis
+      .col-8.mission-difficulty-container
         span Difficulté
-        div.difficulty-stars
+        .difficulty-stars
           - var i = 0
           - var difficultyDifference = 5 - exercise.difficulty;
           while i < exercise.difficulty
