@@ -11,6 +11,7 @@ use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
+use phpDocumentor\Reflection\Types\False_;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Rule;
 use Zephyrus\Network\Response;
@@ -57,9 +58,6 @@ class ManagementController extends Controller
         $this->get('/management/weeks/create', 'createWeek');
         $this->get('/management/weeks/{id}/delete', 'deleteWeek');
         $this->post('/management/weeks/store', 'storeWeek');
-
-        $this->get("/management/students/rapidAdd", "rapidAdd");
-        $this->post("/management/students/rapidAdd", 'rapidAddUpdate');
 	}
 
 	public function management(): Response
@@ -335,30 +333,6 @@ class ManagementController extends Controller
         (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
         Flash::success("Semaine ajoutée avec succès!");
         return $this->redirect('/management/weeks');
-    }
-
-    public function rapidAdd()
-    {
-        return $this->render("/management/students/add_points_cash", [
-            'title' => "Ajout rapide",
-            'teams' => (new TeamBroker())->getAll(),
-            'students' => (new StudentBroker())->getAll()
-        ]);
-    }
-
-    public function rapidAddUpdate()
-    {
-        $form = $this->buildForm();
-        $forValue = $form->getValue("for");
-        if ($forValue == "team") {
-            $broker = new TeamBroker();
-            $broker->addToTeam($form->getValue('team_id'), $form->getValue('points'), $form->getValue('cash'));
-        } else if ($forValue == "student"){
-            $studentBroker = new StudentBroker();
-            $studentBroker->addPoints($form->getValue('student_da'), (int)($form->getValue('points')));
-            $studentBroker->addCash($form->getValue('student_da'), (int)($form->getValue('cash')));
-        }
-        return $this->redirect("/management/students");
     }
 
 }
