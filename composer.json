@@ -25,5 +25,10 @@
     "post-create-project-cmd": [
       "rm README.md"
     ]
+  },
+  "config": {
+    "allow-plugins": {
+      "nodejs-php-fallback/nodejs-php-fallback": true
+    }
   }
 }

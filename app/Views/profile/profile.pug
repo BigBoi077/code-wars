@@ -40,7 +40,7 @@ block body
               +profileInfo("Mot de passe", "********")
             if !isTeacher
               .row.justify-content-md-end.mx-3
-                a#editProfileBtn.btn.btn-yellow.text-dark(href="/profile/edit")
+                a#editProfileBtn.btn.btn-yellow(href="/profile/edit")
                   | Modifier le compte
                   i.fas.fa-edit
     .row
@@ -84,7 +84,7 @@ block body
                     +itemRow(item)
                 if !isTeacher
                   .text-center.mt-3
-                    a.btn.btn-yellow.text-dark(href="/market")
+                    a.btn.btn-yellow(href="/market")
                       | Aller au magasin
         .row
           .card.mb-4.w-100
@@ -110,7 +110,7 @@ block body
                     +exerciseRow(exercise)
                 if !isTeacher
                   .text-center.mt-3
-                    a.btn.btn-yellow.text-dark(href="/exercises")
+                    a.btn.btn-yellow(href="/exercises")
                       | Aller aux missions
 
 block script
