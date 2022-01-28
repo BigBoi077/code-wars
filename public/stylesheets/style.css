@@ -858,6 +858,7 @@ text-align: center;
     "description      description      .                info"
     ".                .                .                info"
     "example          example          example          example"
+    "tips             tips             tips             tips"
     ".                submit           submit           .";
 }
 
@@ -953,6 +954,10 @@ text-align: center;
     color: var(--accent);
     padding: 24px;
     border-radius: 5px;
+}
+
+.single-mission-detail .mission-tips {
+    grid-area: tips;
 }
 
 .single-mission-detail .mission-info .mission-difficulty-container {
@@ -1137,6 +1142,10 @@ footer {
 
 footer h1 {
     font-size: 52px;
+}
+
+.blur {
+    filter: blur(3px);
 }
 
 /* endregion */

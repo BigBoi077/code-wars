@@ -109,6 +109,11 @@ class ExerciseBroker extends Broker
         return $this->selectSingle($sql, [$id]);
     }
 
+    public function getDifficulties()
+    {
+        $sql = "select t.typname as name, e.enumlabel as value from pg_type t join pg_enum e on t.oid = e.enumtypid order by value desc";
+        return $this->select($sql);
+    }
 
 }
 

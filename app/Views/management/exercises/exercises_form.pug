@@ -35,7 +35,14 @@ block body
           input.form-control(placeholder="0" id='point', name='point', type='number' value=(exercise !== null) ? exercise.point_reward : val('point'))
         .form-group.col-3
           label(for="difficulty") Difficulté
-          input.form-control(id='difficulty', name='difficulty', type='number', min='1', max='5', value=(exercise !== null) ? exercise.difficulty : val('difficulty'))
+          select.form-control(id="difficulty" name="difficulty")
+            each difficulty, index in difficulties
+              if (index === exercise.difficulty)
+                option(value=index selected)
+                  | #{difficulty}
+              else
+                option(value=index)
+                  | #{difficulty}
         .form-group.col-3
           label(for="week") Semaine
           select.form-control(id="week", name="week")

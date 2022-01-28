@@ -1,0 +1,29 @@
+extends ../../mixins/layout
+
+block title
+  title Indices - Code Wars
+
+block header
+  +header()
+
+block body
+  +flash
+  .student-form-container
+    h4 #{title}
+    hr
+    form(method='post', action=action)
+      .form-row
+        .form-group.col-12.mb-1
+          label(for="tip") Description
+          textArea.form-control(id='tip', name='tip' rows='2')
+            | #{(tip !== null) ? tip.tip : val('tip')}
+      .form-row
+        .form-group
+          label(for="price") Prix
+          input.form-control(placeholder="0" id='price', name='price', type='number' min='0' value=(tip !== null) ? tip.price : val('price'))
+      .form-row
+        button#submitBtn.btn(type='submit')
+          if tip !== null
+            | Modifier
+          else
+            | Ajouter

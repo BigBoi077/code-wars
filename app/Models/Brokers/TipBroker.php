@@ -6,14 +6,32 @@ use stdClass;
 
 class TipBroker extends Broker
 {
-
-    public function findByID($id) : ?stdClass
+    public function GetById($tipId): stdClass
     {
-        $sql = "SELECT t.id, t.tip, t.exercise_id
+        $sql = "SELECT t.id, t.tip, t.price
                 FROM codewars.tips t
                 WHERE t.id = ?";
+        return $this->selectSingle($sql, [$tipId]);
+    }
 
-        return $this->selectSingle($sql, [$id]);
+    public function GetAllById($id) : array
+    {
+        $sql = "SELECT t.id, t.tip, t.price
+                FROM codewars.tips t join codewars.exercise e on t.exercise_id = e.id
+                WHERE e.id = ?
+                ORDER BY price";
+
+        return $this->select($sql, [$id]);
+    }
+
+    public function GetAllUnlocked($id, $da) : array
+    {
+        $sql = "SELECT *
+                FROM codewars.studenttip st join codewars.tips t on t.id = st.tip_id
+                WHERE st.student_da = ? and t.exercise_id = ?
+                order by price";
+
+        return $this->select($sql, [$da, $id]);
     }
 
     public function getAll()
@@ -24,27 +42,33 @@ class TipBroker extends Broker
         return $this->select($sql);
     }
 
-
-    public function insert($id,$tip)
+    public function buy($tipId, $da)
     {
-        $sql = "INSERT INTO codewars.tips (id, exercise_id,tip) VALUES (default, ?,?)";
+        $sql = "insert into codewars.studenttip(id, tip_id, student_da) values(default, ?, ?)";
+        $this->query($sql, [$tipId, $da]);
+    }
+
+    public function insert($exerciseId, $tip, $price)
+    {
+        $sql = "INSERT INTO codewars.tips (id, exercise_id, tip, price) VALUES (default, ?, ?, ?)";
 
         return $this->query($sql, [
-            $id,
-            $tip
+            $exerciseId,
+            $tip,
+            $price
         ]);
     }
 
-    public function update($id,$tip)
+    public function update($id, $tip, $price)
     {
-        $sql = "UPDATE codewars.tips SET tip = ?  WHERE id = ?";
-        $this->query($sql, [$id,$tip]);
+        $sql = "UPDATE codewars.tips SET tip = ?, price = ?  WHERE id = ?";
+        $this->query($sql, [$tip, $price, $id]);
     }
 
 
     public function delete($id)
     {
-        $sql = "DELETE FROM codewars.tips WHERE exercise_id = ?;";
+        $sql = "DELETE FROM codewars.tips WHERE id = ?;";
         return $this->query($sql, [$id]);
     }
 
