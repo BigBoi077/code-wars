@@ -49,8 +49,18 @@ create table if not exists tips (
     id serial,
     tip varchar,
     exercise_id int,
+    price int,
     constraint fk_id_exercise foreign key (exercise_id) references exercise(id),
     constraint pk_id_tips primary key (id)
+);
+
+create table if not exists studenttip (
+    id serial,
+    tip_id int,
+    student_da int,
+    constraint fk_studenttip_tip_id foreign key (tip_id) references tips(id),
+    constraint fk_tip_student_da foreign key (student_da) references student(da),
+    constraint pk_studenttip_id primary key (id)
 );
 
 create table if not exists team (
