@@ -374,6 +374,10 @@ body {
     width: 125%;
 }
 
+#correctedBtn {
+    opacity: .5;
+}
+
 .btn-yellow {
     background-color: var(--accent);
     color: var(--font);
@@ -609,14 +613,29 @@ body {
     border:2px solid #000;
 }
 
-.login-form #da {
-    background-image: url("images/user_icon.png");
+.da-row, .password-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
-.login-form #password {
-    background-image: url("images/padlock.png");
-    margin-bottom: 0 !important;
+#inputDAIMG, #inputPWDIMG {
+    width: 25px;
+    height: auto;
+    position: absolute;
+    top: 6px;
+    left: 8px;
 }
+
+/*.login-form #da {*/
+/*    background-image: url("images/user_icon.png");*/
+/*}*/
+
+/*.login-form #password {*/
+/*    background-image: url("images/padlock.png");*/
+/*    margin-bottom: 0 !important;*/
+/*}*/
 
 .login-form #da, .login-form #password {
     background-repeat: no-repeat;
@@ -971,6 +990,11 @@ text-align: center;
     opacity: 50%;
 }
 
+.mission-submit.disabled {
+    background-color: var(--grey);
+    opacity: 50%;
+}
+
 .single-mission-detail .mission-submit label:hover, .single-mission-detail .mission-upload label:hover,
 .single-mission-submit .mission-submit label:hover, .single-mission-submit .mission-upload label:hover {
     cursor: pointer;
@@ -1063,6 +1087,10 @@ text-align: center;
 }
 
 /* Profile */
+
+.profile-first-elems {
+    height: 100%;
+}
 
 .rounded-img {
     height: 150px;

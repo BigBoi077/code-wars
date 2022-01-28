@@ -28,6 +28,7 @@ class ExerciseController extends Controller
                 $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
                 $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
             }
+
         }
         $weeklyProgress = null;
         $indProgress = null;
@@ -57,6 +58,7 @@ class ExerciseController extends Controller
         return $this->render('exercises/exercise_details', [
             'exercise' => ExerciseService::get($id),
             'action' => "/submit/exercise/" . $id,
+            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da) : false,
             'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
         ]);
     }
