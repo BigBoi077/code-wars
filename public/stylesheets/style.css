@@ -13,6 +13,7 @@
     --grey: rgb(169, 169, 169);
     --red: #fd5a5a;
     --blue: #367bc4;
+    --font: #212529;
 }
 
 .selected {
@@ -177,12 +178,12 @@ header .menu-items li {
 }
 
 header .menu-items li a {
-    color: black;
+    color: var(--font);
     text-decoration: none;
 }
 
 header .menu-items li a:hover {
-    color: black;
+    color: var(--font);
     text-decoration: underline;
 }
 
@@ -190,8 +191,13 @@ header #hamburger-menu {
     display: none;
 }
 
+#bell, #icon-header {
+    color: var(--font);
+}
+
 #bell:hover, #icon-header:hover {
     cursor: pointer;
+    color: var(--blue);
 }
 
 .disconnect, .bell {
@@ -361,6 +367,7 @@ body {
 
 .btn-yellow {
     background-color: var(--accent);
+    color: var(--font);
 }
 
 #editProfileBtn i {
@@ -393,7 +400,6 @@ body {
 }
 
 #Btn p, #buyBtn p {
-    color: var(--dark);
     margin: 0;
 }
 
@@ -461,7 +467,7 @@ body {
 }
 
 .student-icons {
-    color: var(--dark) !important;
+    color: var(--font);
 }
 
 .student-icons:hover {
@@ -541,16 +547,12 @@ body {
     align-content: center;
 }
 
-.student-row i {
-    color: var(--accent);
-}
-
 .student-row-element, .student-header-element {
     margin: 1.75rem;
 }
 
 .student-link {
-    color: black;
+    color: var(--font);
     text-decoration: underline;
 }
 
@@ -636,6 +638,10 @@ body {
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+#managementDropdown {
+    color: var(--font);
 }
 
 #managementDropdown:hover {
@@ -741,6 +747,10 @@ text-align: center;
 .week {
     z-index: 10;
     position: relative;
+}
+
+.week-header {
+    color: var(--font);
 }
 
 .single-mission-row {
@@ -897,6 +907,12 @@ text-align: center;
 .single-mission-detail .mission-info .mission-cash-reward img, .single-mission-row .mission-results .mission-cash-reward img {
     height: 22px;
     width: 22px;
+}
+
+#cashIcon {
+    height: 22px;
+    width: 22px;
+    padding-bottom: 2px;
 }
 
 .single-mission-detail .mission-execution-example {

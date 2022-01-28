@@ -27,8 +27,8 @@ block body
           each week, index in exercisesByWeek
             .week
               button.bg-transparent.btn.row.mb-4.d-flex.align-items-end(data-toggle=index)
-                i.mb-1.ml-3.fa.fa-chevron-down.fa-2x
-                h2.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
+                i.week-header.mb-1.ml-3.fa.fa-chevron-down.fa-2x
+                h2.week-header.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
               .week-exercises(id="weekExercises" + index)
                   each exercise, index in week
                     if index !== 'startDate' && index !== 'number'
@@ -39,11 +39,9 @@ block body
                             .mission-detail
                               .mission-results
                                 .mission-cash-reward
-                                  img(src="/assets/images/credit_symbol.png")
-                                  span #{format('decimal', exercise.cash_reward, 0, 0)}
+                                  +star_wars_money(exercise.cash_reward)
                                 .mission-point-reward
-                                  i.fab.fa-ethereum
-                                  span #{format('decimal', exercise.point_reward, 0, 0)}
+                                  +star_wars_points(exercise.point_reward)
                               .mission-detail
                                 .detail-link
                                   a(href="/exercises/" + exercise.id)
