@@ -9,7 +9,8 @@ class StudentBroker extends Broker
 
     public function findByDa($da) : ?stdClass
     {
-        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email from codewars.student s 
+        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email 
+                from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
                 join codewars.team t on t.id = s.team_id
@@ -104,17 +105,21 @@ class StudentBroker extends Broker
     public function addCash($da, $amount)
     {
         $student = $this->findByDa($da);
-        $student->cash += $amount;
+        $cash = $student->cash + $amount;
+        if ($cash < 0)
+            $cash = 0;
         $sql = "UPDATE codewars.student SET cash = ? WHERE da = ?";
-        $this->query($sql, [$student->cash, $da]);
+        $this->query($sql, [$cash, $da]);
     }
 
     public function addPoints($da, $amount)
     {
         $student = $this->findByDa($da);
-        $student->points += $amount;
+        $points = $student->points + $amount;
+        if ($points < 0)
+            $points = 0;
         $sql = "UPDATE codewars.student SET points = ? WHERE da = ?";
-        $this->query($sql, [$student->points, $da]);
+        $this->query($sql, [$points, $da]);
     }
 
     private function getStudentId($da)
