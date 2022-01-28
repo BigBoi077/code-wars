@@ -1,3 +1,10 @@
+include ../mixins/base
+doctype html
+html
+  head
+    link(rel="icon" href="/assets/images/icon_helmet.png")
+    link(rel="stylesheet" href="/stylesheets/style.css")
+
 block title
   title Connexion - Code Wars
 
@@ -12,7 +19,7 @@ block body
           h1.mb-1.letter-space-1 CODE WARS
           h6.mb-4 AUTHENTIFICATION
           form(method='post', action='/login').container.login-form
-            +flash
+            +flash()
             input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.mb-3
             input(id='password', type='password', name='password', placeholder='Mot de passe').form-control
             br
