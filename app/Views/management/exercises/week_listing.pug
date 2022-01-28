@@ -36,8 +36,8 @@ block body
             .row.d-flex.align-items-center
               a.col(href='/management/weeks/' + week.id + '/activate')
                 i(class=week.is_active ? 'fa-eye-slash': 'fa-eye').fas.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal")
+              a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal" + week.id)
                 i.fas.fa-trash.student-icons
-
-  +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine ?',
-      '/management/weeks/' + week.id + '/delete', 'weekDeleteModal')
+  each week in weeks
+    +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine ?',
+        '/management/weeks/' + week.id + '/delete', 'weekDeleteModal' + week.id)

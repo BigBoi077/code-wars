@@ -47,8 +47,8 @@ block body
                 i.fas.fa-lightbulb.student-icons
               a.col(href='/management/exercises/' + exercise.id + '/edit')
                 i.fas.fa-edit.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal")
+              a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
                 i.fas.fa-trash.student-icons
-
-  +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
-    '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal')
+  each exercise in exercises
+    +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+      '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)

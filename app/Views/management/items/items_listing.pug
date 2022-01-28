@@ -37,8 +37,8 @@ block body
             .row.d-flex.align-items-center
               a.col(href='/management/items/' + item.id + '/edit')
                 i.fas.fa-edit.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target="#itemDeleteModal")
+              a.col(data-bs-toggle="modal" data-bs-target="#itemDeleteModal" + item.id)
                 i.fas.fa-trash.student-icons
-
-  +confirmationModal("Suppression d'article", 'Voulez-vous vraiment supprimer cet article ?',
-    '/management/items/' + item.id + '/delete', 'itemDeleteModal')
+  each item in items
+    +confirmationModal("Suppression d'article", 'Voulez-vous vraiment supprimer cet article ?',
+      '/management/items/' + item.id + '/delete', 'itemDeleteModal' + item.id)

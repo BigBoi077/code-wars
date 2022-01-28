@@ -49,9 +49,8 @@ block body
             .row.d-flex.align-items-center
               a.col(href='/management/students/' + student.da + '/edit')
                 i.fas.fa-edit.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target="#studentDeleteModal")
+              a.col(data-bs-toggle="modal" data-bs-target='#studentDeleteModal' + student.da)
                 i.fas.fa-trash.student-icons
-
-  +confirmationModal("Suppression d'étudiant", 'Voulez-vous vraiment supprimer cet étudiant ?',
-      '/management/students/' + student.da + '/delete', 'studentDeleteModal')
-
+  each student in students
+    +confirmationModal("Suppression d'étudiant", 'Voulez-vous vraiment supprimer cet étudiant ?',
+      '/management/students/' + student.da + '/delete', 'studentDeleteModal' + student.da)
