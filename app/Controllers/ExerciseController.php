@@ -3,8 +3,10 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\FileBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
+use Zephyrus\Security\Cryptography;
 use function Composer\Autoload\includeFile;
 use function PHPUnit\Framework\isEmpty;
 
@@ -57,6 +59,7 @@ class ExerciseController extends Controller
         return $this->render('exercises/exercise_details', [
             'exercise' => ExerciseService::get($id),
             'action' => "/submit/exercise/" . $id,
+            'tips' => $this->gibberishTip($id),
             'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
         ]);
     }
@@ -113,5 +116,26 @@ class ExerciseController extends Controller
 
         Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
         return $this->redirect('/exercises/' . $id);
+    }
+
+    private function gibberishTip($exerciseId): array
+    {
+        $broker = new TipBroker();
+        $tips = [];
+        $allTips = $broker->GetAllById($exerciseId);
+        $boughtTips = $broker->GetAllUnlocked($exerciseId, 2222222);
+        $index = 0;
+        foreach ($allTips as $tip) {
+            $tip->bought = false;
+            if ($tip->id === $boughtTips[$index]->id) {
+                $tip->bought = true;
+                array_push($tips, $tip);
+            } else {
+                $tip->tip = Cryptography::randomString(strlen($tip->tip));
+                array_push($tips, $tip);
+            }
+            $index++;
+        }
+        return $tips;
     }
 }

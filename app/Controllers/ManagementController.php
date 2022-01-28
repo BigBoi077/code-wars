@@ -164,7 +164,8 @@ class ManagementController extends Controller
         $exercises = (new ExerciseBroker())->getAll();
         return $this->render('management/exercises/exercises_listing', [
             'exercises' => $exercises,
-            'student' => null
+            'student' => null,
+            'difficulties' => [1 => "Très Facile", 2 => "Facile", 3 => "Moyen", 4 => "Difficile", 5 => "Très Difficile"]
         ]);
     }
 
@@ -174,7 +175,8 @@ class ManagementController extends Controller
             'title' => 'Créer un exercice',
             'action' => '/management/exercises/store',
             'exercise' => null,
-            'weeks' => ((new WeekBroker())->getAll())
+            'weeks' => ((new WeekBroker())->getAll()),
+            'difficulties' => [1 => "Très Facile", 2 => "Facile", 3 => "Moyen", 4 => "Difficile", 5 => "Très Difficile"]
         ]);
     }
 
@@ -184,7 +186,8 @@ class ManagementController extends Controller
             'title' => 'Modifier un exercice',
             'action' => '/management/exercises/' . $id . '/update',
             'exercise' => (new ExerciseBroker())->findByID($id),
-            'weeks' => (new WeekBroker())->getAll()
+            'weeks' => (new WeekBroker())->getAll(),
+            'difficulties' => [1 => "Très Facile", 2 => "Facile", 3 => "Moyen", 4 => "Difficile", 5 => "Très Difficile"]
         ]);
     }
 

@@ -56,6 +56,17 @@ block body
     div.mission-execution-example
       h3 Exemple d'exécution
       pre=exercise.execution_exemple
+    .mission-tips.mt-4
+      h3 Indices de mission
+      each tip in tips
+        .row
+          .col-8.d-flex.align-items-center
+            p=tip.tip
+          .col-4.d-flex.justify-content-end
+            if !tip.bought
+              a(href="/exercises/tips/" + tip.id + "/buy")
+                button.btn.btn-yellow
+                  +star_wars_money(tip.price)
     div.mission-submit.m-4
       a(href="/exercises/submit/" + exercise.id)
         if (student.team_name == "Sith")

@@ -34,7 +34,9 @@ block body
           .col-lg-3.col-sm-4
             p.student-row-element #{exercise.name}
           .col-lg-2.col-sm-4
-            p.student-row-element #{exercise.difficulty}
+            each difficulty, index in difficulties
+              if (index === exercise.difficulty)
+                p.student-row-element #{difficulty}
           .col-lg-2.col-sm-4.d-flex.align-items-center
             +star_wars_money(exercise.cash_reward)
           .col-lg-1.col-sm-3.d-flex.align-items-center

@@ -94,14 +94,10 @@ class ExerciseService
         $difficulty = $this->form->getValue('difficulty');
         $description = $this->form->getValue('description');
         $exemple = $this->form->getValue('exemple');
-        $tips = ($this->form->getValue('tips') == "") ? $this->form->getValue('tips') : null;
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week");
         $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple, $cash, $point, $weekId);
-        if ($tips != null) {
-            (new TipBroker())->insert($exerciseId, $tips);
-        }
         NotificationService::newExerciseAvailable($exerciseName, $cash, $point, $exerciseId);
         $this->succes = true;
     }
