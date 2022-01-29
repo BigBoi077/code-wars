@@ -14,6 +14,11 @@
     --red: #fd5a5a;
     --blue: #367bc4;
     --font: #212529;
+    --bronze: #cd7f32;
+}
+
+.content {
+    min-height: 75%;
 }
 
 .no-decoration {
@@ -86,39 +91,6 @@ html, body {
 @font-face {
     font-family: 'Starjedi';
     src: url("fonts/starjedi/StarJedi.woff");
-}
-
-#circle {
-    position: fixed;
-    bottom: -300px;
-    left: -300px;
-    height: 500px;
-    width: 600px;
-    background-color: #191919;
-    border: 20px solid var(--accent);
-    border-radius: 50%;
-}
-
-#circleSmall {
-    position: fixed;
-    bottom: -150px;
-    left: 100px;
-    height: 250px;
-    width: 300px;
-    background-color: #191919;
-    border: 20px solid var(--accent);
-    border-radius: 50%;
-}
-
-#circleSmallRight {
-    position: fixed;
-    top: -200px;
-    right: -100px;
-    height: 300px;
-    width: 300px;
-    background-color: #191919;
-    border: 20px solid var(--accent);
-    border-radius: 50%;
 }
 
 /*Header*/
@@ -303,15 +275,15 @@ header .gestion-button {
 }
 
 .position0 {
-    color: gold;
+    border: 3px solid gold;
 }
 
 .position1 {
-    color: silver;
+    border: 3px solid silver;
 }
 
 .position2 {
-    color: #cd7f32;
+    border: 3px solid var(--bronze);
 }
 
 /*notifications*/
@@ -1101,6 +1073,24 @@ text-align: center;
 
 .pretty.p-default:not(.p-fill) input:checked~.state.p-warning-o label:after {
     background-color: var(--accent) !important;
+}
+
+/* Leaderboard */
+
+.leaderboard .rounded-img {
+    height: 64px;
+    width: auto;
+}
+
+.leaderboard .leaderboard-overlay {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+}
+
+.leaderboard .gravatar-container {
+    height: 64px;
+    width: 64px;
 }
 
 /* Footer */

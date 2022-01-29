@@ -5,9 +5,11 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
 use Models\Services\StudentService;
 use Zephyrus\Network\Response;
+use Zephyrus\Utilities\Gravatar;
 
 class TeamController extends Controller
 {
+    const DEFAULT_PROFILE_PIC = "/assets/images/profil_pic_default.png";
 
     public function initializeRoutes()
     {
@@ -37,9 +39,19 @@ class TeamController extends Controller
 
     public function leaderboard()
     {
+        $students = StudentService::getAll();
+        foreach ($students as $student) {
+            $gravatar = new Gravatar($student->email);
+            if ($gravatar->isAvailable()) {
+                $student->gravatarUrl = $gravatar->getUrl();
+            } else {
+                $student->gravatarUrl = self::DEFAULT_PROFILE_PIC;
+            }
+        }
+
         return $this->render('teams/leaderboard', [
             'teamPoints' => TeamController::getTeamPoints(),
-            'students' => StudentService::getAll(),
+            'students' => $students,
         ]);
     }
 
