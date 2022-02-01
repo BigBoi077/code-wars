@@ -4,58 +4,62 @@ block title
   title Missions - Code Wars
 
 block header
-  include ../mixins/header
   +header()
 
-block body
+block flash
   +flash
+
+block score
+  +scoreBoard()
+
+block body
   .container
-    #score.d-flex.justify-content-center.my-5
-      +scoreBoard()
-  .row.mission-header
-    h1.mb-3 Missions
-  if user.isTeacher
-    .container.d-flex.justify-content-start
-      a(href='/management/exercises').mr-5
-        button.btn.btn-yellow#Btn
-          p
-            i.fas.fa-plus-square
-            | Gestion des missions
-  .container.main-ct
-    .row
-      .all-missions.col-7
-          each week, index in exercisesByWeek
-            .week
-              button.bg-transparent.btn.row.mb-4.d-flex.align-items-end(data-toggle=index)
-                i.week-header.mb-1.ml-3.fa.fa-chevron-down.fa-2x
-                h2.week-header.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
-              .week-exercises(id="weekExercises" + index)
-                  each exercise, index in week
-                    if index !== 'startDate' && index !== 'number'
-                      .single-mission-row.mb-4.bg-white
-                        .mission-information
-                          .mission-information-header
-                            a(href="/exercises/" + exercise.id).text-dark
-                              h4 #{exercise.name}
-                            .mission-detail
-                              .mission-results
-                                .mission-cash-reward
-                                  +star_wars_money(exercise.cash_reward)
-                                .mission-point-reward
-                                  +star_wars_points(exercise.point_reward)
-                              .mission-detail
-                                .detail-link
-                                  a(href="/exercises/" + exercise.id)
-                                    i.fas.fa-info-circle.fa-2x
-      .col-5.px-5
-        if student != null
-          .card.mb-4.w-100.fixed-ct
-            .card-body
-              h4.text-center.mb-3 Progression individuelle
-              p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
-              include ../mixins/weekProgress
-              each week in weeklyProgress
-                +weekProgressSmall(week)
+    .row.mt-5.p-4.main-card
+      .w-100
+        h1 Missions
+        hr
+      if user.isTeacher
+        .container.d-flex.justify-content-start
+          a(href='/management/exercises').mr-5
+            button.btn.btn-yellow#Btn
+              p
+                i.fas.fa-plus-square
+                | Gestion des missions
+      div
+        .row
+          .all-missions.col-7.p-0
+              each week, index in exercisesByWeek
+                .week
+                  button.bg-transparent.btn.row.mb-4.d-flex.align-items-end(data-toggle=index)
+                    i.week-header.mb-1.ml-3.fa.fa-chevron-down.fa-2x
+                    h2.week-header.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
+                  .week-exercises(id="weekExercises" + index)
+                      each exercise, index in week
+                        if index !== 'startDate' && index !== 'number'
+                          .single-mission-row.mb-4.bg-white.card
+                            .mission-information.card-body
+                              .mission-information-header
+                                a(href="/exercises/" + exercise.id).text-dark
+                                  h4 #{exercise.name}
+                                .mission-detail
+                                  .mission-results
+                                    .mission-cash-reward
+                                      +star_wars_money(exercise.cash_reward)
+                                    .mission-point-reward
+                                      +star_wars_points(exercise.point_reward)
+                                  .mission-detail
+                                    .detail-link
+                                      a(href="/exercises/" + exercise.id)
+                                        i.fas.fa-info-circle.fa-2x
+          .col-5.px-5
+            if student != null
+              .card.mb-4.w-100.fixed-ct
+                .card-body
+                  h4.text-center.mb-3 Progression individuelle
+                  p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+                  include ../mixins/weekProgress
+                  each week in weeklyProgress
+                    +weekProgressSmall(week)
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

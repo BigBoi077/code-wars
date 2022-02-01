@@ -18,6 +18,14 @@
     --bronze: #cd7f32;
 }
 
+.foreground {
+    z-index: 1;
+}
+
+.grey-border {
+    border: 1px solid var(--grey);
+}
+
 .content {
     min-height: 75%;
 }
@@ -58,6 +66,12 @@ html, body {
 .row {
     margin-left: 0;
     margin-right: 0;
+}
+
+.main-card {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .1);
+    background-color: var(--white);
+    border-radius: 6px;
 }
 
 .hidden {
@@ -102,11 +116,12 @@ html, body {
     src: url("fonts/starjedi/StarJedi.woff");
 }
 
-/*Header*/
+/* Header */
+
 header {
     height: 92px;
     display: flex;
-    padding: 32px;
+    padding: 32px 8px 32px 22px !important;
     align-items: center;
     justify-content: space-between;
     z-index: 100;
@@ -174,11 +189,14 @@ header .menu-items li a {
 
 header .menu-items li a:hover {
     color: var(--font);
-    text-decoration: underline;
 }
 
 header #hamburger-menu {
     display: none;
+}
+
+header .menu-items a:hover {
+    border-bottom: 2px solid var(--accent);
 }
 
 #bell, #icon-header {
@@ -214,10 +232,17 @@ header .gestion-button {
     font-size: 1.1rem;
 }
 
-/*ScoreBoard*/
+/* ScoreBoard */
+
+#scoreBoardContainer {
+    margin-top: 4em;
+    margin-bottom: 8em;
+}
+
 #scoreBoard {
     position: relative;
-    max-width: 75vw;
+    width: 100%;
+    padding: 0px;
 }
 
 .title {
@@ -297,16 +322,16 @@ header .gestion-button {
 
 /*notifications*/
 .card, .box-shadow {
-    border-radius: 1rem; !important;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    border-radius: 6px; !important;
 }
 
 .box-shadow-sith {
-    box-shadow: 0 5px 15px 0 rgba(255, 0, 0, 0.5); 
+    box-shadow: 6px 6px  rgba(255, 0, 0, 0.25);
 }
 
 .box-shadow-rebel {
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 255, 0.5);
+
+    box-shadow: -6px 6px 0 0 rgba(0, 0, 255, 0.25);
 }
 
 .notification {
@@ -493,7 +518,7 @@ body {
 }
 
 .shop-header, .mission-header {
-    width: 80%;
+    width: 77%;
     margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
@@ -768,8 +793,7 @@ text-align: center;
     margin: auto;
     max-width: 1000px;
     padding: 26px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    border-radius: 6px;
     background-color: var(--background);
     z-index: 10;
     position: relative;
@@ -821,16 +845,15 @@ text-align: center;
 }
 
 .single-mission-detail {
-    max-width: 1000px;
-    margin: auto;
+    width: 100%;
     display: grid;
     padding: 32px;
     border-radius: 10px;
     position: relative;
     background-color: var(--background);
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .1);
     grid-template-columns: 25% 25% 25% 25%;
-    margin-top: 32px;
+    margin: 32px auto auto;
     grid-template-areas:
     "title            title            title            title"
     "separator        separator        separator        separator"
@@ -843,13 +866,17 @@ text-align: center;
     ".                submit           submit           .";
 }
 
+.tip-buy-button {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .single-mission-submit {
-    max-width: 1000px;
     padding: 32px;
     border-radius: 10px;
     position: relative;
     background-color: var(--background);
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
     margin: 32px auto auto;
 }
 
@@ -1136,15 +1163,17 @@ footer {
     width: 100vw;
     background-color: var(--accent);
     margin-top: 86px;
-    padding: 42px 15% 22px;
+    padding: 42px 22px;
 }
 
 footer h1 {
     font-size: 52px;
 }
 
+/*  */
+
 .blur {
-    filter: blur(3px);
+    filter: blur(6px);
 }
 
 /* Errors */

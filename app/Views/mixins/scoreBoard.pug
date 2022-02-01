@@ -1,17 +1,18 @@
 mixin scoreBoard()
-  #scoreBoard.d-flex.flex-column.m-5
-    .d-flex.justify-content-between
-      .score-bar
-        .score-points
-          .d-flex
-            i.fab.fa-ethereum.m-1
-            h4 #{format('decimal', teamPoints.Rebel, 0, 0)}
-        .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
-      .score-bar
-        .score-points
-          .d-flex.justify-content-end.mr-3
-            i.fab.fa-ethereum.m-1
-            h4 #{format('decimal', teamPoints.Sith, 0, 0)}
-        .score-value-right(style="width: " + teamPoints.sithWidth + "%")
-    .rebel-sith.text-center.w-100
-      img(src='/assets/images/rebelvsith.png')
+  .container#scoreBoardContainer
+    #scoreBoard.d-flex.flex-column
+      .d-flex.justify-content-between
+        .score-bar
+          .score-points
+            .d-flex
+              i.fab.fa-ethereum.m-1
+              h4 #{format('decimal', teamPoints.Rebel, 0, 0)}
+          .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
+        .score-bar
+          .score-points
+            .d-flex.justify-content-end.mr-3
+              i.fab.fa-ethereum.m-1
+              h4 #{format('decimal', teamPoints.Sith, 0, 0)}
+          .score-value-right(style="width: " + teamPoints.sithWidth + "%")
+      .rebel-sith.text-center.w-100
+        img(src='/assets/images/rebelvsith.png')
