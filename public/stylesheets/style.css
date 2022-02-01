@@ -842,8 +842,8 @@ text-align: center;
     "title            title            title            title"
     "separator        separator        separator        separator"
     "debrief          debrief          .                info"
-    "description      description      .                info"
-    "description      description      .                info"
+    "description      description      description      info"
+    "description      description      description      info"
     ".                .                .                info"
     "example          example          example          example"
     "tips             tips             tips             tips"
@@ -1041,6 +1041,10 @@ text-align: center;
 }
 
 .submitted {
+    color: var(--accent);
+}
+
+.corrected {
     color: var(--green);
 }
 
@@ -1159,14 +1163,19 @@ footer h1 {
 .full-screen {
     min-height: 100vh;
     min-width: 100vw;
+    overflow: hidden;
 }
 
 .darth-vader {
     object-fit: contain;
 }
 
+.buff-trooper {
+    object-fit: contain;
+}
+
 .error-code {
-    font-size: 8rem;
+    font-size: 15vh;
 }
 
 /* endregion */

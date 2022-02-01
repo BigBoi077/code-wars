@@ -39,7 +39,6 @@ class ExerciseController extends Controller
 
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
-            'teamPoints' => TeamController::getTeamPoints(),
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
         ]);
@@ -66,25 +65,26 @@ class ExerciseController extends Controller
             'exercise' => $exercise,
             'action' => "/submit/exercise/" . $exercise->id,
             'tips' => $this->gibberishTip($exercise->id),
+            'completion' => $this->calculateCompletion($exercise),
             'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false,
             'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false
         ]);
     }
 
-    public function exerciseUpload($id)
+    public function exerciseUpload($exercise)
     {
         $maxsize = 20971520;
 
         if ($this->isUserTeacher()) {
             Flash::error("L'enseignant ne peut pas remettre des exercices.");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         $form = $this->buildForm();
 
-        if ((new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da)) {
+        if ((new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
             Flash::error("L'exercice à déjà été remis et corrigé. Vous ne pouvez pas le remettre une seconde fois!");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         $targetDir = "../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
@@ -92,12 +92,12 @@ class ExerciseController extends Controller
 
         if ($this->request->getFile("exercise")["name"] == '') {
             Flash::error("Aucun fichier selectionné!");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] > $maxsize) {
             Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo.");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] == 0) {
@@ -108,21 +108,21 @@ class ExerciseController extends Controller
 
         if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
             Flash::success("La mission à bel et bien été remise.");
-            if ((new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)) {
-                (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $id, $targetFile);
+            if ((new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da)) {
+                (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $exercise->id, $targetFile);
             } else {
-                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $id, $targetFile, $form->getValue("exerciseName"));
+                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $exercise->id, $targetFile, $form->getValue("exerciseName"));
             }
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
-        return $this->redirect('/exercises/' . $id);
+        return $this->redirect('/exercises/' . $exercise->id);
     }
 
     private function gibberishTip($exerciseId): array
@@ -144,6 +144,19 @@ class ExerciseController extends Controller
             array_push($tips, $tip);
         }
         return $tips;
+    }
+
+    private function calculateCompletion($exercise): float
+    {
+        $allStudent = (new StudentBroker())->getAll();
+        $nbHasCompleted = 0;
+        $broker = new ExerciseBroker();
+        foreach ($allStudent as $student) {
+            if ($broker->isCorrected($exercise->id, $student->da)) {
+                $nbHasCompleted++;
+            }
+        }
+        return $nbHasCompleted / Count($allStudent) * 100;
     }
 
     private function overrideExercice()

@@ -8,6 +8,9 @@ block header
 
 block body
   +flash
+  .container
+    #score.d-flex.justify-content-center.my-5
+      +scoreBoard()
   .single-mission-detail
     h1#mission-title=exercise.name
     hr.separator
@@ -30,7 +33,12 @@ block body
         .col-8.mb-0
           span #{format('decimal', exercise.point_reward, 0, 0)}
       .row.mission-state
-        if !submitted
+        if corrected
+          .col-2.mb-0
+            i.far.fa-check-circle.corrected
+          .col-8.mb-0
+            span.font-weight-light Corrigé
+        else if !submitted
           .col-2.mb-0
             i.far.fa-times-circle.not-submitted
           .col-8.mb-0
@@ -40,6 +48,9 @@ block body
             i.far.fa-check-circle.submitted
           .col-8.mb-0
             span Remis
+      .col-12.mission-difficulty-container.mb-1
+        span Achèvement
+        h6.text-muted=completion + " % des élèves ont complétés l'exercises"
       .col-8.mission-difficulty-container
         span Difficulté
         .difficulty-stars

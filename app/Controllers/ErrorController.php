@@ -13,4 +13,9 @@ class ErrorController extends Controller
     {
         return $this->render("errors/404");
     }
+
+    public function chooseAName()
+    {
+        return $this->render("errors/413");
+    }
 }

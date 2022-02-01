@@ -27,7 +27,6 @@ class MarketController extends Controller
         }
 		return $this->render('market/market', [
 			'items' => ItemService::getAll(),
-            'teamPoints' => TeamController::getTeamPoints(),
             'studentItems' => $studentItems
 		]);
 	}

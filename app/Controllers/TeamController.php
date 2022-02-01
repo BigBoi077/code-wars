@@ -31,7 +31,6 @@ class TeamController extends Controller
         return $this->render("teams/teams", [
             'user' => $user,
             'student' => $student,
-            'teamPoints' => $this->getTeamPoints(),
             'teamProgress' => $this->getTeamProgression(Count($teams['siths']), Count($teams['rebels'])),
             'teams' => $teams
         ]);
@@ -41,16 +40,16 @@ class TeamController extends Controller
     {
         $students = StudentService::getAll();
         foreach ($students as $student) {
-            $gravatar = new Gravatar($student->email);
-            if ($gravatar->isAvailable()) {
-                $student->gravatarUrl = $gravatar->getUrl();
-            } else {
-                $student->gravatarUrl = self::DEFAULT_PROFILE_PIC;
+            $student->gravatarUrl = self::DEFAULT_PROFILE_PIC;
+            if (is_string($student->email)) {
+                $gravatar = new Gravatar($student->email);
+                if ($gravatar->isAvailable()) {
+                    $student->gravatarUrl = $gravatar->getUrl();
+                }
             }
         }
 
         return $this->render('teams/leaderboard', [
-            'teamPoints' => TeamController::getTeamPoints(),
             'students' => $students,
         ]);
     }
