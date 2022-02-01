@@ -13,56 +13,17 @@ block body
   .container
     if corrections == null
       h4.text-muted.text-center Aucun exercice à corriger pour l'instant...
+    else
+      h5.text-muted Consulter la liste des solutions. Vous avez (#{count(corrections)}) missions à corriger
     each correction, person in corrections
-      h2 #{person}
+      h2.mt-4 #{person}
       hr
-      .exercises-list
-        .row
-          .col-4
-            h6.mb-0 Nom de l'exercice
-          .col-3
-            h6.mb-0 Date de remise
-          .col
-            h6.text-center.mb-0 Commentaire
-          .col
-            h6.text-center.mb-0 Marquer corrigé
-          .col
-            h6.text-center.mb-0 Télécharger
-      each exercise, index in correction
-        .row.student-row.box-shadow.mb-4
-          .col-4
-            a(href="/exercises/submit/detail/" + person + "/"  + exercise.exercise_id + "/" + exercise.id ).text-dark
-              p.ml-0.student-row-element #{exercise.name}
-          .col-3.pr-0.text-center.d-flex.align-items-end
-            p.ml-0.student-row-element #{format('date', exercise.submit_date)}
-          .col.d-flex.justify-content-center.align-items-center
-            button(data-toggle="modal" data-target="#comment-modal-" + index).open-commentModal.bg-transparent.btn
-              i.fas.fa-comment-medical.student-icons
-          .col.d-flex.justify-content-center.align-items-center
-            a(href='/management/correction/correct/' + exercise.student_da + "/" + exercise.id)
-              i.fas.fa-edit.student-icons
-          .col.d-flex.justify-content-center.align-items-center
-            a(href='/management/correction/download/' + exercise.id)
-              i.fas.fa-download.student-icons
-        .modal.fade(id=("comment-modal-" + index) tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true")
-          .modal-dialog(role="document")
-            .modal-content
-              .modal-header.d-flex.align-items-center
-                img(src="/assets/images/dark_vador.png" width="50px" height="50px")
-                h5.modal-title.pl-2(id="addModalLabel") Laisser un commentaire
-                button.close(type="button" data-dismiss="modal" aria-label="Close")
-                  span(aria-hidden="true") &times;
-              form(method="post", action="")
-                .modal-body
-                    .form-group
-                      p.text-muted Ce commentaire pourra être consulté par l'étudiant concerné sans que son exercice ait été corrigé.
-                      input.form-control(name="username")
-                .modal-footer
-                  .form-group.pt-2
-                    button.btn.btn-secondary(type="button"  data-dismiss="modal") Annuler
-                    button.btn.btn-yellow.ml-2(type="submit") Soumettre
+      ul.mb-4
+        each exercise, index in correction
+          li
+            a(href="/management/correction/detail/" + person + "/"  + exercise.exercise_id + "/" + exercise.id ).text-dark
+              p.m-0.student-row-element #{exercise.name} (Remis le #{format('date', exercise.submit_date)})
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src="/javascripts/vendor/bootstrap.min.js")
-  script(src="/javascripts/vendor/jquery-3.5.1.min.js")

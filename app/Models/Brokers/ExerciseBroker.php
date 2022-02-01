@@ -61,10 +61,10 @@ class ExerciseBroker extends Broker
         NotificationService::newCorrectionAvailable($student, $this->findByID($exerciseId)->name);
     }
 
-    public function correctExercise($userId, $student, $id)
+    public function correctExercise($userId, $student, $id, $comment = null)
     {
-        $sql = "update codewars.studentexercise se set corrected = true where se.id = ? and se.student_da = ? and se.completed = true";
-        $this->query($sql, [$id, $student->da]);
+        $sql = "update codewars.studentexercise se set corrected = true, comments = ? where se.id = ? and se.student_da = ? and se.completed = true";
+        $this->query($sql, [$comment, $id, $student->da]);
         $sql = "select cash_reward, point_reward from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
         $reward = $this->selectSingle($sql, [$id]);
         $broker = new StudentBroker();
@@ -104,7 +104,7 @@ class ExerciseBroker extends Broker
         return $this->select($sql);
     }
 
-    public function getCorrectionPath($id): stdClass
+    public function getCorrectionPath($id): ?stdClass
     {
         $sql = "select dir_path as path, e.name as name from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id where se.id = ?";
         return $this->selectSingle($sql, [$id]);

@@ -2,10 +2,14 @@ mixin exerciseRow(exercise)
   .row.mb-2
     .col-4
       h6 #{exercise.name}
-    .col-3
+    .col-2
       h6=exercise.submit_date
-    .col-4.student-exercise-col
+    .col-2.student-exercise-col
       if exercise.corrected
-        i.far.fa-check-circle.submitted.student-exercise-element
+        i.far.fa-check-circle.corrected.student-exercise-element
       else
         i.far.fa-times-circle.not-submitted.student-exercise-element
+    .col-2
+      h6=exercise.cash_reward
+    .col-2
+      h6=exercise.point_reward

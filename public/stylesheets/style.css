@@ -1050,7 +1050,6 @@ text-align: center;
 
 .exercise-submit-detail .exercise-content pre {
     border-radius: 5px;
-    min-height: 450px;
 }
 
 .exercise-submit-detail .side-options textarea {
@@ -1070,7 +1069,7 @@ text-align: center;
 
 .exercise-submit-detail .download-button {
     background-color: var(--accent);
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
     width: 100%;
     display: flex;
     align-items: center;
