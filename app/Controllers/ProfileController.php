@@ -9,6 +9,7 @@ use Models\Brokers\TeamBroker;
 use Models\Services\ExerciseService;
 use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
+use Zephyrus\Application\Rule;
 
 class ProfileController extends Controller
 {
@@ -17,7 +18,9 @@ class ProfileController extends Controller
     {
         $this->get('/profile', 'profile');
         $this->get('/profile/edit', 'editProfile');
+        $this->get("/profile/editMdp", 'editMdp');
         $this->post('/profile/update', 'updateProfile');
+        $this->post('/profile/update/mdp', 'updateMdp');
         $this->get('/profile/notifications', 'notifications');
 
         $this->get("/management/students/rapidAdd", "rapidAdd");
@@ -54,9 +57,12 @@ class ProfileController extends Controller
 
     public function editProfile()
     {
-        return $this->render('profile/edit_profile', [
-            'action' => '/profile/update'
-        ]);
+        return $this->render('profile/edit_profile');
+    }
+
+    public function editMdp()
+    {
+        return $this->render('profile/edit_mdp');
     }
 
     public function updateProfile()
@@ -68,6 +74,26 @@ class ProfileController extends Controller
         }
         Flash::error($profile->getErrorMessages());
         return $this->redirect('/profile/edit');
+    }
+
+    public function updateMdp()
+    {
+        $form = $this->buildForm();
+        $mdp = $form->getValue('password');
+        $form->validate('password', Rule::passwordCompliant('Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et avoir une longueur minimum de 8 caractères.'));
+        if ($form->getValue('confirmPassword') != '') {
+            $form->validate('confirmPassword', Rule::sameAs('password', 'La confirmation de mot de passe doit être identique au mot de passe.'));
+        } else {
+            $form->validate('confirmPassword', Rule::notEmpty('La confirmation de mot de passe est requise.'));
+        }
+        if (!$form->verify()) {
+            Flash::error($form->getErrorMessages());
+            return $this->redirect($this->request->getReferer());
+        }
+
+
+        Flash::success("Mot de passe changé avec succès");
+        return $this->redirect('/profile');
     }
 
     public function rapidAdd()

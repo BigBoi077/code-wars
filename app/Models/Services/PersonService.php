@@ -67,9 +67,7 @@ class PersonService
         $username = $this->form->getValue('username');
         $person = self::get($da);
         $email = $this->form->getValue('email');
-        $password = $this->form->getValue('password') == '' ? (new UserBroker())->getHashedPassword($da) : password_hash($this->form->getValue('password') . PASSWORD_PEPPER, PASSWORD_DEFAULT);
         (new PersonBroker())->update($da, $username, $person->firstname, $person->lastname, $email);
-        (new UserBroker())->update($da, $password);
         SessionHelper::setUser((new UserBroker())->findByDa($da)->id, (new PersonBroker())->findByDa($da));
         $this->success = true;
     }

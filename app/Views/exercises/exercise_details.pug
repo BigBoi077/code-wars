@@ -15,61 +15,67 @@ block body
       hr.separator
       h3.mb-2 Débriefing de la mission
       p.mission-description=exercise.description
-      .mission-info.px-0
-        .row.mission-week
-          .col-2.mb-0
-            i.fas.fa-calendar-alt
-          .col-8.mb-0
-            span Semaine #{exercise.week_id}
-        .row.mission-cash-reward
-          .col-2.mb-0
-            img(src="/assets/images/credit_symbol.svg")#cashIcon
-          .col-8.mb-0
-            span #{format('decimal', exercise.cash_reward, 0, 0)}
-        .row.mission-point-reward
-          .col-2.mb-0
-            i.fab.fa-ethereum
-          .col-8.mb-0
-            span #{format('decimal', exercise.point_reward, 0, 0)}
-        .row.mission-state
-          if !submitted
+        .mission-info.px-0
+          .row.mission-week
             .col-2.mb-0
-              i.far.fa-times-circle.not-submitted
+              i.fas.fa-calendar-alt
             .col-8.mb-0
-              span.font-weight-light Non-remis
-          else
+              span Semaine #{exercise.week_id}
+          .row.mission-cash-reward
             .col-2.mb-0
-              i.far.fa-check-circle.submitted
+              img(src="/assets/images/credit_symbol.svg").svg-icons
             .col-8.mb-0
-              span Remis
-        .col-8.mission-difficulty-container
-          span Difficulté
-          .difficulty-stars
-            - var i = 0
-            - var difficultyDifference = 5 - exercise.difficulty;
+              span #{format('decimal', exercise.cash_reward, 0, 0)}
+          .row.mission-point-reward
+            .col-2.mb-0
+              img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
+            .col-8.mb-0
+              span #{format('decimal', exercise.point_reward, 0, 0)}
+          .row.mission-state
+            if corrected
+              .col-2.mb-0
+                i.far.fa-check-circle.corrected
+              .col-8.mb-0
+                span.font-weight-light Corrigé
+            else if !submitted
+              .col-2.mb-0
+                i.far.fa-times-circle.not-submitted
+              .col-8.mb-0
+                span.font-weight-light Non-remis
+            else
+              .col-2.mb-0
+                i.far.fa-check-circle.submitted
+              .col-8.mb-0
+                span Remis
+          .col-12.mission-difficulty-container.mb-1
+            span Achèvement
+            h6.text-muted=completion + " % des élèves ont complétés l'exercises"
+          .col-8.mission-difficulty-container
+            span Difficulté
+            .difficulty-stars
+                - var i = 0
+                - var difficultyDifference = 5 - exercise.difficulty;
             while i < exercise.difficulty
               i.fas.fa-star.active
               - i++
-            - var i = 0
+              - var i = 0
             while i < difficultyDifference
               i.fas.fa-star
               - i++
-      div.mission-execution-example
-        h3 Exemple d'exécution
-        pre=exercise.execution_exemple
-      if tips != null
+        div.mission-execution-example
+          h3 Exemple d'exécution
+          pre=exercise.execution_exemple
         .mission-tips.mt-4
-          h3.mb-4 Indices de mission
-          each tip in tips
-            .row
-              if tip.bought
-                p.w-100.pl-0.grey-border=tip.tip
-              else
-                .position-relative.foreground.tip-buy-button
-                  a.position-absolute(href="/exercises/tips/" + tip.id + "/buy")
-                    button.btn.btn-yellow
-                      +star_wars_money(tip.price)
-                p.w-100.pl-0.blur.grey-border=tip.tip
+          h3 Indices de mission
+              each tip in tips
+                .row
+                  .col-8.d-flex.align-items-center
+                    p=tip.tip
+                  .col-4.d-flex.justify-content-end
+                    if !tip.bought
+                      form(action="/exercises/tips/" + tip.id + "/buy" method="post")
+                        button.btn.btn-yellow
+                          +star_wars_money(tip.price)
 
       if !corrected
         div.mission-submit.m-4

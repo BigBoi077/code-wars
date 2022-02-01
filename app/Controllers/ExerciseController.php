@@ -1,7 +1,6 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
-use Models\Brokers\FileBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
@@ -40,7 +39,6 @@ class ExerciseController extends Controller
 
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
-            'teamPoints' => TeamController::getTeamPoints(),
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $indProgress,
         ]);
@@ -67,38 +65,39 @@ class ExerciseController extends Controller
             'exercise' => $exercise,
             'action' => "/submit/exercise/" . $exercise->id,
             'tips' => $this->gibberishTip($exercise->id),
+            'completion' => $this->calculateCompletion($exercise),
             'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false,
             'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false
         ]);
     }
 
-    public function exerciseUpload($id)
+    public function exerciseUpload($exercise)
     {
         $maxsize = 20971520;
 
         if ($this->isUserTeacher()) {
             Flash::error("L'enseignant ne peut pas remettre des exercices.");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         $form = $this->buildForm();
 
-        if ((new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da)) {
+        if ((new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
             Flash::error("L'exercice à déjà été remis et corrigé. Vous ne pouvez pas le remettre une seconde fois!");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
-        $targetDir = "../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
+        $targetDir = getcwd() . "/../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
 
         if ($this->request->getFile("exercise")["name"] == '') {
             Flash::error("Aucun fichier selectionné!");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] > $maxsize) {
             Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo.");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] == 0) {
@@ -109,21 +108,21 @@ class ExerciseController extends Controller
 
         if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
             Flash::success("La mission à bel et bien été remise.");
-            if ((new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da)) {
-                (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $id, $targetFile);
+            if ((new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da)) {
+                (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $exercise->id, $targetFile);
             } else {
-                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $id, $targetFile, $form->getValue("exerciseName"));
+                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $exercise->id, $targetFile, $form->getValue("exerciseName"));
             }
-            return $this->redirect('/exercises/' . $id);
+            return $this->redirect('/exercises/' . $exercise->id);
         }
 
         Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
-        return $this->redirect('/exercises/' . $id);
+        return $this->redirect('/exercises/' . $exercise->id);
     }
 
     private function gibberishTip($exerciseId): array
@@ -131,20 +130,33 @@ class ExerciseController extends Controller
         $broker = new TipBroker();
         $tips = [];
         $allTips = $broker->GetAllById($exerciseId);
-        $boughtTips = $broker->GetAllUnlocked($exerciseId, 2222222);
-        $index = 0;
+        $boughtTips = $broker->GetAllUnlocked($exerciseId, $this->getUser()["da"]);
         foreach ($allTips as $tip) {
             $tip->bought = false;
-            if ($tip->id === $boughtTips[$index]->id) {
-                $tip->bought = true;
-                array_push($tips, $tip);
-            } else {
-                $tip->tip = Cryptography::randomString(strlen($tip->tip));
-                array_push($tips, $tip);
+            $unHashedTip = $tip->tip;
+            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin. Moff fett maul mothma kenobi. Skywalker kessel jabba moff fett darth.";
+            foreach ($boughtTips as $boughtTip) {
+                if ($tip->id === $boughtTip->id) {
+                    $tip->bought = true;
+                    $tip->tip = $unHashedTip;
+                }
             }
-            $index++;
+            array_push($tips, $tip);
         }
         return $tips;
+    }
+
+    private function calculateCompletion($exercise): float
+    {
+        $allStudent = (new StudentBroker())->getAll();
+        $nbHasCompleted = 0;
+        $broker = new ExerciseBroker();
+        foreach ($allStudent as $student) {
+            if ($broker->isCorrected($exercise->id, $student->da)) {
+                $nbHasCompleted++;
+            }
+        }
+        return $nbHasCompleted / Count($allStudent) * 100;
     }
 
     private function overrideExercice()
@@ -153,13 +165,11 @@ class ExerciseController extends Controller
             if (is_numeric($value)) {
                 $exercice = ExerciseService::get($value);
                 if (is_null($exercice)) {
-                    Flash::error("L'exercice recherché n'existe pas");
-                    return $this->request->getReferer();
+                    return $this->redirect('/exercises');
                 }
                 return $exercice;
             } else {
-                Flash::error("Whoops");
-                return $this->request->getReferer();
+                return $this->redirect('/exercises');
             }
         });
     }

@@ -477,12 +477,18 @@ body {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
 }
 
+.student-form-container h4 {
+    word-break: break-all;
+}
+
 .student-row {
     background-color: #FFF;
     margin: 1rem 0;
     border-radius: .75rem;
     position: relative;
     z-index: 10;
+    display: flex;
+    align-items: center;
 }
 
 .student-icons {
@@ -568,6 +574,7 @@ body {
 
 .student-row-element, .student-header-element {
     margin: 1.75rem;
+    word-break: break-all;
 }
 
 .student-link {
@@ -858,8 +865,8 @@ text-align: center;
     "title            title            title            title"
     "separator        separator        separator        separator"
     "debrief          debrief          .                info"
-    "description      description      .                info"
-    "description      description      .                info"
+    "description      description      description      info"
+    "description      description      description      info"
     ".                .                .                info"
     "example          example          example          example"
     "tips             tips             tips             tips"
@@ -946,7 +953,7 @@ text-align: center;
     width: 22px;
 }
 
-#cashIcon {
+.svg-icons {
     height: 22px;
     width: 22px;
     padding-bottom: 2px;
@@ -1061,12 +1068,15 @@ text-align: center;
 }
 
 .submitted {
+    color: var(--accent);
+}
+
+.corrected {
     color: var(--green);
 }
 
 .exercise-submit-detail .exercise-content pre {
     border-radius: 5px;
-    min-height: 450px;
 }
 
 .exercise-submit-detail .side-options textarea {
@@ -1086,7 +1096,7 @@ text-align: center;
 
 .exercise-submit-detail .download-button {
     background-color: var(--accent);
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -1181,14 +1191,24 @@ footer h1 {
 .full-screen {
     min-height: 100vh;
     min-width: 100vw;
+    overflow: hidden;
 }
 
 .darth-vader {
+    margin-left: 38px;
+    object-fit: contain;
+}
+
+.buff-trooper {
     object-fit: contain;
 }
 
 .error-code {
-    font-size: 8rem;
+    font-size: 15vh;
+}
+
+.error-message {
+    font-size: 4vh;
 }
 
 /* endregion */
