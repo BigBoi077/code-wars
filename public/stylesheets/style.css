@@ -8,12 +8,18 @@
 :root {
     --accent: rgb(255,222,0);
     --dark: #000000;
+    --light: #fff;
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --grey: rgb(169, 169, 169);
     --red: #fd5a5a;
     --blue: #367bc4;
     --font: #212529;
+    --bronze: #cd7f32;
+}
+
+.content {
+    min-height: 75%;
 }
 
 .no-decoration {
@@ -23,6 +29,14 @@
 
 .text-dark {
     color: var(--dark);
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.dark-bg {
+    background-color: var(--dark);
 }
 
 .selected {
@@ -86,39 +100,6 @@ html, body {
 @font-face {
     font-family: 'Starjedi';
     src: url("fonts/starjedi/StarJedi.woff");
-}
-
-#circle {
-    position: fixed;
-    bottom: -300px;
-    left: -300px;
-    height: 500px;
-    width: 600px;
-    background-color: #191919;
-    border: 20px solid var(--accent);
-    border-radius: 50%;
-}
-
-#circleSmall {
-    position: fixed;
-    bottom: -150px;
-    left: 100px;
-    height: 250px;
-    width: 300px;
-    background-color: #191919;
-    border: 20px solid var(--accent);
-    border-radius: 50%;
-}
-
-#circleSmallRight {
-    position: fixed;
-    top: -200px;
-    right: -100px;
-    height: 300px;
-    width: 300px;
-    background-color: #191919;
-    border: 20px solid var(--accent);
-    border-radius: 50%;
 }
 
 /*Header*/
@@ -303,15 +284,15 @@ header .gestion-button {
 }
 
 .position0 {
-    color: gold;
+    border: 3px solid gold;
 }
 
 .position1 {
-    color: silver;
+    border: 3px solid silver;
 }
 
 .position2 {
-    color: #cd7f32;
+    border: 3px solid var(--bronze);
 }
 
 /*notifications*/
@@ -372,6 +353,10 @@ body {
     position: relative;
     left: 120px;
     width: 125%;
+}
+
+#correctedBtn {
+    opacity: .5;
 }
 
 .btn-yellow {
@@ -609,14 +594,29 @@ body {
     border:2px solid #000;
 }
 
-.login-form #da {
-    background-image: url("images/user_icon.png");
+.da-row, .password-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
 }
 
-.login-form #password {
-    background-image: url("images/padlock.png");
-    margin-bottom: 0 !important;
+#inputDAIMG, #inputPWDIMG {
+    width: 25px;
+    height: auto;
+    position: absolute;
+    top: 6px;
+    left: 8px;
 }
+
+/*.login-form #da {*/
+/*    background-image: url("images/user_icon.png");*/
+/*}*/
+
+/*.login-form #password {*/
+/*    background-image: url("images/padlock.png");*/
+/*    margin-bottom: 0 !important;*/
+/*}*/
 
 .login-form #da, .login-form #password {
     background-repeat: no-repeat;
@@ -976,6 +976,11 @@ text-align: center;
     opacity: 50%;
 }
 
+.mission-submit.disabled {
+    background-color: var(--grey);
+    opacity: 50%;
+}
+
 .single-mission-detail .mission-submit label:hover, .single-mission-detail .mission-upload label:hover,
 .single-mission-submit .mission-submit label:hover, .single-mission-submit .mission-upload label:hover {
     cursor: pointer;
@@ -1069,6 +1074,10 @@ text-align: center;
 
 /* Profile */
 
+.profile-first-elems {
+    height: 100%;
+}
+
 .rounded-img {
     height: 150px;
     width: 150px;
@@ -1103,6 +1112,24 @@ text-align: center;
     background-color: var(--accent) !important;
 }
 
+/* Leaderboard */
+
+.leaderboard .rounded-img {
+    height: 64px;
+    width: auto;
+}
+
+.leaderboard .leaderboard-overlay {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+}
+
+.leaderboard .gravatar-container {
+    height: 64px;
+    width: 64px;
+}
+
 /* Footer */
 
 footer {
@@ -1118,6 +1145,21 @@ footer h1 {
 
 .blur {
     filter: blur(3px);
+}
+
+/* Errors */
+
+.full-screen {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.darth-vader {
+    object-fit: contain;
+}
+
+.error-code {
+    font-size: 8rem;
 }
 
 /* endregion */

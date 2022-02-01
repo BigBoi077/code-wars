@@ -4,6 +4,7 @@ use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
+use stdClass;
 use Zephyrus\Application\Flash;
 use Zephyrus\Security\Cryptography;
 
@@ -15,6 +16,7 @@ class ExerciseController extends Controller
         $this->get('/exercises/{id}', 'exerciseDetail');
         $this->get('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
+        $this->overrideExercice();
     }
 
     public function exercises()
@@ -43,21 +45,29 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function exerciseSubmit($id)
+    public function exerciseSubmit(stdClass $exercise)
     {
+        $broker = new ExerciseBroker();
+
+        if ($broker->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
+            Flash::error("Vous ne pouvez pas remettre un exercice de cette façon");
+            return $this->redirect('/exercises');
+        }
+
         return $this->render('exercises/exercise_submit', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id
+            'exercise' => $exercise,
+            'action' => "/submit/exercise/" . $exercise->id
         ]);
     }
 
-    public function exerciseDetail($id)
+    public function exerciseDetail(stdClass $exercise)
     {
         return $this->render('exercises/exercise_details', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id,
-            'tips' => $this->gibberishTip($id),
-            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
+            'exercise' => $exercise,
+            'action' => "/submit/exercise/" . $exercise->id,
+            'tips' => $this->gibberishTip($exercise->id),
+            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false,
+            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false
         ]);
     }
 
@@ -77,7 +87,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/' . $id);
         }
 
-        $targetDir = getcwd().DIRECTORY_SEPARATOR . "uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
+        $targetDir = "../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
 
         if ($this->request->getFile("exercise")["name"] == '') {
@@ -134,5 +144,22 @@ class ExerciseController extends Controller
             array_push($tips, $tip);
         }
         return $tips;
+    }
+
+    private function overrideExercice()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_numeric($value)) {
+                $exercice = ExerciseService::get($value);
+                if (is_null($exercice)) {
+                    Flash::error("L'exercice recherché n'existe pas");
+                    return $this->request->getReferer();
+                }
+                return $exercice;
+            } else {
+                Flash::error("Whoops");
+                return $this->request->getReferer();
+            }
+        });
     }
 }

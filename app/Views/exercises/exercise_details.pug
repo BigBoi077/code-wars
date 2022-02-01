@@ -66,15 +66,25 @@ block body
               form(action="/exercises/tips/" + tip.id + "/buy" method="post")
                 button.btn.btn-yellow
                   +star_wars_money(tip.price)
-    div.mission-submit.m-4
-      a(href="/exercises/submit/" + exercise.id)
-        if (student.team_name == "Sith")
+    if !corrected
+      div.mission-submit.m-4
+        a(href="/exercises/submit/" + exercise.id)
+          if (student.team_name === "Sith")
+            img.submit-team(src="/assets/images/sith.png")
+          else if (student.team_name === "Rebel")
+            img.submit-team(src="/assets/images/rebel.png")
+          else
+            img.submit-team(src="/assets/images/dark_vador.png")
+          span Soumettre un solution
+    else
+      div.mission-submit.disabled.m-4
+        if (student.team_name === "Sith")
           img.submit-team(src="/assets/images/sith.png")
-        else if (student.team_name == "Rebel")
+        else if (student.team_name === "Rebel")
           img.submit-team(src="/assets/images/rebel.png")
         else
           img.submit-team(src="/assets/images/dark_vador.png")
-        span Soumettre un solution
+        span Corrigé
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

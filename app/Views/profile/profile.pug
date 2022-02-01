@@ -9,9 +9,9 @@ block header
 block body
   +flash
   .container.py-5
-    .row
+    .row.mb-4
       .col-lg-4
-        .card.mb-4
+        .card.mb-4.profile-first-elems
           .card-body.text-center
             if isTeacher
               img.rounded-img.mt-2(src=gravatarUrl)
@@ -24,7 +24,7 @@ block body
             div.d-flex.justify-content-center
               +star_wars_points(studentProfile.points)
       .col-lg-8
-        .card.mb-4
+        .card.mb-4.profile-first-elems
           include ../mixins/profileInfo
           .card-body
             h2.text-center.mb-4 Informations du compte
