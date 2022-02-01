@@ -1171,4 +1171,8 @@ footer h1 {
     font-size: 15vh;
 }
 
+.error-message {
+    font-size: 4vh;
+}
+
 /* endregion */
