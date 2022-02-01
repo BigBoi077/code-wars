@@ -61,14 +61,14 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function exerciseDetail($id)
+    public function exerciseDetail(stdClass $exercise)
     {
         return $this->render('exercises/exercise_details', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id,
-            'tips' => $this->gibberishTip($id),
-            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da) : false,
-            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
+            'exercise' => $exercise,
+            'action' => "/submit/exercise/" . $exercise->id,
+            'tips' => $this->gibberishTip($exercise->id),
+            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false,
+            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false
         ]);
     }
 
@@ -150,7 +150,7 @@ class ExerciseController extends Controller
     private function overrideExercice()
     {
         $this->overrideArgument('id', function ($value) {
-            if (is_int($value)) {
+            if (is_numeric($value)) {
                 $exercice = ExerciseService::get($value);
                 if (is_null($exercice)) {
                     Flash::error("L'exercice recherché n'existe pas");
