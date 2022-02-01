@@ -1,0 +1,7 @@
+mixin teamIcon(student)
+	if (student.team_name === "Sith")
+		img.submit-team(src="/assets/images/sith.png")
+	else if (student.team_name === "Rebel")
+		img.submit-team(src="/assets/images/rebel.png")
+	else
+		img.submit-team(src="/assets/images/dark_vador.png")

@@ -54,6 +54,18 @@ class ExerciseBroker extends Broker
         NotificationService::newCorrectionAvailable($student, $fileName);
     }
 
+    public function deleteExercise($studentDA, $exerciseId)
+    {
+        $sql = "DELETE FROM codewars.studentexercise WHERE student_da = ? AND exercise_id = ?";
+        return $this->query($sql, [$studentDA, $exerciseId]);
+    }
+
+    public function getExerciseByStudentDA($studentDA, $exerciseId): ?stdClass
+    {
+        $sql = "SELECT * FROM codewars.studentexercise WHERE student_da = ? AND exercise_id = ?";
+        return $this->selectSingle($sql, [$studentDA, $exerciseId]);
+    }
+
     public function updateSubmit($student, $exerciseId, $path)
     {
         $sql = "update codewars.studentexercise se set dir_path = ? where se.exercise_id = ? and se.student_da = ? and se.completed = true";
