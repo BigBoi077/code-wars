@@ -72,4 +72,26 @@ class TipBroker extends Broker
         return $this->query($sql, [$id]);
     }
 
+    public function Has($tipId, $da): bool
+    {
+        $sql = "select * from codewars.studenttip t where t.student_da = ? and t.tip_id = ?";
+        return $this->selectSingle($sql, [$da, $tipId]) != null;
+    }
+
+    public function deleteAllFor($da)
+    {
+        $sql = "delete from codewars.studenttip st where st.student_da = ?";
+        $this->query($sql, [$da]);
+    }
+
+    public function deleteAllOf($id)
+    {
+        $tips = $this->select("select * from codewars.tips t where t.exercise_id = ?", [$id]);
+        $sql = "delete from codewars.studenttip t where t.tip_id = ?";
+        foreach ($tips as $tip) {
+            $this->query($sql, [$tip->id]);
+            $this->delete($tip->id);
+        }
+    }
+
 }

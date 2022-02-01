@@ -35,8 +35,21 @@ class ItemBroker extends Broker
         $this->query($sql, [ucfirst($name), $price, $description, $id]);
     }
 
+    public function deleteAllOf($id)
+    {
+        $sql = "delete from codewars.studentitem si where si.item_id = ?";
+        $this->query($sql, [$id]);
+    }
+
+    public function deleteAllFor($da)
+    {
+        $sql = "delete from codewars.studentitem si where si.student_da = ?";
+        $this->query($sql, [$da]);
+    }
+
     public function delete($id)
     {
+        $this->deleteAllOf($id);
         $sql = "DELETE FROM codewars.item WHERE id = ?";
         $this->query($sql, [$id]);
     }

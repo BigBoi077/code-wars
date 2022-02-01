@@ -40,9 +40,8 @@ class ExerciseService
 
     public static function delete($id)
     {
-        (new TipBroker())->delete($id);
+        (new TipBroker())->deleteAllOf($id);
         (new ExerciseBroker())->delete($id);
-
     }
 
     public static function exists($id): bool

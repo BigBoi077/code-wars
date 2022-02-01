@@ -31,7 +31,7 @@ class ExerciseBroker extends Broker
         return $this->select($sql, [$weekId]);
     }
 
-    public function insert($name,$difficulty,$description,$exemple, $cash, $point, $weekId): int
+    public function insert($name, $difficulty, $description, $exemple, $cash, $point, $weekId): int
     {
         $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?,?,?,?, ?) RETURNING id";
 
@@ -75,6 +75,7 @@ class ExerciseBroker extends Broker
 
     public function delete($id)
     {
+        $this->deleteStudentExercisesOf($id);
         $sql = "DELETE FROM codewars.exercise WHERE id = ?;";
         return $this->query($sql, [$id]);
     }
@@ -113,6 +114,36 @@ class ExerciseBroker extends Broker
     {
         $sql = "select t.typname as name, e.enumlabel as value from pg_type t join pg_enum e on t.oid = e.enumtypid order by value desc";
         return $this->select($sql);
+    }
+
+    public function deleteStudentExercisesOf($id)
+    {
+        $sql = "select dir_path from codewars.studentexercise se where se.exercise_id = ?";
+        $exerciseDirPath = $this->select($sql, [$id]);
+        foreach ($exerciseDirPath as $path) {
+            if (!unlink($path->dir_path)) {
+                echo "Cannot delete " . $path->dir_path;
+            } else {
+                echo $path->dir_path . "deleted";
+            }
+        }
+        $sql = "delete from codewars.studentexercise se where se.exercise_id = ?";
+        $this->query($sql, [$id]);
+    }
+
+    public function deleteAllFor($da)
+    {
+        $sql = "select dir_path from codewars.studentexercise se where se.student_da = ?";
+        $exerciseDirPath = $this->select($sql, [$da]);
+        foreach ($exerciseDirPath as $path) {
+            if (!unlink($path->dir_path)) {
+                echo "Cannot delete " . $path->dir_path;
+            } else {
+                echo $path->dir_path . "deleted";
+            }
+        }
+        $sql = "delete from codewars.studentexercise se where se.student_da = ?";
+        $this->query($sql, [$da]);
     }
 
 }

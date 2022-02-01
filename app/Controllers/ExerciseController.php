@@ -1,14 +1,11 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
-use Models\Brokers\FileBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Security\Cryptography;
-use function Composer\Autoload\includeFile;
-use function PHPUnit\Framework\isEmpty;
 
 class ExerciseController extends Controller
 {
@@ -123,18 +120,18 @@ class ExerciseController extends Controller
         $broker = new TipBroker();
         $tips = [];
         $allTips = $broker->GetAllById($exerciseId);
-        $boughtTips = $broker->GetAllUnlocked($exerciseId, 2222222);
-        $index = 0;
+        $boughtTips = $broker->GetAllUnlocked($exerciseId, $this->getUser()["da"]);
         foreach ($allTips as $tip) {
             $tip->bought = false;
-            if ($tip->id === $boughtTips[$index]->id) {
-                $tip->bought = true;
-                array_push($tips, $tip);
-            } else {
-                $tip->tip = Cryptography::randomString(strlen($tip->tip));
-                array_push($tips, $tip);
+            $unHashedTip = $tip->tip;
+            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin. Moff fett maul mothma kenobi. Skywalker kessel jabba moff fett darth.";
+            foreach ($boughtTips as $boughtTip) {
+                if ($tip->id === $boughtTip->id) {
+                    $tip->bought = true;
+                    $tip->tip = $unHashedTip;
+                }
             }
-            $index++;
+            array_push($tips, $tip);
         }
         return $tips;
     }

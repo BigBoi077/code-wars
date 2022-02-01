@@ -8,8 +8,7 @@ block header
 
 block body
   +flash
-  form.single-mission-detail(action=action  method="post" enctype="multipart/form-data")
-    input(type="hidden" name="exerciseName" value=exercise.name)
+  .single-mission-detail
     h1#mission-title=exercise.name
     hr.separator
     h3.mb-2 Débriefing de la mission
@@ -64,7 +63,7 @@ block body
             p=tip.tip
           .col-4.d-flex.justify-content-end
             if !tip.bought
-              a(href="/exercises/tips/" + tip.id + "/buy")
+              form(action="/exercises/tips/" + tip.id + "/buy" method="post")
                 button.btn.btn-yellow
                   +star_wars_money(tip.price)
     div.mission-submit.m-4

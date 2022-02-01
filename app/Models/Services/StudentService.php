@@ -1,8 +1,11 @@
 <?php namespace Models\Services;
 
+use Models\Brokers\ExerciseBroker;
+use Models\Brokers\ItemBroker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
+use Models\Brokers\TipBroker;
 use Models\Brokers\UserBroker;
 use stdClass;
 use Zephyrus\Application\Form;
@@ -47,6 +50,9 @@ class StudentService
 
     public static function delete($da)
     {
+        (new ItemBroker())->deleteAllFor($da);
+        (new TipBroker())->deleteAllFor($da);
+        (new ExerciseBroker())->deleteAllFor($da);
         (new StudentBroker())->delete($da);
         (new UserBroker())->delete($da);
         (new PersonBroker())->delete($da);
