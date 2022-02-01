@@ -20,8 +20,12 @@ block body
           h6.mb-4 AUTHENTIFICATION
           form(method='post', action='/login').container.login-form
             +flash()
-            input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.mb-3
-            input(id='password', type='password', name='password', placeholder='Mot de passe').form-control
+            .da-row
+              img(src="/assets/images/user_icon.png")#inputDAIMG
+              input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.mb-3
+            .password-row
+              img(src="/assets/images/padlock.png")#inputPWDIMG
+              input(id='password', type='password', name='password', placeholder='Mot de passe').form-control
             br
             .text-right.w-100.mb-4
               .pretty.p-default.p-switch.mr-0

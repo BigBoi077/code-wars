@@ -60,6 +60,7 @@ class ExerciseController extends Controller
             'exercise' => ExerciseService::get($id),
             'action' => "/submit/exercise/" . $id,
             'tips' => $this->gibberishTip($id),
+            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($id, $this->getActiveStudent()->da) : false,
             'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($id, $this->getActiveStudent()->da) : false
         ]);
     }
