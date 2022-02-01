@@ -27,5 +27,5 @@ try {
 } catch (RouteNotAcceptedException $e) {
     ResponseFactory::getInstance()->abortNotAcceptable()->send();
 } catch (RouteNotFoundException $e) {
-    ResponseFactory::getInstance()->abortNotFound()->send();
+    ResponseFactory::getInstance()->redirect("/error/404")->send();
 }
