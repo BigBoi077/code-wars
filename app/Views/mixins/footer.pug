@@ -1,24 +1,26 @@
 mixin footer()
   footer
-    div.d-flex.justify-content-between
-      h1.w-75.starwars-font Code Wars
-      ul.no-decoration.w-25.d-flex.flex-column.justify-content-flex-end
-        li.text-right
-          a.text-dark(href="#") À propos
-        li.text-right
-          a.text-dark(href="#") Lorem
-        li.text-right
-          a.text-dark(href="#") The Boys
-    br
-    div.d-flex.justify-content-between
-      p.w-75 Ether © 2021
-      ul.no-decoration.w-25.d-flex.flex-row.justify-content-end
-        li.mr-2
-          a.text-dark(href="https://discord.gg/JZNBKr7v")
-            i.fab.fa-discord
-        li.mr-2
-          a.text-dark(href="https://github.com/cegepst/code-wars")
-            i.fab.fa-github
-        li
-          a.text-dark(href="https://cegepst.omnivox.ca")
-            i.fas.fa-graduation-cap.text-dark
+    .container
+      div.d-flex.justify-content-between
+        h1.w-75.starwars-font Code Wars
+        ul.no-decoration.w-25.d-flex.flex-column.justify-content-flex-end
+          li.text-right.mb-2
+            a.text-dark(href="#") The Boys
+          li.text-right.mb-2
+            a.text-dark(href="#") À propos
+          li.text-right.mb-2
+            a.text-dark(href="#") Lorem
+
+      br
+      div.d-flex.justify-content-between
+        p.w-75 Ether © 2021
+        ul.no-decoration.w-25.d-flex.flex-row.justify-content-end
+          li.mr-3
+            a.text-dark(href="https://discord.gg/JZNBKr7v")
+              i.fab.fa-discord
+          li.mr-3
+            a.text-dark(href="https://github.com/cegepst/code-wars")
+              i.fab.fa-github
+          li
+            a.text-dark(href="https://cegepst.omnivox.ca")
+              i.fas.fa-graduation-cap.text-dark

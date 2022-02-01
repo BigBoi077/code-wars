@@ -1,17 +1,18 @@
 mixin scoreBoard()
-  #scoreBoard.d-flex.flex-column.m-5
-    .d-flex.justify-content-between
-      .score-bar
-        .score-points
-          .d-flex
-            img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
-            h4 #{format('decimal', teamPoints.Rebel, 0, 0)}
-        .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
-      .score-bar
-        .score-points
-          .d-flex.justify-content-end.mr-3
-            img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
-            h4 #{format('decimal', teamPoints.Sith, 0, 0)}
-        .score-value-right(style="width: " + teamPoints.sithWidth + "%")
-    .rebel-sith.text-center.w-100
-      img(src='/assets/images/rebelvsith.png')
+  .container#scoreBoardContainer
+    #scoreBoard.d-flex.flex-column
+      .d-flex.justify-content-between
+        .score-bar
+          .score-points
+            .d-flex
+              img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
+              h4 #{format('decimal', teamPoints.Rebel, 0, 0)}
+          .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
+        .score-bar
+          .score-points
+            .d-flex.justify-content-end.mr-3
+              img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
+              h4 #{format('decimal', teamPoints.Sith, 0, 0)}
+          .score-value-right(style="width: " + teamPoints.sithWidth + "%")
+      .rebel-sith.text-center.w-100
+        img(src='/assets/images/rebelvsith.png')

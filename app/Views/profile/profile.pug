@@ -43,6 +43,10 @@ block body
                 a#editProfileBtn.btn.btn-yellow(href="/profile/edit")
                   | Modifier le compte
                   i.fas.fa-edit
+                a#editProfileBtn.btn.btn-yellow(href="/profile/editMdp").ml-3
+                  | Modifier le mdp
+                  i.fas.fa-lock
+
     .row
       .col
         .row
@@ -95,10 +99,14 @@ block body
                 .row
                   .col-4
                     h5.mb-0 Nom de la mission
-                  .col-3
+                  .col-2
                     h5.mb-0 Date de remise
-                  .col-4
+                  .col-2
                     h5.mb-0.text-center Corrigé
+                  .col-2
+                    h5.mb-0 Points
+                  .col-2
+                    h5.mb-0 Argent
                 hr.mt-1
                 if exercises == null
                   if isTeacher

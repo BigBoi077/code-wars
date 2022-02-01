@@ -112,7 +112,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/' . $exercise->id);
         }
 
-        $targetDir = "../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
+        $targetDir = getcwd() . "/../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
 
         if ($this->request->getFile("exercise")["name"] == '') {
@@ -190,13 +190,11 @@ class ExerciseController extends Controller
             if (is_numeric($value)) {
                 $exercice = ExerciseService::get($value);
                 if (is_null($exercice)) {
-                    Flash::error("L'exercice recherché n'existe pas");
-                    return $this->request->getReferer();
+                    return $this->redirect('/exercises');
                 }
                 return $exercice;
             } else {
-                Flash::error("Whoops");
-                return $this->request->getReferer();
+                return $this->redirect('/exercises');
             }
         });
     }

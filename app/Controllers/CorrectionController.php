@@ -13,7 +13,7 @@ class CorrectionController extends Controller
     public function before(): ?Response
     {
         if (!$this->isUserTeacher()) {
-            return $this->redirect("/");
+            return $this->redirect("/error/404");
         }
         return parent::before();
     }
@@ -21,9 +21,9 @@ class CorrectionController extends Controller
     public function initializeRoutes()
     {
         $this->get('/management/correction', 'correctionList');
-        $this->get('/management/correction/correct/{userId}/{id}', 'correctExercise');
+        $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
         $this->get('/management/correction/download/{id}', 'downloadExercise');
-        $this->get('/exercises/submit/detail/{studentName}/{id}/{submitId}', 'exerciseSubmitDetail');
+        $this->get('/management/correction/detail/{studentName}/{id}/{submitId}', 'exerciseSubmitDetail');
     }
 
     public function correctionList()
@@ -40,7 +40,8 @@ class CorrectionController extends Controller
 
     public function correctExercise($da, $id)
     {
-        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id);
+        $form = $this->buildForm();
+        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
         $e = (new ExerciseBroker())->getCorrectionPath($id);
         unlink($e->path);
         Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
@@ -50,6 +51,11 @@ class CorrectionController extends Controller
     public function downloadExercise($id)
     {
         $e = (new ExerciseBroker())->getCorrectionPath($id);
+
+        if ($e == null) {
+            Flash::error("Impossible de télécharcher le fichier");
+            return $this->redirect($this->request->getReferer());
+        }
 
         if (file_exists($e->path)) {
             header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
@@ -72,15 +78,14 @@ class CorrectionController extends Controller
         $studentExerciseBroker = new StudentExerciseBroker();
         $studentExercise = $studentExerciseBroker->findById($submitId);
 
+        $fileContent = null;
         if (file_exists($studentExercise->dir_path)) {
             $file = fopen($studentExercise->dir_path, "r");
             if (!$file) {
                 Flash::error("Impossible d'ouvrir le fichier");
-                return $this->redirect('/management/correction');
             }
             if (filesize($studentExercise->dir_path) == 0) {
                 Flash::error("Impossible d'ouvrir le fichier");
-                return $this->redirect('/management/correction');
             }
 
             $fileContent = fread($file, filesize($studentExercise->dir_path));
@@ -91,18 +96,15 @@ class CorrectionController extends Controller
             }
 
             fclose($file);
-
-            return $this->render('management/correction/correction_submit_detail', [
-                'exercise' => ExerciseService::get($id),
-                'action' => "/submit/exercise/" . $id,
-                'studentExercise' => $studentExercise,
-                'fileContent' => $fileContent,
-                'studentFirstname' => $studentArrayName[0],
-                'studentLastname' => $studentArrayName[1]
-            ]);
-        } else {
-            Flash::error("Impossible d'ouvrir le fichier");
-            return $this->redirect('/management/correction');
         }
+
+        return $this->render('management/correction/correction_submit_detail', [
+            'exercise' => ExerciseService::get($id),
+            'action' => "/submit/exercise/" . $id,
+            'studentExercise' => $studentExercise,
+            'fileContent' => $fileContent,
+            'studentFirstname' => $studentArrayName[0],
+            'studentLastname' => $studentArrayName[1]
+        ]);
     }
 }

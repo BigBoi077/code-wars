@@ -6,20 +6,24 @@ block title
 block header
   +header()
 
+block score
+  +scoreBoard()
+
 block body
   .container
-    #score.d-flex.justify-content-center.my-5
-      +scoreBoard()
     if quote !== null
       .m-5.text-center
         h3.font-italic “ #{quote} ”
-    .row.mt-5.p-4
+    .row.mt-5.p-4.main-card
+      .w-100
+        h1 Accueil
+        hr
       include mixins/notificationLayout
-      .col-6
+      .col-6.p-0
         +notificationLayout(notifications)
-      .col-6
+      .col-6.p-0
         if isTeacher === false
-          h2.mb-4 Membres de mon équipe
+          h4.mb-4 Membres de mon équipe
           .card.py-3
             each member in teamMembers
               +teamMember(member)

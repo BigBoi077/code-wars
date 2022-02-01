@@ -10,7 +10,7 @@ block body
   +flash
   .student-form-container
     h2.text-center.p-3 Modification du profil
-    form(method='post', action=action)
+    form(method='post', action='/profile/update')
       .form-row
         .form-group.col-6
           label Nom d'utilisateur
@@ -19,12 +19,5 @@ block body
           label E-mail
           input.form-control(placeholder="beepboop@gmail.com", name='email', type='text' value=student.email)
       .form-row
-        .form-group.col-6
-          label Mot de passe
-          input.form-control(name='password', type='password')
-        .form-group.col-6
-          label Confirmer le mot de passe
-          input.form-control(name='confirmPassword', type='password')
-      .form-row
         button#submitBtn.btn(type='submit')
-          | Modifier
+          | Modifier les informations
