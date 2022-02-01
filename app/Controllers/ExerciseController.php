@@ -165,13 +165,11 @@ class ExerciseController extends Controller
             if (is_numeric($value)) {
                 $exercice = ExerciseService::get($value);
                 if (is_null($exercice)) {
-                    Flash::error("L'exercice recherché n'existe pas");
-                    return $this->request->getReferer();
+                    return $this->redirect('/exercises');
                 }
                 return $exercice;
             } else {
-                Flash::error("Whoops");
-                return $this->request->getReferer();
+                return $this->redirect('/exercises');
             }
         });
     }
