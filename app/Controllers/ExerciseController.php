@@ -48,8 +48,16 @@ class ExerciseController extends Controller
 
     public function exerciseSubmit($id)
     {
+        $exercise = ExerciseService::get($id);
+        $broker = new ExerciseBroker();
+
+        if ($broker->isCorrected($id, $this->getActiveStudent()->da)) {
+            Flash::error("Vous ne pouvez pas remettre un exercice de cette façon");
+            return $this->redirect('/exercises');
+        }
+
         return $this->render('exercises/exercise_submit', [
-            'exercise' => ExerciseService::get($id),
+            'exercise' => $exercise,
             'action' => "/submit/exercise/" . $id
         ]);
     }
@@ -81,7 +89,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/' . $id);
         }
 
-        $targetDir = getcwd().DIRECTORY_SEPARATOR . "uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
+        $targetDir = "../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
 
         if ($this->request->getFile("exercise")["name"] == '') {
