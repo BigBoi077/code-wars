@@ -41,7 +41,8 @@ abstract class Controller extends SecurityController
             'system_date' => date(FORMAT_DATE_TIME),
             'user' => $this->getUser(),
             'profileImageUrl' => $imageUrl,
-            'student' => $student
+            'student' => $student,
+            'teamPoints' => TeamController::getTeamPoints()
         ]));
     }
 

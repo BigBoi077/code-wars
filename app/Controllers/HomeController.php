@@ -34,7 +34,6 @@ class HomeController extends Controller
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
             'teamMembers' => $teamMembers,
-            'teamPoints' => TeamController::getTeamPoints(),
             'notifications' => $notifications,
             'quote' => null
         ]);
