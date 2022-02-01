@@ -8,6 +8,7 @@
 :root {
     --accent: rgb(255,222,0);
     --dark: #000000;
+    --light: #fff;
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --grey: rgb(169, 169, 169);
@@ -28,6 +29,14 @@
 
 .text-dark {
     color: var(--dark);
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.dark-bg {
+    background-color: var(--dark);
 }
 
 .selected {
@@ -1136,6 +1145,21 @@ footer h1 {
 
 .blur {
     filter: blur(3px);
+}
+
+/* Errors */
+
+.full-screen {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.darth-vader {
+    object-fit: contain;
+}
+
+.error-code {
+    font-size: 8rem;
 }
 
 /* endregion */
