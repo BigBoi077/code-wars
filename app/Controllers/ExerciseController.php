@@ -5,10 +5,9 @@ use Models\Brokers\FileBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
+use stdClass;
 use Zephyrus\Application\Flash;
 use Zephyrus\Security\Cryptography;
-use function Composer\Autoload\includeFile;
-use function PHPUnit\Framework\isEmpty;
 
 class ExerciseController extends Controller
 {
@@ -18,6 +17,7 @@ class ExerciseController extends Controller
         $this->get('/exercises/{id}', 'exerciseDetail');
         $this->get('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
+        $this->overrideExercice();
     }
 
     public function exercises()
@@ -46,11 +46,11 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function exerciseSubmit($id)
+    public function exerciseSubmit(stdClass $exercice)
     {
         return $this->render('exercises/exercise_submit', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id
+            'exercise' => $exercice,
+            'action' => "/submit/exercise/" . $exercice->id
         ]);
     }
 
@@ -137,5 +137,22 @@ class ExerciseController extends Controller
             $index++;
         }
         return $tips;
+    }
+
+    private function overrideExercice()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_int($value)) {
+                $exercice = ExerciseService::get($value);
+                if (is_null($exercice)) {
+                    Flash::error("L'exercice recherché n'existe pas");
+                    return $this->request->getReferer();
+                }
+                return $exercice;
+            } else {
+                Flash::error("Whoops");
+                return $this->request->getReferer();
+            }
+        });
     }
 }
