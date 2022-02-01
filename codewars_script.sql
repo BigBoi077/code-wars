@@ -3,6 +3,7 @@ set search_path = codewars;
 /*--DROP-TALBES--*/
 drop table if exists file;
 drop table if exists studentExercise;
+drop table if exists studenttip;
 drop table if exists tips;
 drop table if exists exercise;
 drop table if exists week;
@@ -54,15 +55,6 @@ create table if not exists tips (
     constraint pk_id_tips primary key (id)
 );
 
-create table if not exists studenttip (
-    id serial,
-    tip_id int,
-    student_da int,
-    constraint fk_studenttip_tip_id foreign key (tip_id) references tips(id),
-    constraint fk_tip_student_da foreign key (student_da) references student(da),
-    constraint pk_studenttip_id primary key (id)
-);
-
 create table if not exists team (
     id serial,
     color varchar,
@@ -96,6 +88,16 @@ create table if not exists student (
     constraint fk_team_id foreign key (team_id) references team(id),
     constraint fk_da_student foreign key (da) references "user"(da),
     constraint pk_da_student primary key (da)
+);
+
+
+create table if not exists studenttip (
+    id serial,
+    tip_id int,
+    student_da int,
+    constraint fk_studenttip_tip_id foreign key (tip_id) references tips(id),
+    constraint fk_tip_student_da foreign key (student_da) references student(da),
+    constraint pk_studenttip_id primary key (id)
 );
 
 create table if not exists teacher (
