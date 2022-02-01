@@ -35,7 +35,8 @@ block body
                       .single-mission-row.mb-4.bg-white
                         .mission-information
                           .mission-information-header
-                            h4 #{exercise.name}
+                            a(href="/exercises/" + exercise.id).text-dark
+                              h4 #{exercise.name}
                             .mission-detail
                               .mission-results
                                 .mission-cash-reward
