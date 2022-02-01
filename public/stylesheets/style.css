@@ -55,8 +55,17 @@
     text-decoration: none !important;
 }
 
+.page {
+    min-height:100%;
+    position: relative;
+}
+
 html, body {
     background-color: var(--background);
+}
+
+body {
+    padding-bottom: 276px;
 }
 
 .letter-space-1 {
@@ -1171,9 +1180,11 @@ text-align: center;
 
 footer {
     width: 100vw;
+    height: 276px;
     background-color: var(--accent);
     margin-top: 86px;
     padding: 42px 22px;
+    position: absolute;
 }
 
 footer h1 {
