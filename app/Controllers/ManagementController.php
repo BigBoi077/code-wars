@@ -22,7 +22,7 @@ class ManagementController extends Controller
     public function before(): ?Response
     {
         if (!$this->isUserTeacher()) {
-            return $this->redirect("/");
+            return $this->redirect("/error/404");
         }
         return parent::before();
     }
