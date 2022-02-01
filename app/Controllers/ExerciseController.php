@@ -91,8 +91,8 @@ class ExerciseController extends Controller
             'tips' => $this->gibberishTip($exercise->id),
             'completion' => $this->calculateCompletion($exercise),
             'state' => $state,
-            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false,
-            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false
+            'corrected' => $corrected,
+            'submitted' => $submitted
         ]);
     }
 
