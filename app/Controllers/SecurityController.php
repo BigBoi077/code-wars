@@ -50,18 +50,9 @@ abstract class SecurityController extends ZephyrusBaseController
         try {
             parent::before();
         } catch (IntrusionDetectionException $exception) {
-            /**
-             * Defines what to do when an attack attempt (mainly XSS and SQL injection) is detected in the application.
-             * The impact value represents the severity of the attempt. IntrusionDetection class is a wrapper of the
-             * expose library. Be careful about the action chosen to handle such case as there may have false positive
-             * for legitimate clients. That is why there are no default action.
-             *
-             * @see https://github.com/enygma/expose
-             */
-            $data = $exception->getIntrusionData();
-            if ($data['impact'] >= 10) {
-                // Do something (logs, database report, redirect, ...)
-                // return $this->abortForbidden();
+            if ($exception->getImpact() >= 15) {
+                // TODO: Log
+                return $this->redirect('https://fbi.gov');
             }
         } catch (InvalidCsrfException $exception) {
             /**
