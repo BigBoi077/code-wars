@@ -925,6 +925,8 @@ text-align: center;
 .single-mission-detail .mission-description {
     grid-area: description;
     margin-bottom: 52px;
+    white-space: pre-wrap;
+    text-align: justify;
     max-width: 600px;
 }
 
