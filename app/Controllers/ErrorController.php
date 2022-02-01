@@ -11,8 +11,7 @@ class ErrorController extends Controller
 
     public function index()
     {
-        //return $this->render("errors/404");
-        return $this->render("errors/413");
+        return $this->render("errors/404");
     }
 
     public function chooseAName()
