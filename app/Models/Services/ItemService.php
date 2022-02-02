@@ -3,6 +3,8 @@
 
 use Models\Brokers\ItemBroker;
 use Models\Brokers\StudentItemBroker;
+use Models\Validators\CustomRule;
+use Models\Validators\NumberRule;
 use stdClass;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
@@ -72,8 +74,10 @@ class ItemService
 
     private function applyRules(): bool
     {
+        $this->form->field('price')
+            ->validate(NumberRule::isInteger('Le prix est trop élevé.'))
+            ->validate(Rule::notEmpty('Le prix est requis.'));
         $this->form->validate('name', Rule::notEmpty('Le nom est requis.'));
-        $this->form->validate('price', Rule::notEmpty('Le prix est requis.'));
         $this->form->validateWhenFieldHasNoError('price', Rule::integer('Le prix doit être un nombre.'));
         $this->form->validate('description', Rule::notEmpty('La description est requise.'));
         if (!$this->form->verify()) {
