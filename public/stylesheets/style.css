@@ -361,7 +361,13 @@ header .gestion-button {
     color: var(--accent) !important;
 }
 
-/*team Member*/
+/* Team Member */
+
+#teams .col-lg-5 {
+    flex: 0 0 48.67%;
+    max-width: 100%;
+}
+
 .team {
     margin: 1rem;
     min-width: 15rem;
@@ -571,10 +577,8 @@ body {
 }
 
 .shop-items-list {
-    width: 90%;
+    width: 100%;
     margin: auto;
-    display: flex;
-    justify-content: center;
 }
 
 .shop-header, .mission-header {
@@ -589,12 +593,12 @@ body {
 }
 
 .shop-items-list .card {
-    margin: 1rem;
     min-width: 15rem;
 }
 
 .shop-item {
-    border-radius: 1.5rem;
+    border-radius: 6px;
+    width: 30%;
 }
 
 .shop-item .card-body {
@@ -1252,6 +1256,11 @@ footer {
 
 footer h1 {
     font-size: 52px;
+}
+
+footer li .omnivox-logo {
+    height: 18px;
+    width: 18px;
 }
 
 /*  */
