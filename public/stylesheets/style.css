@@ -396,6 +396,51 @@ body {
 .btn-yellow {
     background-color: var(--accent);
     color: var(--font);
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 16px 32px;
+}
+
+.btn-yellow:hover {
+    text-decoration: none;
+    color: var(--font);
+}
+
+.btn-disabled {
+    background-color: var(--grey);
+    opacity: 50%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 16px 32px;
+}
+
+.btn-yellow.cancel {
+    grid-area: cancel;
+    margin: 1rem;
+    min-height: 48px;
+}
+
+.btn-disabled.waiting {
+    grid-area: waiting;
+    margin: 1rem;
+    min-height: 48px;
+}
+
+.btn-disabled.submit, .btn-yellow.submit {
+    grid-area: submit;
+}
+
+.btn-yellow p, .btn-disabled p {
+    padding: 0;
+    margin: 0;
 }
 
 #editProfileBtn i {
@@ -870,6 +915,9 @@ text-align: center;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .1);
     grid-template-columns: 25% 25% 25% 25%;
     margin: 32px auto auto;
+}
+
+.single-mission-detail.unsubmitted, .single-mission-detail.finished {
     grid-template-areas:
     "title            title            title            title"
     "separator        separator        separator        separator"
@@ -886,6 +934,19 @@ text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.single-mission-detail.uncorrected {
+    grid-template-areas:
+    "title            title            title            title"
+    "separator        separator        separator        separator"
+    "debrief          debrief          .                info"
+    "description      description      description      info"
+    "description      description      description      info"
+    ".                .                .                info"
+    "example          example          example          example"
+    "tips             tips             tips             tips"
+    ".                cancel           waiting           .";
 }
 
 .single-mission-submit {
@@ -934,6 +995,8 @@ text-align: center;
 .single-mission-detail .mission-description {
     grid-area: description;
     margin-bottom: 52px;
+    white-space: pre-wrap;
+    text-align: justify;
     max-width: 600px;
 }
 
@@ -1042,7 +1105,7 @@ text-align: center;
     text-decoration: none;
 }
 
-.single-mission-detail .mission-submit img.submit-team {
+.submit-team {
     height: 28px;
     width: 28px;
     margin-right: 12px;

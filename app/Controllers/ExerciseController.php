@@ -15,6 +15,7 @@ class ExerciseController extends Controller
         $this->get('/exercises', 'exercises');
         $this->get('/exercises/{id}', 'exerciseDetail');
         $this->get('/exercises/submit/{id}', 'exerciseSubmit');
+        $this->get('/exercises/cancel/{id}', 'exerciseCancel');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
         $this->overrideExercice();
     }
@@ -31,16 +32,16 @@ class ExerciseController extends Controller
             }
         }
         $weeklyProgress = null;
-        $indProgress = null;
+        $findProgress = null;
         if (!$this->isUserTeacher()) {
             $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
-            $indProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
+            $findProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
         }
 
         return $this->render('exercises/exercises_listing', [
             'exercisesByWeek' => $exercisesByWeek,
             'weeklyProgress' => $weeklyProgress,
-            'individualProgress' => $indProgress,
+            'individualProgress' => $findProgress,
         ]);
     }
 
@@ -59,15 +60,39 @@ class ExerciseController extends Controller
         ]);
     }
 
+    public function exerciseCancel(stdClass $exercise)
+    {
+        $broker = new ExerciseBroker();
+        $student = $this->getUser();
+        $exerciseToDelete = $broker->getExerciseByStudentDA($student['da'], $exercise->id);
+
+        unlink($exerciseToDelete->dir_path);
+        $broker->deleteExercise($student['da'], $exercise->id);
+
+        Flash::success("L'exercice à été effacé avec succès");
+        return $this->redirect($this->request->getReferer());
+    }
+
     public function exerciseDetail(stdClass $exercise)
     {
+        $state = "unsubmitted";
+        $corrected = !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false;
+        $submitted = !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false;
+
+        if ($corrected && $submitted) {
+            $state = "finished";
+        } else if (!$corrected && $submitted) {
+            $state = "uncorrected";
+        }
+
         return $this->render('exercises/exercise_details', [
             'exercise' => $exercise,
             'action' => "/submit/exercise/" . $exercise->id,
             'tips' => $this->gibberishTip($exercise->id),
             'completion' => $this->calculateCompletion($exercise),
-            'corrected' => !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false,
-            'submitted' => !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false
+            'state' => $state,
+            'corrected' => $corrected,
+            'submitted' => $submitted
         ]);
     }
 
