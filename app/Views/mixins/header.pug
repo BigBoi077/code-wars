@@ -34,8 +34,8 @@ mixin header()
         a.profile-pic(href="/profile")
             img(src=profileImageUrl)
       .d-flex
-        a(href="/profile/notifications").bell.mr-2
-          button.ml-3.mr-0
+        a(href="/profile/notifications").bell
+          button.ml-3(class=(!user.isTeacher) ? 'mr-2': '')
             i#bell.fas.fa-bell
         if user.isTeacher
           .dropdown.d-flex.align-items-center
@@ -51,7 +51,7 @@ mixin header()
               li.p-1
                 a(href="/management/weeks").dropdown-item Semaines
         form.disconnect(action="/logout", method="post")
-          button.ml-3
+          button
             i#icon-header.fas.fa-power-off
 
 block script
