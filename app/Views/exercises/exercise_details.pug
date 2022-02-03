@@ -77,15 +77,17 @@ block body
                     p.pl-0.blur.grey-border=tip.tip
 
       if !corrected && !submitted
-        a(href="/exercises/submit/" + exercise.id).btn.btn-yellow.submit
-          +teamIcon(student)
-          p Soumettre une solution
+        form(action="/exercises/submit/" + exercise.id method="POST").submit
+          button(type="submit").btn.btn-yellow
+            +teamIcon(student)
+            p Soumettre une solution
       else if !corrected && submitted
-        a(href="/exercises/cancel/" + exercise.id).btn.btn-yellow.cancel
-          +teamIcon(student)
-          p Annuler la remise
-        button.btn.btn-disabled.waiting
-          p En attente de correction
+        form(action="/exercises/cancel/" + exercise.id method="POST").submit
+          button(type="submit").btn.btn-yellow.cancel
+            +teamIcon(student)
+            p Annuler la remise
+          a.btn.btn-disabled.waiting
+            p En attente de correction
       else
         button.btn.btn-disabled.submit
           p Corrigé

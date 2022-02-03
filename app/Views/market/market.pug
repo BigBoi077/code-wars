@@ -33,8 +33,8 @@ block body
 						.card-body
 							h3.card-title #{item.name}
 							p.card-text #{item.description}
-							.row.buying-element-row
-								div.d-flex.align-items-center
+							.row.buying-element-row.d-flex.align-items-center
+								div
 									+star_wars_money(item.price)
 								if studentItems !== null
 									- var contains = false;
@@ -42,14 +42,14 @@ block body
 										if studentItem.item_id === item.id
 											- contains = true
 									if !user.isTeacher
-										a(href=(!contains) ? '/market/buy/' + item.id: '#')
+										form(action=(!contains) ? '/market/buy/' + item.id: '#' method="post").mb-0
 											button(disabled=contains).btn.btn-yellow#buyBtn
 												p
 													| Acheter
 													i.fas.fa-shopping-basket
 								else
 									if !user.isTeacher
-										a(href='/market/buy/' + item.id)
+										form(action='/market/buy/' + item.id method="post").mb-0
 											button.btn.btn-yellow#buyBtn
 												p
 													| Acheter

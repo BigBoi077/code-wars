@@ -14,8 +14,8 @@ class ExerciseController extends Controller
     {
         $this->get('/exercises', 'exercises');
         $this->get('/exercises/{id}', 'exerciseDetail');
-        $this->get('/exercises/submit/{id}', 'exerciseSubmit');
-        $this->get('/exercises/cancel/{id}', 'exerciseCancel');
+        $this->post('/exercises/submit/{id}', 'exerciseSubmit');
+        $this->post('/exercises/cancel/{id}', 'exerciseCancel');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
         $this->overrideExercice();
     }
@@ -63,6 +63,12 @@ class ExerciseController extends Controller
     public function exerciseCancel(stdClass $exercise)
     {
         $broker = new ExerciseBroker();
+
+        if ($broker->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
+            Flash::error("Vous ne pouvez pas faire cela !");
+            return $this->redirect('/exercises');
+        }
+
         $student = $this->getUser();
         $exerciseToDelete = $broker->getExerciseByStudentDA($student['da'], $exercise->id);
 

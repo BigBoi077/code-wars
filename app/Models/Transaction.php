@@ -56,11 +56,11 @@ class Transaction
         $item = ItemService::get($item_id);
         $student = StudentService::get($da);
         if ($student->cash < $item->price) {
-            array_push($this->errorMessages, 'Pas assez d\'argent.');
+            array_push($this->errorMessages, "Vous n'avez pas assez d'argent pour cet article.");
             return;
         }
         if (StudentItemService::exists($item_id, $da)) {
-            array_push($this->errorMessages, 'Article déjà acheté.');
+            array_push($this->errorMessages, "Vous avez déjà acheté cet article.");
             return;
         }
         StudentItemService::create($item_id, $da);

@@ -13,8 +13,7 @@ class MarketController extends Controller
 	public function initializeRoutes()
 	{
 		$this->get('/market', 'market');
-
-        $this->get('/market/buy/{id}', 'buy');
+        $this->post('/market/buy/{id}', 'buy');
 	}
 
 	public function market() {

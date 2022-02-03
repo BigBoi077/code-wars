@@ -440,6 +440,12 @@ body {
     min-height: 48px;
 }
 
+.single-mission-detail form.submit {
+    display: flex;
+    justify-content: center;
+    grid-area: submit;
+}
+
 .btn-disabled.submit, .btn-yellow.submit {
     grid-area: submit;
 }
@@ -921,7 +927,7 @@ text-align: center;
     margin: 32px auto auto;
 }
 
-.single-mission-detail.unsubmitted, .single-mission-detail.finished {
+.single-mission-detail {
     grid-template-areas:
     "title            title            title            title"
     "separator        separator        separator        separator"
@@ -938,19 +944,6 @@ text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.single-mission-detail.uncorrected {
-    grid-template-areas:
-    "title            title            title            title"
-    "separator        separator        separator        separator"
-    "debrief          debrief          .                info"
-    "description      description      description      info"
-    "description      description      description      info"
-    ".                .                .                info"
-    "example          example          example          example"
-    "tips             tips             tips             tips"
-    ".                cancel           waiting           .";
 }
 
 .single-mission-submit {
