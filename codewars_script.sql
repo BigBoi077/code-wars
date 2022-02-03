@@ -1,7 +1,6 @@
 set search_path = codewars;
 
 /*--DROP-TALBES--*/
-drop table if exists file;
 drop table if exists studentExercise;
 drop table if exists studenttip;
 drop table if exists tips;
@@ -63,17 +62,18 @@ create table if not exists team (
 );
 
 create table if not exists person (
-    da int,
+    id serial,
+    da varchar unique,
     username varchar,
     firstname varchar,
     lastname varchar,
     email varchar,
-    constraint pk_da_person primary key (da)
+    constraint pk_person_id primary key (id)
 );
 
 create table if not exists "user" (
     id serial,
-    da int,
+    da varchar unique,
     password varchar,
     unique (da),
     constraint fk_da_user foreign key (da) references person(da),
@@ -81,34 +81,35 @@ create table if not exists "user" (
 );
 
 create table if not exists student (
-    da int,
+    id serial,
+    da varchar unique,
     team_id int,
     cash bigint,
     points bigint,
     constraint fk_team_id foreign key (team_id) references team(id),
     constraint fk_da_student foreign key (da) references "user"(da),
-    constraint pk_da_student primary key (da)
+    constraint pk_student_id primary key (id)
 );
 
 
 create table if not exists studenttip (
     id serial,
     tip_id int,
-    student_da int,
+    student_da varchar,
     constraint fk_studenttip_tip_id foreign key (tip_id) references tips(id),
     constraint fk_tip_student_da foreign key (student_da) references student(da),
     constraint pk_studenttip_id primary key (id)
 );
 
 create table if not exists teacher (
-    da int,
+    da varchar,
     constraint fk_da_teacher foreign key (da) references "user"(da),
     constraint pk_da_teacher primary key (da)
 );
 
 create table if not exists studentExercise (
     id serial,
-    student_da int,
+    student_da varchar,
     exercise_id int,
     completed bool,
     corrected bool,
@@ -118,14 +119,6 @@ create table if not exists studentExercise (
     constraint fk_id_exercise foreign key (exercise_id) references exercise(id),
     constraint fk_da_student foreign key (student_da) references student(da),
     constraint pk_id_student_exercise primary key (id)
-);
-
-create table if not exists file (
-    student_exercise_id int,
-    file_path varchar,
-    corrected_file_path varchar,
-    constraint fk_student_exercise_id foreign key (student_exercise_id) references studentExercise(id),
-    constraint pk_student_exercise_id primary key (student_exercise_id)
 );
 
 create table if not exists item (
@@ -139,7 +132,7 @@ create table if not exists item (
 create table if not exists studentItem (
     id serial,
     item_id int,
-    student_da int,
+    student_da varchar,
     bought_date date,
     constraint fk_item_id foreign key (item_id) references item(id),
     constraint fk_student_da foreign key (student_da) references student(da),
@@ -169,13 +162,9 @@ create table if not exists log (
     id serial,
     date date,
     ip varchar,
-    da int,
+    da varchar,
     method varchar(4),
     action varchar,
     constraint fk_da_log foreign key (da) references "user"(da),
     constraint pk_id_log primary key (id)
 );
-
-insert into person(da, username, firstname, lastname, email) values (000000, 'Prof', 'big', 'boi', 'admin@gmail.com');
-insert into "user"(id, da, password) values (default, 000000, '$2y$10$B9bEPdKiHAl0uL/MrIQLsOCmEh4.PtGPZLaqKbODyTrytc.zW3e8y');
-insert into teacher(da) values (000000);
