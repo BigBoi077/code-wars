@@ -7,22 +7,23 @@ block header
   +header()
 
 block body
-  +flash
-  .row.mission-header
-    h1.mb-3 Correction
   .container
-    if corrections == null
-      h4.text-muted.text-center Aucun exercice à corriger pour l'instant...
-    else
-      h5.text-muted Consulter la liste des solutions. Vous avez (#{count(corrections)}) missions à corriger
-    each correction, person in corrections
-      h2.mt-4 #{person}
-      hr
-      ul.mb-4
-        each exercise, index in correction
-          li
-            a(href="/management/correction/detail/" + person + "/"  + exercise.exercise_id + "/" + exercise.id ).text-dark
-              p.m-0.student-row-element #{exercise.name} (Remis le #{format('date', exercise.submit_date)})
+    .row.mt-5.p-4.main-card
+      .w-100
+        h1 Correction
+        hr
+      if corrections == null
+        h4.text-muted.text-center Aucun exercice à corriger pour l'instant...
+      else
+        h5.text-muted Consulter la liste des solutions. Vous avez (#{count(corrections)}) missions à corriger
+      each correction, person in corrections
+        h2.mt-4 #{person}
+        hr
+        ul.mb-4
+          each exercise, index in correction
+            li
+              a(href="/management/correction/detail/" + person + "/"  + exercise.exercise_id + "/" + exercise.id ).text-dark
+                p.m-0.student-row-element #{exercise.name} (Remis le #{format('date', exercise.submit_date)})
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

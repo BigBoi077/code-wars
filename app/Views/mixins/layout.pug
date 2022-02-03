@@ -9,7 +9,6 @@ include confirmationModal
 include footer
 include weekProgress
 include teamIcon
-//include input_modal
 
 doctype html
 html
@@ -19,7 +18,7 @@ html
     link(rel="stylesheet" href="/stylesheets/style.css")
   block header
   .page
-    block flash
+    +flash
     block score
     block body
   +footer

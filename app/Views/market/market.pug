@@ -7,45 +7,50 @@ block title
 block header
 	+header()
 
-block body
+block score
+	+scoreBoard()
+
+block flash
 	+flash
+
+block body
 	.container
-		#score.d-flex.justify-content-center.my-5
-			+scoreBoard()
-	.row.shop-header
-		h1 Magasin
-	if user.isTeacher
-		.container.d-flex.justify-content-end
-			a(href='/management/items').mr-5
-				button.btn.btn-yellow#Btn
-					p
-						i.fas.fa-plus-square
-						| Gestion des articles
-	.row.shop-items-list
-		each item in items
-			.card.shop-item.col-lg-3.col-md-6.col-12
-				img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
-				.card-body
-					h3.card-title #{item.name}
-					p.card-text #{item.description}
-					.row.buying-element-row
-						div.d-flex.align-items-center
-							+star_wars_money(item.price)
-						if studentItems !== null
-							- var contains = false;
-							each studentItem in studentItems
-								if studentItem.item_id === item.id
-									- contains = true
-							if !user.isTeacher
-								a(href=(!contains) ? '/market/buy/' + item.id: '#')
-									button(disabled=contains).btn.btn-yellow#buyBtn
-										p
-											| Acheter
-											i.fas.fa-shopping-basket
-						else
-							if !user.isTeacher
-								a(href='/market/buy/' + item.id)
-									button.btn.btn-yellow#buyBtn
-										p
-											| Acheter
-											i.fas.fa-shopping-basket
+		.row.mt-5.p-4.main-card
+			.w-100
+				.d-flex.justify-content-between.align-items-center
+					h1 Magasin
+					if user.isTeacher
+						a(href='/management/items')
+							button.btn.btn-yellow
+								p.mb-0
+									i.fas.fa-plus-square.mr-2
+									| Gestion des articles
+				hr
+			.row.shop-items-list.p-0.container-fluid
+				each item in items
+					.card.shop-item
+						img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
+						.card-body
+							h3.card-title #{item.name}
+							p.card-text #{item.description}
+							.row.buying-element-row
+								div.d-flex.align-items-center
+									+star_wars_money(item.price)
+								if studentItems !== null
+									- var contains = false;
+									each studentItem in studentItems
+										if studentItem.item_id === item.id
+											- contains = true
+									if !user.isTeacher
+										a(href=(!contains) ? '/market/buy/' + item.id: '#')
+											button(disabled=contains).btn.btn-yellow#buyBtn
+												p
+													| Acheter
+													i.fas.fa-shopping-basket
+								else
+									if !user.isTeacher
+										a(href='/market/buy/' + item.id)
+											button.btn.btn-yellow#buyBtn
+												p
+													| Acheter
+													i.fas.fa-shopping-basket
