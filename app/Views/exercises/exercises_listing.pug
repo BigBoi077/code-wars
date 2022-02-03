@@ -32,21 +32,24 @@ block body
               .week-exercises(id="weekExercises" + index)
                   each exercise, index in week
                     if index !== 'startDate' && index !== 'number'
-                      .single-mission-row.mb-4.bg-white.card
+                      a(href="/exercises/" + exercise.id).single-mission-row.mb-4.bg-white.card.no-decoration
                         .mission-information.card-body.p-0
                           .mission-information-header
-                            a(href="/exercises/" + exercise.id).text-dark
-                              h4 #{exercise.name}
+                            h4.text-dark #{exercise.name}
                             .mission-detail
                               .mission-results
-                                .mission-cash-reward
+                                .mission-cash-reward.text-dark
                                   +star_wars_money(exercise.cash_reward)
-                                .mission-point-reward
+                                .mission-point-reward.text-dark
                                   +star_wars_points(exercise.point_reward)
                               .mission-detail
                                 .detail-link
-                                  a(href="/exercises/" + exercise.id)
-                                    i.fas.fa-info-circle.fa-2x
+                                  if exercise.completed
+                                    i.fas.fa-check-circle.submitted.fa-2x
+                                  else if exercise.corrected
+                                    i.fas.fa-check-circle.corrected.fa-2x
+                                  else
+                                    i.fas.fa-times-circle.not-submitted.fa-2x
       .col-5.pr-0
         if student != null
           .card.mb-4.w-100.fixed-ct

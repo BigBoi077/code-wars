@@ -30,7 +30,7 @@
     min-height: 75%;
 }
 
-.no-decoration {
+.no-decoration, .no-decoration:hover {
     text-decoration: none;
     list-style: none;
 }
