@@ -17,6 +17,7 @@ class ExerciseController extends Controller
         $this->post('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/exercises/cancel/{id}', 'exerciseCancel');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
+        $this->post("/exercises/tips/{tipId}/buy", 'buyTip');
         $this->overrideExercice();
     }
 
@@ -155,6 +156,25 @@ class ExerciseController extends Controller
 
         Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
         return $this->redirect('/exercises/' . $exercise->id);
+    }
+
+    public function buyTip($tipId)
+    {
+        $user = $this->getUser();
+        $student = (new StudentBroker())->findByDa($user['da']);
+        $broker = new TipBroker();
+        $tip = $broker->GetById($tipId);
+        if ($student->cash < $tip->price) {
+            Flash::error("Vous n'avez pas assez d'argent pour cette indice...");
+            return $this->redirect($this->request->getReferer());
+        } else if ($broker->Has($tipId, $student->da)) {
+            Flash::error("Vous avez déjà cette indice, pourquoi payer deux fois.");
+            return $this->redirect($this->request->getReferer());
+        }
+        $broker->buy($tipId, $student->da);
+        (new StudentBroker())->addCash($student->da, -($tip->price));
+        Flash::success("Vous avez acheter l'indice avec succès!");
+        return $this->redirect($this->request->getReferer());
     }
 
     private function gibberishTip($exerciseId): array
