@@ -7,50 +7,47 @@ block header
   +header()
 
 block body
-  .main-container
-    +flash
-    h1 Missions
-    hr.separator
-    .exercises-list
-      .row
-        .col-3.student-header-col
-          h4.student-header-element Nom
-        .col-2.student-header-col
-          h4.student-header-element Difficulté
-        .col-2.student-header-col
-          h4.student-header-element.ml-0 Argent
-        .col-1.student-header-col
-          h4.student-header-element.ml-0 Points
-        .col-2.student-header-col
-          h4.student-header-element Semaine
-        .col.d-flex.justify-content-end
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 Missions
           a(href='/management/exercises/create')
-            button.btn.btn-yellow#Btn
-              p
-                i.fas.fa-plus-square
-                | Nouvel Exercice
+            button.btn.btn-yellow
+              i.fas.fa-plus-square.mr-2
+              | Nouvel Exercice
+        br
+        table.table.w-100
+          thead
+            tr
+              th Nom
+              th Difficulté
+              th Argent
+              th Points
+              th Semaine
+              th
+          tbody.w-100
+            each exercise in exercises
+              tr
+                td
+                  p.student-row-element #{exercise.name}
+                td
+                  each difficulty, index in difficulties
+                    if (index === exercise.difficulty)
+                      p.student-row-element #{difficulty}
+                td
+                  +star_wars_money(exercise.cash_reward)
+                td
+                  +star_wars_points(exercise.point_reward)
+                td
+                  p.student-row-element Semaine #{exercise.number}
+                td
+                  a.col(href='/management/exercises/' + exercise.id + '/tips')
+                    i.fas.fa-lightbulb.student-icons
+                  a.col(href='/management/exercises/' + exercise.id + '/edit')
+                    i.fas.fa-edit.student-icons
+                  a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
+                    i.fas.fa-trash.student-icons
       each exercise in exercises
-        .row.student-row.box-shadow.mb-4
-          .col-lg-3.col-sm-4
-            p.student-row-element #{exercise.name}
-          .col-lg-2.col-sm-4
-            each difficulty, index in difficulties
-              if (index === exercise.difficulty)
-                p.student-row-element #{difficulty}
-          .col-lg-2.col-sm-4.d-flex.align-items-center
-            +star_wars_money(exercise.cash_reward)
-          .col-lg-1.col-sm-3.d-flex.align-items-center
-            +star_wars_points(exercise.point_reward)
-          .col-lg-2.col-sm-3
-            p.student-row-element Semaine #{exercise.number}
-          .col.d-flex.justify-content-end
-            .row.d-flex.align-items-center
-              a.col(href='/management/exercises/' + exercise.id + '/tips')
-                i.fas.fa-lightbulb.student-icons
-              a.col(href='/management/exercises/' + exercise.id + '/edit')
-                i.fas.fa-edit.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
-                i.fas.fa-trash.student-icons
-  each exercise in exercises
-    +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
-      '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)
+        +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+          '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)

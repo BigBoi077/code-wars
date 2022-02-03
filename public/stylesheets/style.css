@@ -64,8 +64,13 @@ html, body {
     background-color: var(--background);
 }
 
+html {
+    font-size: 100%;
+}
+
 body {
     padding-bottom: 276px;
+    font-size: 1rem;
 }
 
 .letter-space-1 {
@@ -379,14 +384,14 @@ header .gestion-button {
     color: var(--dark);
 }
 
-.menu-items > li {
+.menu-items > li, h1, h2, h3, h4, h5, h6 {
     font-family: 'RobotoBold', sans-serif;
     color: var(--dark);
 }
 
 body {
     font-size: 1.1rem;
-    font-family: 'RobotoBold', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .leftImg {
@@ -566,7 +571,7 @@ body {
 }
 
 #productImg {
-    width: 10rem;
+    width: 7rem;
     margin: 1.75rem auto;
 }
 
@@ -585,6 +590,9 @@ body {
 .shop-items-list {
     width: 100%;
     margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 22px;
 }
 
 .shop-header, .mission-header {
@@ -604,7 +612,6 @@ body {
 
 .shop-item {
     border-radius: 6px;
-    width: 30%;
 }
 
 .shop-item .card-body {
@@ -621,7 +628,7 @@ body {
 
 .buying-element-row {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -637,7 +644,6 @@ body {
 }
 
 .student-row-element, .student-header-element {
-    margin: 1.75rem;
     word-break: break-all;
 }
 
@@ -759,6 +765,22 @@ body {
 
 .dropdown-menu {
     z-index: 1000;
+    left: -55px !important;
+    top: 20px !important;
+    margin-top: 14px;
+}
+
+[aria-labelledby="managementDropdown"]::before {
+    content: '';
+    z-index: 1000;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 18px 18px 18px;
+    border-color: transparent transparent #d2d3d4 transparent;
+    position: absolute;
+    top: -18px;
+    left: 58px;
 }
 
 .main-ct {
@@ -1285,6 +1307,58 @@ footer li .omnivox-logo {
 
 .error-message {
     font-size: 4vh;
+}
+
+/* Tables */
+
+thead {
+    border-top: none;
+}
+
+thead th {
+    font-size: 1rem;
+}
+
+table {
+
+}
+
+table p {
+    margin: 0;
+    padding: 0;
+}
+
+th {
+    text-align: left;
+}
+
+.table thead th {
+    border-bottom: 0;
+}
+
+.table td, .table th {
+    padding: 1.25rem 1.25rem 1.25rem 0;
+}
+
+.table td:last-child {
+    padding-right: 0;
+    padding-left: 2rem;
+}
+
+.table th {
+    border-top: none;
+}
+
+.table tbody td {
+    vertical-align: center;
+}
+
+.table .start {
+    text-align: left;
+}
+
+.table td:last-child {
+    text-align: right;
 }
 
 /* endregion */

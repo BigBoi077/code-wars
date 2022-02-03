@@ -26,15 +26,15 @@ block body
 									i.fas.fa-plus-square.mr-2
 									| Gestion des articles
 				hr
-			.row.shop-items-list.p-0.container-fluid
+			.row.shop-items-list.p-0
 				each item in items
 					.card.shop-item
 						img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
 						.card-body
 							h3.card-title #{item.name}
-							p.card-text #{item.description}
-							.row.buying-element-row.d-flex.align-items-center
-								div
+							p.pb-3 #{item.description}
+							.row.buying-element-row
+								div.d-flex.align-items-center
 									+star_wars_money(item.price)
 								if studentItems !== null
 									- var contains = false;
