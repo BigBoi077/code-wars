@@ -5,52 +5,60 @@ block title
 
 block header
   +header()
-block body
-  .main-container
-    +flash
-    h1 Étudiants
-    a(href='/management/students/create').mr-4
-      button.btn.btn-yellow#Btn
-        i.fas.fa-plus-square.m-1
-        | Nouvel étudiant
-    a(href='/management/students/rapidAdd')
-      button.btn.btn-yellow#Btn
-        img.svg-icons.m-1(src="/assets/images/ethereum_symbol.svg")
-        | Ajout rapide
-    hr.separator
-    .student-list
-      .row
-        .col-2.student-header-col
-          h4.student-header-element DA
-        .col-3.student-header-col
-          h4.student-header-element Nom
-        .col-2.student-header-col
-          h4.student-header-element Équipe
-        .col-2.student-header-col
-          h4.student-header-element Balance
-        .col-2.student-header-col
-          h4.student-header-element Points
 
+block body
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 Étudiants
+          div.d-flex
+            if user.isTeacher
+              a(href='/management/students/create')
+                button.btn.btn-yellow
+                  p.mb-0
+                    i.fas.fa-plus-square.m-1
+                    | Nouvel étudiant
+              a(href='/management/students/rapidAdd')
+                button.btn.btn-yellow
+                  p.mb-0
+                    img.svg-icons.m-1(src="/assets/images/ethereum_symbol.svg")
+                    | Ajout rapide
+        hr
+      .row
+        .student-list
+          .row
+            .col-2.student-header-col
+              h4.student-header-element DA
+            .col-3.student-header-col
+              h4.student-header-element Nom
+            .col-2.student-header-col
+              h4.student-header-element Équipe
+            .col-2.student-header-col
+              h4.student-header-element Balance
+            .col-2.student-header-col
+              h4.student-header-element Points
+
+          each student in students
+            .row.student-row.box-shadow.mb-4
+              .col-2
+                p.student-row-element #{student.da}
+              .col-3
+                p.student-row-element
+                  a.student-link(href='/management/students/' + student.da + '/profile')
+                    | #{student.firstname} #{student.lastname}
+              .col-2
+                p.student-row-element #{student.team_name}
+              .col-2.ml-4.d-flex.align-items-center
+                +star_wars_money(student.cash)
+              .col-1.d-flex.align-items-center
+                +star_wars_points(student.points)
+              .col.d-flex.justify-content-end
+                .row.d-flex.align-items-center
+                  a.col(href='/management/students/' + student.da + '/edit')
+                    i.fas.fa-edit.student-icons
+                  a.col(data-bs-toggle="modal" data-bs-target='#studentDeleteModal' + student.da)
+                    i.fas.fa-trash.student-icons
       each student in students
-        .row.student-row.box-shadow.mb-4
-          .col-2
-            p.student-row-element #{student.da}
-          .col-3
-            p.student-row-element
-              a.student-link(href='/management/students/' + student.da + '/profile')
-                | #{student.firstname} #{student.lastname}
-          .col-2
-            p.student-row-element #{student.team_name}
-          .col-2.ml-4.d-flex.align-items-center
-            +star_wars_money(student.cash)
-          .col-1.d-flex.align-items-center
-            +star_wars_points(student.points)
-          .col.d-flex.justify-content-end
-            .row.d-flex.align-items-center
-              a.col(href='/management/students/' + student.da + '/edit')
-                i.fas.fa-edit.student-icons
-              a.col(data-bs-toggle="modal" data-bs-target='#studentDeleteModal' + student.da)
-                i.fas.fa-trash.student-icons
-  each student in students
-    +confirmationModal("Suppression d'étudiant", 'Voulez-vous vraiment supprimer cet étudiant ?',
-      '/management/students/' + student.da + '/delete', 'studentDeleteModal' + student.da)
+        +confirmationModal("Suppression d'étudiant", 'Voulez-vous vraiment supprimer cet étudiant ?',
+          '/management/students/' + student.da + '/delete', 'studentDeleteModal' + student.da)

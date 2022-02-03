@@ -9,7 +9,6 @@ include confirmationModal
 include footer
 include weekProgress
 include teamIcon
-//include input_modal
 
 doctype html
 html
@@ -17,15 +16,13 @@ html
     block title
     link(rel="icon" href="/assets/images/icon_helmet.png")
     link(rel="stylesheet" href="/stylesheets/style.css")
-  body
-    block header
-    block flash
+  block header
+  .page
+    +flash
     block score
     block body
-    +footer
-    block script
-    script(src='/javascripts/vendor/jquery-3.5.1.min.js')
-    script(src='/javascripts/nav.js')
-    script(src='/javascripts/toggleMenu.js')
-
-
+  +footer
+  block script
+  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
+  script(src='/javascripts/nav.js')
+  script(src='/javascripts/toggleMenu.js')

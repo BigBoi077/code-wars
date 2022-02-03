@@ -16,9 +16,9 @@ block body
         h1 Classement
         hr
       .leaderboard.w-100
-        .student-row.box-shadow
+        .student-row.flex-column
           each student, index in students
-            .row.py-3.px-0.d-flex.align-items-center
+            .row.py-3.px-0.d-flex.align-items-center.w-100
               if index < 3
                 div.position-relative.gravatar-container
                   img.rounded-img.position-absolute(src=student.gravatarUrl)

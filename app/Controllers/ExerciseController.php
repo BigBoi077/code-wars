@@ -105,6 +105,7 @@ class ExerciseController extends Controller
     public function exerciseUpload($exercise)
     {
         $maxsize = 20971520;
+        $id = $exercise->id;
 
         if ($this->isUserTeacher()) {
             Flash::error("L'enseignant ne peut pas remettre des exercices.");
