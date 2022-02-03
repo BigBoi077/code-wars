@@ -19,19 +19,8 @@ mixin header()
         li
           a(href="/market") Magasin
         if user.isTeacher
-          .dropdown.d-flex.align-items-center
-            button(id="managementDropdown" type="button" data-bs-toggle="dropdown").btn.bg-transparent.dropdown-toggle.gestion-button Gestion
-            ul(aria-labelledby="managementDropdown").dropdown-menu.dropdown-menu-end
-              li.p-1
-                a(href="/management/correction").dropdown-item Correction
-              li.p-1
-                a(href="/management/students").dropdown-item Étudiants
-              li.p-1
-                a(href="/management/items").dropdown-item Magasin
-              li.p-1
-                a(href="/management/exercises").dropdown-item Missions
-              li.p-1
-                a(href="/management/weeks").dropdown-item Semaines
+          li
+            a(href="/management/correction") Correction
     .d-flex.flex-row
       .d-flex.align-items-center
         .text-right.pr-3.d-flex.flex-column
@@ -48,6 +37,19 @@ mixin header()
         a(href="/profile/notifications").bell.mr-2
           button.ml-3.mr-0
             i#bell.fas.fa-bell
+        if user.isTeacher
+          .dropdown.d-flex.align-items-center
+            button(id="managementDropdown" type="button" data-bs-toggle="dropdown").btn.bg-transparent.gestion-button
+              i#icon-header.fas.fa-cog
+            ul(aria-labelledby="managementDropdown").dropdown-menu.dropdown-menu-end
+              li.p-1
+                a(href="/management/students").dropdown-item Étudiants
+              li.p-1
+                a(href="/management/items").dropdown-item Magasin
+              li.p-1
+                a(href="/management/exercises").dropdown-item Missions
+              li.p-1
+                a(href="/management/weeks").dropdown-item Semaines
         form.disconnect(action="/logout", method="post")
           button.ml-3
             i#icon-header.fas.fa-power-off
