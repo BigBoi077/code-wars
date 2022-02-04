@@ -5,44 +5,48 @@ block title
 
 block header
   +header()
+
 block body
-  +flash
-  .student-form-container
-    h4 Ajout rapide
-    hr
-    form(method='post', action="/management/students/rapidAdd")
-      .form-row
-        .form-group.col-12
-          label(for="for") Pour
-          select.form-control(id='for', name='for' required)
-            option(value="team") Pour l'équipe complète
-            option(value="student") Pour un élève
-      .form-row.hidden#team
-        .form-group.col-12
-          label(for="team_id") Équipes
-          select.form-control(id='team_id', name='team_id')
-            option(value=null disabled="disabled" selected=true) Selectionnez une équipe
-            each team in teams
-              option(value=team.id)
-                | #{team.name}
-      .form-row.hidden#student
-        .form-group.col-12
-          label(for="student_da") Élève
-          select.form-control(id='student_da', name='student_da')
-            option(value=null disabled="disabled" selected=true) Selectionnez un élève
-            each student in students
-              option(value=student.da)
-                | #{student.firstname} #{student.lastname}
-      .form-row
-        .form-group.col-6
-          label(for="cash") Argent (Optionnel)
-          input.form-control(placeholder="0" id='cash', name='cash', type='number' value=0)
-        .form-group.col-6
-          label(for="points") Points (Optionnel)
-          input.form-control(placeholder="0" id='points', name='points', type='number' value=0)
-      .form-row
-        button#submitBtn.btn(type='submit')
-          | Ajouter
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 Ajout rapide
+        hr
+      form.w-100(method='post', action="/management/students/rapidAdd")
+        .form-row
+          .form-group.col-6
+            label(for="for") Pour
+            select.form-control(id='for', name='for' required)
+              option(value="team") Pour l'équipe complète
+              option(value="student") Pour un élève
+          .form-group.col-6
+            label(for="team_id") Équipes
+            select.form-control(id='team_id', name='team_id')
+              option(value=null disabled="disabled" selected=true) Selectionnez une équipe
+              each team in teams
+                option(value=team.id)
+                  | #{team.name}
+        .form-row.hidden#student
+          .form-group.col-12
+            label(for="student_da") Élève
+            select.form-control(id='student_da', name='student_da')
+              option(value=null disabled="disabled" selected=true) Selectionnez un élève
+              each student in students
+                option(value=student.da)
+                  | #{student.firstname} #{student.lastname}
+        .form-row
+          .form-group.col-6
+            label(for="cash") Argent (Optionnel)
+            input.form-control(placeholder="0" id='cash', name='cash', type='number' value=0)
+          .form-group.col-6
+            label(for="points") Points (Optionnel)
+            input.form-control(placeholder="0" id='points', name='points', type='number' value=0)
+        .form-row
+          .form-row.w-50.m-auto
+            button#submitBtn.btn(type='submit')
+              i.fas.fa-plus-square.mr-2
+              | Ajouter
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

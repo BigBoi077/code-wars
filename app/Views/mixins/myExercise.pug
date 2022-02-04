@@ -1,15 +1,11 @@
 mixin exerciseRow(exercise)
-  .row.mb-2
-    .col-4
-      h6 #{exercise.name}
-    .col-2
-      h6=exercise.submit_date
-    .col-2.student-exercise-col
+  tr
+    td=exercise.name
+    td=exercise.submit_date
+    td
       if exercise.corrected
         i.far.fa-check-circle.corrected.student-exercise-element
       else
         i.far.fa-times-circle.not-submitted.student-exercise-element
-    .col-2
-      h6=exercise.cash_reward
-    .col-2
-      h6=exercise.point_reward
+    td=exercise.cash_reward
+    td=exercise.point_reward

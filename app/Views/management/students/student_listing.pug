@@ -14,12 +14,12 @@ block body
           h1 Étudiants
           div.d-flex
             if user.isTeacher
-              a(href='/management/students/create').mr-4
+              a.no-decoration(href='/management/students/create').mr-4
                 button.btn.btn-yellow
                   p.mb-0
                     i.fas.fa-plus-square.m-1
                     | Nouvel étudiant
-              a(href='/management/students/rapidAdd')
+              a.no-decoration(href='/management/students/rapidAdd')
                 button.btn.btn-yellow
                   p.mb-0
                     i.fas.fa-hat-wizard.m-1
