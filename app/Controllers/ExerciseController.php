@@ -209,7 +209,7 @@ class ExerciseController extends Controller
                 $nbHasCompleted++;
             }
         }
-        return $nbHasCompleted / Count($allStudent) * 100;
+        return Round($nbHasCompleted / Count($allStudent) * 100, 2);
     }
 
     private function overrideExercise()

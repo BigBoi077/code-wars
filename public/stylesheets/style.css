@@ -1244,6 +1244,11 @@ text-align: center;
     width: auto;
 }
 
+.leaderboard .not-top-3 {
+    height: 32px;
+    width: auto;
+}
+
 .leaderboard .leaderboard-overlay {
     height: 64px;
     width: 64px;

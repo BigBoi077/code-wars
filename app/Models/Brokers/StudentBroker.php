@@ -9,7 +9,7 @@ class StudentBroker extends Broker
 
     public function findByDa($da) : ?stdClass
     {
-        $sql = "SELECT s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email 
+        $sql = "SELECT s.id, s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email 
                 from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
@@ -62,17 +62,17 @@ class StudentBroker extends Broker
 
     public function getExerciseDone($da): int
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.completed = true";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.corrected = true";
         return $this->selectSingle($sql, [$da])->done;
     }
 
     public function getAll()
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
+        $sql = "SELECT s.id, s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
                 join codewars.user u on s.da = u.da
                 join codewars.person p on u.da = p.da
 				join codewars.team t on s.team_id = t.id
-                ORDER BY s.points desc";
+                ORDER BY s.points desc, s.cash desc";
         return $this->select($sql);
     }
 

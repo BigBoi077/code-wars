@@ -39,6 +39,8 @@ class TeamController extends Controller
     public function leaderboard()
     {
         $students = StudentService::getAll();
+        $index = 0;
+        $current = StudentService::get($this->getUser()['da']);
         foreach ($students as $student) {
             $student->gravatarUrl = self::DEFAULT_PROFILE_PIC;
             if (is_string($student->email)) {
@@ -47,10 +49,14 @@ class TeamController extends Controller
                     $student->gravatarUrl = $gravatar->getUrl();
                 }
             }
+            if ($current->id === $student->id) {
+                $current->position = $index + 1;
+            }
+            $index++;
         }
-
         return $this->render('teams/leaderboard', [
             'students' => $students,
+            'current' => $current
         ]);
     }
 
@@ -62,11 +68,12 @@ class TeamController extends Controller
         $teamProgress = ['Sith' => 0, 'Rebel' => 0];
         foreach ($students as $student) {
             $teamProgress[$student->team_name] += $broker->getExerciseDone($student->da);
+
         }
         $nbExercise = Count((new ExerciseBroker())->getAll());
 
-        $teamProgress['Sith'] = ($nbSith == 0) ? 0 : Floor(($teamProgress['Sith'] / ($nbSith * $nbExercise)) * 100);
-        $teamProgress['Rebel'] = ($nbRebel == 0) ? 0 : Floor(($teamProgress['Rebel'] / ($nbRebel * $nbExercise)) * 100);
+        $teamProgress['Sith'] = ($nbSith == 0) ? 0 : Round($teamProgress['Sith'] / ($nbSith * $nbExercise) * 100, 2);
+        $teamProgress['Rebel'] = ($nbRebel == 0) ? 0 : Round($teamProgress['Rebel'] / ($nbRebel * $nbExercise) * 100, 2);
 
         return $teamProgress;
     }
