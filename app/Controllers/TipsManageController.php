@@ -52,12 +52,12 @@ class TipsManageController extends TeacherController
         return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
     }
 
-    public function editTip($exercise, $tip)
+    public function editTip($exerciseId, $tipId)
     {
         return $this->render("/management/exercises/tips_form", [
             'title' => "Modifier l'indice",
-            'action' => "/management/exercises/" . $exercise->id . "/tips/" . $tip->id ."/update",
-            'tip' => (new TipBroker())->GetById($tip->id)
+            'action' => "/management/exercises/" . $exerciseId . "/tips/" . $tipId ."/update",
+            'tip' => (new TipBroker())->GetById($tipId)
         ]);
     }
 
@@ -67,12 +67,12 @@ class TipsManageController extends TeacherController
             $tip = TipService::update($tipId, $this->buildForm());
             if ($tip->hasSucceeded()) {
                 Flash::success('Indice modifié avec succès!');
-                return $this->redirect("/management/exercises/" . $exerciseId->id . "/tips");
+                return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
             }
             Flash::error($tip->getErrorMessages());
         }
         Flash::error('Une erreur est survenue.');
-        return $this->redirect("/management/exercises/" . $exerciseId->id . "/tips");
+        return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
     }
 
     public function deleteTip($exerciseId, $tipId)
@@ -83,7 +83,7 @@ class TipsManageController extends TeacherController
         } else {
             Flash::error('Une erreur est survenue.');
         }
-        return $this->redirect("/management/exercises/" . $exerciseId->id . "/tips");
+        return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
     }
 
     private function overrideExercise()
@@ -94,7 +94,7 @@ class TipsManageController extends TeacherController
                 if (is_null($exercise)) {
                     return $this->redirect('/management/exercises');
                 }
-                return $exercise;
+                return $exercise->id;
             } else {
                 return $this->redirect('/management/exercises');
             }
@@ -109,7 +109,7 @@ class TipsManageController extends TeacherController
                 if (is_null($tip)) {
                     return $this->redirect('/management/exercises');
                 }
-                return $tip;
+                return $tip->id;
             } else {
                 return $this->redirect('/management/exercises');
             }

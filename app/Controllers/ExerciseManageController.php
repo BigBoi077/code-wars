@@ -96,7 +96,7 @@ class ExerciseManageController extends TeacherController
                 if (is_null($exercise)) {
                     return $this->redirect('/management/exercises');
                 }
-                return $exercise;
+                return $exercise->id;
             } else {
                 return $this->redirect('/management/exercises');
             }

@@ -93,7 +93,7 @@ class ItemManageController extends TeacherController
                 if (is_null($item)) {
                     return $this->redirect('/management/items');
                 }
-                return $item;
+                return $item->id;
             } else {
                 return $this->redirect('/management/items');
             }

@@ -74,7 +74,7 @@ class WeekManageController extends TeacherController
                 if (is_null($week)) {
                     return $this->redirect('/management/weeks');
                 }
-                return $week;
+                return $week->id;
             } else {
                 return $this->redirect('/management/weeks');
             }

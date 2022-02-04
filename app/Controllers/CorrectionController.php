@@ -44,8 +44,8 @@ class CorrectionController extends Controller
     public function correctExercise($da, $id)
     {
         $form = $this->buildForm();
-        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id->id, $form->getValue('comment'));
-        $e = (new ExerciseBroker())->getCorrectionPath($id->id);
+        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
+        $e = (new ExerciseBroker())->getCorrectionPath($id);
         unlink($e->path);
         Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
         return $this->redirect('/management/correction');
@@ -102,7 +102,7 @@ class CorrectionController extends Controller
         }
 
         return $this->render('management/correction/correction_submit_detail', [
-            'exercise' => ExerciseService::get($id->id),
+            'exercise' => ExerciseService::get($id),
             'studentExercise' => $studentExercise,
             'fileContent' => $fileContent,
             'studentFirstname' => $studentArrayName[0],
@@ -118,7 +118,7 @@ class CorrectionController extends Controller
                 if (is_null($exercise)) {
                     return $this->redirect('/management/correction');
                 }
-                return $exercise;
+                return $exercise->id;
             } else {
                 return $this->redirect('/management/correction');
             }
