@@ -27,7 +27,7 @@ block body
               span #{format('decimal', exercise.cash_reward, 0, 0)}
           .row.mission-point-reward
             .col-2.mb-0
-              img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
+              img(src="/assets/images/ethereum_symbol.svg").svg-icons
             .col-8.mb-0
               span #{format('decimal', exercise.point_reward, 0, 0)}
           .row.mission-state
@@ -47,10 +47,10 @@ block body
               .col-8.mb-0
                 span Remis
           .col-12.mission-difficulty-container.mb-1
-            span Achèvement
+            span.mb-2 Achèvement
             h6.text-muted=completion + " % des élèves ont complétés l'exercises"
           .col-8.mission-difficulty-container
-            span Difficulté
+            span.mb-2 Difficulté
             .difficulty-stars
               - var i = 0
               - var difficultyDifference = 5 - exercise.difficulty
@@ -65,24 +65,25 @@ block body
           h3 Exemple d'exécution
           pre=exercise.execution_exemple
         .mission-tips.mt-4
-          h3 Indices de mission
-              each tip in tips
-                .row
-                  if tip.bought
-                    p.w-100.pl-0.grey-border=tip.tip
-                  else
-                    form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
-                      button.btn.btn-yellow.position-absolute.tip-buy-button
-                        +star_wars_money(tip.price)
-                    p.pl-0.blur.grey-border=tip.tip
+          if tips != null
+            h3 Indices de mission
+                each tip in tips
+                  .row
+                    if tip.bought
+                      p.w-100.pl-0.grey-border=tip.tip
+                    else
+                      form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
+                        button.btn.btn-yellow.position-absolute.tip-buy-button
+                          +star_wars_money(tip.price)
+                      p.pl-0.blur.grey-border=tip.tip
 
       if !corrected && !submitted
-        form(action="/exercises/submit/" + exercise.id method="POST").submit
+        form(action="/exercises/submit/" + exercise.id method="POST").submit.mb-0
           button(type="submit").btn.btn-yellow
             +teamIcon(student)
             p Soumettre une solution
       else if !corrected && submitted
-        form(action="/exercises/cancel/" + exercise.id method="POST").submit
+        form(action="/exercises/cancel/" + exercise.id method="POST").submit.mb-0
           button(type="submit").btn.btn-yellow.cancel
             +teamIcon(student)
             p Annuler la remise
