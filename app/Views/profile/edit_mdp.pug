@@ -1,7 +1,7 @@
 extends ../mixins/layout
 
 block title
-  title Modification Du MDP - Code Wars
+  title Modification du mot de passe - Code Wars
 
 block header
   +header()
@@ -15,7 +15,7 @@ block body
       form.w-100.mb-0(method='post', action="/profile/update/mdp")
         .form-row
           .form-group.col-6
-            label Mot de passe
+            label Nouveau mot de passe
             input.form-control(name='password', type='password')
           .form-group.col-6
             label Confirmer le mot de passe
