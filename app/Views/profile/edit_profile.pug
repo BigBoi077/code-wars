@@ -7,17 +7,20 @@ block header
   +header()
 
 block body
-  +flash
-  .student-form-container
-    h2.text-center.p-3 Modification du profil
-    form(method='post', action='/profile/update')
-      .form-row
-        .form-group.col-6
-          label Nom d'utilisateur
-          input.form-control(placeholder='E.g. : Yoda', name='username', type='text', value=student.username)
-        .form-group.col-6
-          label E-mail
-          input.form-control(placeholder="beepboop@gmail.com", name='email', type='text' value=student.email)
-      .form-row
-        button#submitBtn.btn(type='submit')
-          | Modifier les informations
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        h1 Modification du profil
+        hr
+      form.w-100.mb-0(method='post', action='/profile/update')
+        .form-row
+          .form-group.col-6
+            label Nom d'utilisateur
+            input.form-control(placeholder='E.g. : Yoda', name='username', type='text', value=student.username)
+          .form-group.col-6
+            label E-mail
+            input.form-control(placeholder="beepboop@gmail.com", name='email', type='text' value=student.email)
+        .form-row.w-50.m-auto
+          button#submitBtn.btn(type='submit')
+            i.fas.fa-edit.mr-2
+            | Modifier les informations

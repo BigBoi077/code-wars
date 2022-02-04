@@ -7,25 +7,28 @@ block header
   +header()
 
 block body
-  +flash
-  .student-form-container
-    h4 #{title}
-    hr
-    form(method='post', action=action)
-      .form-row
-        .form-group.col-12.mb-1
-          label(for='name') Nom de l'article
-          input.form-control(id='name', type='text', name='name', value=(item !== null) ? item.name : val('name'))
-        .form-group.col-12.mb-1
-          label(for='price') Prix
-          input.form-control(id='price', type='text', name='price', value=(item !== null) ? item.price : val('price'))
-        .form-group.col-12.mb-1
-          label(for="description") Description
-          textArea.form-control(id='description', name='description')
-            | #{(item !== null) ? item.description : val('description')}
-      .form-row
-        button#submitBtn.btn(type='submit')
-          if item !== null
-            | Modifier
-          else
-            | Créer
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 #{title}
+        hr
+      form.w-100(method='post', action=action)
+        .form-row
+          .form-group.col-12.mb-3
+            label(for='name') Nom de l'article
+            input.form-control(id='name', type='text', name='name', value=(item !== null) ? item.name : val('name'))
+          .form-group.col-12.mb-3
+            label(for='price') Prix
+            input.form-control(id='price', type='text', name='price', value=(item !== null) ? item.price : val('price'))
+          .form-group.col-12.mb-3
+            label(for="description") Description
+            textArea.form-control(id='description', name='description', rows="6")
+              | #{(item !== null) ? item.description : val('description')}
+        .form-row.w-50.m-auto
+          button#submitBtn.btn(type='submit')
+            i.fas.fa-plus-square.mr-2
+            if item !== null
+              | Modifier
+            else
+              | Créer

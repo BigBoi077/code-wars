@@ -7,11 +7,10 @@ block header
   +header()
 
 block body
-  +flash
-  .container.py-5
-    .row.mb-4
+  .container.py-5.px-0
+    .row
       .col-lg-4
-        .card.mb-4.profile-first-elems
+        .card
           .card-body.text-center
             if isTeacher
               img.rounded-img.mt-2(src=gravatarUrl)
@@ -19,15 +18,14 @@ block body
               img.rounded-img.mt-2(src=profileImageUrl)
             h5.my-3 #{studentProfile.username}
             h6.text-muted.my-1 #{user.da}
-            div.d-flex.justify-content-center
+            div.d-flex.align-items-center.flex-column
               +star_wars_money(studentProfile.cash)
-            div.d-flex.justify-content-center
               +star_wars_points(studentProfile.points)
       .col-lg-8
         .card.mb-4.profile-first-elems
           include ../mixins/profileInfo
           .card-body
-            h2.text-center.mb-4 Informations du compte
+            h2.mb-4 Informations du compte
             +profileInfo("Nom", studentProfile.lastname)
             hr
             +profileInfo("Prénom", studentProfile.firstname)
@@ -37,89 +35,80 @@ block body
             +profileInfo("E-mail", studentProfile.email)
             if !isTeacher
               hr
-              +profileInfo("Mot de passe", "********")
+              +profileInfo("Mot de passe", "•••••••••••••••••")
+            br
             if !isTeacher
-              .row.justify-content-md-end.mx-3
-                a#editProfileBtn.btn.btn-yellow(href="/profile/edit")
+              .d-flex
+                a#editProfileBtn.btn.btn-yellow.w-100.mr-2(href="/profile/edit")
+                  i.fas.fa-edit.mr-2
                   | Modifier le compte
-                  i.fas.fa-edit
-                a#editProfileBtn.btn.btn-yellow(href="/profile/editMdp").ml-3
-                  | Modifier le mdp
-                  i.fas.fa-lock
-
+                a#editProfileBtn.btn.btn-yellow.w-100.ml-2(href="/profile/editMdp")
+                  i.fas.fa-lock.mr-2
+                  | Modifier le mot de passe
     .row
       .col
         .row
           .card.mb-4.w-100
             .card-body
-              h2.text-center.mb-3 Progression individuelle
+              h2.mb-3 Progression individuelle
+              hr
               if isTeacher
-                p.text-center.mb-0 #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
+                p.mb-0 #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
               else
-                p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+                p.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
               include ../mixins/weekProgress
               .m-4
                 each week in weeklyProgress
                   +weekProgress(week)
-        .row
           .card.mb-4.w-100
             .card-body
               if isTeacher
-                h2.text-center.mb-3 Achats de l'élève
+                h2.mb-3 Achats de l'élève
               else
-                h2.text-center.mb-3 Mes achats
+                h2.mb-3 Mes achats
               include ../mixins/myItem
-              .m-4
-                .row
-                  .col-4
-                    h5.mb-0 Nom de l'item
-                  .col-5
-                    h5.mb-0 Description
-                  .col-2
-                    h5.mb-0 Date
-                hr.mt-1
-                if items == null
-                  if isTeacher
-                    h6.text-center.mb-3 Aucun achat
-                  else
-                    h6.text-center Vous n'avez encore fait aucun achat
-                else
-                  each item in items
-                    +itemRow(item)
-                if !isTeacher
-                  .text-center.mt-3
-                    a.btn.btn-yellow(href="/market")
-                      | Aller au magasin
+              if isTeacher
+                h6.mb-3 Aucun achat
+              if items != null
+                table.table
+                  thead
+                    th Nom de l'item
+                    th Description
+                    th Date
+                  tbody
+                    each item in items
+                      +itemRow(item)
+              else
+                small.text-muted Vous n'avez encore fait aucun achat
+              .text-center.mt-3
+                a.btn.btn-yellow(href="/market")
+                  i.fas.fa-shopping-cart.mr-2
+                  | Aller au magasin
         .row
           .card.mb-4.w-100
             .card-body
-              h2.text-center.mb-3 Mes exercices faits
+              h2.mb-3 Mes exercices faits
               include ../mixins/myExercise
-              .m-4
-                .row
-                  .col-4
-                    h5.mb-0 Nom de la mission
-                  .col-2
-                    h5.mb-0 Date de remise
-                  .col-2
-                    h5.mb-0.text-center Corrigé
-                  .col-2
-                    h5.mb-0 Points
-                  .col-2
-                    h5.mb-0 Argent
-                hr.mt-1
-                if exercises == null
-                  if isTeacher
-                    h6.text-center.mb-3 Aucune mission complétée
-                  else
-                    h6.text-center Vous n'avez complété aucune mission
-                else
-                  each exercise in exercises
-                    +exerciseRow(exercise)
-                if !isTeacher
-                  .text-center.mt-3
-                    a.btn.btn-yellow(href="/exercises")
-                      | Aller aux missions
+              if isTeacher
+                h6.mb-3 Aucune mission complétée
+              if exercises != null
+                table.table
+                  thead
+                    th Nom de la mission
+                    th Date de remise
+                    th Corrigé
+                    th Points
+                    th Argent
+                  tbody
+                    each exercise in exercises
+                      +exerciseRow(exercise)
+              else
+                small.text-muted Vous n'avez complété aucune mission
+
+              .text-center.mt-3
+                a.btn.btn-yellow(href="/exercises")
+                  i.fas.fa-jedi.mr-2
+                  | Aller aux missions
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

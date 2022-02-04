@@ -6,16 +6,13 @@ block title
 block header
   +header()
 
-block flash
-  +flash
-
 block body
   .container
     .row.mt-5.p-4.main-card
       .w-100
         .d-flex.justify-content-between.align-items-center
           h1 Magasin
-          a(href='/management/items/create')
+          a.no-decoration(href='/management/items/create')
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
               | Nouvel article
