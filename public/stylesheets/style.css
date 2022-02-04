@@ -22,6 +22,10 @@
     background-color: var(--accent);
 }
 
+.accent {
+    color: var(--accent);
+}
+
 .foreground {
     z-index: 1;
 }

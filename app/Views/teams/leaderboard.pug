@@ -49,7 +49,7 @@ block body
                 .col-1.d-flex.align-items-center.justify-content-end
                   span.mt-2.mr-4.ml-4 ##{index + 1}
                 .col-6
-                  span.mt-2 #{student.username}
+                  span(class=(current.position === (index + 1) ? 'accent': '')).mt-2 #{student.username}
               .col.row.d-flex.align-items-center
                 .col-6.d-flex.justify-content-end
                   p.mr-3
