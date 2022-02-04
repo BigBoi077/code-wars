@@ -25,7 +25,7 @@ class ExerciseController extends Controller
     {
         $exercises = ExerciseService::getAll();
         $exercisesByWeek = [];
-        foreach ($exercises as $exercise) {
+        foreach ($exercises as $exercise) {;
             if ($exercise->is_active) {
                 $exercisesByWeek[$exercise->week_id]['number'] = $exercise->number;
                 $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
@@ -186,7 +186,7 @@ class ExerciseController extends Controller
         foreach ($allTips as $tip) {
             $tip->bought = false;
             $unHashedTip = $tip->tip;
-            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin. Moff fett maul mothma kenobi. Skywalker kessel jabba moff fett darth.";
+            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin.";
             foreach ($boughtTips as $boughtTip) {
                 if ($tip->id === $boughtTip->id) {
                     $tip->bought = true;
