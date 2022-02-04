@@ -1299,10 +1299,12 @@ footer li .omnivox-logo {
 }
 
 .error-code {
+    color: #FFFFFF;
     font-size: 15vh;
 }
 
 .error-message {
+    color: #FFFFFF;
     font-size: 4vh;
 }
 
