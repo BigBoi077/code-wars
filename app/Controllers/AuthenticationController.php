@@ -10,6 +10,7 @@ class AuthenticationController extends Controller
     {
         $this->get('/login', 'showLogin');
         $this->get('/logout', 'logout');
+
         $this->post('/login', 'processLogin');
     }
 
