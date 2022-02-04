@@ -9,9 +9,8 @@ class AuthenticationController extends Controller
     public function initializeRoutes()
     {
         $this->get('/login', 'showLogin');
-
+        $this->get('/logout', 'logout');
         $this->post('/login', 'processLogin');
-        $this->post('/logout', 'logout');
     }
 
     public function showLogin()
@@ -50,6 +49,4 @@ class AuthenticationController extends Controller
         setcookie(REMEMBER_ME, '', 1, '/');
         unset($_COOKIE[REMEMBER_ME]);
     }
-
-
 }

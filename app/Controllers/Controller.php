@@ -19,6 +19,7 @@ abstract class Controller extends SecurityController
 {
 
     private const LOGIN_ROUTE = '/login';
+    private const DEFAULT_PROFILE_PIC = '/assets/images/kakashi.jpeg';
     public const SESSION_IS_LOGGED = 'is_logged';
 
     /**
@@ -32,14 +33,24 @@ abstract class Controller extends SecurityController
     public function render($page, $args = []): Response
     {
         $student = $this->getActiveStudent();
-        $imageUrl= "/assets/images/profil_pic_default.png";
+        $user = $this->getUser();
+        $imageUrl= self::DEFAULT_PROFILE_PIC;
+
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
             $imageUrl = $gravatar->getUrl();
         }
+
+        if ($user != null && ($user['email'] != '' || $user['email'] != null)) {
+            $gravatar = new Gravatar($user['email']);
+            if ($gravatar->isAvailable()) {
+                $imageUrl = $gravatar->getUrl();
+            }
+        }
+
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),
-            'user' => $this->getUser(),
+            'user' => $user,
             'profileImageUrl' => $imageUrl,
             'student' => $student,
             'teamPoints' => TeamController::getTeamPoints()

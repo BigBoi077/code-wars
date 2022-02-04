@@ -19,7 +19,8 @@ class SessionHelper
             'username' => $person->username,
             'firstname' => $person->firstname,
             'lastname' => $person->lastname,
-            'isTeacher' => (new UserBroker())->isTeacher($person->da)
+            'isTeacher' => (new UserBroker())->isTeacher($person->da),
+            'email' => $person->email
         ]);
     }
 }
