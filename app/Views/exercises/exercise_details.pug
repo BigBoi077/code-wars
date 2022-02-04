@@ -66,15 +66,15 @@ block body
         .mission-tips.mt-4
           if tips != null
             h3 Indices de mission
-                each tip in tips
-                  .row
-                    if tip.bought
-                      p.w-100.pl-0.grey-border=tip.tip
-                    else
-                      form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
-                        button.btn.btn-yellow.position-absolute.tip-buy-button
-                          +star_wars_money(tip.price)
-                      p.pl-0.blur.grey-border=tip.tip
+              each tip in tips
+                .row
+                  if tip.bought
+                    p.w-100.pl-0.grey-border=tip.tip
+                  else
+                    form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
+                      button.btn.btn-yellow.position-absolute.tip-buy-button
+                        +star_wars_money(tip.price)
+                    p.pl-0.blur.grey-border=tip.tip
 
       if !corrected && !submitted
         form(action="/exercises/submit/" + exercise.id method="POST").submit.mb-0

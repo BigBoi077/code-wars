@@ -26,16 +26,20 @@ mixin header()
         .text-right.pr-3.d-flex.flex-column
           if !user.isTeacher
             h6 #{student.username}
-            h6.pr-0.d-flex.align-items-center.justify-content-end
-              +star_wars_money(student.cash)+star_wars_points(student.points)
+            .d-flex.justify-content-end.align-items-center
+              h6.mr-3
+                +star_wars_money(student.cash)
+              h6
+                +star_wars_points(student.points)
           else
             if profileImageUrl != '/assets/images/kakashi.jpeg'
-              img(src=profileImageUrl)
+              a.profile-pic
+                img(src=profileImageUrl)
             else
               h6 Enseignant
       if !user.isTeacher
         a.profile-pic(href="/profile")
-            img(src=profileImageUrl)
+          img(src=profileImageUrl)
       .d-flex
         a(href="/profile/notifications").bell
           button.ml-3(class=(!user.isTeacher) ? 'mr-2': '')

@@ -53,11 +53,11 @@ block body
               h2.mb-3 Progression individuelle
               hr
               if isTeacher
-                p.mb-0 #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
+                p.mb-2 #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
               else
-                p.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+                p.mb-2 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
               include ../mixins/weekProgress
-              .m-4
+              .my-4
                 each week in weeklyProgress
                   +weekProgress(week)
           .card.mb-4.w-100

@@ -1,11 +1,11 @@
 mixin weekProgress(week)
   .row.my-4
-    .col-3
+    .col-2.pl-0
       p.mb-0 Semaine #{week.number} :
-    .col-7.mt-1
+    .col-9.mt-1
       .progress
         .progress-bar(style="width: " + week.progress + "%")
-    .col-2
+    .col-1
       p.mb-0 #{week.progress} %
 
 mixin weekProgressSmall(week)
