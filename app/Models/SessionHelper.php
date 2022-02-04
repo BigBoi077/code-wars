@@ -1,6 +1,5 @@
 <?php namespace Models;
 
-
 use Controllers\Controller;
 use Models\Brokers\UserBroker;
 use Zephyrus\Application\Session;

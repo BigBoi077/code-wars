@@ -18,6 +18,10 @@
     --bronze: #cd7f32;
 }
 
+.bg-accent {
+    background-color: var(--accent);
+}
+
 .foreground {
     z-index: 1;
 }
@@ -922,13 +926,6 @@ text-align: center;
     align-items: center;
 }
 
-.single-mission-row .mission-detail .detail-link {
-    height: 100%;
-    margin: auto;
-    display: flex;
-    justify-content: flex-end;
-}
-
 .single-mission-row .mission-detail a i  {
     color: var(--accent);
 }
@@ -1361,4 +1358,16 @@ th {
     text-align: right;
 }
 
+table {
+    position: relative;
+}
+
+.rowlink::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5em; /* don't forget to set the height! */
+}
 /* endregion */

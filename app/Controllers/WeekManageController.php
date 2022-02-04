@@ -1,8 +1,4 @@
-<?php
-
-
-namespace Controllers;
-
+<?php namespace Controllers;
 
 use Models\Brokers\WeekBroker;
 use Zephyrus\Application\Flash;
@@ -17,7 +13,10 @@ class WeekManageController extends TeacherController
         $this->get('/management/weeks/{id}/activate', 'activateWeek');
         $this->get('/management/weeks/create', 'createWeek');
         $this->get('/management/weeks/{id}/delete', 'deleteWeek');
+
         $this->post('/management/weeks/store', 'storeWeek');
+
+        $this->overrideWeek();
     }
 
     public function weeksListing(): Response
@@ -67,4 +66,18 @@ class WeekManageController extends TeacherController
         return $this->redirect('/management/weeks');
     }
 
+    private function overrideWeek()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_numeric($value)) {
+                $week = (new WeekBroker())->findByID($value);
+                if (is_null($week)) {
+                    return $this->redirect('/management/weeks');
+                }
+                return $week;
+            } else {
+                return $this->redirect('/management/weeks');
+            }
+        });
+    }
 }

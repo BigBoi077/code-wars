@@ -6,7 +6,6 @@ use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
 use stdClass;
 use Zephyrus\Application\Flash;
-use Zephyrus\Security\Cryptography;
 
 class ExerciseController extends Controller
 {
@@ -14,18 +13,20 @@ class ExerciseController extends Controller
     {
         $this->get('/exercises', 'exercises');
         $this->get('/exercises/{id}', 'exerciseDetail');
+
         $this->post('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/exercises/cancel/{id}', 'exerciseCancel');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
         $this->post("/exercises/tips/{tipId}/buy", 'buyTip');
-        $this->overrideExercice();
+
+        $this->overrideExercise();
     }
 
     public function exercises()
     {
         $exercises = ExerciseService::getAll();
         $exercisesByWeek = [];
-        foreach ($exercises as $exercise) {
+        foreach ($exercises as $exercise) {;
             if ($exercise->is_active) {
                 $exercisesByWeek[$exercise->week_id]['number'] = $exercise->number;
                 $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
@@ -186,7 +187,7 @@ class ExerciseController extends Controller
         foreach ($allTips as $tip) {
             $tip->bought = false;
             $unHashedTip = $tip->tip;
-            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin. Moff fett maul mothma kenobi. Skywalker kessel jabba moff fett darth.";
+            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin.";
             foreach ($boughtTips as $boughtTip) {
                 if ($tip->id === $boughtTip->id) {
                     $tip->bought = true;
@@ -211,15 +212,15 @@ class ExerciseController extends Controller
         return $nbHasCompleted / Count($allStudent) * 100;
     }
 
-    private function overrideExercice()
+    private function overrideExercise()
     {
         $this->overrideArgument('id', function ($value) {
             if (is_numeric($value)) {
-                $exercice = ExerciseService::get($value);
-                if (is_null($exercice)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
                     return $this->redirect('/exercises');
                 }
-                return $exercice;
+                return $exercise;
             } else {
                 return $this->redirect('/exercises');
             }

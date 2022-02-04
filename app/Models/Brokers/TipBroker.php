@@ -1,6 +1,4 @@
-<?php
-
-namespace Models\Brokers;
+<?php namespace Models\Brokers;
 
 use stdClass;
 
@@ -50,7 +48,7 @@ class TipBroker extends Broker
 
     public function insert($exerciseId, $tip, $price)
     {
-        $sql = "INSERT INTO codewars.tips (id, exercise_id, tip, price) VALUES (default, ?, ?, ?)";
+        $sql = "INSERT INTO codewars.tips (id, exercise_id, tip, price) VALUES ((SELECT MAX(id)+1 FROM codewars.tips), ?, ?, ?)";
 
         return $this->query($sql, [
             $exerciseId,

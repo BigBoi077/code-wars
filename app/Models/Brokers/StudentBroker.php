@@ -32,7 +32,7 @@ class StudentBroker extends Broker
 
     public function getProgression($da): array
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.corrected = true";
         $done = $this->selectSingle($sql, [$da])->done;
         $nbExercises = Count((new ExerciseBroker())->getAll());
         $totalDone = ($done / $nbExercises) * 100;
@@ -41,12 +41,22 @@ class StudentBroker extends Broker
 
     public function getProgressionByWeek($da): array
     {
-        $sql = "select w.id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.completed = true group by w.id";
-        $weeks = $this->select($sql, [$da]);
-        $broker = new ExerciseBroker();
+        $sql = "select w.id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id
+                where s.da = ? and se.corrected = true group by w.id";
+        $exercisesPerWeeks = $this->select($sql, [$da]);
+        $sql = "select w.id as week_id, * from codewars.week w 
+                where w.is_active = true order by w.id";
+        $weeks = $this->select($sql);
+        $exercisesBroker = new ExerciseBroker();
+        $index = 0;
         foreach ($weeks as $week) {
-            $week->progress = number_format(($week->done / Count($broker->getAllByWeek($week->id))) * 100, 0);
+            $week->progress = 0;
+            if (isset($exercisesPerWeeks[$index])) {
+                $week->progress = number_format(($exercisesPerWeeks[$index]->done / Count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
+            }
+            $index++;
         }
+
         return $weeks;
     }
 

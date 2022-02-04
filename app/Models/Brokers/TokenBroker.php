@@ -1,6 +1,5 @@
 <?php namespace Models\Brokers;
 
-use stdClass;
 
 class TokenBroker extends Broker
 {

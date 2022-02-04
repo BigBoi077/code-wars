@@ -1,7 +1,5 @@
 <?php namespace Models\Services;
 
-use Models\Brokers\ItemBroker;
-use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TipBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
@@ -20,6 +18,11 @@ class TipService
             $instance->insertToDatabase($exerciseId);
         }
         return $instance;
+    }
+
+    public static function get($id)
+    {
+        return (new TipBroker())->GetById($id);
     }
 
     public static function update($id, Form $form)

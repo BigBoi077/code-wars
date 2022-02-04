@@ -16,7 +16,7 @@ block body
         .d-flex.justify-content-between.align-items-center
           h1 Missions
           if user.isTeacher
-            a(href='/management/exercises')
+            a(href='/management/exercises').no-decoration
               button.btn.btn-yellow
                 p.mb-0
                   i.fas.fa-plus-square.mr-2
@@ -24,39 +24,53 @@ block body
         hr
 
       .row.all-missions.col-7.p-0
-          each week, index in exercisesByWeek
-            .week.w-100
-              button.bg-transparent.btn.row.mb-4.d-flex.align-items-end.p-0(data-toggle=index)
-                i.week-header.mb-1.fa.fa-chevron-down
-                span.week-header.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
-              .week-exercises(id="weekExercises" + index)
-                  each exercise, index in week
-                    if index !== 'startDate' && index !== 'number'
-                      a(href="/exercises/" + exercise.id).single-mission-row.mb-4.bg-white.card.no-decoration
-                        .mission-information.card-body.p-0
-                          .mission-information-header
-                            h4.text-dark #{exercise.name}
-                            .mission-detail
-                              .mission-results
-                                .mission-cash-reward.text-dark
-                                  +star_wars_money(exercise.cash_reward)
-                                .mission-point-reward.text-dark
-                                  +star_wars_points(exercise.point_reward)
-                              .mission-detail
-                                .detail-link
-                                  if exercise.completed
-                                    i.fas.fa-check-circle.submitted.fa-2x
-                                  else if exercise.corrected
-                                    i.fas.fa-check-circle.corrected.fa-2x
-                                  else
-                                    i.fas.fa-times-circle.not-submitted.fa-2x
-      .col-5.pr-0
+        each week, index in exercisesByWeek
+          .week.w-100
+            button.bg-transparent.btn.row.mb-4.d-flex.align-items-end.p-0(data-toggle=index)
+              i.week-header.mb-1.fa.fa-chevron-down
+              h4.week-header.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
+            table.table(id="weekExercises" + index).w-100
+              tbody.w-100
+                each exercise, index in week
+                  if index !== 'startDate' && index !== 'number'
+                    tr.text-dark
+                        td
+                          a(href="/exercises/" + exercise.id).rowlink.mr-2
+                        td
+                         span.text-dark #{exercise.name}
+                        td
+                          +star_wars_money(exercise.cash_reward)
+                        td
+                          +star_wars_points(exercise.point_reward)
+                        if !user.isTeacher
+                          td
+                            .d-flex.align-items-center.mt-1
+                              if exercise.corrected
+                                i.fas.fa-check-circle.corrected
+                              else if exercise.completed
+                                i.fas.fa-check-circle.submitted
+                              else
+                                i.fas.fa-times-circle.not-submitted
+
+      .col-5.pr-0.pl-5
         if student != null
           .card.mb-4.w-100.fixed-ct
             .card-body
-              h4.text-center.mb-3 Progression individuelle
-              p.text-center.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+              h4.mb-3 Progression individuelle
+              p.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
               include ../mixins/weekProgress
               each week in weeklyProgress
                 +weekProgressSmall(week)
+              h6.my-2.pt-3 Légende :
+              .small.justify-content-between.d-flex
+                .d-flex.align-items-center
+                  i.fas.fa-check-circle.corrected
+                  span.ml-2 Corrigé
+                .d-flex.align-items-center
+                  i.fas.fa-check-circle.submitted
+                  span.ml-2 Remis
+                .d-flex.align-items-center
+                  i.fas.fa-times-circle.not-submitted
+                  span.ml-2 Non-remis
+
 

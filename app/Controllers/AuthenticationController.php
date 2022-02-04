@@ -3,15 +3,14 @@
 use Models\Brokers\TokenBroker;
 use Models\Logger;
 use Zephyrus\Application\Flash;
-use Zephyrus\Network\Response;
 
 class AuthenticationController extends Controller
 {
     public function initializeRoutes()
     {
         $this->get('/login', 'showLogin');
-        $this->post('/login', 'processLogin');
 
+        $this->post('/login', 'processLogin');
         $this->post('/logout', 'logout');
     }
 
