@@ -1,6 +1,6 @@
-<?php
+<?php namespace Models\Brokers;
 
-namespace Models\Brokers;
+use stdClass;
 
 class ItemBroker extends Broker
 {
@@ -11,7 +11,7 @@ class ItemBroker extends Broker
         return $this->select($sql);
     }
 
-    public function findById($id): \stdClass
+    public function findById($id): ?stdClass
     {
         $sql = "SELECT * FROM codewars.item WHERE id = ?";
         return $this->selectSingle($sql, [$id]);

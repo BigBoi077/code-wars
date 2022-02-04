@@ -7,6 +7,7 @@ class ErrorController extends Controller
     public function initializeRoutes()
     {
         $this->get("/error/404", "index");
+        $this->get("/error/413", "liftFatBoy");
     }
 
     public function index()
@@ -14,7 +15,7 @@ class ErrorController extends Controller
         return $this->render("errors/404");
     }
 
-    public function chooseAName()
+    public function liftFatBoy()
     {
         return $this->render("errors/413");
     }

@@ -6,7 +6,6 @@ use Models\Brokers\TipBroker;
 use Models\Services\ExerciseService;
 use stdClass;
 use Zephyrus\Application\Flash;
-use Zephyrus\Security\Cryptography;
 
 class ExerciseController extends Controller
 {
@@ -14,11 +13,13 @@ class ExerciseController extends Controller
     {
         $this->get('/exercises', 'exercises');
         $this->get('/exercises/{id}', 'exerciseDetail');
+
         $this->post('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/exercises/cancel/{id}', 'exerciseCancel');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
         $this->post("/exercises/tips/{tipId}/buy", 'buyTip');
-        $this->overrideExercice();
+
+        $this->overrideExercise();
     }
 
     public function exercises()
@@ -211,15 +212,15 @@ class ExerciseController extends Controller
         return $nbHasCompleted / Count($allStudent) * 100;
     }
 
-    private function overrideExercice()
+    private function overrideExercise()
     {
         $this->overrideArgument('id', function ($value) {
             if (is_numeric($value)) {
-                $exercice = ExerciseService::get($value);
-                if (is_null($exercice)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
                     return $this->redirect('/exercises');
                 }
-                return $exercice;
+                return $exercise;
             } else {
                 return $this->redirect('/exercises');
             }

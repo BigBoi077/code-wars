@@ -1,7 +1,4 @@
-<?php
-
-
-namespace Models\Brokers;
+<?php namespace Models\Brokers;
 
 
 class StudentExerciseBroker extends Broker

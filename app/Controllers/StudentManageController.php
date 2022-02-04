@@ -20,8 +20,11 @@ class StudentManageController extends TeacherController
         $this->get('/management/students/{da}/edit', 'editStudent');
         $this->get('/management/students/{da}/delete', 'deleteStudent');
         $this->get('/management/students/{da}/profile', 'viewStudent');
+
         $this->post('/management/students/store', 'storeStudent');
         $this->post('/management/students/{da}/update', 'updateStudent');
+
+        $this->overrideStudent();
     }
 
     public function listStudents(): Response
@@ -118,4 +121,18 @@ class StudentManageController extends TeacherController
         return $this->redirect('/management/students/' . $da . '/edit');
     }
 
+    private function overrideStudent()
+    {
+        $this->overrideArgument('da', function ($value) {
+            if (is_numeric($value)) {
+                $student = StudentService::get($value);
+                if (is_null($student)) {
+                    return $this->redirect('/management/students');
+                }
+                return $student;
+            } else {
+                return $this->redirect('/management/students');
+            }
+        });
+    }
 }

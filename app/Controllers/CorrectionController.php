@@ -21,9 +21,12 @@ class CorrectionController extends Controller
     public function initializeRoutes()
     {
         $this->get('/management/correction', 'correctionList');
-        $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
         $this->get('/management/correction/download/{id}', 'downloadExercise');
         $this->get('/management/correction/detail/{studentName}/{id}/{submitId}', 'exerciseSubmitDetail');
+
+        $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
+
+        $this->overrideCorrection();
     }
 
     public function correctionList()
@@ -41,8 +44,8 @@ class CorrectionController extends Controller
     public function correctExercise($da, $id)
     {
         $form = $this->buildForm();
-        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
-        $e = (new ExerciseBroker())->getCorrectionPath($id);
+        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id->id, $form->getValue('comment'));
+        $e = (new ExerciseBroker())->getCorrectionPath($id->id);
         unlink($e->path);
         Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
         return $this->redirect('/management/correction');
@@ -54,7 +57,7 @@ class CorrectionController extends Controller
 
         if ($e == null) {
             Flash::error("Impossible de télécharcher le fichier");
-            return $this->redirect($this->request->getReferer());
+            return $this->redirect("/error/404");
         }
 
         if (file_exists($e->path)) {
@@ -99,12 +102,26 @@ class CorrectionController extends Controller
         }
 
         return $this->render('management/correction/correction_submit_detail', [
-            'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id,
+            'exercise' => ExerciseService::get($id->id),
             'studentExercise' => $studentExercise,
             'fileContent' => $fileContent,
             'studentFirstname' => $studentArrayName[0],
             'studentLastname' => $studentArrayName[1]
         ]);
+    }
+
+    private function overrideCorrection()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_numeric($value)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
+                    return $this->redirect('/management/correction');
+                }
+                return $exercise;
+            } else {
+                return $this->redirect('/management/correction');
+            }
+        });
     }
 }

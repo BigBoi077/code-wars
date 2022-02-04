@@ -1,29 +1,26 @@
-<?php
-
-
-namespace Controllers;
-
+<?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
-use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
-use Models\Services\StudentService;
+use Models\Services\ExerciseService;
 use Models\Services\TipService;
 use Zephyrus\Application\Flash;
-use Zephyrus\Network\Response;
 
 class TipsManageController extends TeacherController
 {
 
     public function initializeRoutes()
     {
-        $this->get('/management/exercises/{id}/tips', 'exercisesTips');
-        $this->get("/management/exercises/{id}/tips/create", 'createTip');
+        $this->get('/management/exercises/{exerciseId}/tips', 'exercisesTips');
+        $this->get("/management/exercises/{exerciseId}/tips/create", 'createTip');
         $this->get("/management/exercises/{exerciseId}/tips/{tipId}/edit", 'editTip');
+        $this->get("/management/exercises/{exerciseId}/tips/{tipId}/delete", 'deleteTip');
 
         $this->post("/management/exercises/{exerciseId}/tips/store", 'storeTip');
-        $this->post("/management/exercises/{exerciseId}/tips/{id}/update", 'updateTip');
-        $this->get("/management/exercises/{exerciseId}/tips/{id}/delete", 'deleteTip');
+        $this->post("/management/exercises/{exerciseId}/tips/{tipId}/update", 'updateTip');
+
+        $this->overrideExercise();
+        $this->overrideTip();
     }
 
     public function exercisesTips($exerciseId)
@@ -55,12 +52,12 @@ class TipsManageController extends TeacherController
         return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
     }
 
-    public function editTip($exerciseId, $tipId)
+    public function editTip($exercise, $tip)
     {
         return $this->render("/management/exercises/tips_form", [
             'title' => "Modifier l'indice",
-            'action' => "/management/exercises/" . $exerciseId . "/tips/" . $tipId ."/update",
-            'tip' => (new TipBroker())->GetById($tipId)
+            'action' => "/management/exercises/" . $exercise->id . "/tips/" . $tip->id ."/update",
+            'tip' => (new TipBroker())->GetById($tip->id)
         ]);
     }
 
@@ -70,12 +67,12 @@ class TipsManageController extends TeacherController
             $tip = TipService::update($tipId, $this->buildForm());
             if ($tip->hasSucceeded()) {
                 Flash::success('Indice modifié avec succès!');
-                return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
+                return $this->redirect("/management/exercises/" . $exerciseId->id . "/tips");
             }
             Flash::error($tip->getErrorMessages());
         }
         Flash::error('Une erreur est survenue.');
-        return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
+        return $this->redirect("/management/exercises/" . $exerciseId->id . "/tips");
     }
 
     public function deleteTip($exerciseId, $tipId)
@@ -86,6 +83,36 @@ class TipsManageController extends TeacherController
         } else {
             Flash::error('Une erreur est survenue.');
         }
-        return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
+        return $this->redirect("/management/exercises/" . $exerciseId->id . "/tips");
+    }
+
+    private function overrideExercise()
+    {
+        $this->overrideArgument('exerciseId', function ($value) {
+            if (is_numeric($value)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
+                    return $this->redirect('/management/exercises');
+                }
+                return $exercise;
+            } else {
+                return $this->redirect('/management/exercises');
+            }
+        });
+    }
+
+    private function overrideTip()
+    {
+        $this->overrideArgument('tipId', function ($value) {
+            if (is_numeric($value)) {
+                $tip = TipService::get($value);
+                if (is_null($tip)) {
+                    return $this->redirect('/management/exercises');
+                }
+                return $tip;
+            } else {
+                return $this->redirect('/management/exercises');
+            }
+        });
     }
 }

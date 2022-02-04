@@ -17,7 +17,7 @@ drop table if exists log;
 drop table if exists "user";
 drop table if exists person;
 
-
+/*--DROP-SCHEMA--*/
 drop schema if exists codewars;
 
 /*--CREATE-SCHEMA--*/

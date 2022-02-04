@@ -1,7 +1,6 @@
 <?php namespace Controllers;
 
 use Models\Brokers\NotificationBroker;
-use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
 use Models\Services\ApiService;
 use Models\Services\StudentService;
@@ -13,8 +12,9 @@ class HomeController extends Controller
     {
         $this->get('/', 'index');
         $this->get('/home', 'home');
-        $this->get('/notification/seen/{id}', 'seeNotification');
         $this->get('/notification/seeAll', 'seeAllNotifications');
+
+        $this->post('/notification/seen/{id}', 'seeNotification');
     }
 
     public function index()

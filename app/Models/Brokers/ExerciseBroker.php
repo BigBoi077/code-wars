@@ -1,6 +1,4 @@
-<?php
-
-namespace Models\Brokers;
+<?php namespace Models\Brokers;
 
 use Models\Services\NotificationService;
 use stdClass;
@@ -8,7 +6,7 @@ use stdClass;
 class ExerciseBroker extends Broker
 {
 
-    public function findByID($id) : ?stdClass
+    public function findByID($id): ?stdClass
     {
         $sql = "SELECT e.id, week_id, name, description, cash_reward, difficulty, execution_exemple, point_reward
                 FROM codewars.exercise e join codewars.week w on w.id = e.week_id

@@ -1,6 +1,5 @@
 <?php namespace Models\Services;
 
-use Models\Brokers\Broker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\UserBroker;
 use Models\SessionHelper;
