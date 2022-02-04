@@ -13,8 +13,7 @@ class HomeController extends Controller
         $this->get('/', 'index');
         $this->get('/home', 'home');
         $this->get('/notification/seeAll', 'seeAllNotifications');
-
-        $this->post('/notification/seen/{id}', 'seeNotification');
+        $this->get('/notification/seen/{id}', 'seeNotification');
     }
 
     public function index()
@@ -42,13 +41,13 @@ class HomeController extends Controller
     public function seeNotification($id)
     {
         (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
-        return $this->redirect('/');
+        return $this->redirect('/profile/notifications');
     }
 
     public function seeAllNotifications()
     {
         (new NotificationBroker())->seeAllNotification($this->getUser()['id']);
         Flash::success("Action effectuée");
-        return $this->redirect('/');
+        return $this->redirect('/profile');
     }
 }

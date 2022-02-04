@@ -37,7 +37,8 @@ class CorrectionController extends Controller
             $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->exercise_id] = $exercise;
         }
         return $this->render('/management/correction/correction_listing', [
-            'corrections' => $exercisesByStudent
+            'corrections' => $exercisesByStudent,
+            'count' => Count($exercises)
         ]);
     }
 
