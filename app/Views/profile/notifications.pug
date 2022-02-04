@@ -6,9 +6,14 @@ block title
 block header
   +header()
 
+block score
+  +scoreBoard()
+
 block body
-  .container.mt-5
-    #score.d-flex.justify-content-center.my-5
-      +scoreBoard()
-    include ../mixins/notificationLayout
-    +notificationLayout(notifications)
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        h1 Notifications
+        hr
+      include ../mixins/notificationLayout
+      +notificationLayout(notifications)

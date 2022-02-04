@@ -79,7 +79,6 @@ class ProfileController extends Controller
     public function updateMdp()
     {
         $form = $this->buildForm();
-        $mdp = $form->getValue('password');
         $form->validate('password', Rule::passwordCompliant('Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et avoir une longueur minimum de 8 caractères.'));
         if ($form->getValue('confirmPassword') != '') {
             $form->validate('confirmPassword', Rule::sameAs('password', 'La confirmation de mot de passe doit être identique au mot de passe.'));
