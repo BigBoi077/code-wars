@@ -7,22 +7,25 @@ block header
   +header()
 
 block body
-  +flash
-  .student-form-container
-    h4 #{title}
-    hr
-    form(method='post', action=action)
-      .form-row
-        .form-group.col-12
-          label(for="number") Numéro
-          input.form-control(id="number" name="number" type="number")
-      .form-row
-        .form-group.col-12
-          label(for="startDate") Date de début
-          input.form-control(id="startDate" name="startDate" type="date")
-      .form-row
-        .form-group.col-12.text-muted
-          h6 Par défaut, la semaine est non activée. Retourner dans la page précédente pour l'activer par la suite.
-      .form-row
-        button#submitBtn.btn(type='submit')
-          | Créer
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 #{title}
+        hr
+      form.w-100(method='post', action=action)
+        .form-row
+          .form-group.col-12
+            label(for="number") Numéro
+            input.form-control(id="number" name="number" type="number")
+        .form-row
+          .form-group.col-12
+            label(for="startDate") Date de début
+            input.form-control(id="startDate" name="startDate" type="date")
+        .form-row
+          .form-group.col-12.text-muted
+            small * Par défaut, la semaine est non activée. Retourner dans la page précédente pour l'activer par la suite.
+        .form-row.w-50.m-auto
+          button#submitBtn.btn(type='submit')
+            i.fas.fa-plus-square.mr-2
+            | Créer

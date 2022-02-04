@@ -5,39 +5,36 @@ block title
 
 block header
   +header()
+
 block body
-  .main-container
-    +flash
-    h1.mt-5 Indices pour
-     | #{exercise.name}
-    hr.separator
-    .tips
-      .row
-        .col-7.student-header-col
-          h4.student-header-element Indice
-        .col-3.student-header-col
-          h4.student-header-element Price
-        .col.d-flex.justify-content-end
-          a(href='/management/exercises/' + exercise.id + "/tips/create")
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 Indices pour : #{exercise.name}
+          a.no-decoration(href='/management/exercises/' + exercise.id + "/tips/create")
             button.btn.btn-yellow#Btn
-              p
-                i.fas.fa-plus-square
-                | Ajouter un indice
-      if count(tips) === 0
-        h3.row.ml-4.text-muted Aucun indice pour cette mission
-      else
-        each tip in tips
-          .row.student-row.box-shadow
-            .col-7
-              p.student-row-element=tip.tip
-            .col-lg-3.col-sm-4.d-flex.align-items-center
-              +star_wars_money(tip.price)
-            .col.d-flex.justify-content-end
-              .row.d-flex.align-items-center
+              i.fas.fa-plus-square
+              | Ajouter un indice
+      br
+      table.table.w-100
+        thead
+          tr
+            th Indice
+            th Prix
+            th
+        tbody.w-100
+          each tip in tips
+            tr
+              td
+                p=tip.tip
+              td
+                +star_wars_money(tip.price)
+              td
                 a.col(href='/management/exercises/' + exercise.id + '/tips/' + tip.id + "/edit")
                   i.fas.fa-edit.student-icons
                 a.col(data-bs-toggle="modal" data-bs-target="#tipsDeleteModal" + tip.id)
                   i.fas.fa-trash.student-icons
-  each tip in tips
-    +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
-       '/management/exercises/' + exercise.id + '/tips/' + tip.id +'/delete', 'tipsDeleteModal' + tip.id)
+        each tip in tips
+          +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+              '/management/exercises/' + exercise.id + '/tips/' + tip.id + '/delete', 'tipsDeleteModal' + tip.id)
