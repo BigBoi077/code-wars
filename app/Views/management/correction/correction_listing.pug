@@ -8,14 +8,14 @@ block header
 
 block body
   .container
-    .row.mt-5.p-4.main-card
+    .mt-5.p-4.main-card
       .w-100
         h1 Correction
         hr
       if corrections == null
         h4.text-muted.text-center Aucun exercice à corriger pour l'instant...
       else
-        h5.text-muted Consulter la liste des solutions. Vous avez (#{count(corrections)}) missions à corriger
+        h5.text-muted Consulter la liste des solutions. Vous avez (#{count}) missions à corriger
       each correction, person in corrections
         h2.mt-4 #{person}
         hr
