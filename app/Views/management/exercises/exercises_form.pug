@@ -7,7 +7,6 @@ block header
   +header()
 
 block body
-  +flash
   .student-form-container
     h4 #{title}
     hr
@@ -26,6 +25,14 @@ block body
           label(for="exemple") Exemple d'exécution (optionnel)
           textArea.form-control(id='exemple', name='exemple' rows='5')
             | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
+      .form-row
+        .form-group.col-12.mb-1
+          label#uploadImgLabel(for="exemple") Example d'exécution (Image, optionnel)
+          button(type="button").btn.btn-yellow#uploadImgBtn
+            label#uploadLabel(for='exerciseUpload')
+              i.fas.fa-file-code
+              | Image d'exécution
+            input#exerciseUpload(style="visibility:hidden;" type='file' name='exercise' accept='.png, .jpeg')
       .form-row
         .form-group.col-3
           label(for="cash") Argent
