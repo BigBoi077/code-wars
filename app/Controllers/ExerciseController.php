@@ -220,7 +220,7 @@ class ExerciseController extends Controller
                 if (is_null($exercise)) {
                     return $this->redirect('/exercises');
                 }
-                return $exercise->id;
+                return $exercise;
             } else {
                 return $this->redirect('/exercises');
             }
