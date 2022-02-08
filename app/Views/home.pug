@@ -19,11 +19,11 @@ block body
         h1 Accueil
         hr
       include mixins/notificationLayout
-      .col-6.p-0
+      .col.p-0
         +notificationLayout(notifications)
-      .col-6.p-0
-        if isTeacher === false
+      if isTeacher === false
+        .col.p-0
           h4.mb-4 Membres de mon équipe
-          .card.py-3
-            each member in teamMembers
-              +teamMember(member)
+          .card.pb-3.pt-1
+            each member, index in teamMembers
+              +teamMember(member, index)

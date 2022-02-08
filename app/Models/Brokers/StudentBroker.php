@@ -107,7 +107,7 @@ class StudentBroker extends Broker
 
     public function sameTeamStudent($teamId): array
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
+        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.points desc, s.cash desc";
         return $this->select($sql, [$teamId]);
     }
 

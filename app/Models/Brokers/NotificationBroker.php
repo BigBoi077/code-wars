@@ -33,7 +33,7 @@ class NotificationBroker extends Broker
     public function sendNotificationToSpecificStudent($userId, $msg, $name)
     {
         $sql = "insert into codewars.notification(id, user_id, name, is_seen, description, date) values(default, ?, ?, false, ?, now())";
-        $this->query($sql, [$userId, strtoupper($name), $msg]);
+        $this->query($sql, [$userId, $name, $msg]);
     }
 
     public function sendNotificationToStudents($msg, $name)
@@ -42,7 +42,7 @@ class NotificationBroker extends Broker
         $students = (new StudentBroker())->getAll();
         $sql = "insert into codewars.notification(id, user_id, name, is_seen, description, date) values(default, ?, ?, false, ?, now())";
         foreach ($students as $student) {
-            $this->query($sql, [($userBroker->findByDa($student->da))->id, strtoupper($name), $msg]);
+            $this->query($sql, [($userBroker->findByDa($student->da))->id, $name, $msg]);
         }
     }
 
@@ -53,7 +53,7 @@ class NotificationBroker extends Broker
         $sql = "insert into codewars.notification(id, user_id, name, is_seen, description, date) values(default, ?, ?, false, ?, now())";
         foreach ($users as $user) {
             if ($userBroker->isTeacher($user->da)) {
-                $this->query($sql, [$user->id, strtoupper($name), $msg]);
+                $this->query($sql, [$user->id, $name, $msg]);
             }
         }
     }
