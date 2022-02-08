@@ -7,5 +7,8 @@ mixin exerciseRow(exercise)
         i.far.fa-check-circle.corrected.student-exercise-element
       else
         i.far.fa-times-circle.not-submitted.student-exercise-element
+      if exercise.comments != null
+        a(data-bs-toggle="modal" data-bs-target="#commentModal" + exercise.id).ml-3
+          i.fas.fa-comment-dots.student-icons
     td=exercise.cash_reward
     td.start=exercise.point_reward

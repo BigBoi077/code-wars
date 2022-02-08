@@ -131,6 +131,8 @@ block body
                   a.btn.btn-yellow(href="/exercises")
                     i.fas.fa-jedi.mr-2
                     | Aller aux missions
-
+      each exercise in exercises
+        if exercise.comments != null
+          +commentModal("Commentaire du professeur" , exercise.comments, "commentModal" + exercise.id)
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
