@@ -25,4 +25,6 @@ block body
             each exercise, index in correction
               li.ml-4
                 a(href="/management/correction/detail/" + person + "/"  + exercise.exercise_id + "/" + exercise.id ).text-dark
-                  p.m-0.student-row-element #{exercise.name} (Remis le #{format('datetime', exercise.submit_date)})
+                  p.m-0.student-row-element #{exercise.name} (Remis le #{format('date', exercise.submit_date)})
+
+

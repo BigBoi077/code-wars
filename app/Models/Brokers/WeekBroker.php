@@ -13,6 +13,15 @@ class WeekBroker extends Broker
         return $this->selectSingle($sql, [$id]);
     }
 
+    public function getAllActive()
+    {
+        $sql = "SELECT w.id as week_id, w.start_date, w.is_active, w.number
+                FROM codewars.week w 
+                where w.is_active = true
+                order by w.number asc";
+        return $this->select($sql);
+    }
+
     public function getAll()
     {
         $sql = "SELECT w.id, w.start_date, w.is_active, w.number
