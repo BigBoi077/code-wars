@@ -1,7 +1,7 @@
 mixin exerciseRow(exercise)
   tr
     td=exercise.name
-    td=exercise.submit_date
+    td #{format('date', exercise.submit_date)}
     td
       if exercise.corrected
         i.far.fa-check-circle.corrected.student-exercise-element
