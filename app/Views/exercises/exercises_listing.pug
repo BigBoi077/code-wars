@@ -29,11 +29,8 @@ block body
               h4.week-header.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
             table.table(id="weekExercises" + index).w-100
               tbody.w-100
-                each exercise, index in week
-                  if index === ""
-                    tr
-                      td.text-muted.start.pl-5 Aucun exercise cette semaine
-                  else if index !== 'startDate' && index !== 'number'
+                if week.exercises != null
+                  each exercise in week.exercises
                     tr.text-dark
                         td
                           a(href="/exercises/" + exercise.id).rowlink.mr-2
@@ -52,6 +49,8 @@ block body
                                 i.fas.fa-check-circle.submitted(title="Remis")
                               else
                                 i.fas.fa-times-circle.not-submitted(title="Non-remis")
+                else
+                  span.text-muted.ml-4 Aucun exercise pour cette semaine
       .col-5.pr-0.pl-5
         if student != null
           .mission-progression.card.mb-4.w-100.fixed-ct

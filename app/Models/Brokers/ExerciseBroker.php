@@ -89,7 +89,16 @@ class ExerciseBroker extends Broker
         $broker = new StudentBroker();
         $broker->addCash($student->da, $reward->cash_reward);
         $broker->addPoints($student->da, $reward->point_reward);
+        NotificationService::newCommentOnCorrection($userId);
         NotificationService::exerciseCorrected($userId, $reward->cash_reward, $reward->point_reward);
+    }
+
+    public function incorrectExercise($userId, $student, $id, $comment)
+    {
+        $sql = "update codewars.studentexercise se set comments = ? where se.id = ? and se.student_da = ? and se.completed = true";
+        $this->query($sql, [$comment, $id, $student->da]);
+        $name = (new StudentExerciseBroker())->findById($id)->name;
+        NotificationService::incorrectSolution($userId, $name);
     }
 
     public function delete($id)

@@ -3,6 +3,7 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
+use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use stdClass;
 use Zephyrus\Application\Flash;
@@ -24,13 +25,14 @@ class ExerciseController extends Controller
 
     public function exercises()
     {
-        $exercises = ExerciseService::getAll();
-        $exercisesByWeek = [];
-        foreach ($exercises as $exercise) {;
-            if ($exercise->is_active) {
-                $exercisesByWeek[$exercise->week_id]['number'] = $exercise->number;
-                $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
-                $exercisesByWeek[$exercise->week_id][$exercise->id] = $exercise;
+        $exerciseBroker = new ExerciseBroker();
+        $weeks = (new WeekBroker())->getAllActive();
+        $da = $this->getUser()['da'];
+        foreach ($weeks as $week) {
+            $week->exercises = $exerciseBroker->getAllByWeek($week->week_id);
+            foreach ($week->exercises as $exercise) {
+                $exercise->corrected = $exerciseBroker->isCorrected($exercise->id, $da);
+                $exercise->completed = $exerciseBroker->isSubmitted($exercise->id, $da);
             }
         }
         $weeklyProgress = null;
@@ -41,7 +43,7 @@ class ExerciseController extends Controller
         }
 
         return $this->render('exercises/exercises_listing', [
-            'exercisesByWeek' => $exercisesByWeek,
+            'exercisesByWeek' => $weeks,
             'weeklyProgress' => $weeklyProgress,
             'individualProgress' => $findProgress,
         ]);
@@ -49,6 +51,11 @@ class ExerciseController extends Controller
 
     public function exerciseSubmit(stdClass $exercise)
     {
+        if ($this->isUserTeacher()) {
+            Flash::error('Un enseignant ne peut pas remettre d\'exercice');
+            return $this->redirect($this->request->getReferer());
+        }
+
         $broker = new ExerciseBroker();
 
         if ($broker->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
@@ -86,6 +93,7 @@ class ExerciseController extends Controller
         $state = "unsubmitted";
         $corrected = !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false;
         $submitted = !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false;
+        $isTeacher = $this->isUserTeacher();
 
         if ($corrected && $submitted) {
             $state = "finished";
@@ -99,6 +107,7 @@ class ExerciseController extends Controller
             'tips' => $this->gibberishTip($exercise->id),
             'completion' => $this->calculateCompletion($exercise),
             'state' => $state,
+            'isTeacher' => $isTeacher,
             'corrected' => $corrected,
             'submitted' => $submitted
         ]);

@@ -48,8 +48,6 @@ class HomeController extends Controller
     {
         (new NotificationBroker())->seeAllNotification($this->getUser()['id']);
         Flash::success("Action effectuée");
-        if ($this->getUser()['isTeacher'])
-            return $this->redirect('/home');
-        return $this->redirect('/profile');
+        return $this->redirect('/profile/notifications');
     }
 }

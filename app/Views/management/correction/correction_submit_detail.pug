@@ -33,18 +33,21 @@ block body
           else
             code.p-4.language-java=fileContent
         .d-flex.align-items-center.justify-content-end.w-100
-          a(href='/management/correction/download/' + studentExercise.id).download-button.align-self-end.p-2
+          a(href='/management/correction/download/' + studentExercise.se_id).download-button.align-self-end.p-2
             span.mr-3 Télécharger
             i.fas.fa-download
-        form.correct-form.w-100.mb-0(action="/management/correction/correct/" + studentExercise.student_da + "/" + studentExercise.id method="post")
+        form.correct-form.w-100.mb-0(action="/management/correction/correct/" + studentExercise.student_da + "/" + studentExercise.se_id method="post")
           .form-row.mt-4
             .form-group.col-12.mb-4
               textarea(id="comment" rows=6 name="comment" placeholder="Commentaire (Optionnel)").form-control
-          .form-row
-            .form-group.col.d-flex.justify-content-end.mb-0
-              button(type="submit").p-3.m-auto
+          .form-row.justify-content-end
+            .form-group.d-flex.mb-0.mr-2
+              button(type="submit" name="ok").p-3.mr-3
                 i.fas.fa-check.student-icons.mr-2
                 span.mr-3 Réponse correcte
+              button(type="submit" name="notOk").p-3.m-auto
+                i.fas.fa-times-circle.student-icons.mr-2
+                span.mr-3 Réponse incorrecte
 
 block script
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/obsidian.min.css')

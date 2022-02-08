@@ -26,7 +26,12 @@ class NotificationService
 
     public static function newBalance($userId, $add, $newBalance)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour. Ajout de " . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour." . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
+    }
+
+    public static function incorrectSolution($userId, $exerciseName)
+    {
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre solution pour " . $exerciseName . " ne convient pas. Consulter le commentaire pour vous orienter", "Solution incorrect");
     }
 
     public static function newCommentOnCorrection($userId)

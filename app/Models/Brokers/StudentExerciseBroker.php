@@ -14,8 +14,8 @@ class StudentExerciseBroker extends Broker
 
     public function findById($id)
     {
-        $sql = "SELECT *
-                FROM codewars.studentexercise ex join codewars.student s on s.da = ex.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da
+        $sql = "SELECT ex.id as se_id, *
+                FROM codewars.studentexercise ex join codewars.student s on s.da = ex.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da join codewars.exercise e on ex.exercise_id = e.id
                 WHERE ex.id = ?";
         return $this->selectSingle($sql, [$id]);
     }

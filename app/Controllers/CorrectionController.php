@@ -1,5 +1,8 @@
 <?php namespace Controllers;
 
+use Cassandra\Date;
+use DateInterval;
+use DateTime;
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
@@ -34,6 +37,13 @@ class CorrectionController extends Controller
         $exercises = (new ExerciseBroker())->getCorrection();
         $exercisesByStudent = [];
         foreach ($exercises as $exercise) {
+            $nowDate = new DateTime();
+            $exerciseDate = new DateTime($exercise->submit_date);
+            $diff = $exerciseDate->diff($nowDate);
+            if ($diff->d < 1)
+                $exercise->diff = "Remis il y a " . $diff->format("%h heures et %i minutes");
+            else
+                $exercise->diff = "Remis le " . format('date', $exercise->submit_date);
             $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->exercise_id] = $exercise;
         }
         return $this->render('/management/correction/correction_listing', [
@@ -45,15 +55,22 @@ class CorrectionController extends Controller
     public function correctExercise($da, $id)
     {
         $form = $this->buildForm();
-        (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
-        $e = (new ExerciseBroker())->getCorrectionPath($id);
-        unlink($e->path);
-        Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
+        if ($form->getValue("ok") == "") {
+            (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
+            $e = (new ExerciseBroker())->getCorrectionPath($id);
+            unlink($e->path);
+            Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
+        } else {
+            Flash::warning("Commentaire envoyer à l'élève l'informant que sa solution ne convient pas.");
+            (new ExerciseBroker())->incorrectExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
+        }
+
         return $this->redirect('/management/correction');
     }
 
     public function downloadExercise($id)
     {
+
         $e = (new ExerciseBroker())->getCorrectionPath($id);
 
         if ($e == null) {
@@ -71,6 +88,7 @@ class CorrectionController extends Controller
             readfile($e->path);
             die();
         } else {
+            Flash::error("Impossible de télécharcher le fichier");
             die("Error: File not found.");
         }
     }
@@ -121,5 +139,17 @@ class CorrectionController extends Controller
                 return $this->redirect('/management/correction');
             }
         });
+    }
+
+    function format_interval(DateInterval $interval) {
+        $result = "";
+        if ($interval->y) { $result .= $interval->format("%y ans "); }
+        if ($interval->m) { $result .= $interval->format("%m mois "); }
+        if ($interval->d) { $result .= $interval->format("%d jours "); }
+        if ($interval->h) { $result .= $interval->format("%h heures "); }
+        if ($interval->i) { $result .= $interval->format("%i minutes "); }
+        if ($interval->s) { $result .= $interval->format("%s secondes "); }
+
+        return $result;
     }
 }

@@ -14,9 +14,9 @@ block body
           h1 Correction
           hr
         if corrections == null
-          h5.d-block.text-muted.text-center Aucun exercice à corriger pour l'instant...
+          h5.d-block.text-muted Aucun exercice à corriger pour l'instant...
         else
-          h5.d-block.text-muted Consulter la liste des solutions. Vous avez (#{count}) missions à corriger
+          h5.d-block.text-muted Consulter la liste des solutions. Vous avez (#{count}) missions à corriger :
         br
         each correction, person in corrections
           h4 #{person}
@@ -24,5 +24,7 @@ block body
           ul.mb-4.pl-0
             each exercise, index in correction
               li.ml-4
-                a(href="/management/correction/detail/" + exercise.exercise_id + "/" + exercise.id ).text-dark
-                  p.m-0.student-row-element #{exercise.name} (Remis le #{format('datetime', exercise.submit_date)})
+                a(href="/management/correction/detail/" + exercise.exercise_id + "/" + exercise.id ).d-inline-block.text-dark
+                  p.m-0.student-row-element #{exercise.name}
+                .d-inline-block
+                  small.ml-2 (#{exercise.diff})
