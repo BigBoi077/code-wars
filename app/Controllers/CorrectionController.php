@@ -39,9 +39,9 @@ class CorrectionController extends Controller
         foreach ($exercises as $exercise) {
             $nowDate = new DateTime();
             $exerciseDate = new DateTime($exercise->submit_date);
-            $diff = $exerciseDate->diff($nowDate)->format("%h heures et %i minutes");
-            if ($diff > time() + 86400)
-                $exercise->diff = "Remis il y a " . $diff;
+            $diff = $exerciseDate->diff($nowDate);
+            if ($diff->d < 1)
+                $exercise->diff = "Remis il y a " . $diff->format("%h heures et %i minutes");
             else
                 $exercise->diff = "Remis le " . format('date', $exercise->submit_date);
             $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->exercise_id] = $exercise;

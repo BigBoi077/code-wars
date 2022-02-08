@@ -40,10 +40,13 @@ mixin header()
       if !user.isTeacher
         a.profile-pic(href="/profile")
           img(src=profileImageUrl)
-      .d-flex
-        a(href="/profile/notifications").bell
-          button.ml-3(class=(!user.isTeacher) ? 'mr-2': '')
-            i#bell.fas.fa-bell
+      .d-flex.ml-3
+        .notification-container
+          a#notifBtn(href="/profile/notifications").bell
+            button(class=(!user.isTeacher) ? 'mr-2': '')
+              i#bell.fas.fa-bell
+          if hasNotifications
+            span#hasNotifIcon
         if user.isTeacher
           .dropdown.d-flex.align-items-center
             button(id="managementDropdown" type="button" data-bs-toggle="dropdown").btn.bg-transparent.gestion-button

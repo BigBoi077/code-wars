@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+use Models\Brokers\NotificationBroker;
 use Models\Logger;
 use Models\Services\StudentService;
 use Zephyrus\Application\Session;
@@ -35,6 +36,7 @@ abstract class Controller extends SecurityController
         $student = $this->getActiveStudent();
         $user = $this->getUser();
         $imageUrl= self::DEFAULT_PROFILE_PIC;
+        $hasNotifications = false;
 
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
@@ -46,6 +48,8 @@ abstract class Controller extends SecurityController
             if ($gravatar->isAvailable()) {
                 $imageUrl = $gravatar->getUrl();
             }
+
+            $hasNotifications = count((new NotificationBroker())->getStudentAllNotifications($user['id'])) > 0;
         }
 
         return parent::render($page, array_merge($args, [
@@ -53,6 +57,7 @@ abstract class Controller extends SecurityController
             'user' => $user,
             'profileImageUrl' => $imageUrl,
             'student' => $student,
+            'hasNotifications' => $hasNotifications,
             'teamPoints' => TeamController::getTeamPoints()
         ]));
     }
