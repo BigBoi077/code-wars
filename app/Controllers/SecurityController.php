@@ -149,8 +149,13 @@ abstract class SecurityController extends ZephyrusBaseController
         $csp->setDefaultSources(["'self'"]);
         $csp->setFontSources(["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com']);
         $csp->setStyleSources(["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://cdnjs.cloudflare.com']);
-        $csp->setScriptSources(["'self'", 'https://ajax.googleapis.com', 'https://maps.googleapis.com',
-            'https://www.google-analytics.com', 'http://connect.facebook.net', 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com']);
+        $csp->setScriptSources(["'self'",
+            'https://ajax.googleapis.com',
+            'https://maps.googleapis.com',
+            'https://www.google-analytics.com',
+            'http://connect.facebook.net',
+            'https://cdn.jsdelivr.net',
+            'https://cdnjs.cloudflare.com']);
         $csp->setChildSources(["'self'", 'http://staticxx.facebook.com']);
         $csp->setImageSources(["'self'", 'data:', 'https://www.gravatar.com/', 'https://api.qrserver.com/']);
         $csp->setBaseUri([$this->request->getBaseUrl()]);

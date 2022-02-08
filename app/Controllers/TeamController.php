@@ -9,7 +9,6 @@ use Zephyrus\Utilities\Gravatar;
 
 class TeamController extends Controller
 {
-    const DEFAULT_PROFILE_PIC = "/assets/images/profil_pic_default.png";
 
     public function initializeRoutes()
     {
@@ -42,13 +41,6 @@ class TeamController extends Controller
         $index = 0;
         $current = StudentService::get($this->getUser()['da']);
         foreach ($students as $student) {
-            $student->gravatarUrl = self::DEFAULT_PROFILE_PIC;
-            if (is_string($student->email)) {
-                $gravatar = new Gravatar($student->email);
-                if ($gravatar->isAvailable()) {
-                    $student->gravatarUrl = $gravatar->getUrl();
-                }
-            }
             if ($current->id === $student->id) {
                 $current->position = $index + 1;
             }
