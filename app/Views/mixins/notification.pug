@@ -9,7 +9,3 @@ mixin notification(notif)
               i.fas.fa-check-circle
         p.py-1.pt-2=notif.description
         h6.mb-0.pt-2 Émis le #{format('date', notif.date)}
-      //if !notif.is_seen
-      //  .col-1.d-flex.align-items-center.px-1
-      //    a(href="/notification/seen/" + notif.id).notification-check
-      //      i.fas.fa-check-circle.fa-2x
