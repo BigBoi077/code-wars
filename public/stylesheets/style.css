@@ -420,6 +420,50 @@ body {
     opacity: .5;
 }
 
+input#exerciseUpload {
+    width: 0;
+}
+
+#uploadImgBtn {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#uploadImgBtn label {
+    margin: 0;
+    padding: 2px 75px;
+}
+
+#uploadImgBtn #uploadLabel i {
+    padding-right: 1rem;
+}
+
+#uploadLabel {
+    background-color: var(--accent);
+    padding: 12px 28px;
+    border-radius: .25rem;
+}
+
+#submitLabel {
+    padding: 12px 28px;
+    border-radius: .25rem;
+}
+
+#submitLabel.disabled {
+    background-color: var(--grey);
+    opacity: 50%;
+}
+
+.mission-submit label {
+    background-color: var(--accent);
+}
+
+#uploadLabel i, #submitLabel i {
+    padding-right: 10px;
+}
+
 .btn-yellow {
     background-color: var(--accent);
     color: var(--font);
@@ -1093,16 +1137,11 @@ text-align: center;
     cursor: pointer !important;
 }
 
-.single-mission-detail .mission-submit, .single-mission-detail .mission-upload,
-.single-mission-submit .mission-submit, .single-mission-submit .mission-upload {
-    background-color: var(--accent);
-    border-radius: 5px;
-    padding: 16px 32px;
+ .mission-submit, .single-mission-detail .mission-upload,
+ .mission-submit, .single-mission-submit .mission-upload {
     cursor: pointer;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 48px;
 }
 
 .mission-upload.disabled {
@@ -1159,7 +1198,7 @@ text-align: center;
     display: none;
 }
 
-.single-mission-submit .mission-upload input[type="submit"] {
+.single-mission-submit .mission-submit input[type="submit"] {
     display: none;
 }
 

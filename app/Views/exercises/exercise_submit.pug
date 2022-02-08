@@ -25,14 +25,16 @@ block body
       li La taille maximale du fichier est 20 Mo.
     p Si vous avez des précisions à apporter ou tout autre commentaire que vous désirez transmettre avec la solution, veillez utiliser la zone commentaire ci-dessous.
     textarea(rows=6 placeholder="Commentaires" name="comment")
-    div.d-flex.justify-content-end
-      div.mission-submit.mt-4.mr-4
-        i.fas.fa-file-code
-        label#uploadLabel(for='exerciseUpload') Remise d'exercice
-        input#exerciseUpload(type='file' name='exercise' accept='.zip,.java')
-      div.mission-upload.mt-4.mr-0.disabled
-        i.fas.fa-file-upload
-        label(for='exercice-submit') Soumettre le fichier
+    .d-flex.justify-content-end
+      .mission-upload.mt-4.mr-4
+        label#uploadLabel(for='exerciseUpload')
+          i.fas.fa-file-code
+          | Remise d'exercice
+        input#exerciseUpload(type='file' name='exercise' accept='.zip,.java' placeholder="Remise d'exercice")
+      .mission-submit.mt-4.mr-0
+        label#submitLabel.disabled(for='exercice-submit')
+          i.fas.fa-file-upload
+          | Soumettre le fichier
         input#exercice-submit(type='submit' disabled=true)
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
