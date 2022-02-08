@@ -16,12 +16,12 @@ block body
       .exercise-submit-detail.w-100
         .row.pt-4.pb-0
           .d-flex.align-items-center
-            h4 #{studentFirstname} #{studentLastname} a remis cette mission le #{format('date', studentExercise.submit_date)}.
+            h4 #{studentName} a remis l'exercise le #{format('datetime', studentExercise.submit_date)}.
         .d-inline-block
           h6.text-muted Soumission de l'exercise
         .d-inline-block.mx-1
           a(href="/exercises/" + exercise.id)
-            .text-muted #{exercise.name}.
+            .text-muted.font-italic #{exercise.name}.
         h6.text-muted Une réponse correcte octroie une récompense de #{exercise.cash_reward}$ et #{exercise.point_reward} points.
           | Vous pouvez également laisser un commentaire à l'élève.
         br
@@ -47,6 +47,7 @@ block body
                 span.mr-3 Réponse correcte
 
 block script
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/obsidian.min.css')
   script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js')
   script(nonce=nonce()).
     hljs.highlightAll({
