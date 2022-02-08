@@ -376,6 +376,7 @@ header .gestion-button {
 
 .notification-check {
     color: black;
+    font-size: 28px;
 }
 
 .notification-check:hover {

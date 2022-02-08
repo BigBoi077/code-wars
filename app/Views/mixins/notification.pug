@@ -1,11 +1,15 @@
 mixin notification(notif)
   .card.mb-3.mr-4
     .row.p-3
-      .col-11.px-2
-        h4.mb-1=notif.name
-        p.mb-0=notif.description
+      .w-100.px-2
+        .d-flex.justify-content-between
+          h4.mb-1=notif.name
+          if !notif.is_seen
+            a(href="/notification/seen/" + notif.id).notification-check
+              i.fas.fa-check-circle
+        p.py-1.pt-2=notif.description
         h6.mb-0.pt-2 Émis le #{format('date', notif.date)}
-      if !notif.is_seen
-        .col-1.d-flex.align-items-center.px-1
-          a(href="/notification/seen/" + notif.id).notification-check
-            i.fas.fa-check-circle.fa-2x
+      //if !notif.is_seen
+      //  .col-1.d-flex.align-items-center.px-1
+      //    a(href="/notification/seen/" + notif.id).notification-check
+      //      i.fas.fa-check-circle.fa-2x
