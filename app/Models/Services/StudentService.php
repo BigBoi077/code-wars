@@ -127,7 +127,7 @@ class StudentService
         $firstname = $this->form->getValue('firstname');
         $lastname = $this->form->getValue('lastname');
         $username = $firstname . ' ' . $lastname;
-        $password = password_hash($this->form->getValue('da') . 'Cegep' . PASSWORD_PEPPER, PASSWORD_DEFAULT);
+        $password = password_hash($this->form->getValue('da') . PASSWORD_PEPPER, PASSWORD_DEFAULT);
         $team_id = $this->form->getValue('team_id');
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $points = ($this->form->getValue('points') != "") ? $this->form->getValue('points') : 0;
