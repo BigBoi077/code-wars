@@ -51,6 +51,11 @@ class ExerciseController extends Controller
 
     public function exerciseSubmit(stdClass $exercise)
     {
+        if ($this->isUserTeacher()) {
+            Flash::error('Un enseignant ne peut pas remettre d\'exercice');
+            return $this->redirect($this->request->getReferer());
+        }
+
         $broker = new ExerciseBroker();
 
         if ($broker->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
@@ -88,6 +93,7 @@ class ExerciseController extends Controller
         $state = "unsubmitted";
         $corrected = !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false;
         $submitted = !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false;
+        $isTeacher = $this->isUserTeacher();
 
         if ($corrected && $submitted) {
             $state = "finished";
@@ -101,6 +107,7 @@ class ExerciseController extends Controller
             'tips' => $this->gibberishTip($exercise->id),
             'completion' => $this->calculateCompletion($exercise),
             'state' => $state,
+            'isTeacher' => $isTeacher,
             'corrected' => $corrected,
             'submitted' => $submitted
         ]);

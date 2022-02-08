@@ -7,11 +7,11 @@ block header
   +header()
 
 block body
-  .container.py-5.px-0
-    .row
+  .container.py-5.px-0.profile
+    .row.mb-4
       .col-lg-4
         .card
-          .card-body.text-center
+          .card-body.text-center.main-card
             if isTeacher
               img.rounded-img.mt-2(src=gravatarUrl)
             else
@@ -24,7 +24,7 @@ block body
       .col-lg-8
         .card.mb-4.profile-first-elems
           include ../mixins/profileInfo
-          .card-body
+          .card-body.main-card
             h2.mb-4 Informations du compte
             +profileInfo("Nom", studentProfile.lastname)
             hr
@@ -49,7 +49,7 @@ block body
       .col
         .row
           .card.mb-4.w-100
-            .card-body
+            .card-body.main-card
               h2.mb-3 Progression individuelle
               hr
               if user.isTeacher
@@ -61,7 +61,7 @@ block body
                 each week in weeklyProgress
                   +weekProgress(week)
           .card.mb-4.w-100
-            .card-body
+            .card-body.main-card
               include ../mixins/myItem
               if user.isTeacher
                 h2.mb-3 Achats de l'élève
@@ -95,7 +95,7 @@ block body
                     | Aller au magasin
         .row
           .card.mb-4.w-100
-            .card-body
+            .card-body.main-card
               include ../mixins/myExercise
               if user.isTeacher
                 h2.mb-3 Exercises de l'élève

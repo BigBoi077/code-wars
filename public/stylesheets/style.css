@@ -240,6 +240,10 @@ header .menu-items a:hover {
     align-items: center;
 }
 
+.bell button {
+    padding: 0;
+}
+
 header .disconnect button, header .bell button {
     border: none;
     border-radius: 15px;
@@ -422,6 +426,26 @@ body {
 
 input#exerciseUpload {
     display: none;
+}
+
+.notification-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#notifBtn {
+    position: relative;
+}
+
+#hasNotifIcon {
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    position: absolute;
+    top: -1px;
+    right: 4px;
+    background-color: red;
 }
 
 #uploadImgBtn {
@@ -1256,6 +1280,10 @@ text-align: center;
 }
 
 /* Profile */
+
+.profile .card {
+    border: none;
+}
 
 .profile-first-elems {
     height: 100%;
