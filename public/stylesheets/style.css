@@ -1257,6 +1257,10 @@ text-align: center;
 
 /* Profile */
 
+.profile .card {
+    border: none;
+}
+
 .profile-first-elems {
     height: 100%;
 }
