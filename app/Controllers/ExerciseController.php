@@ -26,7 +26,7 @@ class ExerciseController extends Controller
     {
         $exercises = ExerciseService::getAll();
         $exercisesByWeek = [];
-        foreach ($exercises as $exercise) {;
+        foreach ($exercises as $exercise) {
             if ($exercise->is_active) {
                 $exercisesByWeek[$exercise->week_id]['number'] = $exercise->number;
                 $exercisesByWeek[$exercise->week_id]['startDate'] = $exercise->start_date;
