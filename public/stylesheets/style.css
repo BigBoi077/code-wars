@@ -432,6 +432,9 @@ input#exerciseUpload {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+#notifBtn {
     position: relative;
 }
 
@@ -440,8 +443,8 @@ input#exerciseUpload {
     height: 12px;
     border-radius: 100%;
     position: absolute;
-    top: 6px;
-    right: -4px;
+    top: -1px;
+    right: 4px;
     background-color: red;
 }
 
