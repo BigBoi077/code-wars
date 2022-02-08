@@ -30,6 +30,7 @@ class WeekManageController extends TeacherController
     public function activateWeek($id)
     {
         (new WeekBroker())->activate($id);
+        Flash::success("La visibilité a été changé avec succès!");
         return $this->redirect('/management/weeks');
     }
 

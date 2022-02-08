@@ -37,7 +37,7 @@ block body
                   a.col(data-bs-toggle="modal" data-bs-target="#tipsDeleteModal" + tip.id)
                     i.fas.fa-trash.student-icons
           each tip in tips
-            +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+            +confirmationModal("Suppression d'indice" , 'Voulez-vous vraiment supprimer cet indice?',
                 '/management/exercises/' + exercise.id + '/tips/' + tip.id + '/delete', 'tipsDeleteModal' + tip.id)
       else
         h5.text-muted Aucun indices pour cette mission

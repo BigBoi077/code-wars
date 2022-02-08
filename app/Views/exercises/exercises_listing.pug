@@ -33,15 +33,19 @@ block body
                   each exercise in week.exercises
                     tr.text-dark
                         td
-                          a(href="/exercises/" + exercise.id).rowlink.mr-2
+                          a(href="/exercises/" + exercise.id).rowlink
                         td
-                         span.text-dark #{exercise.name}
+                          a(href="/exercises/" + exercise.id).rowlink
+                          span.text-dark #{exercise.name}
                         td
+                          a(href="/exercises/" + exercise.id).rowlink
                           +star_wars_money(exercise.cash_reward)
                         td
+                          a(href="/exercises/" + exercise.id).rowlink
                           +star_wars_points(exercise.point_reward)
                         if !user.isTeacher
                           td
+                            a(href="/exercises/" + exercise.id).rowlink
                             .d-flex.align-items-center.mt-1
                               if exercise.corrected
                                 i.fas.fa-check-circle.corrected(title="Corrigé")

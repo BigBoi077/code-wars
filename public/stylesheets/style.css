@@ -1461,6 +1461,7 @@ th {
 }
 
 .table tbody td {
+    position: relative;
     vertical-align: center;
 }
 
@@ -1472,14 +1473,22 @@ table {
     position: relative;
 }
 
-.rowlink::before {
+.rowlink {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+/*.rowlink::before {
     content: "";
     display: block;
     position: absolute;
     left: 0;
     width: 100%;
     height: 1.5em;
-}
+}*/
 
 .table .start {
     text-align: left !important;

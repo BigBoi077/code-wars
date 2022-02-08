@@ -38,5 +38,5 @@ block body
                   a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal" + week.id)
                     i.fas.fa-trash.student-icons
         each week in weeks
-          +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine ?',
+          +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine?',
               '/management/weeks/' + week.id + '/delete', 'weekDeleteModal' + week.id)

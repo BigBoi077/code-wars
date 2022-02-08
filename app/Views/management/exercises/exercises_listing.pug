@@ -41,7 +41,7 @@ block body
                   +star_wars_points(exercise.point_reward)
                 td
                   p.student-row-element Semaine #{exercise.number}
-                td
+                td.text-nowrap
                   a(href='/management/exercises/' + exercise.id + '/tips').mr-3
                     i.fas.fa-lightbulb.student-icons
                   a(href='/management/exercises/' + exercise.id + '/edit').mr-3
@@ -49,5 +49,5 @@ block body
                   a(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
                     i.fas.fa-trash.student-icons
       each exercise in exercises
-        +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+        +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice?',
           '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)

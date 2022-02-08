@@ -175,10 +175,10 @@ class ExerciseController extends Controller
         $broker = new TipBroker();
         $tip = $broker->GetById($tipId);
         if ($student->cash < $tip->price) {
-            Flash::error("Vous n'avez pas assez d'argent pour cette indice...");
+            Flash::error("Vous n'avez pas assez d'argent pour cet indice...");
             return $this->redirect($this->request->getReferer());
         } else if ($broker->Has($tipId, $student->da)) {
-            Flash::error("Vous avez déjà cette indice, pourquoi payer deux fois.");
+            Flash::error("Vous avez déjà cet indice, pourquoi payer deux fois?");
             return $this->redirect($this->request->getReferer());
         }
         $broker->buy($tipId, $student->da);

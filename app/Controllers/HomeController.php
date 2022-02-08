@@ -41,13 +41,14 @@ class HomeController extends Controller
     public function seeNotification($id)
     {
         (new NotificationBroker())->seenNotification($id, $this->getUser()['id']);
+        Flash::success("La notification a été cochée comme vue.");
         return $this->redirect('/profile/notifications');
     }
 
     public function seeAllNotifications()
     {
         (new NotificationBroker())->seeAllNotification($this->getUser()['id']);
-        Flash::success("Action effectuée");
+        Flash::success("Les notifications ont été cochées comme vues.");
         return $this->redirect('/profile/notifications');
     }
 }
