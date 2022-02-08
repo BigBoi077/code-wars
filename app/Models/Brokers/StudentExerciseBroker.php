@@ -14,7 +14,7 @@ class StudentExerciseBroker extends Broker
 
     public function findById($id)
     {
-        $sql = "SELECT * 
+        $sql = "SELECT *
                 FROM codewars.studentexercise ex 
                 WHERE ex.id = ?";
         return $this->selectSingle($sql, [$id]);

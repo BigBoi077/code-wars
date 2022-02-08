@@ -150,7 +150,7 @@ class ExerciseController extends Controller
             if ((new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da)) {
                 (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $exercise->id, $targetFile);
             } else {
-                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $exercise->id, $targetFile, $form->getValue("exerciseName"));
+                (new ExerciseBroker())->submitExercise($this->getActiveStudent(), $exercise->id, $targetFile, $form->getValue("exerciseName"), $form->getValue("comment"));
             }
             return $this->redirect('/exercises/' . $exercise->id);
         }

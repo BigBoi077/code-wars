@@ -24,6 +24,9 @@ block body
             .text-muted #{exercise.name}.
         h6.text-muted Une réponse correcte octroie une récompense de #{exercise.cash_reward}$ et #{exercise.point_reward} points.
           | Vous pouvez également laisser un commentaire à l'élève.
+        br
+        h5 Commentaire de l'étudiant
+        p.mb-0.text-muted=studentExercise.student_comment
         pre.mb-0
           if fileContent == null
             code.p-4.language-java Le fichier remis ne peut être lu

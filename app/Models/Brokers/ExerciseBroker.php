@@ -45,10 +45,10 @@ class ExerciseBroker extends Broker
         return $result->id;
     }
 
-    public function submitExercise($student, $exerciseId, $path, $fileName)
+    public function submitExercise($student, $exerciseId, $path, $fileName, $comment)
     {
-        $sql = "insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date) values (default, ?, ?, true, false, null, ?, now())";
-        $this->query($sql, [$student->da, $exerciseId, $path]);
+        $sql = "insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment) values (default, ?, ?, true, false, null, ?, now(), ?)";
+        $this->query($sql, [$student->da, $exerciseId, $path, $comment]);
         NotificationService::newCorrectionAvailable($student, $fileName);
     }
 
@@ -110,7 +110,7 @@ class ExerciseBroker extends Broker
 
     public function getCorrection(): array
     {
-        $sql = "select se.id, se.dir_path, se.submit_date, e.id as exercise_id, e.name, s.da as student_da, p.firstname, p.lastname from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false";
+        $sql = "select se.id, se.dir_path, se.submit_date, e.id as exercise_id, e.name, se.student_comment, s.da as student_da, p.firstname, p.lastname from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false order by se.submit_date";
         return $this->select($sql);
     }
 
