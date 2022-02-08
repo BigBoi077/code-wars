@@ -2,10 +2,8 @@
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\TipBroker;
-use Models\Brokers\WeekBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
-use function PHPUnit\Framework\isEmpty;
 
 class ExerciseService
 {
@@ -51,8 +49,7 @@ class ExerciseService
 
     public static function get($id)
     {
-        $broker = new ExerciseBroker();
-        return $broker->findByID($id);
+        return (new ExerciseBroker())->findById($id);
     }
 
     public function getErrorMessages()

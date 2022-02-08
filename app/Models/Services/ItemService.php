@@ -46,7 +46,7 @@ class ItemService
         return (new ItemBroker())->findById($id) != null;
     }
 
-    public static function get($id): stdClass
+    public static function get($id)
     {
         return (new ItemBroker())->findById($id);
     }

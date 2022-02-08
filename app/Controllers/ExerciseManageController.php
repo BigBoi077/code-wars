@@ -15,8 +15,11 @@ class ExerciseManageController extends TeacherController
         $this->get('/management/exercises/create', 'createExercise');
         $this->get('/management/exercises/{id}/edit', 'editExercise');
         $this->get('/management/exercises/{id}/delete', 'deleteExercise');
+
         $this->post('/management/exercises/store', 'storeExercise');
         $this->post('/management/exercises/{id}/update', 'updateExercise');
+
+        $this->overrideExercise();
     }
 
     public function listExercises(): Response
@@ -85,4 +88,18 @@ class ExerciseManageController extends TeacherController
         return $this->redirect('/management/exercises');
     }
 
+    private function overrideExercise()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_numeric($value)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
+                    return $this->redirect('/management/exercises');
+                }
+                return $exercise->id;
+            } else {
+                return $this->redirect('/management/exercises');
+            }
+        });
+    }
 }

@@ -1,10 +1,10 @@
 mixin notification(notif)
-  .card.mb-3.w-100.notification
+  .card.mb-3.mr-4
     .row.p-3
-      .col-11
-        h6.mb-1=notif.name
+      .col-11.px-0
+        h4.mb-1=notif.name
         p.mb-0=notif.description
-        p.mb-0.time.pt-2 Émis le #{format('date', notif.date)}
+        h6.mb-0.pt-2 Émis le #{format('date', notif.date)}
       if !notif.is_seen
         .col-1.d-flex.align-items-center.px-0
           a(href="/notification/seen/" + notif.id).text-dark.notification-check

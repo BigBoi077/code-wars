@@ -6,7 +6,6 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
-use Models\Services\ExerciseService;
 use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Rule;
@@ -19,11 +18,11 @@ class ProfileController extends Controller
         $this->get('/profile', 'profile');
         $this->get('/profile/edit', 'editProfile');
         $this->get("/profile/editMdp", 'editMdp');
+        $this->get('/profile/notifications', 'notifications');
+        $this->get("/management/students/rapidAdd", "rapidAdd");
+
         $this->post('/profile/update', 'updateProfile');
         $this->post('/profile/update/mdp', 'updateMdp');
-        $this->get('/profile/notifications', 'notifications');
-
-        $this->get("/management/students/rapidAdd", "rapidAdd");
         $this->post("/management/students/rapidAdd", 'rapidAddUpdate');
     }
 

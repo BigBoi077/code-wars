@@ -1,9 +1,9 @@
 set search_path = codewars;
 
 /*--DROP-TALBES--*/
-drop table if exists studentExercise;
 drop table if exists studenttip;
 drop table if exists tips;
+drop table if exists studentExercise;
 drop table if exists exercise;
 drop table if exists week;
 drop table if exists studentItem;
@@ -17,7 +17,7 @@ drop table if exists log;
 drop table if exists "user";
 drop table if exists person;
 
-
+/*--DROP-SCHEMA--*/
 drop schema if exists codewars;
 
 /*--CREATE-SCHEMA--*/

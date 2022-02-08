@@ -7,62 +7,59 @@ block header
   +header()
 
 block body
-  .student-form-container
-    h4 #{title}
-    hr
-    form(method='post', action=action)
-      .form-row
-        .form-group.col-12.mb-1
-          label(for="exercisename") Nom de l'exercice
-          input.form-control(id='exercisename', name='exercisename', type='text' value=(exercise !== null) ? exercise.name: val('exercisename'))
-      .form-row
-        .form-group.col-12.mb-1
-          label(for="description") Description
-          textArea.form-control(id='description', name='description' rows='10')
-           | #{(exercise !== null) ? exercise.description : val('description')}
-      .form-row
-        .form-group.col-12.mb-1
-          label(for="exemple") Exemple d'exécution (optionnel)
-          textArea.form-control(id='exemple', name='exemple' rows='5')
-            | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
-      .form-row
-        .form-group.col-12.mb-1
-          label#uploadImgLabel(for="exemple") Example d'exécution (Image, optionnel)
-          button(type="button").btn.btn-yellow#uploadImgBtn
-            label#uploadLabel(for='exerciseUpload')
-              i.fas.fa-file-code
-              | Image d'exécution
-            input#exerciseUpload(style="visibility:hidden;" type='file' name='exercise' accept='.png, .jpeg')
-      .form-row
-        .form-group.col-3
-          label(for="cash") Argent
-          input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(exercise !== null) ? exercise.cash_reward : val('cash'))
-        .form-group.col-3
-          label(for="point") Points
-          input.form-control(placeholder="0" id='point', name='point', type='number' value=(exercise !== null) ? exercise.point_reward : val('point'))
-        .form-group.col-3
-          label(for="difficulty") Difficulté
-          select.form-control(id="difficulty" name="difficulty")
-            each difficulty, index in difficulties
-              if (index === exercise.difficulty)
-                option(value=index selected)
-                  | #{difficulty}
+  .container
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 #{title}
+        hr
+      form.w-100(method='post', action=action)
+        .form-row
+          .form-group.col-12.mb-3
+            label(for="exercisename") Nom de l'exercice
+            input.form-control(id='exercisename', name='exercisename', type='text' value=(exercise !== null) ? exercise.name: val('exercisename'))
+        .form-row
+          .form-group.col-12.mb-3
+            label(for="description") Description
+            textArea.form-control(id='description', name='description' rows='10')
+             | #{(exercise !== null) ? exercise.description : val('description')}
+        .form-row
+          .form-group.col-12.mb-3
+            label(for="exemple") Exemple d'exécution (optionnel)
+            textArea.form-control(id='exemple', name='exemple' rows='5')
+              | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
+        .form-row
+          .form-group.col-6
+            label(for="cash") Argent
+            input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(exercise !== null) ? exercise.cash_reward : val('cash'))
+          .form-group.col-6
+            label(for="point") Points
+            input.form-control(placeholder="0" id='point', name='point', type='number' value=(exercise !== null) ? exercise.point_reward : val('point'))
+        .form-row
+          .form-group.col-6
+            label(for="difficulty") Difficulté
+            select.form-control(id="difficulty" name="difficulty")
+              each difficulty, index in difficulties
+                if (index === exercise.difficulty)
+                  option(value=index selected)
+                    | #{difficulty}
+                else
+                  option(value=index)
+                    | #{difficulty}
+          .form-group.col-6
+            label(for="week") Semaine
+            select.form-control(id="week", name="week")
+              each week in weeks
+                if (exercise.number === week.id)
+                  option(value=week.id selected)
+                    | #{week.number}
+                else
+                  option(value=week.id)
+                    | #{week.number}
+          .form-row.w-50.m-auto
+            button#submitBtn.btn(type='submit')
+              i.fas.fa-plus-square.mr-2
+              if exercise !== null
+                | Modifier
               else
-                option(value=index)
-                  | #{difficulty}
-        .form-group.col-3
-          label(for="week") Semaine
-          select.form-control(id="week", name="week")
-            each week in weeks
-              if (exercise.number === week.id)
-                option(value=week.id selected)
-                  | #{week.number}
-              else
-                option(value=week.id)
-                  | #{week.number}
-      .form-row
-        button#submitBtn.btn(type='submit')
-          if exercise !== null
-            | Modifier
-          else
-            | Créer
+                | Créer

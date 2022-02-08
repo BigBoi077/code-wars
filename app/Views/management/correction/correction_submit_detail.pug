@@ -7,14 +7,16 @@ block header
   +header()
 
 block body
-  .row.mission-header
-    h1.mb-3 Correction
   .container
-    .exercise-submit-detail.box-shadow.mb-4
-      .row.pt-4.pb-0.ml-5
-        .d-flex.align-items-center
-          h4 #{studentFirstname} #{studentLastname} a remis cette mission le #{format('date', studentExercise.submit_date)}.
-      .mx-5
+    .row.mt-5.p-4.main-card
+      .w-100
+        .d-flex.justify-content-between.align-items-center
+          h1 Correction
+        hr
+      .exercise-submit-detail.w-100
+        .row.pt-4.pb-0
+          .d-flex.align-items-center
+            h4 #{studentFirstname} #{studentLastname} a remis cette mission le #{format('date', studentExercise.submit_date)}.
         .d-inline-block
           h6.text-muted Soumission de l'exercise
         .d-inline-block.mx-1
@@ -22,25 +24,24 @@ block body
             .text-muted #{exercise.name}.
         h6.text-muted Une réponse correcte octroie une récompense de #{exercise.cash_reward}$ et #{exercise.point_reward} points.
           | Vous pouvez également laisser un commentaire à l'élève.
-      .mx-5
         pre.mb-0
           if fileContent == null
             code.p-4.language-java Le fichier remis ne peut être lu
           else
             code.p-4.language-java=fileContent
-        .d-flex.align-items-center.justify-content-end
+        .d-flex.align-items-center.justify-content-end.w-100
           a(href='/management/correction/download/' + studentExercise.id).download-button.align-self-end.p-2
             span.mr-3 Télécharger
             i.fas.fa-download
-      form.correct-form(action="/management/correction/correct/" + studentExercise.student_da + "/" + studentExercise.id method="post").mx-5
-        .form-row.mt-4
-          .form-group.col-12
-            textarea(id="comment" rows=6 name="comment" placeholder="Commentaire (Optionnel)").form-control
-        .form-row.my-3
-          .form-group.col.d-flex.justify-content-end
-            button(type="submit").p-3
-              span.mr-3 Réponse correcte
-              i.fas.fa-check.student-icons
+        form.correct-form.w-100.mb-0(action="/management/correction/correct/" + studentExercise.student_da + "/" + studentExercise.id method="post")
+          .form-row.mt-4
+            .form-group.col-12.mb-4
+              textarea(id="comment" rows=6 name="comment" placeholder="Commentaire (Optionnel)").form-control
+          .form-row
+            .form-group.col.d-flex.justify-content-end.mb-0
+              button(type="submit").p-3.m-auto
+                i.fas.fa-check.student-icons.mr-2
+                span.mr-3 Réponse correcte
 
 block script
   script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js')

@@ -1,34 +1,23 @@
 <?php namespace Controllers;
 
-use Models\Brokers\NotificationBroker;
-use Models\Brokers\StudentBroker;
-use Models\Brokers\StudentExerciseBroker;
-use Models\Brokers\StudentItemBroker;
-use Models\Brokers\TeamBroker;
-use Models\Brokers\ExerciseBroker;
-use Models\Brokers\TipBroker;
-use Models\Brokers\WeekBroker;
-use Models\Services\ExerciseService;
 use Models\Services\ItemService;
-use Models\Services\StudentService;
-use phpDocumentor\Reflection\Types\False_;
 use Zephyrus\Application\Flash;
-use Zephyrus\Application\Rule;
-use Zephyrus\Network\Response;
-use Zephyrus\Utilities\Gravatar;
 
 class ItemManageController extends TeacherController
 {
 
     public function initializeRoutes()
-	{
+    {
         $this->get('/management/items', 'listItems');
         $this->get('/management/items/create', 'createItem');
         $this->get('/management/items/{id}/edit', 'editItem');
         $this->get('/management/items/{id}/delete', 'deleteItem');
+
         $this->post('/management/items/store', 'storeItem');
         $this->post('/management/items/{id}/update', 'updateItem');
-	}
+
+        $this->overrideItem();
+    }
 
     public function listItems()
     {
@@ -96,4 +85,18 @@ class ItemManageController extends TeacherController
         return $this->redirect('/management/items/' . $id . '/edit');
     }
 
+    private function overrideItem()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_numeric($value)) {
+                $item = ItemService::get($value);
+                if (is_null($item)) {
+                    return $this->redirect('/management/items');
+                }
+                return $item->id;
+            } else {
+                return $this->redirect('/management/items');
+            }
+        });
+    }
 }

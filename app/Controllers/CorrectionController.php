@@ -21,9 +21,12 @@ class CorrectionController extends Controller
     public function initializeRoutes()
     {
         $this->get('/management/correction', 'correctionList');
-        $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
         $this->get('/management/correction/download/{id}', 'downloadExercise');
         $this->get('/management/correction/detail/{studentName}/{id}/{submitId}', 'exerciseSubmitDetail');
+
+        $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
+
+        $this->overrideCorrection();
     }
 
     public function correctionList()
@@ -34,7 +37,8 @@ class CorrectionController extends Controller
             $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->exercise_id] = $exercise;
         }
         return $this->render('/management/correction/correction_listing', [
-            'corrections' => $exercisesByStudent
+            'corrections' => $exercisesByStudent,
+            'count' => Count($exercises)
         ]);
     }
 
@@ -54,7 +58,7 @@ class CorrectionController extends Controller
 
         if ($e == null) {
             Flash::error("Impossible de télécharcher le fichier");
-            return $this->redirect($this->request->getReferer());
+            return $this->redirect("/error/404");
         }
 
         if (file_exists($e->path)) {
@@ -100,11 +104,25 @@ class CorrectionController extends Controller
 
         return $this->render('management/correction/correction_submit_detail', [
             'exercise' => ExerciseService::get($id),
-            'action' => "/submit/exercise/" . $id,
             'studentExercise' => $studentExercise,
             'fileContent' => $fileContent,
             'studentFirstname' => $studentArrayName[0],
             'studentLastname' => $studentArrayName[1]
         ]);
+    }
+
+    private function overrideCorrection()
+    {
+        $this->overrideArgument('id', function ($value) {
+            if (is_numeric($value)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
+                    return $this->redirect('/management/correction');
+                }
+                return $exercise->id;
+            } else {
+                return $this->redirect('/management/correction');
+            }
+        });
     }
 }

@@ -1,29 +1,26 @@
-<?php
-
-
-namespace Controllers;
-
+<?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
-use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
-use Models\Services\StudentService;
+use Models\Services\ExerciseService;
 use Models\Services\TipService;
 use Zephyrus\Application\Flash;
-use Zephyrus\Network\Response;
 
 class TipsManageController extends TeacherController
 {
 
     public function initializeRoutes()
     {
-        $this->get('/management/exercises/{id}/tips', 'exercisesTips');
-        $this->get("/management/exercises/{id}/tips/create", 'createTip');
+        $this->get('/management/exercises/{exerciseId}/tips', 'exercisesTips');
+        $this->get("/management/exercises/{exerciseId}/tips/create", 'createTip');
         $this->get("/management/exercises/{exerciseId}/tips/{tipId}/edit", 'editTip');
+        $this->get("/management/exercises/{exerciseId}/tips/{tipId}/delete", 'deleteTip');
 
         $this->post("/management/exercises/{exerciseId}/tips/store", 'storeTip');
-        $this->post("/management/exercises/{exerciseId}/tips/{id}/update", 'updateTip');
-        $this->get("/management/exercises/{exerciseId}/tips/{id}/delete", 'deleteTip');
+        $this->post("/management/exercises/{exerciseId}/tips/{tipId}/update", 'updateTip');
+
+        $this->overrideExercise();
+        $this->overrideTip();
     }
 
     public function exercisesTips($exerciseId)
@@ -87,5 +84,35 @@ class TipsManageController extends TeacherController
             Flash::error('Une erreur est survenue.');
         }
         return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
+    }
+
+    private function overrideExercise()
+    {
+        $this->overrideArgument('exerciseId', function ($value) {
+            if (is_numeric($value)) {
+                $exercise = ExerciseService::get($value);
+                if (is_null($exercise)) {
+                    return $this->redirect('/management/exercises');
+                }
+                return $exercise->id;
+            } else {
+                return $this->redirect('/management/exercises');
+            }
+        });
+    }
+
+    private function overrideTip()
+    {
+        $this->overrideArgument('tipId', function ($value) {
+            if (is_numeric($value)) {
+                $tip = TipService::get($value);
+                if (is_null($tip)) {
+                    return $this->redirect('/management/exercises');
+                }
+                return $tip->id;
+            } else {
+                return $this->redirect('/management/exercises');
+            }
+        });
     }
 }

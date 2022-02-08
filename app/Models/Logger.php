@@ -1,16 +1,12 @@
 <?php namespace Models;
 
-use Controllers\Controller;
-use Models\Brokers\Broker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\TokenBroker;
 use Models\Brokers\UserBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
-use Zephyrus\Application\Session;
 use Zephyrus\Network\Cookie;
 use Zephyrus\Security\Cryptography;
-
 
 class Logger
 {

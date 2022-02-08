@@ -1,8 +1,5 @@
 mixin itemRow(item)
-  .row.mb-2
-    .col-4
-      h6 #{item.name}
-    .col-5
-      h6 #{item.description}
-    .col-3
-      p(style="font-size: small") #{format('date', item.bought_date)}
+  tr
+    td #{item.name}
+    td #{item.description}
+    td.start #{format('date', item.bought_date)}
