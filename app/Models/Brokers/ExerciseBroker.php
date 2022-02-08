@@ -17,7 +17,16 @@ class ExerciseBroker extends Broker
     public function getAll(): array
     {
         $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple, w.id as week_id, w.number, w.is_active, w.start_date, se.corrected, se.completed
-                FROM codewars.exercise e join codewars.week w on w.id = e.week_id left join codewars.studentexercise se on se.exercise_id = e.id 
+                FROM codewars.week w left join codewars.exercise e on w.id = e.week_id left join codewars.studentexercise se on se.exercise_id = e.id
+                ORDER BY e.week_id, se.corrected desc, se.completed";
+        return $this->select($sql);
+    }
+
+    public function getAllActive(): array
+    {
+        $sql = "SELECT e.id, e.difficulty, e.name, e.description, e.cash_reward, e.point_reward, e.execution_exemple, w.id as week_id, w.number, w.is_active, w.start_date, se.corrected, se.completed
+                FROM codewars.exercise e join codewars.week w on w.id = e.week_id left join codewars.studentexercise se on se.exercise_id = e.id
+                WHERE w.is_active = true
                 ORDER BY e.week_id, se.corrected desc, se.completed";
         return $this->select($sql);
     }
