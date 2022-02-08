@@ -22,16 +22,18 @@ block body
                   i.fas.fa-plus-square.mr-2
                   | Gestion des missions
         hr
-      .row.all-missions.col-7.p-0
+      .row.all-missions.col.p-0
         each week, index in exercisesByWeek
           .week.w-100
-            button.bg-transparent.btn.row.mb-4.d-flex.align-items-end.p-0(data-toggle=index)
-              i.week-header.mb-1.fa.fa-chevron-down
-              h4.week-header.ml-3.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
+            .row.mb-4.d-flex.align-items-end.p-0
+              h4.week-header.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
             table.table(id="weekExercises" + index).w-100
               tbody.w-100
                 each exercise, index in week
-                  if index !== 'startDate' && index !== 'number'
+                  if index === ""
+                    tr
+                      td.text-muted.start.pl-5 Aucun exercise cette semaine
+                  else if index !== 'startDate' && index !== 'number'
                     tr.text-dark
                         td
                           a(href="/exercises/" + exercise.id).rowlink.mr-2
@@ -50,7 +52,6 @@ block body
                                 i.fas.fa-check-circle.submitted(title="Remis")
                               else
                                 i.fas.fa-times-circle.not-submitted(title="Non-remis")
-
       .col-5.pr-0.pl-5
         if student != null
           .mission-progression.card.mb-4.w-100.fixed-ct

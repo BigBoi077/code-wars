@@ -1,7 +1,6 @@
 <?php namespace Models\Brokers;
 
 use Models\Services\NotificationService;
-use mysql_xdevapi\Result;
 use stdClass;
 
 class StudentBroker extends Broker
@@ -32,27 +31,29 @@ class StudentBroker extends Broker
 
     public function getProgression($da): array
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.corrected = true";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id 
+                where s.da = ? and se.corrected = true and w.is_active = true";
         $done = $this->selectSingle($sql, [$da])->done;
-        $nbExercises = Count((new ExerciseBroker())->getAll());
+        $nbExercises = Count((new ExerciseBroker())->getAllActive());
         $totalDone = ($done / $nbExercises) * 100;
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
 
     public function getProgressionByWeek($da): array
     {
-        $sql = "select w.id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id
+        $sql = "select w.id as week_id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id
                 where s.da = ? and se.corrected = true group by w.id";
         $exercisesPerWeeks = $this->select($sql, [$da]);
         $sql = "select w.id as week_id, * from codewars.week w 
                 where w.is_active = true order by w.id";
-        $weeks = $this->select($sql);
+        $weeks = (new WeekBroker())->getAllActive();
         $exercisesBroker = new ExerciseBroker();
         $index = 0;
         foreach ($weeks as $week) {
             $week->progress = 0;
             if (isset($exercisesPerWeeks[$index])) {
-                $week->progress = number_format(($exercisesPerWeeks[$index]->done / Count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
+                if ($exercisesPerWeeks[$index]->week_id == $week->week_id)
+                    $week->progress = number_format(($exercisesPerWeeks[$index]->done / Count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
             }
             $index++;
         }
@@ -108,7 +109,7 @@ class StudentBroker extends Broker
 
     public function sameTeamStudent($teamId): array
     {
-        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.cash desc";
+        $sql = "SELECT s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name from codewars.student s  join codewars.user u on s.da = u.da join codewars.person p on u.da = p.da join codewars.team t on s.team_id = t.id where t.id = ? order by s.points desc, s.cash desc";
         return $this->select($sql, [$teamId]);
     }
 

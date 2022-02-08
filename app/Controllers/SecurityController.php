@@ -62,7 +62,7 @@ abstract class SecurityController extends ZephyrusBaseController
              * of the route processing.
              */
             // Do something (logs, database report, redirect, ...)
-            return $this->abortForbidden();
+            return $this->redirect('/errors/error');
         } catch (UnauthorizedAccessException $exception) {
             /**
              * Defines what to do when the route doesn't meet the authorization requirements. By default, treat this as

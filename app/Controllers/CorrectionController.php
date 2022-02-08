@@ -22,7 +22,7 @@ class CorrectionController extends Controller
     {
         $this->get('/management/correction', 'correctionList');
         $this->get('/management/correction/download/{id}', 'downloadExercise');
-        $this->get('/management/correction/detail/{studentName}/{id}/{submitId}', 'exerciseSubmitDetail');
+        $this->get('/management/correction/detail/{id}/{submitId}', 'exerciseSubmitDetail');
 
         $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
 
@@ -38,7 +38,7 @@ class CorrectionController extends Controller
         }
         return $this->render('/management/correction/correction_listing', [
             'corrections' => $exercisesByStudent,
-            'count' => Count($exercises)
+            'count' => count($exercises)
         ]);
     }
 
@@ -75,10 +75,8 @@ class CorrectionController extends Controller
         }
     }
 
-    public function exerciseSubmitDetail($studentName, $id, $submitId): Response
+    public function exerciseSubmitDetail($id, $submitId): Response
     {
-        $studentArrayName = explode(" ", rawurldecode($studentName));
-
         $studentExerciseBroker = new StudentExerciseBroker();
         $studentExercise = $studentExerciseBroker->findById($submitId);
 
@@ -106,8 +104,7 @@ class CorrectionController extends Controller
             'exercise' => ExerciseService::get($id),
             'studentExercise' => $studentExercise,
             'fileContent' => $fileContent,
-            'studentFirstname' => $studentArrayName[0],
-            'studentLastname' => $studentArrayName[1]
+            'studentName' => $studentExercise->firstname . " " . $studentExercise->lastname
         ]);
     }
 

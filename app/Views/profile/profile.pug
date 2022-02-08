@@ -17,7 +17,7 @@ block body
             else
               img.rounded-img.mt-2(src=profileImageUrl)
             h5.my-3 #{studentProfile.username}
-            h6.text-muted.my-1 #{user.da}
+            h6.text-muted.my-1 #{studentProfile.da}
             div.d-flex.align-items-center.flex-column
               +star_wars_money(studentProfile.cash)
               +star_wars_points(studentProfile.points)
@@ -52,8 +52,8 @@ block body
             .card-body
               h2.mb-3 Progression individuelle
               hr
-              if isTeacher
-                p.mb-2 #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
+              if user.isTeacher
+                p.mb-2 L'élève a complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
               else
                 p.mb-2 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
               include ../mixins/weekProgress
@@ -62,54 +62,75 @@ block body
                   +weekProgress(week)
           .card.mb-4.w-100
             .card-body
-              if isTeacher
+              include ../mixins/myItem
+              if user.isTeacher
                 h2.mb-3 Achats de l'élève
+                if items != null
+                  table.table
+                    thead
+                      th Nom de l'item
+                      th Description
+                      th Date
+                    tbody
+                      each item in items
+                        +itemRow(item)
+                else
+                  small.text-muted.mb-3 Aucun achat
               else
                 h2.mb-3 Mes achats
-              include ../mixins/myItem
-              if isTeacher
-                h6.mb-3 Aucun achat
-              if items != null
-                table.table
-                  thead
-                    th Nom de l'item
-                    th Description
-                    th Date
-                  tbody
-                    each item in items
-                      +itemRow(item)
-              else
-                small.text-muted Vous n'avez encore fait aucun achat
-              .text-center.mt-3
-                a.btn.btn-yellow(href="/market")
-                  i.fas.fa-shopping-cart.mr-2
-                  | Aller au magasin
+                if items != null
+                  table.table
+                    thead
+                      th Nom de l'item
+                      th Description
+                      th Date
+                    tbody
+                      each item in items
+                        +itemRow(item)
+                else
+                  small.text-muted Vous n'avez encore fait aucun achat
+                .text-center.mt-3
+                  a.btn.btn-yellow(href="/market")
+                    i.fas.fa-shopping-cart.mr-2
+                    | Aller au magasin
         .row
           .card.mb-4.w-100
             .card-body
-              h2.mb-3 Mes exercices faits
               include ../mixins/myExercise
-              if isTeacher
-                h6.mb-3 Aucune mission complétée
-              if exercises != null
-                table.table
-                  thead
-                    th Nom de la mission
-                    th Date de remise
-                    th Corrigé
-                    th Points
-                    th Argent
-                  tbody
-                    each exercise in exercises
-                      +exerciseRow(exercise)
+              if user.isTeacher
+                h2.mb-3 Exercises de l'élève
+                if exercises != null
+                  table.table
+                    thead
+                      th Nom de la mission
+                      th Date de remise
+                      th Corrigé
+                      th Points
+                      th Argent
+                    tbody
+                      each exercise in exercises
+                        +exerciseRow(exercise)
+                else
+                  small.text-muted Aucune mission complété
               else
-                small.text-muted Vous n'avez complété aucune mission
-
-              .text-center.mt-3
-                a.btn.btn-yellow(href="/exercises")
-                  i.fas.fa-jedi.mr-2
-                  | Aller aux missions
+                h2.mb-3 Mes exercices faits
+                if exercises != null
+                  table.table
+                    thead
+                      th Nom de la mission
+                      th Date de remise
+                      th Corrigé
+                      th Points
+                      th Argent
+                    tbody
+                      each exercise in exercises
+                        +exerciseRow(exercise)
+                else
+                  small.text-muted Vous n'avez complété aucune mission
+                .text-center.mt-3
+                  a.btn.btn-yellow(href="/exercises")
+                    i.fas.fa-jedi.mr-2
+                    | Aller aux missions
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
-  script(src='/javascripts/toggleComment.js')
