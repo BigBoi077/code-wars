@@ -120,7 +120,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/' . $exercise->id);
         }
 
-        $targetDir = getcwd() . "/../Uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
+        $targetDir = getcwd() . "/../uploads/" . str_replace([' ', '_'], '', $form->getValue("exerciseName")) . "_user" . $this->getUser()['id'] . "_";
         $targetFile = $targetDir . basename($this->request->getFile("exercise")["name"]);
 
         if ($this->request->getFile("exercise")["name"] == '') {
