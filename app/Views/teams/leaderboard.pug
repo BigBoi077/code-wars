@@ -16,44 +16,47 @@ block body
         h1 Classement
         hr
       if current.position > 3
-        .w-100.leaderboard
-          .card.my-4.bg-accent
-            .card-header
-              span.small Votre position actuelle :
-            .row.py-3.px-0.d-flex.align-items-center.w-100.bg-white
-              img.rounded-img(src=profileImageUrl).not-top-3.ml-3.mr-3
-              .col-1.d-flex.align-items-center.justify-content-end
-                span.mt-2.mr-4.ml-4 ##{current.position}
-              .col-6
-                span.mt-2 #{current.username}
-              .col.row.d-flex.align-items-center
-                .col-6.d-flex.justify-content-end
-                  p.mr-3
-                    +star_wars_points(current.points)
-                .col-6.d-flex.justify-content-end
-                  p.m-0 #{current.team_name}
+        .w-100.leaderboard.mb-4
+          .position.row.m-0.p-4.bg-accent
+            span Votre position actuelle :
+          .position-info.row.m-0.px-2.py-4.d-flex.align-items-center.w-100.bg-white
+            img.rounded-img(src=profileImageUrl).not-top-3.ml-3.mr-3
+            .col-1.d-flex.align-items-center.justify-content-end
+              span.mt-2.mr-4.ml-4 ##{current.position}
+            .col-6
+              span.mt-2 #{current.username}
+            .col.row.d-flex.align-items-center
+              .col-6.d-flex.justify-content-end
+                p.mr-3
+                  +star_wars_points(current.points)
+              .col-6.d-flex.justify-content-end
+                p.m-0 #{current.team_name}
       .leaderboard.w-100
         .flex-column
           each student, index in students
-            .row.py-3.px-0.d-flex.align-items-center.w-100
+            .row.py-3.px-0.d-flex.align-items-center.w-100(class=(current.position === (index + 1) ? 'accent': ''))
               if index < 3
                 div.position-relative.gravatar-container
-                  img.rounded-img.position-absolute(src=student.gravatarUrl)
+                  img.rounded-img.position-absolute(data-gravatar data-email=student.email)
                   .leaderboard-overlay.position-absolute(class="position" + index)
                 .col-1.d-flex.align-items-center.justify-content-end
-                  h4.mt-2.mr-4.ml-4 ##{index + 1}
+                  h4.mt-2.mr-4.ml-4.text-dark ##{index + 1}
                 .col-6
-                  h4.mt-2 #{student.username}
+                  h4.mt-2.text-dark #{student.username}
               else
-                img.rounded-img(src=student.gravatarUrl).not-top-3.ml-3.mr-3
+                img.rounded-img(data-gravatar data-email=student.email).not-top-3.ml-3.mr-3
                 .col-1.d-flex.align-items-center.justify-content-end
-                  span.mt-2.mr-4.ml-4 ##{index + 1}
+                  span.mt-2.mr-4.ml-4.text-dark ##{index + 1}
                 .col-6
-                  span(class=(current.position === (index + 1) ? 'accent': '')).mt-2 #{student.username}
+                  span.mt-2.text-dark #{student.username}
               .col.row.d-flex.align-items-center
                 .col-6.d-flex.justify-content-end
                   p.mr-3
                     +star_wars_points(student.points)
                 .col-6.d-flex.justify-content-end
-                  p.m-0 #{student.team_name}
+                  p.m-0.text-dark #{student.team_name}
             hr.m-0.w-100
+
+block script
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js")
+  script(src="/javascripts/gravatar.js")

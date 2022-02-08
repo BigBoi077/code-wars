@@ -84,12 +84,14 @@ class StudentManageController extends TeacherController
 
     public function deleteStudent($da)
     {
+        $student = StudentService::get($da);
+
         if (StudentService::exists($da)) {
             if (StudentService::hasItem($da)) {
                 ItemService::deleteAllStudentItem($da);
             }
             StudentService::delete($da);
-            Flash::success('Étudiant supprimé avec succès!');
+            Flash::success('Étudiant, ' . $student->firstname . ' ' . $student->lastname . ', supprimé avec succès!');
         } else {
             Flash::error('Une erreur est survenue.');
         }
