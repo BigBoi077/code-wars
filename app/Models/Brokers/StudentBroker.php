@@ -1,7 +1,6 @@
 <?php namespace Models\Brokers;
 
 use Models\Services\NotificationService;
-use mysql_xdevapi\Result;
 use stdClass;
 
 class StudentBroker extends Broker
