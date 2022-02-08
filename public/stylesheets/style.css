@@ -465,6 +465,8 @@ input#exerciseUpload {
     padding-right: 10px;
 }
 
+
+
 .btn-yellow {
     background-color: var(--accent);
     color: var(--font);
@@ -482,7 +484,7 @@ input#exerciseUpload {
     color: var(--font);
 }
 
-.btn-disabled {
+.btn-disabled, .btn:disabled {
     background-color: var(--grey);
     opacity: 50%;
     display: flex;

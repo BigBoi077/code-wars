@@ -28,6 +28,9 @@ class ProfileController extends Controller
 
     public function profile()
     {
+        if ($this->getUser()['isTeacher'])
+            return $this->redirect('/home');
+
         $student = $this->getActiveStudent();
         $weeklyProgress = (new StudentBroker())->getProgressionByWeek($student->da);
         $indProgress = (new StudentBroker())->getProgression($student->da);

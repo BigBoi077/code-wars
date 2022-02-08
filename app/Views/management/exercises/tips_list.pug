@@ -11,30 +11,33 @@ block body
     .row.mt-5.p-4.main-card
       .w-100
         .d-flex.justify-content-between.align-items-center
-          h1 Indices pour : #{exercise.name}
+          h2.pr-4 Indices pour : #{exercise.name}
           a.no-decoration(href='/management/exercises/' + exercise.id + "/tips/create")
             button.btn.btn-yellow#Btn
               i.fas.fa-plus-square
               | Ajouter un indice
       br
-      table.table.w-100
-        thead
-          tr
-            th Indice
-            th Prix
-            th
-        tbody.w-100
-          each tip in tips
+      if tips != null
+        table.table.w-100
+          thead
             tr
-              td
-                p=tip.tip
-              td
-                +star_wars_money(tip.price)
-              td
-                a.col(href='/management/exercises/' + exercise.id + '/tips/' + tip.id + "/edit")
-                  i.fas.fa-edit.student-icons
-                a.col(data-bs-toggle="modal" data-bs-target="#tipsDeleteModal" + tip.id)
-                  i.fas.fa-trash.student-icons
-        each tip in tips
-          +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
-              '/management/exercises/' + exercise.id + '/tips/' + tip.id + '/delete', 'tipsDeleteModal' + tip.id)
+              th Indice
+              th Prix
+              th
+          tbody.w-100
+            each tip in tips
+              tr
+                td
+                  p=tip.tip
+                td
+                  +star_wars_money(tip.price)
+                td
+                  a.col(href='/management/exercises/' + exercise.id + '/tips/' + tip.id + "/edit")
+                    i.fas.fa-edit.student-icons
+                  a.col(data-bs-toggle="modal" data-bs-target="#tipsDeleteModal" + tip.id)
+                    i.fas.fa-trash.student-icons
+          each tip in tips
+            +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',
+                '/management/exercises/' + exercise.id + '/tips/' + tip.id + '/delete', 'tipsDeleteModal' + tip.id)
+      else
+        h5.text-muted Aucun indices pour cette mission
