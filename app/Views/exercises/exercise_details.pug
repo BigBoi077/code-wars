@@ -72,24 +72,25 @@ block body
                 if tip.bought
                   p.w-100.pl-0.mb-5=tip.tip
                 else
-                  form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
-                    button.btn.btn-yellow.position-absolute.tip-buy-button
-                      +star_wars_money(tip.price)
-                  p.pl-0.blur.grey-border=tip.tip
+                  if !isTeacher
+                    form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
+                      button.btn.btn-yellow.position-absolute.tip-buy-button
+                        +star_wars_money(tip.price)
+                  p(class=(isTeacher) ? '': 'blur').my-4.pl-0=tip.tip
 
-      if !corrected && !submitted
+      if !corrected && !submitted && !isTeacher
         form(action="/exercises/submit/" + exercise.id method="POST").submit.mb-0
           button(type="submit").btn.btn-yellow
             +teamIcon(student)
             p Soumettre une solution
-      else if !corrected && submitted
+      else if !corrected && submitted && !isTeacher
         form(action="/exercises/cancel/" + exercise.id method="POST").submit.mb-0
           button(type="submit").btn.btn-yellow.cancel
             +teamIcon(student)
             p Annuler la remise
           a.btn.btn-disabled.waiting
             p En attente de correction
-      else
+      else if !isTeacher && corrected
         button.btn.btn-disabled.submit
           p Corrigé
 
