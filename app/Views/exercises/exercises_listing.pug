@@ -22,7 +22,6 @@ block body
                   i.fas.fa-plus-square.mr-2
                   | Gestion des missions
         hr
-
       .row.all-missions.col-7.p-0
         each week, index in exercisesByWeek
           .week.w-100
@@ -46,31 +45,18 @@ block body
                           td
                             .d-flex.align-items-center.mt-1
                               if exercise.corrected
-                                i.fas.fa-check-circle.corrected
+                                i.fas.fa-check-circle.corrected(title="Corrigé")
                               else if exercise.completed
-                                i.fas.fa-check-circle.submitted
+                                i.fas.fa-check-circle.submitted(title="Remis")
                               else
-                                i.fas.fa-times-circle.not-submitted
+                                i.fas.fa-times-circle.not-submitted(title="Non-remis")
 
       .col-5.pr-0.pl-5
         if student != null
-          .card.mb-4.w-100.fixed-ct
-            .card-body
-              h4.mb-3 Progression individuelle
-              p.mb-0 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+          .mission-progression.card.mb-4.w-100.fixed-ct
+            .card-body.pb-0
+              h4.mb-3.text-center Progression individuelle
+              p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
               include ../mixins/weekProgress
               each week in weeklyProgress
                 +weekProgressSmall(week)
-              h6.my-2.pt-3 Légende :
-              .small.justify-content-between.d-flex
-                .d-flex.align-items-center
-                  i.fas.fa-check-circle.corrected
-                  span.ml-2 Corrigé
-                .d-flex.align-items-center
-                  i.fas.fa-check-circle.submitted
-                  span.ml-2 Remis
-                .d-flex.align-items-center
-                  i.fas.fa-times-circle.not-submitted
-                  span.ml-2 Non-remis
-
-

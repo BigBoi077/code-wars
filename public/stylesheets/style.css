@@ -879,6 +879,11 @@ text-align: center;
 
 /* Missions */
 
+.mission-progression {
+    background-color: var(--background);
+    border: none;
+}
+
 .week {
     z-index: 10;
     position: relative;
@@ -964,7 +969,7 @@ text-align: center;
 }
 
 .tip-buy-button {
-    top: 80px;
+    top: 30px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -1292,6 +1297,11 @@ footer {
 
 footer h1 {
     font-size: 52px;
+}
+
+footer li .omnivox-link {
+    display: flex;
+    padding-top: 3px;
 }
 
 footer li .omnivox-logo {
