@@ -6,7 +6,7 @@
 @import "vendor/pretty-checkbox.min.css";
 
 :root {
-    --accent: rgb(255,222,0);
+    --accent: rgb(255, 222, 0);
     --dark: #000000;
     --light: #fff;
     --background: rgb(247, 247, 249);
@@ -16,6 +16,10 @@
     --blue: #367bc4;
     --font: #212529;
     --bronze: #cd7f32;
+}
+
+.bg-accent-50 {
+    background-color: rgba(255, 222, 0, 0.4);
 }
 
 .bg-accent {
@@ -370,7 +374,11 @@ header .gestion-button {
     font-size: xx-small;
 }
 
-.notification .notification-check:hover {
+.notification-check {
+    color: black;
+}
+
+.notification-check:hover {
     color: var(--accent) !important;
 }
 

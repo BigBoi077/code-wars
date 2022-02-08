@@ -38,7 +38,7 @@ class CorrectionController extends Controller
         }
         return $this->render('/management/correction/correction_listing', [
             'corrections' => $exercisesByStudent,
-            'count' => Count($exercises)
+            'count' => count($exercises)
         ]);
     }
 

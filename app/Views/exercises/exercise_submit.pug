@@ -8,7 +8,6 @@ block header
 
 block body
   +flash
-
   form.container.main-card.single-mission-submit(action=action  method="post" enctype="multipart/form-data")
     input(type="hidden" name="exerciseName" value=exercise.name)
     h1 Fichier(s) à soumettre
@@ -16,7 +15,7 @@ block body
     p
     | Vous vous aprêter à soumettre une solution pour le contrat « #{exercise.name} »
     | de la semaine #{exercise.week_id}. La réussite de cette mission vous octroiera
-    .mission-results.mt-3.mb-3
+    div.mission-results.mt-3.mb-3
       +star_wars_money(exercise.cash_reward)
       +star_wars_points(exercise.point_reward)
     p La correction peut prendre jusqu'à 14 jours ouvrables.
@@ -25,7 +24,7 @@ block body
       li Seuls les extensions .java et .zip sont acceptées pour la remise.
       li La taille maximale du fichier est 20 Mo.
     p Si vous avez des précisions à apporter ou tout autre commentaire que vous désirez transmettre avec la solution, veillez utiliser la zone commentaire ci-dessous.
-    textarea(rows=6 placeholder="Commentaires")
+    textarea(rows=6 placeholder="Commentaires" name="comment")
     .d-flex.justify-content-end
       .mission-upload.mt-4.mr-4
         label#uploadLabel(for='exerciseUpload')
@@ -37,7 +36,6 @@ block body
           i.fas.fa-file-upload
           | Soumettre le fichier
         input#exercice-submit(type='submit' disabled=true)
-
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src='/javascripts/upload.js')

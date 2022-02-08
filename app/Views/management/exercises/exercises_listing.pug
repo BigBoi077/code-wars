@@ -42,11 +42,11 @@ block body
                 td
                   p.student-row-element Semaine #{exercise.number}
                 td
-                  a.col(href='/management/exercises/' + exercise.id + '/tips')
+                  a(href='/management/exercises/' + exercise.id + '/tips').mr-3
                     i.fas.fa-lightbulb.student-icons
-                  a.col(href='/management/exercises/' + exercise.id + '/edit')
+                  a(href='/management/exercises/' + exercise.id + '/edit').mr-3
                     i.fas.fa-edit.student-icons
-                  a.col(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
+                  a(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
                     i.fas.fa-trash.student-icons
       each exercise in exercises
         +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice ?',

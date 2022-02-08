@@ -33,8 +33,8 @@ block body
                 p.student-row-element #{item.description}
               td.end
                 +star_wars_money(item.price, true)
-              td
-                a(href='/management/items/' + item.id + '/edit').mr-2
+              td.d-flex.align-items-center.h-100
+                a(href='/management/items/' + item.id + '/edit').mr-3
                   i.fas.fa-edit.student-icons
                 a(data-bs-toggle="modal" data-bs-target="#itemDeleteModal" + item.id)
                   i.fas.fa-trash.student-icons

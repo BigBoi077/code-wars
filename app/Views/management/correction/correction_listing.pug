@@ -16,7 +16,7 @@ block body
         if corrections == null
           h5.d-block.text-muted.text-center Aucun exercice à corriger pour l'instant...
         else
-          h5.d-block.text-muted Consulter la liste des solutions. Vous avez (#{count(corrections)}) missions à corriger
+          h5.d-block.text-muted Consulter la liste des solutions. Vous avez (#{count}) missions à corriger
         br
         each correction, person in corrections
           h4 #{person}
