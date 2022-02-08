@@ -530,7 +530,7 @@ input#exerciseUpload {
     background-color: var(--accent);
     padding: 1rem;
     margin: 1rem auto 0;
-    border-radius: 1rem;
+    border-radius: 4px;
     width: 50%;
 }
 
@@ -933,6 +933,11 @@ text-align: center;
 
 /* Missions */
 
+.mission-progression {
+    background-color: var(--background);
+    border: none;
+}
+
 .week {
     z-index: 10;
     position: relative;
@@ -1018,7 +1023,7 @@ text-align: center;
 }
 
 .tip-buy-button {
-    top: 80px;
+    top: 30px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -1313,6 +1318,21 @@ text-align: center;
     width: 64px;
 }
 
+.leaderboard .row.accent {
+    background-color: rgba(255, 222, 0, .5);
+}
+
+.leaderboard .position {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.leaderboard .position-info {
+    border: 2px solid var(--accent);
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
 /* Footer */
 
 footer {
@@ -1326,6 +1346,11 @@ footer {
 
 footer h1 {
     font-size: 52px;
+}
+
+footer li .omnivox-link {
+    display: flex;
+    padding-top: 3px;
 }
 
 footer li .omnivox-logo {
