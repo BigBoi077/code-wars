@@ -129,7 +129,7 @@ class StudentManageController extends TeacherController
                 if (is_null($student)) {
                     return $this->redirect('/management/students');
                 }
-                return $student->id;
+                return $student->da;
             } else {
                 return $this->redirect('/management/students');
             }
