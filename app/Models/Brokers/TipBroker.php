@@ -12,7 +12,7 @@ class TipBroker extends Broker
         return $this->selectSingle($sql, [$tipId]);
     }
 
-    public function GetAllById($id) : array
+    public function GetAllById($id): array
     {
         $sql = "SELECT t.id, t.tip, t.price
                 FROM codewars.tips t join codewars.exercise e on t.exercise_id = e.id
@@ -22,7 +22,7 @@ class TipBroker extends Broker
         return $this->select($sql, [$id]);
     }
 
-    public function GetAllUnlocked($id, $da) : array
+    public function GetAllUnlocked($id, $da): array
     {
         $sql = "SELECT *
                 FROM codewars.studenttip st join codewars.tips t on t.id = st.tip_id
@@ -63,7 +63,6 @@ class TipBroker extends Broker
         $this->query($sql, [$tip, $price, $id]);
     }
 
-
     public function delete($id)
     {
         $sql = "DELETE FROM codewars.tips WHERE id = ?;";
@@ -91,5 +90,4 @@ class TipBroker extends Broker
             $this->delete($tip->id);
         }
     }
-
 }

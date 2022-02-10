@@ -1,6 +1,5 @@
 <?php namespace Controllers;
 
-use Cassandra\Date;
 use DateInterval;
 use DateTime;
 use Models\Brokers\ExerciseBroker;
@@ -40,10 +39,11 @@ class CorrectionController extends Controller
             $nowDate = new DateTime();
             $exerciseDate = new DateTime($exercise->submit_date);
             $diff = $exerciseDate->diff($nowDate);
-            if ($diff->d < 1)
+            if ($diff->d < 1) {
                 $exercise->diff = "Remis il y a " . $diff->format("%h heures et %i minutes");
-            else
+            } else {
                 $exercise->diff = "Remis le " . format('date', $exercise->submit_date);
+            }
             $exercisesByStudent[$exercise->firstname . " " . $exercise->lastname][$exercise->exercise_id] = $exercise;
         }
         return $this->render('/management/correction/correction_listing', [
@@ -70,7 +70,6 @@ class CorrectionController extends Controller
 
     public function downloadExercise($id)
     {
-
         $e = (new ExerciseBroker())->getCorrectionPath($id);
 
         if ($e == null) {
@@ -86,10 +85,10 @@ class CorrectionController extends Controller
             header("Content-Length:".filesize($e->path));
             header("Content-Disposition: attachment; filename=" . substr($e->path, 40));
             readfile($e->path);
-            die();
+            exit();
         } else {
             Flash::error("Impossible de télécharcher le fichier");
-            die("Error: File not found.");
+            exit("Error: File not found.");
         }
     }
 
@@ -139,17 +138,5 @@ class CorrectionController extends Controller
                 return $this->redirect('/management/correction');
             }
         });
-    }
-
-    function format_interval(DateInterval $interval) {
-        $result = "";
-        if ($interval->y) { $result .= $interval->format("%y ans "); }
-        if ($interval->m) { $result .= $interval->format("%m mois "); }
-        if ($interval->d) { $result .= $interval->format("%d jours "); }
-        if ($interval->h) { $result .= $interval->format("%h heures "); }
-        if ($interval->i) { $result .= $interval->format("%i minutes "); }
-        if ($interval->s) { $result .= $interval->format("%s secondes "); }
-
-        return $result;
     }
 }

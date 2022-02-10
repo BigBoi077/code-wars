@@ -4,7 +4,6 @@ use stdClass;
 
 class ItemBroker extends Broker
 {
-
     public function getAll(): array
     {
         $sql = "SELECT * FROM codewars.item ORDER BY price, name";

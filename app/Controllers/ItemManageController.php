@@ -5,7 +5,6 @@ use Zephyrus\Application\Flash;
 
 class ItemManageController extends TeacherController
 {
-
     public function initializeRoutes()
     {
         $this->get('/management/items', 'listItems');

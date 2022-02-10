@@ -2,7 +2,6 @@
 
 class AboutController extends Controller
 {
-
     public function initializeRoutes()
     {
         $this->get('/about', 'index');

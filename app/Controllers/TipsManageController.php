@@ -8,7 +8,6 @@ use Zephyrus\Application\Flash;
 
 class TipsManageController extends TeacherController
 {
-
     public function initializeRoutes()
     {
         $this->get('/management/exercises/{exerciseId}/tips', 'exercisesTips');

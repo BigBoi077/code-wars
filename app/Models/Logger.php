@@ -17,7 +17,6 @@ class Logger
     private $success = false;
     private $errorMessages;
 
-
     public function loginWithForm(Form $form)
     {
         $form->validate(self::INPUT_NAME_DA, Rule::integer('Le DA doit etre un chiffre.'));
@@ -29,7 +28,7 @@ class Logger
         }
     }
 
-    private function tryCredentials($form) : bool
+    private function tryCredentials($form): bool
     {
         $userBroker = new UserBroker();
         $this->user = $userBroker->findByDa($form->getValue(self::INPUT_NAME_DA));
@@ -45,7 +44,7 @@ class Logger
         return false;
     }
 
-    public function hasSucceeded() : bool
+    public function hasSucceeded(): bool
     {
         return $this->success;
     }
@@ -99,5 +98,4 @@ class Logger
         setcookie(REMEMBER_ME, '', 1, '/');
         unset($_COOKIE[REMEMBER_ME]);
     }
-
 }

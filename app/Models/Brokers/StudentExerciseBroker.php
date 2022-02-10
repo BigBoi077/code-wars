@@ -1,6 +1,5 @@
 <?php namespace Models\Brokers;
 
-
 class StudentExerciseBroker extends Broker
 {
 	public function getAllWithDa($da)

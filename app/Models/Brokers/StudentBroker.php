@@ -5,8 +5,7 @@ use stdClass;
 
 class StudentBroker extends Broker
 {
-
-    public function findByDa($da) : ?stdClass
+    public function findByDa($da): ?stdClass
     {
         $sql = "SELECT s.id, s.da, s.team_id, t.name team_name, s.cash, s.points, p.username, p.firstname, p.lastname, p.email 
                 from codewars.student s 
@@ -34,7 +33,7 @@ class StudentBroker extends Broker
         $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id 
                 where s.da = ? and se.corrected = true and w.is_active = true";
         $done = $this->selectSingle($sql, [$da])->done;
-        $nbExercises = Count((new ExerciseBroker())->getAllActive());
+        $nbExercises = count((new ExerciseBroker())->getAllActive());
         $totalDone = ($done / $nbExercises) * 100;
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
@@ -53,7 +52,7 @@ class StudentBroker extends Broker
             $week->progress = 0;
             if (isset($exercisesPerWeeks[$index])) {
                 if ($exercisesPerWeeks[$index]->week_id == $week->week_id)
-                    $week->progress = number_format(($exercisesPerWeeks[$index]->done / Count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
+                    $week->progress = number_format(($exercisesPerWeeks[$index]->done / count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
             }
             $index++;
         }
@@ -97,8 +96,12 @@ class StudentBroker extends Broker
         $addedPoints = $this->getAddedPoints($da, $points);
         $sql = "UPDATE codewars.student SET team_id = ?, cash = ?, points = ? WHERE da = ?";
         $this->query($sql, [$team_id, $cash, $points, $da]);
-        if ($notifyCash) NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
-        if ($notifyPoints) NotificationService::newPoints($this->getStudentId($da), $addedPoints, $this->getPoints($da));
+        if ($notifyCash) {
+            NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
+        }
+        if ($notifyPoints) {
+            NotificationService::newPoints($this->getStudentId($da), $addedPoints, $this->getPoints($da));
+        }
     }
 
     public function hasItem($da): bool
@@ -120,8 +123,9 @@ class StudentBroker extends Broker
     {
         $student = $this->findByDa($da);
         $cash = $student->cash + $amount;
-        if ($cash < 0)
+        if ($cash < 0) {
             $cash = 0;
+        }
         $sql = "UPDATE codewars.student SET cash = ? WHERE da = ?";
         $this->query($sql, [$cash, $da]);
     }
@@ -141,21 +145,21 @@ class StudentBroker extends Broker
         $sql = "SELECT s.da, u.id FROM codewars.student s 
                     JOIN codewars.user u on s.da = u.da 
                     WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $result->id;
     }
 
     private function isCashDifferent($da, $cash): bool
     {
         $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $result->cash != $cash;
     }
 
     private function isPointsDifferent($da, $points): bool
     {
         $sql = "SELECT s.da, s.points FROM codewars.student s WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $result->points != $points;
     }
 

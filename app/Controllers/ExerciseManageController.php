@@ -8,7 +8,6 @@ use Zephyrus\Network\Response;
 
 class ExerciseManageController extends TeacherController
 {
-
     public function initializeRoutes()
     {
         $this->get('/management/exercises', 'listExercises');
@@ -63,7 +62,6 @@ class ExerciseManageController extends TeacherController
         }
         Flash::error($exercise->getErrorMessages());
         return $this->redirect('/management/exercises/' . $id . '/edit');
-
     }
 
     public function storeExercise()

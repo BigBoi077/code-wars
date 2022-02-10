@@ -2,7 +2,6 @@
 
 class TeamBroker extends Broker
 {
-
     public function getAll()
     {
         $sql = "SELECT * FROM codewars.team";

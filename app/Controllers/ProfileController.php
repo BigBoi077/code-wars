@@ -5,7 +5,6 @@ use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
-use Models\Brokers\TeamBroker;
 use Models\Brokers\UserBroker;
 use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
@@ -13,7 +12,6 @@ use Zephyrus\Application\Rule;
 
 class ProfileController extends Controller
 {
-
     public function initializeRoutes()
     {
         $this->get('/profile', 'profile');
@@ -26,8 +24,9 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        if ($this->getUser()['isTeacher'])
+        if ($this->getUser()['isTeacher']) {
             return $this->redirect('/home');
+        }
 
         $student = $this->getActiveStudent();
         $weeklyProgress = (new StudentBroker())->getProgressionByWeek($student->da);
@@ -99,5 +98,4 @@ class ProfileController extends Controller
         Flash::success("Mot de passe changé avec succès.");
         return $this->redirect('/profile');
     }
-
 }

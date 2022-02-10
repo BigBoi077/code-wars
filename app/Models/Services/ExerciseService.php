@@ -20,7 +20,7 @@ class ExerciseService
     {
         $instance = new self();
         $instance->form = $form;
-        if ($instance->areFieldsValid()){
+        if ($instance->areFieldsValid()) {
             $instance->insertToDatabase();
         }
         return $instance;
@@ -93,7 +93,7 @@ class ExerciseService
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week");
-        $exerciseId = (new ExerciseBroker())->insert($exerciseName,$difficulty,$description,$exemple, $cash, $point, $weekId);
+        $exerciseId = (new ExerciseBroker())->insert($exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
         NotificationService::newExerciseAvailable($exerciseName, $cash, $point, $exerciseId);
         $this->succes = true;
     }
@@ -108,9 +108,6 @@ class ExerciseService
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week");
         (new ExerciseBroker())->update($id, $exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
-
-
         $this->succes = true;
     }
 }
-
