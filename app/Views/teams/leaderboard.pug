@@ -36,7 +36,7 @@ block body
           each student, index in students
             .row.py-3.px-0.d-flex.align-items-center.w-100(class=(current.position === (index + 1) ? 'accent': ''))
               if index < 3
-                div.position-relative.gravatar-container
+                div.position-relative.gravatar-container.pl-1
                   img.rounded-img.position-absolute(data-gravatar data-email=student.email)
                   .leaderboard-overlay.position-absolute(class="position" + index)
                 .col-1.d-flex.align-items-center.justify-content-end

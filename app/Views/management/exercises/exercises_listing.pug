@@ -22,25 +22,25 @@ block body
             tr
               th Nom
               th Difficulté
+              th Semaine
               th Argent
               th Points
-              th Semaine
               th
           tbody.w-100
             each exercise in exercises
               tr
                 td
-                  p.student-row-element #{exercise.name}
+                  p #{exercise.name}
                 td
                   each difficulty, index in difficulties
                     if (index === exercise.difficulty)
-                      p.student-row-element #{difficulty}
+                      small.student-row-element #{difficulty}
+                td
+                  small Semaine #{exercise.number}
                 td
                   +star_wars_money(exercise.cash_reward)
                 td
                   +star_wars_points(exercise.point_reward)
-                td
-                  p.student-row-element Semaine #{exercise.number}
                 td.text-nowrap
                   a(href='/management/exercises/' + exercise.id + '/tips').mr-3
                     i.fas.fa-lightbulb.student-icons
