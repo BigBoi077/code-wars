@@ -62,6 +62,10 @@ class WeekManageController extends TeacherController
             Flash::error($form->getErrorMessages());
             return $this->redirect('/management/weeks/create');
         }
+        if ((new WeekBroker())->findByNumber($form->getValue("number"))) {
+            Flash::error("Le numéro de la semaine est déjà utilisé.");
+            return $this->redirect('/management/weeks/create');
+        }
         (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
         Flash::success("Semaine ajoutée avec succès!");
         return $this->redirect('/management/weeks');

@@ -51,4 +51,12 @@ class WeekBroker extends Broker
         $sql = "update codewars.week set is_active = ? where id = ?";
         $this->query($sql, [!$week->is_active, $id]);
     }
+
+    public function findByNumber($number)
+    {
+        $sql = "SELECT w.id, w.start_date, w.is_active
+                FROM codewars.week w
+                WHERE w.number = ?";
+        return $this->selectSingle($sql, [$number]);
+    }
 }
