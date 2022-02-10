@@ -14,6 +14,10 @@ block body
         hr
       form.w-100.mb-0(method='post', action="/profile/update/mdp")
         .form-row
+          .form-group.col
+            label Ancien mot de passe
+            input.form-control(name="currentPassword", type="password")
+        .form-row
           .form-group.col-6
             label Nouveau mot de passe
             input.form-control(name='password', type='password')
