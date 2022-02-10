@@ -1371,6 +1371,7 @@ footer {
     margin-top: 86px;
     padding: 42px 22px;
     position: absolute;
+    bottom: 0;
 }
 
 footer h1 {
