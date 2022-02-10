@@ -48,8 +48,8 @@ block body
             .form-group.col-6
               label(for="points") Points (Optionnel)
               input.form-control(placeholder="0" id='points', name='points', type='number' value=(editStudent !== null) ? editStudent.points : val('points'))
-          .form-row.w-50.m-auto
-            button#submitBtn.btn(type='submit')
+          .form-row
+            button#submitBtn.btn.w-100(type='submit')
               i.fas.fa-plus-square.mr-2
               if editStudent !== null
                 | Modifier
