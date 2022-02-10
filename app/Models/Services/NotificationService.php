@@ -1,6 +1,7 @@
 <?php namespace Models\Services;
 
 use Models\Brokers\NotificationBroker;
+use function Sodium\add;
 
 class NotificationService
 {
@@ -26,6 +27,7 @@ class NotificationService
 
     public static function newBalance($userId, $add, $newBalance)
     {
+        if ($add > 0) $add = "+" . $add;
         (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour." . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
     }
 
