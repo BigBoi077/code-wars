@@ -1,10 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\NotificationBroker;
-use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
-use Models\Services\ApiService;
-use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
 
 class HomeController extends Controller
@@ -19,7 +16,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        return ($this->isLogged()) ? $this->redirect('/home') : $this->redirect('/login');
+
+        return ($this->isLogged()) ? ((!$this->getUser()['isTeacher']) ? $this->redirect('/home') : $this->redirect('/management/correction')) : $this->redirect('/login');
     }
 
     public function home()
