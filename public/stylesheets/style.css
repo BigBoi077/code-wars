@@ -790,6 +790,10 @@ input#exerciseUpload {
     position: relative;
 }
 
+.cursor-hover:hover {
+    cursor: pointer;
+}
+
 #inputDAIMG, #inputPWDIMG {
     width: 25px;
     height: auto;
