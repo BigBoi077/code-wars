@@ -55,7 +55,7 @@ class CorrectionController extends Controller
     public function correctExercise($da, $id)
     {
         $form = $this->buildForm();
-        if ($form->getValue("ok") == "") {
+        if ($form->getValue("ok") != "") {
             (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
             $e = (new ExerciseBroker())->getCorrectionPath($id);
             unlink($e->path);

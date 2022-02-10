@@ -1015,7 +1015,7 @@ text-align: center;
 
 .single-mission-row .mission-detail {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .single-mission-row .mission-detail a i  {
@@ -1045,16 +1045,16 @@ text-align: center;
     "debrief          debrief          .                info"
     "description      description      description      info"
     "description      description      description      info"
-    ".                .                .                info"
-    "example          example          example          example"
-    "tips             tips             tips             tips"
-    ".                submit           submit           .";
+    "submit           submit           submit           info"
+    "example          example          example          ."
+    "tips             tips             tips             .";
 }
 
 .tip-buy-button {
     top: 30px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -25%);
+    padding: 12px 20px !important;
 }
 
 .single-mission-submit {
@@ -1177,7 +1177,7 @@ text-align: center;
  .mission-submit, .single-mission-submit .mission-upload {
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .mission-upload.disabled {
