@@ -42,12 +42,12 @@ block body
               textarea(id="comment" rows=6 name="comment" placeholder="Commentaire (Optionnel)").form-control
           .form-row.justify-content-end
             .form-group.d-flex.mb-0.mr-2
-              button(type="submit" name="ok").p-3.mr-3.btn
-                i.fas.fa-check.student-icons.mr-2
-                span.mr-3 Réponse correcte
-              button(type="submit" name="notOk").p-3.m-auto.btn
-                i.fas.fa-times-circle.student-icons.mr-2
-                span.mr-3 Réponse incorrecte
+              button(type="submit" name="ok").p-3.mr-3.cursor-hover
+                i.fas.fa-check.mr-2
+                span Réponse correcte
+              button(type="submit" name="notOk").p-3.m-auto.cursor-hover
+                i.fas.fa-times-circle.mr-2
+                span Réponse incorrecte
 
 block script
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/obsidian.min.css')

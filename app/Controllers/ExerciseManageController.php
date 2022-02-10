@@ -62,7 +62,7 @@ class ExerciseManageController extends TeacherController
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
-        return $this->redirect('/management/exercises/' . $id . '/update');
+        return $this->redirect('/management/exercises/' . $id . '/edit');
 
     }
 
