@@ -20,11 +20,8 @@ class ProfileController extends Controller
         $this->get('/profile/edit', 'editProfile');
         $this->get("/profile/editMdp", 'editMdp');
         $this->get('/profile/notifications', 'notifications');
-        $this->get("/management/students/rapidAdd", "rapidAdd");
-
         $this->post('/profile/update', 'updateProfile');
         $this->post('/profile/update/mdp', 'updateMdp');
-        $this->post("/management/students/rapidAdd", 'rapidAddUpdate');
     }
 
     public function profile()
@@ -103,35 +100,4 @@ class ProfileController extends Controller
         return $this->redirect('/profile');
     }
 
-    public function rapidAdd()
-    {
-        return $this->render("/management/students/add_points_cash", [
-            'teams' => (new TeamBroker())->getAll(),
-            'students' => (new StudentBroker())->getAll()
-        ]);
-    }
-
-    public function rapidAddUpdate()
-    {
-        $form = $this->buildForm();
-        $forValue = $form->getValue("for");
-        if ($forValue == "team") {
-            if ($form->getValue('team_id') == null) {
-                Flash::error("Aucune équipe sélectionnée...");
-                return $this->redirect("/management/students/rapidAdd");
-            }
-            $broker = new TeamBroker();
-            $broker->addToTeam($form->getValue('team_id'), $form->getValue('points'), $form->getValue('cash'));
-        } else if ($forValue == "student") {
-            if ($form->getValue('student_da') == null) {
-                Flash::error("Aucun élève sélectionné...");
-                return $this->redirect("/management/students/rapidAdd");
-            }
-            $studentBroker = new StudentBroker();
-            $studentBroker->addPoints($form->getValue('student_da'), (int)($form->getValue('points')));
-            $studentBroker->addCash($form->getValue('student_da'), (int)($form->getValue('cash')));
-        }
-        Flash::success("Action effectué avec succès");
-        return $this->redirect("/management/students");
-    }
 }

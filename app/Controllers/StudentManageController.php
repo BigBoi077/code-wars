@@ -20,9 +20,11 @@ class StudentManageController extends TeacherController
         $this->get('/management/students/{da}/edit', 'editStudent');
         $this->get('/management/students/{da}/delete', 'deleteStudent');
         $this->get('/management/students/{da}/profile', 'viewStudent');
+        $this->get("/management/students/rapidAdd", "rapidAdd");
 
         $this->post('/management/students/store', 'storeStudent');
         $this->post('/management/students/{da}/update', 'updateStudent');
+        $this->post("/management/students/rapidAdd", 'rapidAddUpdate');
 
         $this->overrideStudent();
     }
@@ -136,5 +138,37 @@ class StudentManageController extends TeacherController
                 return $this->redirect('/management/students');
             }
         });
+    }
+
+    public function rapidAdd()
+    {
+        return $this->render("/management/students/add_points_cash", [
+            'teams' => (new TeamBroker())->getAll(),
+            'students' => (new StudentBroker())->getAll()
+        ]);
+    }
+
+    public function rapidAddUpdate()
+    {
+        $form = $this->buildForm();
+        $forValue = $form->getValue("for");
+        if ($forValue == "team") {
+            if ($form->getValue('team_id') == null) {
+                Flash::error("Aucune équipe sélectionnée...");
+                return $this->redirect("/management/students/rapidAdd");
+            }
+            $broker = new TeamBroker();
+            $broker->addToTeam($form->getValue('team_id'), $form->getValue('points'), $form->getValue('cash'));
+        } else if ($forValue == "student") {
+            if ($form->getValue('student_da') == null) {
+                Flash::error("Aucun élève sélectionné...");
+                return $this->redirect("/management/students/rapidAdd");
+            }
+            $studentBroker = new StudentBroker();
+            $studentBroker->addPoints($form->getValue('student_da'), (int)($form->getValue('points')));
+            $studentBroker->addCash($form->getValue('student_da'), (int)($form->getValue('cash')));
+        }
+        Flash::success("Action effectué avec succès");
+        return $this->redirect("/management/students");
     }
 }
