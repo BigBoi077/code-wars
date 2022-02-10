@@ -11,17 +11,18 @@ mixin flash()
 
 mixin flash-message(data, type)
   if data
-    div.alert(class='alert-' + type).shop-header.container
-      if is_array(data)
-        if count(data) > 1
-          ul
-            each message in data
-              if message != ""
-                li!=message
+    .container.my-3
+      div.alert(class='alert-' + type)
+        if is_array(data)
+          if count(data) > 1
+            ul
+              each message in data
+                if message != ""
+                  li!=message
+          else
+            !=data[0]
         else
-          !=data[0]
-      else
-        !=data
+          !=data
 
 //-
   Allows usage HTTP method besides GET and POST. Zephyrus verifies the existence of a __method

@@ -28,12 +28,12 @@ class NotificationService
     public static function newBalance($userId, $add, $newBalance)
     {
         if ($add > 0) $add = "+" . number_format($add, 0, '.', ' ');
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour." . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour. " . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
     }
 
     public static function newPoints($userId, $add, $newAmount) {
         if ($add > 0) $add = "+" . number_format($add, 0, '.', ' ');
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Vos points ont été mise à jour." . $add . " Points. Nouvelle balance : " . $newAmount . " Points", "Nouvelle balance de points");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Vos points ont été mise à jour. " . $add . " Points. Nouvelle balance : " . $newAmount . " Points", "Nouvelle balance de points");
     }
 
     public static function incorrectSolution($userId, $exerciseName)
