@@ -23,8 +23,8 @@ block body
           .form-group.col-12.mb-3
             label(for="price") Prix
             input.form-control(placeholder="0" id='price', name='price', type='number' min='0' value=(tip !== null) ? tip.price : val('price'))
-        .form-row.w-50.m-auto
-          button#submitBtn.btn(type='submit')
+        .form-row
+          button#submitBtn.btn.w-100(type='submit')
             i.fas.fa-plus-square.mr-2
             if tip !== null
               | Modifier
