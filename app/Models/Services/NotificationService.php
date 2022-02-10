@@ -29,6 +29,10 @@ class NotificationService
         (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour." . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
     }
 
+    public static function newPoints($userId, $add, $newAmount) {
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Vos points ont été mise à jour." . $add . " Points. Nouvelle balance : " . $newAmount . " Points", "Nouvelle balance de points");
+    }
+
     public static function incorrectSolution($userId, $exerciseName)
     {
         (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre solution pour " . $exerciseName . " ne convient pas. Consulter le commentaire pour vous orienter", "Solution incorrect");

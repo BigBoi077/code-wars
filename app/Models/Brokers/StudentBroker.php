@@ -91,11 +91,14 @@ class StudentBroker extends Broker
 
     public function update($da, $team_id, $cash, $points)
     {
-        $notify = $this->isCashDifferent($da, $cash);
+        $notifyCash = $this->isCashDifferent($da, $cash);
+        $notifyPoints = $this->isPointsDifferent($da, $points);
         $addedCash = $this->getAddedCash($da, $cash);
+        $addedPoints = $this->getAddedPoints($da, $points);
         $sql = "UPDATE codewars.student SET team_id = ?, cash = ?, points = ? WHERE da = ?";
         $this->query($sql, [$team_id, $cash, $points, $da]);
-        if ($notify) NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
+        if ($notifyCash) NotificationService::newBalance($this->getStudentId($da), $addedCash, $this->getCash($da));
+        if ($notifyPoints) NotificationService::newPoints($this->getStudentId($da), $addedPoints, $this->getPoints($da));
     }
 
     public function hasItem($da): bool
@@ -149,10 +152,24 @@ class StudentBroker extends Broker
         return $result->cash != $cash;
     }
 
+    private function isPointsDifferent($da, $points): bool
+    {
+        $sql = "SELECT s.da, s.points FROM codewars.student s WHERE s.da = ?";
+        $result = $this->selectSingle($sql, [ $da ]);
+        return $result->points != $points;
+    }
+
     private function getAddedCash($da, $cash)
     {
         $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
         $result = $this->selectSingle($sql, [ $da ]);
         return $cash - $result->cash;
+    }
+
+    private function getAddedPoints($da, $points)
+    {
+        $sql = "SELECT s.da, s.points FROM codewars.student s WHERE s.da = ?";
+        $result = $this->selectSingle($sql, [ $da ]);
+        return $points - $result->points;
     }
 }

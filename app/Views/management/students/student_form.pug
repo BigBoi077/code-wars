@@ -17,23 +17,9 @@ block body
         .w-100.m-auto
           if editStudent === null
             .form-row
-              .form-group.col-6
+              .form-group.col
                 label DA
                 input.form-control(id='da', name='da', type='text' value=val('da') placeholder="7777777")
-              .form-group.col-6
-                label(for="team_id") Équipe
-                select.form-control(id='team_id', name='team_id' required)
-                    each team in teams
-                      if editStudent !== null
-                        if editStudent.team_id === team.id
-                          option(value=team.id, selected)
-                            | #{team.name}
-                        else
-                          option(value=team.id)
-                            | #{team.name}
-                      else
-                        option(value=team.id)
-                          | #{team.name}
           .form-row
             .form-group.col-6
               label(for="firstname") Prénom
@@ -41,6 +27,21 @@ block body
             .form-group.col-6
               label(for="lastname") Nom
               input.form-control(placeholder="Leblanc" id='lastname', name='lastname', type='text' value=(editStudent !== null) ? editStudent.lastname: val('lastname'))
+          .form-row
+            .form-group.col
+              label(for="team_id") Équipe
+              select.form-control(id='team_id', name='team_id' required)
+                each team in teams
+                  if editStudent !== null
+                    if editStudent.team_id === team.id
+                      option(value=team.id, selected)
+                        | #{team.name}
+                    else
+                      option(value=team.id)
+                        | #{team.name}
+                  else
+                    option(value=team.id)
+                      | #{team.name}
           .form-row
             .form-group.col-6
               label(for="cash") Argent (Optionnel)
