@@ -43,10 +43,9 @@ block body
             label(for="points") Points (Optionnel)
             input.form-control(placeholder="0" id='points', name='points', type='number' value=0)
         .form-row
-          .form-row.w-50.m-auto
-            button#submitBtn.btn(type='submit')
-              i.fas.fa-plus-square.mr-2
-              | Ajouter
+          button#submitBtn.btn.w-100(type='submit')
+            i.fas.fa-plus-square.mr-2
+            | Ajouter
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

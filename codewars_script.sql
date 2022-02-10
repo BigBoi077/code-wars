@@ -161,7 +161,7 @@ create table if not exists notification (
 
 create table if not exists log (
     id serial,
-    date date,
+    date timestamp,
     ip varchar,
     da varchar,
     method varchar(4),

@@ -6,6 +6,7 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
+use Models\Brokers\UserBroker;
 use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Application\Rule;
@@ -78,6 +79,11 @@ class ProfileController extends Controller
     public function updateMdp()
     {
         $form = $this->buildForm();
+        $userPassword = (new UserBroker())->getHashedPassword($this->getUser()['da']);
+        if (!password_verify($form->getValue("currentPassword") . PASSWORD_PEPPER, $userPassword)) {
+            Flash::error("Ancien mot de passe invalide, veuillez saisir votre mot de passe.");
+            return $this->redirect($this->request->getReferer());
+        }
         $form->validate('password', Rule::passwordCompliant('Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et avoir une longueur minimum de 8 caractères.'));
         if ($form->getValue('confirmPassword') != '') {
             $form->validate('confirmPassword', Rule::sameAs('password', 'La confirmation de mot de passe doit être identique au mot de passe.'));
@@ -88,9 +94,9 @@ class ProfileController extends Controller
             Flash::error($form->getErrorMessages());
             return $this->redirect($this->request->getReferer());
         }
+        (new UserBroker())->update($this->getUser()['da'], password_hash($form->getValue("password") . PASSWORD_PEPPER, PASSWORD_DEFAULT));
 
-
-        Flash::success("Mot de passe changé avec succès");
+        Flash::success("Mot de passe changé avec succès.");
         return $this->redirect('/profile');
     }
 

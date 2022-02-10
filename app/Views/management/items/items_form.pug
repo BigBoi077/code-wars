@@ -25,8 +25,8 @@ block body
             label(for="description") Description
             textArea.form-control(id='description', name='description', rows="6")
               | #{(item !== null) ? item.description : val('description')}
-        .form-row.w-50.m-auto
-          button#submitBtn.btn(type='submit')
+        .form-row
+          button#submitBtn.btn.w-100(type='submit')
             i.fas.fa-plus-square.mr-2
             if item !== null
               | Modifier

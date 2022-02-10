@@ -38,14 +38,18 @@ class TeamController extends Controller
     public function leaderboard()
     {
         $students = StudentService::getAll();
-        $index = 0;
-        $current = StudentService::get($this->getUser()['da']);
-        foreach ($students as $student) {
-            if ($current->id === $student->id) {
-                $current->position = $index + 1;
+        $current = null;
+        if (!$this->getUser()['isTeacher']) {
+            $index = 0;
+            $current = StudentService::get($this->getUser()['da']);
+            foreach ($students as $student) {
+                if ($current->id === $student->id) {
+                    $current->position = $index + 1;
+                }
+                $index++;
             }
-            $index++;
         }
+
         return $this->render('teams/leaderboard', [
             'students' => $students,
             'current' => $current

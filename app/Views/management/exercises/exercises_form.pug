@@ -56,10 +56,10 @@ block body
                 else
                   option(value=week.id)
                     | #{week.number}
-          .form-row.w-50.m-auto
-            button#submitBtn.btn(type='submit')
-              i.fas.fa-plus-square.mr-2
-              if exercise !== null
-                | Modifier
-              else
-                | Créer
+        .form-row
+          button#submitBtn.btn.w-100(type='submit')
+            i.fas.fa-plus-square.mr-2
+            if exercise !== null
+              | Modifier
+            else
+              | Créer
