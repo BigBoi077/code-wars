@@ -3,6 +3,7 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
+use Models\Brokers\TransactionBroker;
 use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use stdClass;
@@ -116,7 +117,6 @@ class ExerciseController extends Controller
     public function exerciseUpload($exercise)
     {
         $maxsize = 20971520;
-        $id = $exercise->id;
 
         if ($this->isUserTeacher()) {
             Flash::error("L'enseignant ne peut pas remettre des exercices.");

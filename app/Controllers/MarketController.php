@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+use Models\Brokers\TransactionBroker;
 use Models\Services\ItemService;
 use Models\Services\StudentItemService;
 use Models\Transaction;

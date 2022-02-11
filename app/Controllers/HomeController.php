@@ -2,6 +2,7 @@
 
 use Models\Brokers\NotificationBroker;
 use Models\Brokers\StudentExerciseBroker;
+use Models\Brokers\TransactionBroker;
 use Zephyrus\Application\Flash;
 
 class HomeController extends Controller
@@ -26,7 +27,8 @@ class HomeController extends Controller
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
             'quote' => null,
-            'exercises' => $studentExercises
+            'exercises' => $studentExercises,
+            'transactions' => (new TransactionBroker())->getAllByUser($this->getUser()['id'])
         ]);
     }
 

@@ -5,6 +5,7 @@ use DateTime;
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
+use Models\Brokers\TransactionBroker;
 use Models\Brokers\UserBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
@@ -56,14 +57,15 @@ class CorrectionController extends Controller
     {
         $form = $this->buildForm();
         $ok = $form->getValue("ok");
+        $userId = (new UserBroker())->findByDa($da)->id;
         if (is_string($ok)) {
-            (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
+            (new ExerciseBroker())->correctExercise($userId, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
             $e = (new ExerciseBroker())->getCorrectionPath($id);
             unlink($e->path);
             Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
         } else {
             Flash::warning("Commentaire envoyer à l'élève l'informant que sa solution ne convient pas.");
-            (new ExerciseBroker())->incorrectExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
+            (new ExerciseBroker())->incorrectExercise($userId, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
         }
         return $this->redirect('/management/correction');
     }

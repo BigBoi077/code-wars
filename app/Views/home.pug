@@ -19,17 +19,18 @@ block body
         h1 Transactions
         hr
         .done
-          if exercises != null
+          if transactions != null
             table.table
               thead
-                th Nom de la mission
-                th Date de remise
-                th Corrigé
-                th Argent
-                th Points
+                th Date
+                th Action
+                th Raison
               tbody
-                each exercise in exercises
-                  +exerciseRow(exercise)
+                each transaction in transactions
+                  tr
+                    td=format('date', transaction.date)
+                    td=transaction.action
+                    td.start=transaction.description
           else
             small.text-muted Vous n'avez complété aucune mission
     each exercise in exercises
