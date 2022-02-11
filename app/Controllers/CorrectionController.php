@@ -55,7 +55,8 @@ class CorrectionController extends Controller
     public function correctExercise($da, $id)
     {
         $form = $this->buildForm();
-        if ($form->getValue("ok") != "") {
+        $ok = $form->getValue("ok");
+        if (is_string($ok)) {
             (new ExerciseBroker())->correctExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
             $e = (new ExerciseBroker())->getCorrectionPath($id);
             unlink($e->path);
@@ -64,7 +65,6 @@ class CorrectionController extends Controller
             Flash::warning("Commentaire envoyer à l'élève l'informant que sa solution ne convient pas.");
             (new ExerciseBroker())->incorrectExercise((new UserBroker())->findByDa($da)->id, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
         }
-
         return $this->redirect('/management/correction');
     }
 

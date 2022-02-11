@@ -16,7 +16,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
         return ($this->isLogged()) ? ((!$this->getUser()['isTeacher']) ? $this->redirect('/home') : $this->redirect('/management/correction')) : $this->redirect('/login');
     }
 

@@ -1,5 +1,8 @@
 mixin itemRow(item)
   tr
-    td #{item.name}
-    td #{item.description}
+    td
+      .row
+        h6.mb-1=item.name
+      .row
+        small.text-muted=item.description
     td.start #{format('date', item.bought_date)}

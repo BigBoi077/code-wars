@@ -1499,4 +1499,9 @@ table {
     padding-left: 0 !important;
 }
 
+.return-ready {
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
 /* endregion */
