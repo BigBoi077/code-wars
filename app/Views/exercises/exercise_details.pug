@@ -43,8 +43,8 @@ block body
             else
               .col-2.mb-0
                 i.far.fa-check-circle.submitted
-              .col-8.mb-0
-                span Remis
+              .col-10.mb-0
+                small En attente de correction
           .col-12.mission-difficulty-container.mb-1
             span.mb-2 Achèvement
             h6.text-muted=completion + " % des élèves ont complétés l'exercises"
@@ -60,39 +60,37 @@ block body
               while i < difficultyDifference
                 i.fas.fa-star
                 - i++
-        div.mission-execution-example
+        .mission-submit
+          if !corrected && !submitted && !isTeacher
+            form(action="/exercises/submit/" + exercise.id method="POST").mb-0
+              button(type="submit").btn.btn-yellow
+                +teamIcon(student)
+                p Soumettre une solution
+          else if !corrected && submitted && !isTeacher
+            form(action="/exercises/cancel/" + exercise.id method="POST").mb-0
+              button(type="submit").btn.btn-yellow
+                +teamIcon(student)
+                p Annuler la remise
+          else if !isTeacher && corrected
+            button.btn.btn-disabled
+              p Corrigé
+        div.mission-execution-example.my-5
           h3 Exemple d'exécution
           pre=exercise.execution_exemple
-        .mission-tips.mt-4
+        .mission-tips
           if tips != null
             h3 Indices de mission
             hr
             each tip in tips
               .row
                 if tip.bought
-                  p.w-100.pl-0.mb-5=tip.tip
+                  p.w-100.pl-0.mb-3=tip.tip
                 else
                   if !isTeacher
                     form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
                       button.btn.btn-yellow.position-absolute.tip-buy-button
                         +star_wars_money(tip.price)
                   p(class=(isTeacher) ? '': 'blur').my-4.pl-0=tip.tip
-
-      if !corrected && !submitted && !isTeacher
-        form(action="/exercises/submit/" + exercise.id method="POST").submit.mb-0
-          button(type="submit").btn.btn-yellow
-            +teamIcon(student)
-            p Soumettre une solution
-      else if !corrected && submitted && !isTeacher
-        form(action="/exercises/cancel/" + exercise.id method="POST").submit.mb-0
-          button(type="submit").btn.btn-yellow.cancel
-            +teamIcon(student)
-            p Annuler la remise
-          a.btn.btn-disabled.waiting
-            p En attente de correction
-      else if !isTeacher && corrected
-        button.btn.btn-disabled.submit
-          p Corrigé
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

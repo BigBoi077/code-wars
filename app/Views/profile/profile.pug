@@ -16,11 +16,13 @@ block body
               img.rounded-img.mt-2(src=gravatarUrl)
             else
               img.rounded-img.mt-2(src=profileImageUrl)
-            h5.my-3 #{studentProfile.username}
-            h6.text-muted.my-1 #{studentProfile.da}
-            div.d-flex.align-items-center.flex-column
-              +star_wars_money(studentProfile.cash)
-              +star_wars_points(studentProfile.points)
+            h6.text-muted.mt-3 #{studentProfile.da}
+            h5 #{studentProfile.username}
+            div.d-flex.justify-content-center.my-2.mt-3
+              .mx-3
+                +star_wars_money(studentProfile.cash)
+              .mx-3
+                +star_wars_points(studentProfile.points)
       .col-lg-8
         .card.mb-4.profile-first-elems
           include ../mixins/profileInfo
@@ -82,7 +84,6 @@ block body
                   table.table
                     thead
                       th Nom de l'item
-                      th Description
                       th Date
                     tbody
                       each item in items
@@ -96,7 +97,6 @@ block body
         .row
           .card.mb-4.w-100
             .card-body.main-card
-              include ../mixins/myExercise
               if user.isTeacher
                 h2.mb-3 Exercises de l'élève
                 if exercises != null

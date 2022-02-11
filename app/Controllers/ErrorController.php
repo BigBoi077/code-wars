@@ -1,9 +1,7 @@
 <?php namespace Controllers;
 
-
 class ErrorController extends Controller
 {
-
     public function initializeRoutes()
     {
         $this->get("/error/404", "index");

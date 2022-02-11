@@ -16,14 +16,22 @@ block body
         h3.font-italic “ #{quote} ”
     .row.mt-5.p-4.main-card
       .w-100
-        h1 Accueil
+        h1 Transactions
         hr
-      include mixins/notificationLayout
-      .col.p-0
-        +notificationLayout(notifications)
-      if isTeacher === false
-        .col.p-0
-          h4.mb-4 Membres de mon équipe
-          .card.pb-3.pt-1
-            each member, index in teamMembers
-              +teamMember(member, index)
+        .done
+          if exercises != null
+            table.table
+              thead
+                th Nom de la mission
+                th Date de remise
+                th Corrigé
+                th Argent
+                th Points
+              tbody
+                each exercise in exercises
+                  +exerciseRow(exercise)
+          else
+            small.text-muted Vous n'avez complété aucune mission
+    each exercise in exercises
+      if exercise.comments != null
+        +commentModal("Commentaire du professeur" , exercise.comments, "commentModal" + exercise.id)

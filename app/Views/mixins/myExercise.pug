@@ -9,6 +9,16 @@ mixin exerciseRow(exercise)
         i.far.fa-times-circle.not-submitted.student-exercise-element
       if exercise.comments != null
         a(href="" data-bs-toggle="modal" data-bs-target="#commentModal" + exercise.id).ml-3
-          i.fas.fa-comment-dots.student-icons
-    td=exercise.cash_reward
-    td.start=exercise.point_reward
+          i.fas.fa-comment.student-icons
+      else
+        i.fas.fa-comment-slash.ml-3
+    td
+      if exercise.corrected
+        +star_wars_money(exercise.cash_reward)
+      else
+        +star_wars_money(0)
+    td.start
+      if exercise.corrected
+        +star_wars_points(exercise.point_reward)
+      else
+        +star_wars_points(0)

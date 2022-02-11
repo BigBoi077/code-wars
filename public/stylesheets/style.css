@@ -68,7 +68,7 @@
 }
 
 .page {
-    min-height:100%;
+    min-height: 55vh;
     position: relative;
 }
 
@@ -81,8 +81,15 @@ html {
 }
 
 body {
-    padding-bottom: 276px;
     font-size: 1rem;
+}
+
+a {
+    color: var(--dark);
+}
+
+a:hover {
+    color: var(--accent);
 }
 
 .letter-space-1 {
@@ -809,6 +816,10 @@ input#exerciseUpload {
     position: relative;
 }
 
+.cursor-hover:hover {
+    cursor: pointer;
+}
+
 #inputDAIMG, #inputPWDIMG {
     width: 25px;
     height: auto;
@@ -1030,7 +1041,7 @@ text-align: center;
 
 .single-mission-row .mission-detail {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .single-mission-row .mission-detail a i  {
@@ -1060,16 +1071,16 @@ text-align: center;
     "debrief          debrief          .                info"
     "description      description      description      info"
     "description      description      description      info"
-    ".                .                .                info"
-    "example          example          example          example"
-    "tips             tips             tips             tips"
-    ".                submit           submit           .";
+    "submit           submit           submit           info"
+    "example          example          example          ."
+    "tips             tips             tips             .";
 }
 
 .tip-buy-button {
     top: 30px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -25%);
+    padding: 12px 20px !important;
 }
 
 .single-mission-submit {
@@ -1192,7 +1203,7 @@ text-align: center;
  .mission-submit, .single-mission-submit .mission-upload {
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .mission-upload.disabled {
@@ -1492,26 +1503,14 @@ table {
     position: relative;
 }
 
-.rowlink {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-}
-
-/*.rowlink::before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 1.5em;
-}*/
-
 .table .start {
     text-align: left !important;
     padding-left: 0 !important;
+}
+
+.return-ready {
+    white-space: pre-wrap;
+    text-align: justify;
 }
 
 /* endregion */

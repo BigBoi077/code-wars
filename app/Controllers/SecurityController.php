@@ -1,7 +1,6 @@
 <?php namespace Controllers;
 
 use Models\Brokers\LogBroker;
-use Models\Logger;
 use Zephyrus\Exceptions\IntrusionDetectionException;
 use Zephyrus\Exceptions\InvalidCsrfException;
 use Zephyrus\Exceptions\UnauthorizedAccessException;
@@ -17,9 +16,6 @@ use Zephyrus\Security\CrossOriginResourcePolicy;
  * headers, intrusion detection behaviors, and any another security specific settings for your application. The Zephyrus
  * base security controller which this class extends from contains basic security behaviors that all applications should
  * have (CSRF, security headers and authorization engine).
- *
- * Class SecurityController
- * @package Controllers
  */
 abstract class SecurityController extends ZephyrusBaseController
 {

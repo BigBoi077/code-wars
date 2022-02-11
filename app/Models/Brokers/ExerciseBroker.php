@@ -108,10 +108,10 @@ class ExerciseBroker extends Broker
         return $this->query($sql, [$id]);
     }
 
-    public function update($id,$name,$difficulty,$description,$exemple,$cash,$point, $weekId)
+    public function update($id, $name, $difficulty, $description, $exemple, $cash, $point, $weekId)
     {
         $sql = "UPDATE codewars.exercise SET name = ?, difficulty = ?, description = ?, execution_exemple = ?, cash_reward = ?, point_reward = ?, week_id = ? WHERE id = ?";
-        $this->query($sql, [$name,$difficulty,$description,$exemple,$cash,$point, $weekId, $id]);
+        $this->query($sql, [$name, $difficulty, $description, $exemple, $cash, $point, $weekId, $id]);
     }
 
     public function isSubmitted($id, $da): bool
@@ -173,7 +173,4 @@ class ExerciseBroker extends Broker
         $sql = "delete from codewars.studentexercise se where se.student_da = ?";
         $this->query($sql, [$da]);
     }
-
 }
-
-

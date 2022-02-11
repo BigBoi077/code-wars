@@ -7,18 +7,8 @@ use Zephyrus\Application\Session;
 use Zephyrus\Network\Response;
 use Zephyrus\Utilities\Gravatar;
 
-/**
- * This class acts as an application middleware, all other controller classes should extends this Controller and thus
- * inherit every global behaviors your application may require. You can override methods like before() and after() to
- * make good use of the middleware feature, or simply override method like render() to define specific variables that
- * all views should have. You can have as much middleware as you want (through extends).
- *
- * Class Controller
- * @package Controllers
- */
 abstract class Controller extends SecurityController
 {
-
     private const LOGIN_ROUTE = '/login';
     private const DEFAULT_PROFILE_PIC = '/assets/images/kakashi.jpeg';
     public const SESSION_IS_LOGGED = 'is_logged';
@@ -35,7 +25,7 @@ abstract class Controller extends SecurityController
     {
         $student = $this->getActiveStudent();
         $user = $this->getUser();
-        $imageUrl= self::DEFAULT_PROFILE_PIC;
+        $imageUrl = self::DEFAULT_PROFILE_PIC;
         $hasNotifications = false;
         $profileTeamImg = "/assets/images/rebel.png";
 

@@ -1,9 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\NotificationBroker;
-use Models\Brokers\StudentBroker;
-use Models\Services\ApiService;
-use Models\Services\StudentService;
+use Models\Brokers\StudentExerciseBroker;
 use Zephyrus\Application\Flash;
 
 class HomeController extends Controller
@@ -18,23 +16,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        return ($this->isLogged()) ? $this->redirect('/home') : $this->redirect('/login');
+        return ($this->isLogged()) ? ((!$this->getUser()['isTeacher']) ? $this->redirect('/home') : $this->redirect('/management/correction')) : $this->redirect('/login');
     }
 
     public function home()
     {
-        $teamMembers = [];
-        if (!$this->isUserTeacher()) {
-            $student = StudentService::get($this->getUser()['da']);
-            $teamMembers = (new StudentBroker())->sameTeamStudent($student->team_id);
-        }
-        $notifications = (new NotificationBroker())->getStudentNotifications($this->getUser()['id']);
+        $studentExercises = (new StudentExerciseBroker())->getAllWithDa($this->getUser()['da']);
         //$quote = (new HttpRequester("get", "http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote"))->execute();
         return $this->render('home', [
             'isTeacher' => $this->isUserTeacher(),
-            'teamMembers' => $teamMembers,
-            'notifications' => $notifications,
-            'quote' => null
+            'quote' => null,
+            'exercises' => $studentExercises
         ]);
     }
 

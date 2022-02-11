@@ -3,4 +3,4 @@ mixin star_wars_money(money, isAlignEnd, url)
     - isAlignEnd = false
   .mission-cash-reward.d-flex.align-items-center(class = isAlignEnd ? 'justify-content-end': '')
     img.mr-2(src="/assets/images/credit_symbol.svg").svg-icons
-    span.m-1 #{format('decimal', money, 0, 0)}
+    span #{format('decimal', money, 0, 0)}

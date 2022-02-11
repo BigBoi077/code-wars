@@ -12,7 +12,6 @@ use Zephyrus\Utilities\Gravatar;
 
 class StudentManageController extends TeacherController
 {
-
     public function initializeRoutes()
     {
         $this->get('/management/students', 'listStudents');
@@ -49,7 +48,7 @@ class StudentManageController extends TeacherController
     public function viewStudent($da)
     {
         $student = StudentService::get($da);
-        $imageUrl= "/assets/images/profil_pic_default.png";
+        $imageUrl = "/assets/images/profil_pic_default.png";
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
             $imageUrl = $gravatar->getUrl();
@@ -159,14 +158,14 @@ class StudentManageController extends TeacherController
             }
             $broker = new TeamBroker();
             $broker->addToTeam($form->getValue('team_id'), $form->getValue('points'), $form->getValue('cash'));
-        } else if ($forValue == "student") {
+        } elseif ($forValue == "student") {
             if ($form->getValue('student_da') == null) {
                 Flash::error("Aucun élève sélectionné...");
                 return $this->redirect("/management/students/rapidAdd");
             }
             $studentBroker = new StudentBroker();
-            $studentBroker->addPoints($form->getValue('student_da'), (int)($form->getValue('points')));
-            $studentBroker->addCash($form->getValue('student_da'), (int)($form->getValue('cash')));
+            $studentBroker->addPoints($form->getValue('student_da'), (int) ($form->getValue('points')));
+            $studentBroker->addCash($form->getValue('student_da'), (int) ($form->getValue('cash')));
         }
         Flash::success("Action effectué avec succès");
         return $this->redirect("/management/students");

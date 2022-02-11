@@ -4,7 +4,7 @@ use stdClass;
 
 class WeekBroker extends Broker
 {
-    public function findByID($id) : ?stdClass
+    public function findByID($id): ?stdClass
     {
         $sql = "SELECT w.id, w.start_date, w.is_active
                 FROM codewars.week w
@@ -50,5 +50,13 @@ class WeekBroker extends Broker
         $week = $this->findByID($id);
         $sql = "update codewars.week set is_active = ? where id = ?";
         $this->query($sql, [!$week->is_active, $id]);
+    }
+
+    public function findByNumber($number)
+    {
+        $sql = "SELECT w.id, w.start_date, w.is_active
+                FROM codewars.week w
+                WHERE w.number = ?";
+        return $this->selectSingle($sql, [$number]);
     }
 }

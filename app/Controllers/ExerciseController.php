@@ -97,7 +97,7 @@ class ExerciseController extends Controller
 
         if ($corrected && $submitted) {
             $state = "finished";
-        } else if (!$corrected && $submitted) {
+        } elseif (!$corrected && $submitted) {
             $state = "uncorrected";
         }
 
@@ -147,9 +147,9 @@ class ExerciseController extends Controller
             Flash::error("La taille des fichiers ne peut pas être de 0 octet.");
         }
 
-        $fileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
+        if ($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
             return $this->redirect('/exercises/' . $exercise->id);
         }
@@ -177,7 +177,7 @@ class ExerciseController extends Controller
         if ($student->cash < $tip->price) {
             Flash::error("Vous n'avez pas assez d'argent pour cet indice...");
             return $this->redirect($this->request->getReferer());
-        } else if ($broker->Has($tipId, $student->da)) {
+        } elseif ($broker->Has($tipId, $student->da)) {
             Flash::error("Vous avez déjà cet indice, pourquoi payer deux fois?");
             return $this->redirect($this->request->getReferer());
         }
@@ -218,7 +218,7 @@ class ExerciseController extends Controller
                 $nbHasCompleted++;
             }
         }
-        return Round($nbHasCompleted / Count($allStudent) * 100, 2);
+        return round($nbHasCompleted / count($allStudent) * 100, 2);
     }
 
     private function overrideExercise()

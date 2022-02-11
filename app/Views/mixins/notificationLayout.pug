@@ -6,7 +6,7 @@ mixin notificationLayout(notifications, isHome)
       if notifications != null
         a(href="/notification/seeAll").text-dark
           h6.mb-4.mr-4 Coché tout comme vu
-  #notifs
+  #notifs(data-notifications)
     if notifications == null
       h6 Vous n'avez aucune nouvelle notification
     else

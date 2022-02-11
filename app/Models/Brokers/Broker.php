@@ -7,9 +7,6 @@ use Zephyrus\Database\DatabaseBroker;
  * Zephyrus enforces that the way to communicate with your database should use broker instances. This class acts as a
  * middleware, all the other "brokers" should extends this class and thus, you can add project specific processing to
  * this class that every other brokers shall inherit.
- *
- * Class Broker
- * @package Models\Brokers
  */
 abstract class Broker extends DatabaseBroker
 {
