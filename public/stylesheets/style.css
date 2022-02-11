@@ -69,6 +69,7 @@
 
 .page {
     min-height:100%;
+    padding-bottom: 360px;
     position: relative;
 }
 
@@ -81,7 +82,6 @@ html {
 }
 
 body {
-    padding-bottom: 276px;
     font-size: 1rem;
 }
 
