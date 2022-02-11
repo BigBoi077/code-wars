@@ -10,7 +10,6 @@ use Zephyrus\Utilities\Gravatar;
 abstract class Controller extends SecurityController
 {
     private const LOGIN_ROUTE = '/login';
-    private const DEFAULT_PROFILE_PIC = '/assets/images/kakashi.jpeg';
     public const SESSION_IS_LOGGED = 'is_logged';
 
     /**
@@ -25,7 +24,7 @@ abstract class Controller extends SecurityController
     {
         $student = $this->getActiveStudent();
         $user = $this->getUser();
-        $imageUrl = self::DEFAULT_PROFILE_PIC;
+        $imageUrl = null;
         $hasNotifications = false;
         $profileTeamImg = "/assets/images/rebel.png";
 
