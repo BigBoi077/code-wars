@@ -38,8 +38,11 @@ mixin header()
             else
               h6 Enseignant
       if !user.isTeacher
-        a.profile-pic(href="/profile")
-          img(src=profileImageUrl)
+        .profile-pic-container
+          a.profile-pic(href="/profile")
+            img(src=profileImageUrl)
+            img(src=profileTeamImg)#profileTeamImg
+
       .d-flex.ml-3
         .notification-container
           a#notifBtn(href="/profile/notifications").bell

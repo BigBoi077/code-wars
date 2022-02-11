@@ -37,6 +37,11 @@ abstract class Controller extends SecurityController
         $user = $this->getUser();
         $imageUrl= self::DEFAULT_PROFILE_PIC;
         $hasNotifications = false;
+        $profileTeamImg = "/assets/images/rebel.png";
+
+        if ($student->team_id == 1) {
+            $profileTeamImg = "/assets/images/sith.png";
+        }
 
         if ($student != null && ($student->email != '' || $student->email != null)) {
             $gravatar = new Gravatar($student->email);
@@ -57,6 +62,7 @@ abstract class Controller extends SecurityController
             'user' => $user,
             'profileImageUrl' => $imageUrl,
             'student' => $student,
+            'profileTeamImg' => $profileTeamImg,
             'hasNotifications' => $hasNotifications,
             'teamPoints' => TeamController::getTeamPoints()
         ]));

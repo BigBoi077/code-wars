@@ -225,6 +225,20 @@ header .menu-items a:hover {
     border-bottom: 2px solid var(--accent);
 }
 
+.profile-pic-container {
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+.profile-pic-container #profileTeamImg {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: -5px;
+    right: -5px;
+}
+
 #bell, #icon-header {
     color: var(--font);
 }
@@ -655,6 +669,11 @@ input#exerciseUpload {
 
 .student-icons:hover {
     color: var(--accent) !important;
+}
+
+#marketIcons {
+    width: 48px;
+    height: 48px;
 }
 
 #productImg {
