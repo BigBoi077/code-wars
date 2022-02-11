@@ -32,7 +32,7 @@ mixin header()
               h6
                 +star_wars_points(student.points)
           else
-            if profileImageUrl != '/assets/images/kakashi.jpeg'
+            if profileImageUrl !== null
               a.profile-pic
                 img(src=profileImageUrl)
             else
