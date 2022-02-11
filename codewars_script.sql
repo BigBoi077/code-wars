@@ -169,3 +169,13 @@ create table if not exists log (
     constraint fk_da_log foreign key (da) references "user"(da),
     constraint pk_id_log primary key (id)
 );
+
+create table if not exists transaction (
+    id serial,
+    user_id int,
+    date timestamp,
+    action varchar,
+    description varchar,
+    constraint fk_transaction_user_id foreign key (user_id) references "user"(id),
+    constraint pk_transaction_id primary key (id)
+)
