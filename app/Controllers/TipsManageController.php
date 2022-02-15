@@ -48,7 +48,7 @@ class TipsManageController extends TeacherController
         }
         Flash::error($tip->getErrorMessages());
 
-        return $this->redirect("/management/exercises/" . $exerciseId . "/tips");
+        return $this->redirect("/management/exercises/" . $exerciseId . "/tips/create");
     }
 
     public function editTip($exerciseId, $tipId)

@@ -57,6 +57,5 @@ block body
             .card-body.pb-0
               h4.mb-3.text-center Progression individuelle
               p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
-              include ../mixins/weekProgress
               each week in weeklyProgress
                 +weekProgressSmall(week)

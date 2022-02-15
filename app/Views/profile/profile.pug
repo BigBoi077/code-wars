@@ -58,7 +58,6 @@ block body
                 p.mb-2 L'élève a complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal} complétées
               else
                 p.mb-2 Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
-              include ../mixins/weekProgress
               .my-4
                 each week in weeklyProgress
                   +weekProgress(week)
@@ -134,5 +133,3 @@ block body
       each exercise in exercises
         if exercise.comments != null
           +commentModal("Commentaire du professeur" , exercise.comments, "commentModal" + exercise.id)
-block script
-  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
