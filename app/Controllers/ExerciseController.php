@@ -108,7 +108,7 @@ class ExerciseController extends Controller
         return $this->render('exercises/exercise_details', [
             'exercise' => $exercise,
             'action' => "/submit/exercise/" . $exercise->id,
-            'tips' => $this->gibberishTip($exercise->id),
+            'tips' => $this->gibberishTip($exercise->id, $this->getUser()['isTeacher']),
             'completion' => $this->calculateCompletion($exercise),
             'state' => $state,
             'isTeacher' => $isTeacher,
@@ -191,16 +191,21 @@ class ExerciseController extends Controller
         return $this->redirect($this->request->getReferer());
     }
 
-    private function gibberishTip($exerciseId): array
+    private function gibberishTip($exerciseId, $isTeacher): array
     {
         $broker = new TipBroker();
         $tips = [];
         $allTips = $broker->GetAllById($exerciseId);
         $boughtTips = $broker->GetAllUnlocked($exerciseId, $this->getUser()["da"]);
         foreach ($allTips as $tip) {
+            if ($isTeacher) {
+                $tip->bought = true;
+                array_push($tips, $tip);
+                continue;
+            }
             $tip->bought = false;
             $unHashedTip = $tip->tip;
-            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin.";
+            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé.";
             foreach ($boughtTips as $boughtTip) {
                 if ($tip->id === $boughtTip->id) {
                     $tip->bought = true;
