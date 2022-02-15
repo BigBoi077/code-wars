@@ -15,7 +15,7 @@ mixin flash-message(data, type)
       div.alert(class='alert-' + type)
         if is_array(data)
           if count(data) > 1
-            ul
+            ul.mb-0
               each message in data
                 if message != ""
                   li!=message
