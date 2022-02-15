@@ -243,6 +243,18 @@ header .menu-items a:hover {
     right: -5px;
 }
 
+.profile-bg {
+    background-color: var(--accent);
+}
+
+.initials {
+    font-size: 25px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translate(40%, 25%);
+}
+
 #bell, #icon-header {
     color: var(--font);
 }
