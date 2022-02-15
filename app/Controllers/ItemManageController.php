@@ -2,6 +2,7 @@
 
 use Models\Services\ItemService;
 use Zephyrus\Application\Flash;
+use Zephyrus\Network\Response;
 
 class ItemManageController extends TeacherController
 {
@@ -11,7 +12,7 @@ class ItemManageController extends TeacherController
         $this->get('/management/items/create', 'createItem');
         $this->get('/management/items/{id}/edit', 'editItem');
         $this->get('/management/items/{id}/delete', 'deleteItem');
-
+        $this->get('/management/items/fetch-icons', 'fetchIcons');
         $this->post('/management/items/store', 'storeItem');
         $this->post('/management/items/{id}/update', 'updateItem');
 
@@ -40,6 +41,7 @@ class ItemManageController extends TeacherController
             Flash::error('L\'article n\'existe pas.');
             return $this->redirect('/management/items');
         }
+
         $item = ItemService::get($id);
         return $this->render('management/items/items_form', [
             'title' => 'Modifier ' . $item->name,
@@ -97,5 +99,11 @@ class ItemManageController extends TeacherController
                 return $this->redirect('/management/items');
             }
         });
+    }
+
+    public function fetchIcons(): Response
+    {
+        $marketIcons = glob("assets/images/market_icons" . "/*.png");
+        return $this->json($marketIcons);
     }
 }

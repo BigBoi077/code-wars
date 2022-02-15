@@ -3,6 +3,9 @@ extends ../../mixins/layout
 block title
   title Articles - Code Wars
 
+block head
+  link(rel="stylesheet" type="text/css" href="/stylesheets/iconselect.css")
+
 block header
   +header()
 
@@ -22,6 +25,10 @@ block body
             label(for='price') Prix
             input.form-control(id='price', type='text', name='price', value=(item !== null) ? item.price : val('price'))
           .form-group.col-12.mb-3
+            label(for="selectedImg") Icône de l'article
+            #my-icon-select
+            input(type="hidden" id="selectedImg" name="selectedImg" style="width:65px;")
+          .form-group.col-12.mb-3
             label(for="description") Description
             textArea.form-control(id='description', name='description', rows="6")
               | #{(item !== null) ? item.description : val('description')}
@@ -32,3 +39,9 @@ block body
               | Modifier
             else
               | Créer
+
+block script
+  script(src="/javascripts/iconScrollAddons.js")
+  script(src="/javascripts/iscroll.js")
+  script(src="/javascripts/iconselect.js")
+
