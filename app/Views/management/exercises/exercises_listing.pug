@@ -30,7 +30,7 @@ block body
             each exercise in exercises
               tr
                 td
-                  p #{exercise.name}
+                  a(href="/exercises/" + exercise.id)=exercise.name
                 td
                   each difficulty, index in difficulties
                     if (index === exercise.difficulty)

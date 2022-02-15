@@ -28,7 +28,7 @@ block body
           each item in items
             tr
               td
-                p #{item.name}
+                a(href="/management/items/" + item.id + "/edit")=item.name
               td
                 p.student-row-element #{item.description}
               td.end

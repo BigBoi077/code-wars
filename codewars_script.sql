@@ -129,6 +129,7 @@ create table if not exists item (
     name varchar,
     price int,
     description varchar,
+    image_path varchar,
     constraint pk_id_item primary key (id)
 );
 
