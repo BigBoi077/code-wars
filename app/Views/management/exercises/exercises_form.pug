@@ -50,7 +50,7 @@ block body
             label(for="week") Semaine
             select.form-control(id="week", name="week")
               each week in weeks
-                if (exercise.number === week.id)
+                if (exercise.week_id === week.id)
                   option(value=week.id selected)
                     | #{week.number}
                 else
