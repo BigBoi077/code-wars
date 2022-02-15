@@ -18,8 +18,8 @@ block body
           img.login-logo(src="/assets/images/trooper_helmet.png")
           h1.mb-1.letter-space-1 CODE WARS
           h6.mb-4 AUTHENTIFICATION
+          +flash()
           form(method='post', action='/login').container.login-form
-            +flash()
             .da-row
               img(src="/assets/images/user_icon.png")#inputDAIMG
               input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.mb-3
