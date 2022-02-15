@@ -32,17 +32,14 @@ mixin header()
               h6
                 +star_wars_points(student.points)
           else
-            if profileImageUrl !== null
+            if profileImageUrl != '/assets/images/kakashi.jpeg'
               a.profile-pic
                 img(src=profileImageUrl)
             else
               h6 Enseignant
       if !user.isTeacher
-        .profile-pic-container
-          a.profile-pic(href="/profile")
-            img(src=profileImageUrl).profile-bg
-            img(src=profileTeamImg)#profileTeamImg
-
+        a.profile-pic(href="/profile")
+          img(src=profileImageUrl)
       .d-flex.ml-3
         .notification-container
           a#notifBtn(href="/profile/notifications").bell

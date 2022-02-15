@@ -10,6 +10,7 @@ class ExerciseService
     private $succes = false;
     private Form $form;
     private $errorMessages;
+    private $exerciseId;
 
     public static function getAll()
     {
@@ -62,6 +63,11 @@ class ExerciseService
         return $this->succes;
     }
 
+    public function getInsertId()
+    {
+        return $this->exerciseId;
+    }
+
     private function areFieldsValid(): bool
     {
         if (!$this->applyRules()) {
@@ -93,8 +99,8 @@ class ExerciseService
         $point = ($this->form->getValue('point') != "") ? $this->form->getValue('point') : 0;
         $cash = ($this->form->getValue('cash') != "") ? $this->form->getValue('cash') : 0;
         $weekId = $this->form->getValue("week");
-        $exerciseId = (new ExerciseBroker())->insert($exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
-        NotificationService::newExerciseAvailable($exerciseName, $cash, $point, $exerciseId);
+        $this->exerciseId = (new ExerciseBroker())->insert($exerciseName, $difficulty, $description, $exemple, $cash, $point, $weekId);
+        NotificationService::newExerciseAvailable($exerciseName, $cash, $point, $this->exerciseId);
         $this->succes = true;
     }
 

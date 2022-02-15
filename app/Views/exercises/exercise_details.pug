@@ -91,6 +91,11 @@ block body
                       button.btn.btn-yellow.position-absolute.tip-buy-button
                         +star_wars_money(tip.price)
                   p(class=(isTeacher) ? '': 'blur').my-4.pl-0=tip.tip
+        div.mission-image-example.my-5
+          h3 Exemple
+          if imageExamples != null
+            each example in imageExamples
+              img(src=example.path + "/" + example.name_hash + "." + example.file_extension)
 
 block script
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')

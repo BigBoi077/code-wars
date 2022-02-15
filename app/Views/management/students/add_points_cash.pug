@@ -20,14 +20,15 @@ block body
             select.form-control(id='for', name='for' required)
               option(value="team") Pour l'équipe complète
               option(value="student") Pour un élève
-          .form-group.col-6.hidden#team
+          .form-group.col-6
             label(for="team_id") Équipes
             select.form-control(id='team_id', name='team_id')
               option(value=null disabled="disabled" selected=true) Selectionnez une équipe
               each team in teams
                 option(value=team.id)
                   | #{team.name}
-          .form-group.col-6.hidden#student
+        .form-row.hidden#student
+          .form-group.col-12
             label(for="student_da") Élève
             select.form-control(id='student_da', name='student_da')
               option(value=null disabled="disabled" selected=true) Selectionnez un élève
@@ -41,9 +42,6 @@ block body
           .form-group.col-6
             label(for="points") Points (Optionnel)
             input.form-control(placeholder="0" id='points', name='points', type='number' value=0)
-        .form-row
-          label(for="reason") Raison
-          textarea.form-control#reason(rows=2 name="reason")
         .form-row
           button#submitBtn.btn.w-100(type='submit')
             i.fas.fa-plus-square.mr-2

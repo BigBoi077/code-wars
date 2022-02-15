@@ -89,10 +89,6 @@ a {
     color: var(--dark);
 }
 
-a:hover {
-    color: var(--accent);
-}
-
 .letter-space-1 {
     letter-spacing: 0.1em;
 }
@@ -245,10 +241,6 @@ header .menu-items a:hover {
     height: 25px;
     top: -5px;
     right: -5px;
-}
-
-.profile-bg {
-    background-color: var(--accent);
 }
 
 #bell, #icon-header {
@@ -969,23 +961,23 @@ input#exerciseUpload {
 
 /* Exercise */
 
-.exerciseTable{
+.exerciseTable {
     width: 100%;
     margin-top: 3rem;
     margin-bottom: 1rem;
 }
 
-.exerciseInfo{
+.exerciseInfo {
     font-family: "Roboto", sans-serif;
 }
 
-.menuLink{
+.menuLink {
     width: 100%;
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-.pageTitle{
+.pageTitle {
 text-align: center;
     font-family: 'StarJedi', sans-serif;
 }
@@ -1077,6 +1069,7 @@ text-align: center;
     "description      description      description      info"
     "submit           submit           submit           info"
     "example          example          example          ."
+    "image            image            image            ."
     "tips             tips             tips             .";
 }
 
@@ -1312,6 +1305,17 @@ text-align: center;
 .exercise-submit-detail .download-button span, .exercise-submit-detail .download-button i {
     text-decoration: none;
     color: var(--dark);
+}
+
+.mission-image-example {
+    grid-area: image;
+}
+
+.mission-image-example img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 32px;
 }
 
 /* Profile */
