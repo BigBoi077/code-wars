@@ -17,7 +17,7 @@ class ExerciseController extends Controller
         $this->get('/exercises', 'exercises');
         $this->get('/exercises/{id}', 'exerciseDetail');
 
-        $this->post('/exercises/submit/{id}', 'exerciseSubmit');
+        $this->get('/exercises/submit/{id}', 'exerciseSubmit');
         $this->post('/exercises/cancel/{id}', 'exerciseCancel');
         $this->post('/submit/exercise/{id}', 'exerciseUpload');
         $this->post("/exercises/tips/{tipId}/buy", 'buyTip');
