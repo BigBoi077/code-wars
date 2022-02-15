@@ -1,6 +1,7 @@
 set search_path = codewars;
 
 /*--DROP-TALBES--*/
+drop table if exists transaction;
 drop table if exists studenttip;
 drop table if exists tips;
 drop table if exists studentExercise;
@@ -169,3 +170,19 @@ create table if not exists log (
     constraint fk_da_log foreign key (da) references "user"(da),
     constraint pk_id_log primary key (id)
 );
+
+create table if not exists transaction (
+    id serial,
+    user_id int,
+    date timestamp,
+    action varchar,
+    description varchar,
+    constraint fk_transaction_user_id foreign key (user_id) references "user"(id),
+    constraint pk_transaction_id primary key (id)
+);
+
+grant all privileges on database codewars to etudiant;
+grant all privileges on all tables in schema codewars to etudiant;
+grant all privileges on all sequences in schema codewars to etudiant;
+grant all privileges on all functions in schema codewars to etudiant;
+grant usage on schema codewars to etudiant;

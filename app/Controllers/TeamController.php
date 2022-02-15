@@ -81,8 +81,15 @@ class TeamController extends Controller
         $maxPoints = $teamPoints['Sith'] + $teamPoints['Rebel'];
 
         //$maxPoints = floor(max($teamPoints) / 100) == 0 ? 100 : (floor((max($teamPoints) / 100)) * 100) + 100;
-        $teamPoints['sithWidth'] = $teamPoints['Sith'] / $maxPoints * 100;
-        $teamPoints['rebelWidth'] = $teamPoints['Rebel'] / $maxPoints * 100;
+        if ($teamPoints['Sith'] == 0 || $teamPoints['Rebel'] == 0) {
+            $teamPoints['sithWidth'] = 0;
+            $teamPoints['rebelWidth'] = 0;
+
+        } else {
+            $teamPoints['sithWidth'] = $teamPoints['Sith'] / $maxPoints * 100;
+            $teamPoints['rebelWidth'] = $teamPoints['Rebel'] / $maxPoints * 100;
+        }
+
         return $teamPoints;
     }
 }

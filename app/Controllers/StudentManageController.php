@@ -4,6 +4,7 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
+use Models\Brokers\TransactionBroker;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
@@ -151,21 +152,27 @@ class StudentManageController extends TeacherController
     {
         $form = $this->buildForm();
         $forValue = $form->getValue("for");
+        $reason = $form->getValue("reason");
+        $cash = $form->getValue('cash');
+        $points = $form->getValue('points');
         if ($forValue == "team") {
             if ($form->getValue('team_id') == null) {
                 Flash::error("Aucune équipe sélectionnée...");
                 return $this->redirect("/management/students/rapidAdd");
             }
             $broker = new TeamBroker();
-            $broker->addToTeam($form->getValue('team_id'), $form->getValue('points'), $form->getValue('cash'));
+            $broker->addToTeam($form->getValue('team_id'), $points, $cash, $reason);
         } elseif ($forValue == "student") {
             if ($form->getValue('student_da') == null) {
                 Flash::error("Aucun élève sélectionné...");
                 return $this->redirect("/management/students/rapidAdd");
             }
+            $transactionBroker = new TransactionBroker();
             $studentBroker = new StudentBroker();
-            $studentBroker->addPoints($form->getValue('student_da'), (int) ($form->getValue('points')));
-            $studentBroker->addCash($form->getValue('student_da'), (int) ($form->getValue('cash')));
+            $student = $studentBroker->findByDa($form->getValue('student_da'));
+            $studentBroker->addPoints($form->getValue('student_da'), (int)($points));
+            $studentBroker->addCash($form->getValue('student_da'), (int)($cash));
+            $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction($cash, $points), $reason);
         }
         Flash::success("Action effectué avec succès");
         return $this->redirect("/management/students");

@@ -26,13 +26,15 @@ class TeamBroker extends Broker
         return $this->select($sql, [$id]);
     }
 
-    public function addToTeam($id, $points, $cash)
+    public function addToTeam($id, $points, $cash, $reason)
     {
         $students = $this->findAllStudentByTeam($id);
         $studentBroker = new StudentBroker();
+        $transactionBroker = new TransactionBroker();
         foreach ($students as $student) {
             $studentBroker->addPoints($student->da, $points);
             $studentBroker->addCash($student->da, $cash);
+            $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction($cash, $points), $reason);
         }
     }
 }
