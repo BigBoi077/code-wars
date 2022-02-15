@@ -246,6 +246,10 @@ header .menu-items a:hover {
     right: -5px;
 }
 
+.profile-bg {
+    background-color: var(--accent);
+}
+
 #bell, #icon-header {
     color: var(--font);
 }

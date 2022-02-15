@@ -40,7 +40,7 @@ mixin header()
       if !user.isTeacher
         .profile-pic-container
           a.profile-pic(href="/profile")
-            img(src=profileImageUrl)
+            img(src=profileImageUrl).profile-bg
             img(src=profileTeamImg)#profileTeamImg
 
       .d-flex.ml-3
