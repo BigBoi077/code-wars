@@ -60,7 +60,7 @@
 }
 
 .selected {
-    border-bottom: 2.5px var(--accent) solid;
+    border-bottom: 2px var(--accent) solid;
 }
 
 .selected:hover {
