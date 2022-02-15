@@ -185,3 +185,4 @@ grant all privileges on database codewars to etudiant;
 grant all privileges on all tables in schema codewars to etudiant;
 grant all privileges on all sequences in schema codewars to etudiant;
 grant all privileges on all functions in schema codewars to etudiant;
+grant usage on schema codewars to etudiant;
