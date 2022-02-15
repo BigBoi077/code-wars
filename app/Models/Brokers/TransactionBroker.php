@@ -28,7 +28,7 @@ class TransactionBroker extends Broker
 
     private static function addSub($value): string
     {
-        if ($value > 0) {
+        if ($value >= 0) {
             $value = "ajouté " . number_format($value, 0, '.', ' ');
         } else {
             $value = "déduit " . ($value * -1);
