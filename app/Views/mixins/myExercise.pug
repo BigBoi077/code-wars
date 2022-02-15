@@ -1,12 +1,15 @@
 mixin exerciseRow(exercise)
   tr
-    td=exercise.name
+    td
+      a(href="/exercises/" + exercise.id)=exercise.name
     td #{format('date', exercise.submit_date)}
     td
       if exercise.corrected
-        i.far.fa-check-circle.corrected.student-exercise-element
+        i.far.fa-check-circle.corrected.student-exercise-element(title="Corrigée")
+      else if exercise.is_good === false
+        i.far.fa-times-circle.not-submitted.student-exercise-element(title="Incorrecte")
       else
-        i.far.fa-times-circle.not-submitted.student-exercise-element
+        i.far.fa-times-circle.student-exercise-element.submitted(title="En attente de correction")
       if exercise.comments != null
         a(href="" data-bs-toggle="modal" data-bs-target="#commentModal" + exercise.id).ml-3
           i.fas.fa-comment.student-icons
