@@ -6,6 +6,4 @@ composer.lock
 /logs/
 /locale/cache
 config.ini
-public/uploads
-/uploads/*
 /public/assets/examples/*
