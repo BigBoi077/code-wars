@@ -139,12 +139,12 @@ class ExerciseController extends Controller
 
         if ($this->request->getFile("exercise")["name"] == '') {
             Flash::error("Aucun fichier selectionné!");
-            return $this->redirect('/exercises/' . $exercise->id);
+            return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] > $maxsize) {
             Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo.");
-            return $this->redirect('/exercises/' . $exercise->id);
+            return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] == 0) {
@@ -155,7 +155,12 @@ class ExerciseController extends Controller
 
         if ($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
-            return $this->redirect('/exercises/' . $exercise->id);
+            return $this->redirect('/exercises/submit/' . $exercise->id);
+        }
+
+        if (strlen($form->getValue('comment')) > 1000) {
+            Flash::warning("Votre commentaire est trop long. Veuillez en entrer un plus court.");
+            return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
@@ -169,7 +174,7 @@ class ExerciseController extends Controller
         }
 
         Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
-        return $this->redirect('/exercises/' . $exercise->id);
+        return $this->redirect('/exercises/submit/' . $exercise->id);
     }
 
     public function buyTip($tipId)
