@@ -89,6 +89,10 @@ a {
     color: var(--dark);
 }
 
+.testing-for-jordy {
+    color: red;
+}
+
 a:hover {
     color: var(--accent);
 }
