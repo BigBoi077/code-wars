@@ -89,6 +89,10 @@ a {
     color: var(--dark);
 }
 
+a:hover {
+    color: var(--accent);
+}
+
 .letter-space-1 {
     letter-spacing: 0.1em;
 }
