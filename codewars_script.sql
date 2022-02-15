@@ -179,4 +179,9 @@ create table if not exists transaction (
     description varchar,
     constraint fk_transaction_user_id foreign key (user_id) references "user"(id),
     constraint pk_transaction_id primary key (id)
-)
+);
+
+grant all privileges on database codewars to etudiant;
+grant all privileges on all tables in schema codewars to etudiant;
+grant all privileges on all sequences in schema codewars to etudiant;
+grant all privileges on all functions in schema codewars to etudiant;
