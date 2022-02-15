@@ -88,7 +88,8 @@ class ItemService
         $name = $this->form->getValue('name');
         $price = $this->form->getValue('price');
         $description = $this->form->getValue('description');
-        (new ItemBroker())->insert($name, $price, $description);
+        $image_path = $this->form->getValue('selectedImg');
+        (new ItemBroker())->insert($name, $price, $description, $image_path);
         $this->success = true;
     }
 
@@ -97,7 +98,8 @@ class ItemService
         $name = $this->form->getValue('name');
         $price = $this->form->getValue('price');
         $description = $this->form->getValue('description');
-        (new ItemBroker())->update($id, $name, $price, $description);
+        $image_path = $this->form->getValue('selectedImg');
+        (new ItemBroker())->update($id, $name, $price, $description, $image_path);
         $this->success = true;
     }
 }
