@@ -4,13 +4,15 @@ mixin footer()
       div.d-flex.justify-content-between
         h1.w-75.starwars-font Code Wars
         ul.no-decoration.w-25.d-flex.flex-column.justify-content-flex-end
-          li.text-right.mb-2
-            a.text-dark(href="/about") The Boys
-          li.text-right.mb-2
+          li.text-right.mb-1
+            a.text-dark(href="/home") Accueil
+          li.text-right.mb-1
             a.text-dark(href="/about") À propos
       br
       div.d-flex.justify-content-between
-        p.w-75 Ether © 2022
+        div.w-75
+          p.d-inline-block Ether ©
+          p.d-inline-block.ml-1=format('year', system_date)
         ul.no-decoration.w-25.d-flex.flex-row.justify-content-end
           li.mr-3
             a.text-dark(href="https://discord.gg/fRvsWMNuDe" target="_blank")

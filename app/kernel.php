@@ -11,6 +11,8 @@ use Zephyrus\Application\Bootstrap;
 use Zephyrus\Application\Session;
 use Zephyrus\Application\Localization;
 use Zephyrus\Exceptions\LocalizationException;
+use Zephyrus\Utilities\Formatter;
+
 define('ROOT_DIR', __DIR__ . '/..');
 require ROOT_DIR . '/vendor/autoload.php';
 require ROOT_DIR . '/app/env.php';
@@ -83,3 +85,10 @@ function setupErrorHandling()
     $errorHandler->exception(function (RouteNotFoundException $e) {
     });
 }
+
+Formatter::register("year", function ($dateTime) {
+    if (!$dateTime instanceof \DateTime) {
+        $dateTime = new DateTime($dateTime);
+    }
+    return strftime("%Y", $dateTime->getTimestamp());
+});
