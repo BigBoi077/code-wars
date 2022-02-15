@@ -1198,7 +1198,6 @@ text-align: center;
 
  .mission-submit, .single-mission-detail .mission-upload,
  .mission-submit, .single-mission-submit .mission-upload {
-    cursor: pointer;
     display: flex;
     align-items: flex-end;
 }
