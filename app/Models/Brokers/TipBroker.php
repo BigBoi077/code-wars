@@ -65,6 +65,8 @@ class TipBroker extends Broker
 
     public function delete($id)
     {
+        $sql = "delete from codewars.studenttip where tip_id = ?";
+        $this->query($sql, [$id]);
         $sql = "DELETE FROM codewars.tips WHERE id = ?;";
         return $this->query($sql, [$id]);
     }
