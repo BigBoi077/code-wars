@@ -144,7 +144,7 @@ class StudentManageController extends TeacherController
     {
         return $this->render("/management/students/add_points_cash", [
             'teams' => (new TeamBroker())->getAll(),
-            'students' => (new StudentBroker())->getAll()
+            'students' => (new StudentBroker())->getAllAlphabetic()
         ]);
     }
 

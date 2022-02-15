@@ -70,7 +70,7 @@ class ExerciseBroker extends Broker
 
     public function getExerciseByStudentDA($studentDA, $exerciseId): ?stdClass
     {
-        $sql = "SELECT * FROM codewars.studentexercise WHERE student_da = ? AND exercise_id = ?";
+        $sql = "SELECT * FROM codewars.studentexercise se WHERE student_da = ? AND exercise_id = ?";
         return $this->selectSingle($sql, [$studentDA, $exerciseId]);
     }
 

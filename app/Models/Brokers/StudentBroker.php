@@ -66,6 +66,16 @@ class StudentBroker extends Broker
         return $this->selectSingle($sql, [$da])->done;
     }
 
+    public function getAllAlphabetic()
+    {
+        $sql = "SELECT s.id, s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 
+                join codewars.user u on s.da = u.da
+                join codewars.person p on u.da = p.da
+				join codewars.team t on s.team_id = t.id
+                ORDER BY p.firstname, p.lastname";
+        return $this->select($sql);
+    }
+
     public function getAll()
     {
         $sql = "SELECT s.id, s.da, s.team_id, s.cash, s.points, p.username, p.firstname, p.lastname, t.name as team_name, p.email  from codewars.student s 

@@ -5,9 +5,10 @@ class StudentExerciseBroker extends Broker
 	public function getAllWithDa($da)
 	{
 		$sql = "SELECT * 
-                FROM codewars.studentexercise 
-                JOIN codewars.exercise e on e.id = studentexercise.exercise_id 
-                WHERE student_da = ?";
+                FROM codewars.studentexercise se
+                JOIN codewars.exercise e on e.id = se.exercise_id 
+                WHERE student_da = ?
+                order by se.submit_date desc";
 		return $this->select($sql, [$da]);
 	}
 
