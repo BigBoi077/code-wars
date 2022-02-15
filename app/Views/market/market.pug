@@ -28,7 +28,7 @@ block body
 			.row.shop-items-list.p-0
 				each item in items
 					.card.shop-item
-						img.card-img-top(src='/assets/images/trooper_helmet.png' alt='Card image cap')#productImg
+						img.card-img-top(src=item.image_path alt='Card image cap')#productImg
 						.card-body
 							h3.card-title #{item.name}
 							p.pb-3 #{item.description}

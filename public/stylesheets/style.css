@@ -81,6 +81,7 @@ html {
 }
 
 body {
+    overflow-x: hidden;
     font-size: 1rem;
 }
 
@@ -786,7 +787,6 @@ input#exerciseUpload {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0 5% 28px;
 }
 
 .login-logo {

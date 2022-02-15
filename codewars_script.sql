@@ -191,3 +191,9 @@ create table if not exists imageExamples (
     constraint fk_exercise_id foreign key (exercise_id) references exercise(id),
     constraint pk_image_example_id primary key (image_example_id)
 );
+
+grant all privileges on database codewars to etudiant;
+grant all privileges on all tables in schema codewars to etudiant;
+grant all privileges on all sequences in schema codewars to etudiant;
+grant all privileges on all functions in schema codewars to etudiant;
+grant usage on schema codewars to etudiant;

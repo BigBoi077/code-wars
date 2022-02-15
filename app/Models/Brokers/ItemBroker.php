@@ -22,16 +22,16 @@ class ItemBroker extends Broker
         return $this->selectSingle($sql, [$name]);
     }
 
-    public function insert($name, $price, $description)
+    public function insert($name, $price, $description, $image_path)
     {
-        $sql = "INSERT INTO codewars.item (name, price, description) VALUES(?, ?, ?)";
-        $this->query($sql, [ucfirst($name), $price, $description]);
+        $sql = "INSERT INTO codewars.item (name, price, description, image_path) VALUES(?, ?, ?, ?)";
+        $this->query($sql, [ucfirst($name), $price, $description, $image_path]);
     }
 
-    public function update($id, $name, $price, $description)
+    public function update($id, $name, $price, $description, $image_path)
     {
-        $sql = "UPDATE codewars.item SET name = ?, price = ?, description = ? WHERE id = ?";
-        $this->query($sql, [ucfirst($name), $price, $description, $id]);
+        $sql = "UPDATE codewars.item SET name = ?, price = ?, description = ?, image_path = ? WHERE id = ?";
+        $this->query($sql, [ucfirst($name), $price, $description, $image_path, $id]);
     }
 
     public function deleteAllOf($id)

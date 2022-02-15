@@ -19,12 +19,12 @@ class Logger
 
     public function loginWithForm(Form $form)
     {
-        $form->validate(self::INPUT_NAME_DA, Rule::integer('Le DA doit etre un chiffre.'));
-        $form->validate(self::INPUT_NAME_PASSWORD, Rule::notEmpty('Le mot de passe est requis.'));
+        $form->validate(self::INPUT_NAME_DA, Rule::integer());
+        $form->validate(self::INPUT_NAME_PASSWORD, Rule::notEmpty());
         if ($form->verify()) {
             $this->success = $this->tryCredentials($form);
         } else {
-            $this->errorMessages = $form->getErrorMessages();
+            $this->errorMessages = "Identifiants incorrects";
         }
     }
 
