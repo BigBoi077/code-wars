@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\ExerciseBroker;
+use Models\Brokers\ImageExampleBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TipBroker;
 use Models\Brokers\TransactionBroker;
@@ -102,6 +103,8 @@ class ExerciseController extends Controller
             $state = "uncorrected";
         }
 
+        $examples = (new ImageExampleBroker())->getAllById($exercise->id);
+
         return $this->render('exercises/exercise_details', [
             'exercise' => $exercise,
             'action' => "/submit/exercise/" . $exercise->id,
@@ -110,7 +113,8 @@ class ExerciseController extends Controller
             'state' => $state,
             'isTeacher' => $isTeacher,
             'corrected' => $corrected,
-            'submitted' => $submitted
+            'submitted' => $submitted,
+            'imageExamples' => $examples
         ]);
     }
 

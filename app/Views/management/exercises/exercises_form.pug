@@ -13,7 +13,7 @@ block body
         .d-flex.justify-content-between.align-items-center
           h1 #{title}
         hr
-      form.w-100(method='post', action=action)
+      form.w-100(method='post', action=action, enctype="multipart/form-data")
         .form-row
           .form-group.col-12.mb-3
             label(for="exercisename") Nom de l'exercice
@@ -28,6 +28,12 @@ block body
             label(for="exemple") Exemple d'exécution (optionnel)
             textArea.form-control(id='exemple', name='exemple' rows='5')
               | #{(exercise !== null) ? exercise.execution_exemple : val('exemple')}
+        .form-row
+          .form-group.col-12.mb-3
+            label(for="imageExamples") Exemple en image
+            br
+            small.mr-4.text-muted * Choix multiple
+            input.form-control.p-0(type="file" id="imageExamples" accept='.png,.jpg,.jpeg,.webp,.gif' name="imageExamples[]" multiple)
         .form-row
           .form-group.col-6
             label(for="cash") Argent

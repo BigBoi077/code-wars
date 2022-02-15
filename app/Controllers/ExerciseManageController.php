@@ -2,7 +2,10 @@
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\WeekBroker;
+use Models\Helpers\ImageUploader;
 use Models\Services\ExerciseService;
+use Models\Services\ImageExampleService;
+use phpDocumentor\Reflection\Types\This;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
@@ -66,12 +69,19 @@ class ExerciseManageController extends TeacherController
 
     public function storeExercise()
     {
-        $exercise = ExerciseService::create($this->buildForm());
-        if ($exercise->hasSucceeded()) {
+        $form = $this->buildForm();
+
+        $exercise = ExerciseService::create($form);
+        $exerciseId = $exercise->getInsertId();
+        $images = ImageExampleService::create($form, $exerciseId);
+
+        if ($exercise->hasSucceeded() && $images->hasSucceeded()) {
             Flash::success('Exercice créé avec succès!');
             return $this->redirect('/management/exercises');
         }
+
         Flash::error($exercise->getErrorMessages());
+        Flash::error($images->getErrorMessages());
         return $this->redirect('/management/exercises/create');
     }
 
