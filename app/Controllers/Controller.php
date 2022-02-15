@@ -28,13 +28,19 @@ abstract class Controller extends SecurityController
         $hasNotifications = false;
         $profileTeamImg = "/assets/images/rebel.png";
 
-        if ($student != null && ($student->email != '' || $student->email != null)) {
-            $gravatar = new Gravatar($student->email);
-            $imageUrl = $gravatar->getUrl();
+        if ($student != null) {
+            if ($student->email != '' || $student->email != null) {
+                $gravatar = new Gravatar($student->email);
+                if ($gravatar->isAvailable()) {
+                    $imageUrl = $gravatar->getUrl();
+                }
+            }
 
             if ($student->team_id == 1) {
                 $profileTeamImg = "/assets/images/sith.png";
             }
+
+            $student->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
         }
 
         if ($user != null && ($user['email'] != '' || $user['email'] != null)) {
