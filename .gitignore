@@ -5,5 +5,4 @@ composer.lock
 /tests/coverage
 /logs/
 /locale/cache
-config.ini
 /public/assets/examples/*
