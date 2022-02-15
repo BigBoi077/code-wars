@@ -17,11 +17,11 @@ block body
         .form-row
           .form-group.col-12
             label(for="number") Numéro
-            input.form-control(id="number" name="number" type="number")
+            input.form-control(id="number" name="number" type="number" value=val('number'))
         .form-row
           .form-group.col-12
             label(for="startDate") Date de début
-            input.form-control(id="startDate" name="startDate" type="date")
+            input.form-control(id="startDate" name="startDate" type="date" value=val('startDate'))
         .form-row
           .form-group.col-12.text-muted
             small * Par défaut, la semaine est non activée. Retourner dans la page précédente pour l'activer par la suite.

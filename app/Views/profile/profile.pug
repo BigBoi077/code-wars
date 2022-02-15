@@ -77,7 +77,7 @@ block body
                       each item in items
                         +itemRow(item)
                 else
-                  small.text-muted.mb-3 Aucun achat
+                  small.text-muted.mb-3 L'élève n'a fait aucun achat
               else
                 h2.mb-3 Mes achats
                 if items != null
@@ -89,7 +89,7 @@ block body
                       each item in items
                         +itemRow(item)
                 else
-                  small.text-muted Vous n'avez encore fait aucun achat
+                  small.text-muted Vous n'avez fait aucun achat
                 .text-center.mt-3
                   a.btn.btn-yellow(href="/market")
                     i.fas.fa-shopping-cart.mr-2

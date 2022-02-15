@@ -17,8 +17,8 @@ block body
         .form-row
           .form-group.col-12.mb-3
             label(for="tip") Description
-            textArea.form-control(id='tip', name='tip' rows='6')
-              | #{(tip !== null) ? tip.tip : val('tip')}
+            textArea.form-control(id='tip', name='tip' rows='4')
+              | #{(tip !== null) ? tip.tip: val('tip')}
         .form-row
           .form-group.col-12.mb-3
             label(for="price") Prix

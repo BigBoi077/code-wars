@@ -21,7 +21,7 @@ block body
         .form-row
           .form-group.col-12.mb-3
             label(for="description") Description
-            textArea.form-control(id='description', name='description' rows='10')
+            textArea.form-control(id='description', name='description' rows='5')
              | #{(exercise !== null) ? exercise.description : val('description')}
         .form-row
           .form-group.col-12.mb-3
@@ -32,21 +32,22 @@ block body
           .form-group.col-12.mb-3
             label(for="imageExamples") Exemple en image
             br
+            input.p-0(type="file" id="imageExamples" accept='.png,.jpg,.jpeg,.webp,.gif' name="imageExamples[]" multiple)
+            br
             small.mr-4.text-muted * Choix multiple
-            input.form-control.p-0(type="file" id="imageExamples" accept='.png,.jpg,.jpeg,.webp,.gif' name="imageExamples[]" multiple)
         .form-row
           .form-group.col-6
             label(for="cash") Argent
-            input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(exercise !== null) ? exercise.cash_reward : val('cash'))
+            input.form-control(placeholder="0" id='cash', name='cash', type='number' value=(exercise !== null) ? exercise.cash_reward: val('cash'))
           .form-group.col-6
             label(for="point") Points
-            input.form-control(placeholder="0" id='point', name='point', type='number' value=(exercise !== null) ? exercise.point_reward : val('point'))
+            input.form-control(placeholder="0" id='point', name='point', type='number' value=(exercise !== null) ? exercise.point_reward: val('point'))
         .form-row
           .form-group.col-6
             label(for="difficulty") Difficulté
             select.form-control(id="difficulty" name="difficulty")
               each difficulty, index in difficulties
-                if (index === exercise.difficulty)
+                if (index == val('difficulty') || index === exercise.difficulty)
                   option(value=index selected)
                     | #{difficulty}
                 else
@@ -56,7 +57,7 @@ block body
             label(for="week") Semaine
             select.form-control(id="week", name="week")
               each week in weeks
-                if (exercise.week_id === week.id)
+                if (week.number == val('week') || exercise.week_id === week.id)
                   option(value=week.id selected)
                     | #{week.number}
                 else
