@@ -83,10 +83,16 @@ block body
             hr
             each tip in tips
               .row
+                u
                 if tip.bought
-                  p.w-100.pl-0.mb-3=tip.tip
+                  if isTeacher
+                    li
+                      a(href="/management/exercises/" + exercise.id + "/tips/" + tip.id + "/edit").pl-0.mb-3.d-inline-block=tip.tip
+                      p.d-inline-block.ml-1 (#{tip.price}$)
+                  else
+                    li.pl-0.mb-3=tip.tip
                 else
-                  if !isTeacher
+                  if !isTeacher && !corrected
                     form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
                       button.btn.btn-yellow.position-absolute.tip-buy-button
                         +star_wars_money(tip.price)

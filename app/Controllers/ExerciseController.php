@@ -108,7 +108,7 @@ class ExerciseController extends Controller
         return $this->render('exercises/exercise_details', [
             'exercise' => $exercise,
             'action' => "/submit/exercise/" . $exercise->id,
-            'tips' => $this->gibberishTip($exercise->id),
+            'tips' => $this->gibberishTip($exercise->id, $this->getUser()['isTeacher']),
             'completion' => $this->calculateCompletion($exercise),
             'state' => $state,
             'isTeacher' => $isTeacher,
@@ -139,12 +139,12 @@ class ExerciseController extends Controller
 
         if ($this->request->getFile("exercise")["name"] == '') {
             Flash::error("Aucun fichier selectionné!");
-            return $this->redirect('/exercises/' . $exercise->id);
+            return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] > $maxsize) {
             Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo.");
-            return $this->redirect('/exercises/' . $exercise->id);
+            return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] == 0) {
@@ -155,7 +155,12 @@ class ExerciseController extends Controller
 
         if ($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
             Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
-            return $this->redirect('/exercises/' . $exercise->id);
+            return $this->redirect('/exercises/submit/' . $exercise->id);
+        }
+
+        if (strlen($form->getValue('comment')) > 1000) {
+            Flash::warning("Votre commentaire est trop long. Veuillez en entrer un plus court.");
+            return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
@@ -169,7 +174,7 @@ class ExerciseController extends Controller
         }
 
         Flash::error("Une erreur est survenue. Votre fichier n'a pas été remis.");
-        return $this->redirect('/exercises/' . $exercise->id);
+        return $this->redirect('/exercises/submit/' . $exercise->id);
     }
 
     public function buyTip($tipId)
@@ -191,16 +196,21 @@ class ExerciseController extends Controller
         return $this->redirect($this->request->getReferer());
     }
 
-    private function gibberishTip($exerciseId): array
+    private function gibberishTip($exerciseId, $isTeacher): array
     {
         $broker = new TipBroker();
         $tips = [];
         $allTips = $broker->GetAllById($exerciseId);
         $boughtTips = $broker->GetAllUnlocked($exerciseId, $this->getUser()["da"]);
         foreach ($allTips as $tip) {
+            if ($isTeacher) {
+                $tip->bought = true;
+                array_push($tips, $tip);
+                continue;
+            }
             $tip->bought = false;
             $unHashedTip = $tip->tip;
-            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé. Jade darth calamari ackbar jango anakin.";
+            $tip->tip = "Lucas ipsum dolor sit amet jinn darth jinn mustafar han darth jinn leia moff tatooine. Gonk jango lando amidala c-3po skywalker padmé.";
             foreach ($boughtTips as $boughtTip) {
                 if ($tip->id === $boughtTip->id) {
                     $tip->bought = true;
