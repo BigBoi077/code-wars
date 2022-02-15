@@ -45,9 +45,9 @@ mixin header()
               img(src=profileTeamImg)#profileTeamImg
           else
             a.profile-pic(href="/profile")
-              img().profile-bg
+              .profile-bg
               img(src=profileTeamImg)#profileTeamImg
-            p.initials.starwars-font #{student.initials}
+            p.initials #{student.initials}
 
       .d-flex.ml-3
         .notification-container

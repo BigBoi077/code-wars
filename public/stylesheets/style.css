@@ -201,7 +201,7 @@ header .profile-pic {
     width: 60px;
 }
 
-header .profile-pic img, header nav .logo img {
+header .profile-pic img, header nav .logo img, .profile-bg {
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -249,10 +249,12 @@ header .menu-items a:hover {
 
 .initials {
     font-size: 25px;
+    font-weight: bold;
+    left: 50%;
     pointer-events: none;
     position: absolute;
-    top: 0;
-    transform: translate(40%, 25%);
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #bell, #icon-header {
