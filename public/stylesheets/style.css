@@ -23,6 +23,10 @@
     background-color: rgba(255, 222, 0, 0.4);
 }
 
+.transparent {
+    color: transparent;
+}
+
 .bg-accent {
     background-color: var(--accent);
 }
@@ -1377,7 +1381,7 @@ text-align: center;
 }
 
 .submitted {
-    color: var(--accent);
+    color: var(--yellow);
 }
 
 .corrected {

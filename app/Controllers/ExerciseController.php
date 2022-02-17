@@ -100,7 +100,7 @@ class ExerciseController extends Controller
         $state = "unsubmitted";
         $corrected = !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false;
         $submitted = !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false;
-        $isGood = !$this->isUserTeacher() ? !(new ExerciseBroker())->isGood($exercise->id, $this->getActiveStudent()->da) : false;
+        $isGood = !$this->isUserTeacher() ? !(new ExerciseBroker())->isGood($exercise->id, $this->getActiveStudent()->da) : true;
 
         if ($corrected && $submitted) {
             $state = "finished";

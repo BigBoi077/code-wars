@@ -26,7 +26,7 @@ block body
           | Vous pouvez également laisser un commentaire à l'élève.
         br
         h5 Commentaire de l'étudiant
-        p.mb-0.text-muted=studentExercise.student_comment
+        pre.ml-1.mb-0.text-muted=studentExercise.student_comment
         pre.mb-0
           if fileContent == null
             code.p-4.language-java Le fichier remis ne peut être lu

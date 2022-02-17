@@ -9,7 +9,11 @@ block header
 block body
   .container
     .single-mission-detail(class=state)
-      h1#mission-title=exercise.name
+      if isTeacher
+        h1#mission-title
+          a(href="/management/exercises/" + exercise.id + "/edit")=exercise.name
+      else
+        h1#mission-title=exercise.name
       hr.separator
       h3.mb-2 Débriefing de la mission
       p.mission-description=exercise.description
@@ -84,7 +88,11 @@ block body
           pre=exercise.execution_exemple
         if tips != null
           .mission-tips
-            h3 Indices de mission
+            if isTeacher
+              h3
+                a(href="/management/exercises/" + exercise.id + "/tips").d-inline-block Indices de mission
+            else
+              h3 Indices de mission
             hr
             each tip in tips
               .row
