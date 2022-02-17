@@ -32,7 +32,7 @@ class StudentManageController extends TeacherController
     public function listStudents(): Response
     {
         return $this->render('management/students/student_listing', [
-            'students' => StudentService::getAll(),
+            'students' => (new StudentBroker())->getAllAlphabetic(),
         ]);
     }
 
