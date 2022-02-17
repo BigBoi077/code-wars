@@ -18,8 +18,9 @@ block body
               if profileImageUrl !== null
                 img.rounded-img.mt-2(src=profileImageUrl)
               else
-                .profile-bg.rounded-img.mt-2
-                p.initials #{student.initials}
+                //.profile-bg.rounded-img.mt-2
+                img.rounded-img.mt-2(src="assets/images/bgp.png")
+                p.initials-profile #{student.initials}
             h6.text-muted.mt-3 #{studentProfile.da}
             h5 #{studentProfile.username}
             div.d-flex.justify-content-center.my-2.mt-3

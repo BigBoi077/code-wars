@@ -153,8 +153,8 @@ class StudentManageController extends TeacherController
         $form = $this->buildForm();
         $forValue = $form->getValue("for");
         $reason = $form->getValue("reason");
-        $cash = $form->getValue('cash') || 0;
-        $points = $form->getValue('points') || 0;
+        $cash = $form->getValue('cash', 0);
+        $points = $form->getValue('points', 0);
         if ($forValue == "team") {
             if ($form->getValue('team_id') == null) {
                 Flash::error("Aucune équipe sélectionnée...");

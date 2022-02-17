@@ -261,6 +261,14 @@ header .menu-items a:hover {
     transform: translate(-50%, -50%);
 }
 
+.initials-profile {
+    font-size: 50px;
+    font-weight: bold;
+    pointer-events: none;
+    position: absolute;
+    transform: translate(183%, -150%);
+}
+
 #bell, #icon-header {
     color: var(--font);
 }

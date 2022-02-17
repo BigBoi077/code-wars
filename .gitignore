@@ -9,4 +9,4 @@ composer.lock
 /uploads/*
 !/public/assets/examples/.keep
 !/uploads/.keep
-/uploads/*
+/temp/sessions/*
