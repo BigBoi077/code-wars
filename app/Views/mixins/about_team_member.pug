@@ -8,9 +8,9 @@ mixin aboutTeamMember(imgSrc, name, roles, githubUrl, linkedinUrl)
 					li.text-muted #{role}
 			.member-urls-row
 				if githubUrl !== ''
-					a(href=githubUrl)
+					a(href=githubUrl target="_blank")
 						i.fab.fa-github
 				if linkedinUrl !== ''
-					a(href=linkedinUrl)
+					a(href=linkedinUrl target = "_blank")
 						i.fab.fa-linkedin
 
