@@ -94,11 +94,13 @@ class ExerciseController extends Controller
 
     public function exerciseDetail(stdClass $exercise)
     {
+        if (!$this->getUser()['isTeacher'] && !$exercise->is_active) {
+            return $this->redirect("/error/404");
+        }
         $state = "unsubmitted";
         $corrected = !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false;
         $submitted = !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false;
         $isGood = !$this->isUserTeacher() ? !(new ExerciseBroker())->isGood($exercise->id, $this->getActiveStudent()->da) : false;
-        $isTeacher = $this->isUserTeacher();
 
         if ($corrected && $submitted) {
             $state = "finished";
@@ -114,7 +116,7 @@ class ExerciseController extends Controller
             'tips' => $this->gibberishTip($exercise->id, $this->getUser()['isTeacher']),
             'completion' => $this->calculateCompletion($exercise),
             'state' => $state,
-            'isTeacher' => $isTeacher,
+            'isTeacher' => $this->isUserTeacher(),
             'corrected' => $corrected,
             'submitted' => $submitted,
             'is_good' => $isGood,

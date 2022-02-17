@@ -1,6 +1,7 @@
 <?php namespace Models\Services;
 
 use Models\Brokers\ExerciseBroker;
+use Models\Brokers\ImageExampleBroker;
 use Models\Brokers\TipBroker;
 use Zephyrus\Application\Form;
 use Zephyrus\Application\Rule;
@@ -39,6 +40,7 @@ class ExerciseService
 
     public static function delete($id)
     {
+        (new ImageExampleBroker())->deleteAllOf($id);
         (new TipBroker())->deleteAllOf($id);
         (new ExerciseBroker())->delete($id);
     }
