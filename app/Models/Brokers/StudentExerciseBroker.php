@@ -6,8 +6,8 @@ class StudentExerciseBroker extends Broker
 	{
 		$sql = "SELECT * 
                 FROM codewars.studentexercise se
-                JOIN codewars.exercise e on e.id = se.exercise_id 
-                WHERE student_da = ?
+                JOIN codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id
+                WHERE student_da = ? and w.is_active = true
                 order by se.submit_date desc";
 		return $this->select($sql, [$da]);
 	}

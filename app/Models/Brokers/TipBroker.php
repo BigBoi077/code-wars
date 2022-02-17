@@ -83,9 +83,9 @@ class TipBroker extends Broker
         $this->query($sql, [$da]);
     }
 
-    public function deleteAllOf($id)
+    public function deleteAllOf($exerciseId)
     {
-        $tips = $this->select("select * from codewars.tips t where t.exercise_id = ?", [$id]);
+        $tips = $this->getAllById($exerciseId);
         $sql = "delete from codewars.studenttip t where t.tip_id = ?";
         foreach ($tips as $tip) {
             $this->query($sql, [$tip->id]);
