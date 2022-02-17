@@ -7,3 +7,6 @@ composer.lock
 /locale/cache
 /public/assets/examples/*
 /uploads/*
+!/public/assets/examples/.keep
+!/uploads/.keep
+/uploads/*
