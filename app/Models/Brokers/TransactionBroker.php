@@ -2,7 +2,7 @@
 
 class TransactionBroker extends Broker
 {
-    public function insert($userId, $action, $description)
+    public function insert($userId, $action, $description = 'Aucune')
     {
         $sql = "insert into codewars.transaction(action, date, description, user_id) values(?, now(), ?, ?)";
         $this->query($sql, [$action, $description, $userId]);

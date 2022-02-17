@@ -157,7 +157,7 @@ create table if not exists notification (
     name varchar,
     is_seen bool,
     description varchar,
-    date date,
+    date timestamp,
     constraint fk_user_id foreign key (user_id) references "user"(id),
     constraint pk_id_notification primary key (id)
 );

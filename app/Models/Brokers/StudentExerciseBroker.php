@@ -12,7 +12,7 @@ class StudentExerciseBroker extends Broker
 		return $this->select($sql, [$da]);
 	}
 
-    public function findById($id)
+    public function findById($id): ?\stdClass
     {
         $sql = "SELECT ex.id as se_id, *
                 FROM codewars.studentexercise ex join codewars.student s on s.da = ex.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da join codewars.exercise e on ex.exercise_id = e.id

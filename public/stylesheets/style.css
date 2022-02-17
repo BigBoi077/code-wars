@@ -85,8 +85,12 @@ body {
     font-size: 1rem;
 }
 
-a, a:hover {
+a {
     color: var(--dark);
+}
+
+a:hover {
+    color: var(--accent);
 }
 
 .letter-space-1 {
