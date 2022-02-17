@@ -24,33 +24,34 @@ block body
         hr
       .row.all-missions.col.p-0
         each week, index in exercisesByWeek
-          .week.w-100
-            .row.mb-4.d-flex.align-items-end.p-0
+          .week.w-100.mb-3
+            .row.mb-1d-flex.align-items-end.p-0
               h4.week-header.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
             table.table(id="weekExercises" + index).w-100
               tbody.w-100
                 if week.exercises != null
                   each exercise in week.exercises
                     tr.text-dark
-                        td
-                        td
-                          a(href="/exercises/" + exercise.id)
-                           | #{exercise.name}
-                        td
-                          +star_wars_money(exercise.cash_reward)
-                        td
-                          +star_wars_points(exercise.point_reward)
-                        if !user.isTeacher
-                          td
-                            .d-flex.align-items-center.mt-1
-                              if exercise.corrected
-                                i.fas.fa-check-circle.corrected(title="Corrigé")
-                              else if exercise.completed
-                                i.fas.fa-check-circle.submitted(title="Remis")
-                              else
-                                i.fas.fa-times-circle.not-submitted(title="Non-remis")
+                      td
+                        a(href="/exercises/" + exercise.id)
+                          | #{exercise.name}
+                      td
+                        +star_wars_money(exercise.cash_reward)
+                      td
+                        +star_wars_points(exercise.point_reward)
+                      if !user.isTeacher
+                         .d-flex.align-items-center.mt-1
+                           if exercise.corrected
+                             td
+                               i.fas.fa-check-circle.corrected(title="Corrigé")
+                           else if exercise.is_good
+                             td
+                              i.fas.fa-times-circle.not-submitted(title="Solution incorrecte")
+                           else if exercise.completed
+                             td
+                               i.fas.fa-check-circle.submitted(title="Remis - En attente de correction")
                 else
-                  span.text-muted.ml-4 Aucun exercise pour cette semaine
+                  span.text-muted.mt-2 Aucune mission disponible cette semaine
       .col-5.pr-0.pl-5
         if student != null
           .mission-progression.card.mb-4.w-100.fixed-ct

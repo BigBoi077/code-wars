@@ -3,6 +3,7 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\ImageExampleBroker;
 use Models\Brokers\StudentBroker;
+use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\TipBroker;
 use Models\Brokers\TransactionBroker;
 use Models\Brokers\WeekBroker;
@@ -35,6 +36,7 @@ class ExerciseController extends Controller
             foreach ($week->exercises as $exercise) {
                 $exercise->corrected = $exerciseBroker->isCorrected($exercise->id, $da);
                 $exercise->completed = $exerciseBroker->isSubmitted($exercise->id, $da);
+                $exercise->is_good = $exerciseBroker->isGood($exercise->id, $da);
             }
         }
         $weeklyProgress = null;
@@ -95,6 +97,7 @@ class ExerciseController extends Controller
         $state = "unsubmitted";
         $corrected = !$this->isUserTeacher() ? (new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da) : false;
         $submitted = !$this->isUserTeacher() ? (new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da) : false;
+        $isGood = !$this->isUserTeacher() ? !(new ExerciseBroker())->isGood($exercise->id, $this->getActiveStudent()->da) : false;
         $isTeacher = $this->isUserTeacher();
 
         if ($corrected && $submitted) {
@@ -114,6 +117,7 @@ class ExerciseController extends Controller
             'isTeacher' => $isTeacher,
             'corrected' => $corrected,
             'submitted' => $submitted,
+            'is_good' => $isGood,
             'imageExamples' => $examples
         ]);
     }
