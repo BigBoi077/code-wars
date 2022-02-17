@@ -1,7 +1,7 @@
 extends mixins/layout
 
 block title
-  title À Propos- Code Wars
+  title À Propos - Code Wars
 
 block header
   +header()
@@ -10,5 +10,35 @@ block body
   .container
     .row.mt-5.p-4.main-card
       .w-100.mb-4
-        .d-flex.justify-content-between.align-items-center
-          h1 Magasin
+        h1 À propos de nous
+        hr
+        h2 À propos de Codewars
+        .row
+          .col-6
+            img(src="")
+          .col-6
+            h3
+            p
+        .row
+          .col-6
+            h3
+            p
+          .col-6
+            img(src="")
+        .row
+          .col-6
+            img(src="")
+          .col-6
+            h3
+            p
+        p Bacon ipsum dolor amet shoulder buffalo chuck leberkas, rump shank cupim andouille fatback frankfurter. Leberkas turducken ham hock kevin pork belly venison alcatra pork short ribs shankle tri-tip. Strip steak short loin hamburger flank ground round beef, cow meatloaf ball tip ham drumstick buffalo fatback. Picanha pork belly salami ball tip ribeye pancetta kielbasa hamburger sausage brisket pig ground round sirloin filet mignon short loin. Venison chuck swine shankle. Hamburger shankle ribeye tenderloin pork loin jowl beef ribs porchetta andouille. Landjaeger jerky meatball turducken.
+        h2#aboutTeamTitle L'équipe Ether
+        .team-pics-container
+          +aboutTeamMember("/assets/images/samuel_color.jpg", "Samuel Tessier", (['Développeur back-end', 'Coordonnateur']), 'https://github.com/ZElGHTS', '')
+          +aboutTeamMember("/assets/images/tommy-lee_color.jpg", 'Tommy-Lee Pigeon', (["Développeur fullstack", "Responsable des tests unitaires"]), 'https://github.com/Lee31416', 'https://www.linkedin.com/in/tommy-lee-pigeon-847581171/')
+          +aboutTeamMember("/assets/images/jeremie_color.jpg", 'Jérémie Bouchard', (["Développeur fullstack", "Responsable de la base de données"]), 'https://github.com/WooDooWooDa', '')
+          +aboutTeamMember("/assets/images/josh_color.jpg", 'Joshua Leblanc', (["Développeur front-end", "responsable UI/UX"]), 'https://github.com/BigBoi077', 'https://www.linkedin.com/in/joshualeblanc077/')
+          +aboutTeamMember("/assets/images/julien_color.jpg", 'Julien Deguire', (["Développeur back-end"]), 'https://github.com/CordePanthere61', 'https://www.linkedin.com/in/julien-deguire-297a3415a/')
+        hr
+        p "“You’re all clear, kid. Now blow this thing and go home!”"
+        p - David Tucker

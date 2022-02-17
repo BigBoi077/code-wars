@@ -1,0 +1,16 @@
+mixin aboutTeamMember(imgSrc, name, roles, githubUrl, linkedinUrl)
+	.about-team-member
+		img#memberPicture.card-img-top(src=imgSrc alt="Card image cap")
+		.member-info
+			h3.card-title #{name}
+			ul
+				each role in roles
+					li.text-muted #{role}
+			.member-urls-row
+				if githubUrl !== ''
+					a(href=githubUrl)
+						i.fab.fa-github
+				if linkedinUrl !== ''
+					a(href=linkedinUrl)
+						i.fab.fa-linkedin
+

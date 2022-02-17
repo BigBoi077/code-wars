@@ -229,6 +229,67 @@ header #hamburger-menu {
     display: none;
 }
 
+.about-team-member {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+}
+
+.member-info .member-urls-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.member-urls-row a {
+    padding: 0 5px;
+}
+
+.about-team-member .member-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 60%;
+    border-top: 2px solid var(--accent);
+}
+
+.about-team-member .member-info .card-title {
+    padding-top: 10px;
+}
+
+.about-team-member .member-info ul {
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+.about-team-member .member-info ul li:before {
+    content: "-";
+    margin-right: 10px;
+}
+
+.team-pics-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0 26px;
+}
+
+.team-pics-container .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.team-pics-container .card-title {
+    color: var(--font);
+}
+
+.team-pics-container .card-img-top {
+    width: 200px;
+    border-radius: 5px;
+}
+
 header .menu-items a:hover {
     border-bottom: 2px solid var(--accent);
 }
@@ -245,6 +306,10 @@ header .menu-items a:hover {
     height: 25px;
     top: -5px;
     right: -5px;
+}
+
+.background-yellow {
+    //background-color: rgba(255, 222, 0, 0.5);
 }
 
 .profile-bg {
