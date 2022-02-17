@@ -41,7 +41,10 @@ class CorrectionController extends Controller
             $exerciseDate = new DateTime($exercise->submit_date);
             $diff = $exerciseDate->diff($nowDate);
             if ($diff->d < 1) {
-                $exercise->diff = "Remis il y a " . $diff->format("%h heures et %i minutes");
+                if ($diff->h <= 0)
+                    $exercise->diff = "Remis il y a " . $diff->format("%i minutes");
+                else
+                    $exercise->diff = "Remis il y a " . $diff->format("%h heures et %i minutes");
             } else {
                 $exercise->diff = "Remis le " . format('date', $exercise->submit_date);
             }

@@ -5,6 +5,7 @@ drop table if exists transaction;
 drop table if exists studenttip;
 drop table if exists tips;
 drop table if exists studentExercise;
+drop table if exists imageExamples;
 drop table if exists exercise;
 drop table if exists week;
 drop table if exists studentItem;
@@ -128,6 +129,7 @@ create table if not exists item (
     name varchar,
     price int,
     description varchar,
+    image_path varchar,
     constraint pk_id_item primary key (id)
 );
 
@@ -155,7 +157,7 @@ create table if not exists notification (
     name varchar,
     is_seen bool,
     description varchar,
-    date date,
+    date timestamp,
     constraint fk_user_id foreign key (user_id) references "user"(id),
     constraint pk_id_notification primary key (id)
 );
@@ -179,6 +181,16 @@ create table if not exists transaction (
     description varchar,
     constraint fk_transaction_user_id foreign key (user_id) references "user"(id),
     constraint pk_transaction_id primary key (id)
+);
+
+create table if not exists imageExamples (
+    image_example_id serial,
+    exercise_id int,
+    path varchar,
+    name_hash varchar,
+    file_extension varchar,
+    constraint fk_exercise_id foreign key (exercise_id) references exercise(id),
+    constraint pk_image_example_id primary key (image_example_id)
 );
 
 grant all privileges on database codewars to etudiant;

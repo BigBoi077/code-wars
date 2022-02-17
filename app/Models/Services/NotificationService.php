@@ -11,7 +11,7 @@ class NotificationService
 
     public static function studentBoughtItem($student, $item)
     {
-        (new NotificationBroker())->sendNotificationToTeachers("Un élève a acheté | " . $item->name . " | Acheté par : " . $student->firstname, "Nouvel achat");
+        (new NotificationBroker())->sendNotificationToTeachers("Un élève a acheté | " . $item->name . " | Acheté par : " . $student->firstname . " " . $student->lastname, "Nouvel achat");
     }
 
     public static function exerciseCorrected($userId, $cash, $points)

@@ -2,15 +2,9 @@
 
 class NotificationBroker extends Broker
 {
-    public function getStudentNotifications($userId): array
-    {
-        $sql = "select * from codewars.notification n where n.user_id = ? and n.is_seen = false order by n.date desc";
-        return $this->select($sql, [$userId]);
-    }
-
     public function getStudentAllNotifications($userId): array
     {
-        $sql = "select * from codewars.notification n where n.user_id = ? and n.is_seen = false";
+        $sql = "select * from codewars.notification n where n.user_id = ? and n.is_seen = false order by n.date desc";
         return $this->select($sql, [$userId]);
     }
 

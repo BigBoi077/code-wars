@@ -144,7 +144,7 @@ class StudentManageController extends TeacherController
     {
         return $this->render("/management/students/add_points_cash", [
             'teams' => (new TeamBroker())->getAll(),
-            'students' => (new StudentBroker())->getAll()
+            'students' => (new StudentBroker())->getAllAlphabetic()
         ]);
     }
 
@@ -153,8 +153,8 @@ class StudentManageController extends TeacherController
         $form = $this->buildForm();
         $forValue = $form->getValue("for");
         $reason = $form->getValue("reason");
-        $cash = $form->getValue('cash');
-        $points = $form->getValue('points');
+        $cash = $form->getValue('cash') || 0;
+        $points = $form->getValue('points') || 0;
         if ($forValue == "team") {
             if ($form->getValue('team_id') == null) {
                 Flash::error("Aucune équipe sélectionnée...");

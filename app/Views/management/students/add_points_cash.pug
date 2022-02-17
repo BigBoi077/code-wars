@@ -18,21 +18,21 @@ block body
           .form-group.col-6
             label(for="for") Pour
             select.form-control(id='for', name='for' required)
-              option(value="team") Pour l'équipe complète
-              option(value="student") Pour un élève
+              option(value="team" selected=(val('for') === "team")) Pour l'équipe complète
+              option(value="student" selected=(val('for') === "student")) Pour un élève
           .form-group.col-6.hidden#team
             label(for="team_id") Équipes
             select.form-control(id='team_id', name='team_id')
               option(value=null disabled="disabled" selected=true) Selectionnez une équipe
               each team in teams
-                option(value=team.id)
+                option(value=team.id selected=(val('team_id') === team.id))
                   | #{team.name}
-          .form-group.col-6.hidden#student
+          .form-group.hidden.col-6#student
             label(for="student_da") Élève
             select.form-control(id='student_da', name='student_da')
               option(value=null disabled="disabled" selected=true) Selectionnez un élève
               each student in students
-                option(value=student.da)
+                option(value=student.da selected=(val('student_da') === student.da))
                   | #{student.firstname} #{student.lastname}
         .form-row
           .form-group.col-6
@@ -43,12 +43,11 @@ block body
             input.form-control(placeholder="0" id='points', name='points', type='number' value=0)
         .form-row
           label(for="reason") Raison
-          textarea.form-control#reason(rows=2 name="reason")
+          textarea.form-control(id='reason' rows=2 name='reason' placeholder="Optionnel")
         .form-row
           button#submitBtn.btn.w-100(type='submit')
             i.fas.fa-plus-square.mr-2
             | Ajouter
 
 block script
-  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src="/javascripts/rapidAdd.js")

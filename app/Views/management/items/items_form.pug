@@ -30,7 +30,7 @@ block body
             input(type="hidden" id="selectedImg" name="selectedImg" style="width:65px;")
           .form-group.col-12.mb-3
             label(for="description") Description
-            textArea.form-control(id='description', name='description', rows="6")
+            textArea.form-control(id='description', name='description', rows="3")
               | #{(item !== null) ? item.description : val('description')}
         .form-row
           button#submitBtn.btn.w-100(type='submit')

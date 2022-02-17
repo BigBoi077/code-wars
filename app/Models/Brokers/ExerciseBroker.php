@@ -40,7 +40,8 @@ class ExerciseBroker extends Broker
 
     public function insert($name, $difficulty, $description, $exemple, $cash, $point, $weekId): int
     {
-        $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?,?,?,?, ?) RETURNING id";
+
+        $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
 
         $result = $this->selectSingle($sql, [
             ucfirst($name),
@@ -69,20 +70,20 @@ class ExerciseBroker extends Broker
 
     public function getExerciseByStudentDA($studentDA, $exerciseId): ?stdClass
     {
-        $sql = "SELECT * FROM codewars.studentexercise WHERE student_da = ? AND exercise_id = ?";
+        $sql = "SELECT * FROM codewars.studentexercise se WHERE student_da = ? AND exercise_id = ?";
         return $this->selectSingle($sql, [$studentDA, $exerciseId]);
     }
 
     public function updateSubmit($student, $exerciseId, $path)
     {
-        $sql = "update codewars.studentexercise se set dir_path = ? where se.exercise_id = ? and se.student_da = ? and se.completed = true";
+        $sql = "update codewars.studentexercise se set dir_path = ?, is_good = null where se.exercise_id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$path, $student->da, $exerciseId]);
         NotificationService::newCorrectionAvailable($student, $this->findByID($exerciseId)->name);
     }
 
     public function correctExercise($userId, $student, $id, $comment = null)
     {
-        $sql = "update codewars.studentexercise se set corrected = true, comments = ? where se.id = ? and se.student_da = ? and se.completed = true";
+        $sql = "update codewars.studentexercise se set corrected = true, comments = ?, is_good = true where se.id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$comment, $id, $student->da]);
         $sql = "select cash_reward, point_reward from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
         $reward = $this->selectSingle($sql, [$id]);
@@ -96,7 +97,7 @@ class ExerciseBroker extends Broker
 
     public function incorrectExercise($userId, $student, $id, $comment)
     {
-        $sql = "update codewars.studentexercise se set comments = ? where se.id = ? and se.student_da = ? and se.completed = true";
+        $sql = "update codewars.studentexercise se set comments = ?, is_good = false where se.id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$comment, $id, $student->da]);
         $name = (new StudentExerciseBroker())->findById($id)->name;
         NotificationService::incorrectSolution($userId, $name);
@@ -127,9 +128,15 @@ class ExerciseBroker extends Broker
         return $this->selectSingle($sql, [$id, $da]) != null;
     }
 
+    public function isGood($id, $da): bool
+    {
+        $sql = "select * from codewars.studentexercise se where se.exercise_id = ? and se.student_da = ? and se.is_good = false";
+        return $this->selectSingle($sql, [$id, $da]) != null;
+    }
+
     public function getCorrection(): array
     {
-        $sql = "select se.id, se.dir_path, se.submit_date, e.id as exercise_id, e.name, se.student_comment, s.da as student_da, p.firstname, p.lastname from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false order by se.submit_date";
+        $sql = "select se.id, se.dir_path, se.submit_date, e.id as exercise_id, e.name, se.student_comment, s.da as student_da, p.firstname, p.lastname from codewars.studentexercise se join codewars.exercise e on e.id = se.exercise_id join codewars.student s on s.da = se.student_da join codewars.user u on u.da = s.da join codewars.person p on p.da = u.da where se.completed = true and se.corrected = false and is_good is null order by se.submit_date";
         return $this->select($sql);
     }
 

@@ -39,9 +39,15 @@ mixin header()
               h6 Enseignant
       if !user.isTeacher
         .profile-pic-container
-          a.profile-pic(href="/profile")
-            img(src=profileImageUrl).profile-bg
-            img(src=profileTeamImg)#profileTeamImg
+          if profileImageUrl !== null
+            a.profile-pic(href="/profile")
+              img(src=profileImageUrl)
+              img(src=profileTeamImg)#profileTeamImg
+          else
+            a.profile-pic(href="/profile")
+              .profile-bg
+              img(src=profileTeamImg)#profileTeamImg
+            p.initials #{student.initials}
 
       .d-flex.ml-3
         .notification-container

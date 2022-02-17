@@ -205,7 +205,7 @@ header .profile-pic {
     width: 60px;
 }
 
-header .profile-pic img, header nav .logo img {
+header .profile-pic img, header nav .logo img, .profile-bg {
     height: 100%;
     width: 100%;
     border-radius: 50%;
@@ -314,6 +314,16 @@ header .menu-items a:hover {
 
 .profile-bg {
     background-color: var(--accent);
+}
+
+.initials {
+    font-size: 25px;
+    font-weight: bold;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #bell, #icon-header {
@@ -1034,23 +1044,23 @@ input#exerciseUpload {
 
 /* Exercise */
 
-.exerciseTable{
+.exerciseTable {
     width: 100%;
     margin-top: 3rem;
     margin-bottom: 1rem;
 }
 
-.exerciseInfo{
+.exerciseInfo {
     font-family: "Roboto", sans-serif;
 }
 
-.menuLink{
+.menuLink {
     width: 100%;
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-.pageTitle{
+.pageTitle {
 text-align: center;
     font-family: 'StarJedi', sans-serif;
 }
@@ -1142,6 +1152,7 @@ text-align: center;
     "description      description      description      info"
     "submit           submit           submit           info"
     "example          example          example          ."
+    "image            image            image            ."
     "tips             tips             tips             .";
 }
 
@@ -1270,7 +1281,6 @@ text-align: center;
 
  .mission-submit, .single-mission-detail .mission-upload,
  .mission-submit, .single-mission-submit .mission-upload {
-    cursor: pointer;
     display: flex;
     align-items: flex-end;
 }
@@ -1379,6 +1389,17 @@ text-align: center;
     color: var(--dark);
 }
 
+.mission-image-example {
+    grid-area: image;
+}
+
+.mission-image-example img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 32px;
+}
+
 /* Profile */
 
 .profile .card {
@@ -1465,7 +1486,6 @@ text-align: center;
 
 footer {
     width: 100vw;
-    height: 276px;
     background-color: var(--accent);
     margin-top: 86px;
     padding: 42px 22px;

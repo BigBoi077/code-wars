@@ -7,9 +7,7 @@ block header
   +header()
 
 block body
-  +flash
-  form.container.main-card.single-mission-submit(action=action  method="post" enctype="multipart/form-data")
-    input(type="hidden" name="exerciseName" value=exercise.name)
+  .container.main-card.single-mission-submit
     h1 Fichier(s) à soumettre
     hr.separator
     p
@@ -24,19 +22,20 @@ block body
       li Seuls les extensions .java et .zip sont acceptées pour la remise.
       li La taille maximale du fichier est 20 Mo.
     p Si vous avez des précisions à apporter ou tout autre commentaire que vous désirez transmettre avec la solution, veillez utiliser la zone commentaire ci-dessous.
-    textarea(rows=6 placeholder="Commentaires" name="comment")
-    .d-flex.justify-content-end
-      .mission-upload.mt-4.mr-4
-        label#uploadLabel(for='exerciseUpload')
-          i.fas.fa-file-code
-          | Remise d'exercice
-        input#exerciseUpload(type='file' name='exercise' accept='.zip,.java' placeholder="Remise d'exercice")
-      .mission-submit.mt-4.mr-0
-        label#submitLabel.disabled(for='exercice-submit')
-          i.fas.fa-file-upload
-          | Soumettre le fichier
-        input#exercice-submit(type='submit' disabled=true)
+    form(method="post", action=action enctype="multipart/form-data")
+      input(type="hidden" name="exerciseName" value=exercise.name)
+      textarea(rows=6 placeholder="Commentaires" name="comment")
+      .d-flex.justify-content-end
+        .mission-upload.mt-4.mr-4
+          label#uploadLabel(for='exerciseUpload')
+            i.fas.fa-file-code
+            | Remise d'exercice
+          input#exerciseUpload(type='file' name='exercise' accept='.zip,.java' placeholder="Remise d'exercice")
+        .mission-submit.mt-4.mr-0
+          label#submitLabel.disabled(for='exercice-submit')
+            i.fas.fa-file-upload
+            | Soumettre le fichier
+          input#exercice-submit(type='submit' disabled=true)
 
 block script
-  script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src='/javascripts/upload.js')

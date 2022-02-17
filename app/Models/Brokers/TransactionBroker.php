@@ -2,7 +2,7 @@
 
 class TransactionBroker extends Broker
 {
-    public function insert($userId, $action, $description)
+    public function insert($userId, $action, $description = 'Aucune')
     {
         $sql = "insert into codewars.transaction(action, date, description, user_id) values(?, now(), ?, ?)";
         $this->query($sql, [$action, $description, $userId]);
@@ -28,7 +28,7 @@ class TransactionBroker extends Broker
 
     private static function addSub($value): string
     {
-        if ($value > 0) {
+        if ($value >= 0) {
             $value = "ajouté " . number_format($value, 0, '.', ' ');
         } else {
             $value = "déduit " . ($value * -1);

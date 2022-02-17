@@ -8,7 +8,7 @@ mixin notificationLayout(notifications, isHome)
           h6.mb-4.mr-4 Coché tout comme vu
   #notifs(data-notifications)
     if notifications == null
-      h6 Vous n'avez aucune nouvelle notification
+      small.text-muted Vous n'avez aucune nouvelles notifications
     else
       each notif in notifications
         +notification(notif)

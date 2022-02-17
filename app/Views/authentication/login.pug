@@ -22,7 +22,7 @@ block body
           form(method='post', action='/login').container.login-form
             .da-row
               img(src="/assets/images/user_icon.png")#inputDAIMG
-              input(id='da', type='text', name='da', placeholder='Numéro de DA').form-control.mb-3
+              input(id='da', type='text', name='da', placeholder='Numéro de DA' maxlength=7).form-control.mb-3
             .password-row
               img(src="/assets/images/padlock.png")#inputPWDIMG
               input(id='password', type='password', name='password', placeholder='Mot de passe').form-control
@@ -36,6 +36,5 @@ block body
             button(type='submit').btn.btn-yellow
               | Connexion
         #footer
-          p.text-center Code Wars © 2022
-        script(nonce=nonce()).
-            document.getElementsByTagName('body')[0].style.padding = 0;
+          p.d-inline-block Ether ©
+          p.d-inline-block.ml-1=format('year', system_date)
