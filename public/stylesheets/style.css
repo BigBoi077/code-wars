@@ -7,13 +7,14 @@
 
 :root {
     --accent: rgb(255, 222, 0);
+    --accent-bg: rgba(255, 222, 0, .5);
     --dark: #000000;
     --light: #fff;
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --grey: rgb(169, 169, 169);
     --red: #fd5a5a;
-    --blue: #367bc4;
+    --blue: #0f86ff;
     --font: #212529;
     --bronze: #cd7f32;
 }
@@ -444,7 +445,7 @@ header .gestion-button {
 
 .score-value-left {
     position: absolute;
-    right: 0;
+    right: -5px;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
     background: #367bc4;
@@ -453,7 +454,7 @@ header .gestion-button {
 
 .score-value-right {
     position: absolute;
-    left: 0;
+    left: -5px;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
     background: #d1463d;
@@ -1300,6 +1301,7 @@ text-align: center;
 
 .single-mission-detail .mission-info .mission-difficulty-container i.active {
     color: var(--accent);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .mission-submit label:hover, .mission-upload label:hover {
@@ -1495,7 +1497,7 @@ text-align: center;
 }
 
 .leaderboard .row.accent {
-    background-color: rgba(255, 222, 0, .5);
+    background-color: var(--accent-bg);
 }
 
 .leaderboard .position {

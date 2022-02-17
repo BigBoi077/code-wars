@@ -19,10 +19,12 @@ html
     block head
     link(rel="icon" href="/assets/images/icon_helmet.png")
     link(rel="stylesheet" href="/stylesheets/style.css")
+    if theme != null
+      link(rel="stylesheet" href="/stylesheets/" + theme)
   block header
   .page
     +flash
-    block score
+    +scoreBoard()
     block body
   .hidden(data-user-da=user.da)
   +footer
