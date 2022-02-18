@@ -37,7 +37,7 @@ function initSelector(data) {
 }
 
 async function fetchIcons() {
-    let response = await fetch('http://codewars.local/management/items/fetch-icons');
+    let response = await fetch('/management/items/fetch-icons');
 
     if (response.status === 200) {
         let data = await response.json();

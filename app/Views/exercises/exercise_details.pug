@@ -30,26 +30,33 @@ block body
             .col-8.mb-0
               span #{format('decimal', exercise.point_reward, 0, 0)}
           .row.mission-state
-            if corrected
+            if isTeacher
               .col-2.mb-0
-                i.far.fa-check-circle.corrected
+                i.far.fa-edit
               .col-8.mb-0
-                span.font-weight-light Corrigé
-            else if !is_good
-              .col-2.mb-0
-                i.far.fa-times-circle.not-submitted
-              .col-8.mb-0
-                span.font-weight-light Incorrecte!
-            else if !submitted
-              .col-2.mb-0
-                i.far.fa-times-circle.not-submitted
-              .col-8.mb-0
-                span.font-weight-light Non-remis
+                span.font-weight-light
+                  a(href="/management/exercises/" + exercise.id + "/edit") Editer l'exercise
             else
-              .col-2.mb-0
-                i.far.fa-check-circle.submitted
-              .col-10.mb-0
-                small En attente de correction
+              if corrected
+                .col-2.mb-0
+                  i.far.fa-check-circle.corrected
+                .col-8.mb-0
+                  span.font-weight-light Corrigé
+              else if !is_good
+                .col-2.mb-0
+                  i.far.fa-times-circle.not-submitted
+                .col-8.mb-0
+                  span.font-weight-light Incorrecte!
+              else if !submitted
+                .col-2.mb-0
+                  i.far.fa-times-circle.not-submitted
+                .col-8.mb-0
+                  span.font-weight-light Non-remis
+              else
+                .col-2.mb-0
+                  i.far.fa-check-circle.submitted
+                .col-10.mb-0
+                  small En attente de correction
           .col-12.mission-difficulty-container.mb-1
             span.mb-2 Achèvement
             h6.text-muted=completion + " % des élèves ont complétés l'exercises"
@@ -79,12 +86,17 @@ block body
           else if !isTeacher && corrected
             .btn-disabled
               p Corrigé
-        div.mission-execution-example.my-5
-          h3 Exemple d'exécution
-          pre=exercise.execution_exemple
+        if exercise.execution_exemple !== ""
+          div.mission-execution-example.my-5
+            h3 Exemple d'exécution
+            pre=exercise.execution_exemple
         if tips != null
           .mission-tips
-            h3 Indices de mission
+            if isTeacher
+              h3
+                a(href="/management/exercises/" + exercise.id + "/tips").d-inline-block Indices de mission
+            else
+              h3 Indices de mission
             hr
             each tip in tips
               .row

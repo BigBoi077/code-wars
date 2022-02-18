@@ -32,7 +32,7 @@ class StudentManageController extends TeacherController
     public function listStudents(): Response
     {
         return $this->render('management/students/student_listing', [
-            'students' => StudentService::getAll(),
+            'students' => (new StudentBroker())->getAllAlphabetic(),
         ]);
     }
 
@@ -161,7 +161,7 @@ class StudentManageController extends TeacherController
                 return $this->redirect("/management/students/rapidAdd");
             }
             $broker = new TeamBroker();
-            $broker->addToTeam($form->getValue('team_id'), $points, $cash, $reason);
+            $broker->addToTeam($form->getValue('team_id'), (int)($points), (int)($cash), $reason);
         } elseif ($forValue == "student") {
             if ($form->getValue('student_da') == null) {
                 Flash::error("Aucun élève sélectionné...");
@@ -172,7 +172,7 @@ class StudentManageController extends TeacherController
             $student = $studentBroker->findByDa($form->getValue('student_da'));
             $studentBroker->addPoints($form->getValue('student_da'), (int)($points));
             $studentBroker->addCash($form->getValue('student_da'), (int)($cash));
-            $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction($cash, $points), $reason);
+            $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction((int)$cash, (int)$points), $reason);
         }
         Flash::success("Action effectué avec succès");
         return $this->redirect("/management/students");

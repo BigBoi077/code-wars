@@ -1,7 +1,7 @@
 extends mixins/layout
 
 block title
-  title À Propos- Code Wars
+  title À Propos - Code Wars
 
 block header
   +header()
@@ -10,5 +10,37 @@ block body
   .container
     .row.mt-5.p-4.main-card
       .w-100.mb-4
-        .d-flex.justify-content-between.align-items-center
-          h1 Magasin
+        h1#aboutTitle À propos
+        .row
+          .col-6.about-codewars-img-container
+            img.about-codewars-pics(src="/assets/images/trooper_team.png")
+          .col-6
+            h3 Travail d'équipe
+            p Bacon ipsum dolor amet shoulder buffalo chuck leberkas, rump shank cupim andouille fatback frankfurter. Leberkas turducken ham hock kevin pork belly venison alcatra pork
+        .row
+          .col-6
+            h3 Mettez-vous au défi !
+            p Bacon ipsum dolor amet shoulder buffalo chuck leberkas, rump shank cupim andouille fatback frankfurter. Leberkas turducken ham hock kevin pork belly venison alcatra pork
+          .col-6.about-codewars-img-container
+            img.about-codewars-pics(src="/assets/images/trooper_sitting.png")
+        .row
+          .col-6.about-codewars-img-container
+            img.about-codewars-pics(src="/assets/images/trooper_alpha.png")
+          .col-6
+            h3 Devenez le meilleur !
+            p Avec l'aide de Codewars, vous allez perfectionner vos capacités en tant que programmeur. Plus précisément, la programmation orientée objet.
+        .row.my-5
+          .col
+            p Bacon ipsum dolor amet shoulder buffalo chuck leberkas, rump shank cupim andouille fatback frankfurter. Leberkas turducken ham hock kevin pork belly venison alcatra pork short ribs shankle tri-tip. Strip steak short loin hamburger flank ground round beef, cow meatloaf ball tip ham drumstick buffalo fatback. Picanha pork belly salami ball tip ribeye pancetta kielbasa hamburger sausage brisket pig ground round sirloin filet mignon short loin. Venison chuck swine shankle. Hamburger shankle ribeye tenderloin pork loin jowl beef ribs porchetta andouille. Landjaeger jerky meatball turducken.
+
+        h2.text-center Ether
+        hr.mb-5
+        .team-pics-container
+          +aboutTeamMember("/assets/images/samuel_color.jpg", "Samuel Tessier", (['Développeur back-end', 'Coordonnateur']), 'https://github.com/ZElGHTS', 'https://www.linkedin.com/in/samuel-tessier-93268820a')
+          +aboutTeamMember("/assets/images/tommy-lee_color.jpg", 'Tommy-Lee Pigeon', (["Développeur fullstack", "Responsable des tests unitaires"]), 'https://github.com/Lee31416', 'https://www.linkedin.com/in/tommy-lee-pigeon-847581171/')
+          +aboutTeamMember("/assets/images/jeremie_color.jpg", 'Jérémie Bouchard', (["Développeur fullstack", "Responsable de la base de données"]), 'https://github.com/WooDooWooDa', '')
+          +aboutTeamMember("/assets/images/josh_color.jpg", 'Joshua Leblanc', (["Développeur front-end", "responsable UI/UX"]), 'https://github.com/BigBoi077', 'https://www.linkedin.com/in/joshualeblanc077/')
+          +aboutTeamMember("/assets/images/julien_color.jpg", 'Julien Deguire', (["Développeur back-end"]), 'https://github.com/CordePanthere61', 'https://www.linkedin.com/in/julien-deguire-297a3415a/')
+        hr
+        p "“You’re all clear, kid. Now blow this thing and go home!”"
+        p - David Tucker

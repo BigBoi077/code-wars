@@ -7,19 +7,24 @@
 
 :root {
     --accent: rgb(255, 222, 0);
+    --accent-bg: rgba(255, 222, 0, .5);
     --dark: #000000;
     --light: #fff;
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --grey: rgb(169, 169, 169);
     --red: #fd5a5a;
-    --blue: #367bc4;
+    --blue: #0f86ff;
     --font: #212529;
     --bronze: #cd7f32;
 }
 
 .bg-accent-50 {
     background-color: rgba(255, 222, 0, 0.4);
+}
+
+.transparent {
+    color: transparent;
 }
 
 .bg-accent {
@@ -229,6 +234,86 @@ header #hamburger-menu {
     display: none;
 }
 
+.about-team-member {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+}
+
+.member-info .member-urls-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.member-urls-row a {
+    padding: 0 5px;
+}
+
+#aboutTitle {
+    border-bottom: 4px solid var(--accent);
+    padding-bottom: 5px;
+    margin-bottom: 50px;
+}
+
+.about-codewars-pics {
+    width: 300px;
+    height: 300px;
+}
+
+.about-codewars-img-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.about-team-member .member-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 60%;
+    border-top: 2px solid var(--accent);
+}
+
+.about-team-member .member-info .card-title {
+    padding-top: 10px;
+}
+
+.about-team-member .member-info ul {
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+.about-team-member .member-info ul li:before {
+    content: "-";
+    margin-right: 10px;
+}
+
+.team-pics-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0 26px;
+}
+
+.team-pics-container .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.team-pics-container .card-title {
+    color: var(--font);
+}
+
+.team-pics-container .card-img-top {
+    width: 200px;
+    border-radius: 5px;
+}
+
 header .menu-items a:hover {
     border-bottom: 2px solid var(--accent);
 }
@@ -245,6 +330,10 @@ header .menu-items a:hover {
     height: 25px;
     top: -5px;
     right: -5px;
+}
+
+.background-yellow {
+    //background-color: rgba(255, 222, 0, 0.5);
 }
 
 .profile-bg {
@@ -266,7 +355,6 @@ header .menu-items a:hover {
     font-weight: bold;
     pointer-events: none;
     position: absolute;
-    transform: translate(183%, -150%);
 }
 
 #bell, #icon-header {
@@ -360,7 +448,7 @@ header .gestion-button {
 
 .score-value-left {
     position: absolute;
-    right: 0;
+    right: -5px;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
     background: #367bc4;
@@ -369,7 +457,7 @@ header .gestion-button {
 
 .score-value-right {
     position: absolute;
-    left: 0;
+    left: -5px;
     box-shadow: 0 10px 40px -10px #000;
     border-radius: 100px;
     background: #d1463d;
@@ -1216,6 +1304,7 @@ text-align: center;
 
 .single-mission-detail .mission-info .mission-difficulty-container i.active {
     color: var(--accent);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .mission-submit label:hover, .mission-upload label:hover {
@@ -1291,7 +1380,7 @@ text-align: center;
 }
 
 .submitted {
-    color: var(--accent);
+    color: var(--yellow);
 }
 
 .corrected {
@@ -1411,7 +1500,7 @@ text-align: center;
 }
 
 .leaderboard .row.accent {
-    background-color: rgba(255, 222, 0, .5);
+    background-color: var(--accent-bg);
 }
 
 .leaderboard .position {

@@ -2,6 +2,7 @@ include base
 include header
 include notification
 include teamMember
+include about_team_member
 include scoreBoard
 include star_wars_money
 include star_wars_points
@@ -18,14 +19,16 @@ html
     block head
     link(rel="icon" href="/assets/images/icon_helmet.png")
     link(rel="stylesheet" href="/stylesheets/style.css")
+    if theme != null
+      link(rel="stylesheet" href="/stylesheets/" + theme)
   block header
   .page
     +flash
-    block score
+    +scoreBoard()
     block body
   .hidden(data-user-da=user.da)
   +footer
-  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js")
+  script(src="/javascripts/vendor/bootstrap.bundle.js")
   script(src='/javascripts/vendor/jquery-3.5.1.min.js')
   script(src='/javascripts/nav.js')
   script(src='/javascripts/toggleMenu.js')

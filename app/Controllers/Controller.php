@@ -52,6 +52,8 @@ abstract class Controller extends SecurityController
             $hasNotifications = count((new NotificationBroker())->getStudentAllNotifications($user['id'])) > 0;
         }
 
+        $teamPoints = TeamController::getTeamPoints();
+
         return parent::render($page, array_merge($args, [
             'system_date' => date(FORMAT_DATE_TIME),
             'user' => $user,
@@ -59,7 +61,8 @@ abstract class Controller extends SecurityController
             'student' => $student,
             'profileTeamImg' => $profileTeamImg,
             'hasNotifications' => $hasNotifications,
-            'teamPoints' => TeamController::getTeamPoints()
+            'teamPoints' => $teamPoints,
+            'theme' => $this->getTheme($teamPoints['Rebel'], $teamPoints['Sith'])
         ]));
     }
 
@@ -124,5 +127,16 @@ abstract class Controller extends SecurityController
     public function isUserTeacher(): bool
     {
         return $this->getUser() != null ? $this->getUser()['isTeacher'] : false;
+    }
+
+    private function getTheme($rebel, $sith): ?string
+    {
+
+        if ($rebel > $sith + WINNER_GAP) {
+            return "rebelTheme.css";
+        } else if ($sith > $rebel + WINNER_GAP) {
+            return "sithTheme.css";
+        }
+        return null;
     }
 }
