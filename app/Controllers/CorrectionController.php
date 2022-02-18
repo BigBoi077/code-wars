@@ -102,6 +102,11 @@ class CorrectionController extends Controller
         $studentExerciseBroker = new StudentExerciseBroker();
         $studentExercise = $studentExerciseBroker->findById($submitId);
 
+        if (is_null($studentExercise)) {
+            Flash::error("Une erreur est survenu lors du traitement. L'exercice remis par l'étudiant à été retiré.");
+            return $this->redirect($this->request->getReferer());
+        }
+
         $fileContent = null;
         if (file_exists($studentExercise->dir_path)) {
             $file = fopen($studentExercise->dir_path, "r");
