@@ -82,7 +82,6 @@ class ItemManageController extends TeacherController
             }
             Flash::error($item->getErrorMessages());
         }
-        Flash::error('Une erreur est survenue.');
         return $this->redirect('/management/items/' . $id . '/edit');
     }
 

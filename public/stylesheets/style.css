@@ -250,12 +250,6 @@ header #hamburger-menu {
     padding: 0 5px;
 }
 
-#aboutTitle {
-    border-bottom: 4px solid var(--accent);
-    padding-bottom: 5px;
-    margin-bottom: 50px;
-}
-
 .about-codewars-pics {
     width: 300px;
     height: 300px;
@@ -348,6 +342,10 @@ header .menu-items a:hover {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.initials-small {
+    font-size: 12px;
 }
 
 .initials-profile {
@@ -1489,7 +1487,7 @@ text-align: center;
 
 .leaderboard .not-top-3 {
     height: 32px;
-    width: auto;
+    width: 32px;
 }
 
 .leaderboard .leaderboard-overlay {

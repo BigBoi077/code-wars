@@ -51,6 +51,7 @@ class TeamController extends Controller
                 }
                 if ($current->id === $student->id) {
                     $current->position = $index + 1;
+                    $current->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
                 }
                 $index++;
             }
