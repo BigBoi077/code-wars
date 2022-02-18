@@ -7,5 +7,5 @@ mixin notification(notif)
           if !notif.is_seen
             a(href="/notification/seen/" + notif.id).notification-check
               i.fas.fa-check-circle
-        p.py-1.pt-2=notif.description
+        div!=notif.description
         h6.mb-0.pt-2 Émis le #{format('date', notif.date)}

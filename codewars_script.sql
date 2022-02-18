@@ -194,6 +194,9 @@ create table if not exists imageExamples (
     constraint pk_image_example_id primary key (image_example_id)
 );
 
+ALTER TABLE studentexercise
+ADD is_good bool;
+
 grant all privileges on database codewars to etudiant;
 grant all privileges on all tables in schema codewars to etudiant;
 grant all privileges on all sequences in schema codewars to etudiant;

@@ -41,7 +41,7 @@ class NotificationService
 
     public static function incorrectSolution($userId, $exerciseName)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre solution pour " . $exerciseName . " ne convient pas. Consulter le commentaire pour vous orienter", "Solution incorrect");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Votre solution pour " . $exerciseName . " ne convient pas. Consulter les <a href='/profile#exerciseSection'>commentaires</a> pour vous orienter</p>", "Solution incorrect");
     }
 
     public static function newCommentOnCorrection($userId)
