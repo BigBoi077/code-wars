@@ -350,6 +350,10 @@ header .menu-items a:hover {
     transform: translate(-50%, -50%);
 }
 
+.initials-small {
+    font-size: 12px;
+}
+
 .initials-profile {
     font-size: 50px;
     font-weight: bold;
@@ -1485,7 +1489,7 @@ text-align: center;
 
 .leaderboard .not-top-3 {
     height: 32px;
-    width: auto;
+    width: 32px;
 }
 
 .leaderboard .leaderboard-overlay {
