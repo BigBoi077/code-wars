@@ -84,6 +84,8 @@ class ImageExampleService
             $this->errorMessages = $this->form->getErrorMessages();
             return false;
         }
+
+        $this->succes = true;
         return true;
     }
 
