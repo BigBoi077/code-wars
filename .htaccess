@@ -16,12 +16,12 @@ DefaultLanguage fr-CA
 
 # --------------------------- SECURITY SETTINGS ----------------------------- #
 # Maximum allowed upload size
-php_value post_max_size 20M
-php_value upload_max_filesize 20M
+php_value post_max_size 100M
+php_value upload_max_filesize 100M
 
 # Limit HTTP request body according to the maximum allowed upload
 # size (20M in bytes).
-LimitRequestBody 20480000
+LimitRequestBody 10480000
 
 # Time limit (in seconds) for script execution
 php_value max_execution_time 15
