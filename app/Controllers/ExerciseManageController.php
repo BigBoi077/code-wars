@@ -5,6 +5,8 @@ use Models\Brokers\WeekBroker;
 use Models\Helpers\ImageUploader;
 use Models\Services\ExerciseService;
 use Models\Services\ImageExampleService;
+use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
+use phpDocumentor\Reflection\Types\Iterable_;
 use phpDocumentor\Reflection\Types\This;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
@@ -72,17 +74,29 @@ class ExerciseManageController extends TeacherController
         $form = $this->buildForm();
 
         $exercise = ExerciseService::create($form);
-        $exerciseId = $exercise->getInsertId();
-        $images = ImageExampleService::create($form, $exerciseId);
 
-        if ($exercise->hasSucceeded() && $images->hasSucceeded()) {
+        if ($exercise->hasSucceeded()) {
+            if ($this->hasImageUpload($form)) {
+                $exerciseId = $exercise->getInsertId();
+                $images = ImageExampleService::create($form, $exerciseId);
+
+                if (!$images->hasSucceeded()) {
+                    Flash::error($images->getErrorMessages());
+                    return $this->redirect('/management/exercises');
+                }
+            }
+
             Flash::success('Exercice créé avec succès!');
             return $this->redirect('/management/exercises');
         }
 
         Flash::error($exercise->getErrorMessages());
-        Flash::error($images->getErrorMessages());
         return $this->redirect('/management/exercises/create');
+    }
+
+    private function hasImageUpload($form)
+    {
+        return $form->getValue('imageExamples')['name'][0] != '';
     }
 
     public function deleteExercise($id)
