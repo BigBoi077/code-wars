@@ -5,6 +5,7 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
 use Models\Services\StudentService;
 use Zephyrus\Network\Response;
+use Zephyrus\Utilities\Gravatar;
 
 class TeamController extends Controller
 {
@@ -41,6 +42,13 @@ class TeamController extends Controller
             $index = 0;
             $current = StudentService::get($this->getUser()['da']);
             foreach ($students as $student) {
+                $student->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
+                if ($student->email != '' || $student->email != null) {
+                    $gravatar = new Gravatar($student->email);
+                    $student->gravatarAvailable = $gravatar->isAvailable();
+                } else {
+                    $student->gravatarAvailable = false;
+                }
                 if ($current->id === $student->id) {
                     $current->position = $index + 1;
                 }

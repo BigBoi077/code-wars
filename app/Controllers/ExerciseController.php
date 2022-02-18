@@ -10,6 +10,7 @@ use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use stdClass;
 use Zephyrus\Application\Flash;
+use Zephyrus\Application\Rule;
 
 class ExerciseController extends Controller
 {
@@ -134,6 +135,13 @@ class ExerciseController extends Controller
         }
 
         $form = $this->buildForm();
+        $form->field('exercise')
+            ->validate(Rule::fileUpload("Pas d'upload"))
+            ->validate(Rule::fileSize("La taille du fichier est trop lourde.", 100));
+        if (!$form->verify()) {
+            Flash::error($form->getErrorMessages());
+            return $this->redirect('/exercises/' . $exercise->id);
+        }
 
         if ((new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
             Flash::error("L'exercice à déjà été remis et corrigé. Vous ne pouvez pas le remettre une seconde fois!");

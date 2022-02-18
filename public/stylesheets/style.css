@@ -355,7 +355,6 @@ header .menu-items a:hover {
     font-weight: bold;
     pointer-events: none;
     position: absolute;
-    transform: translate(183%, -150%);
 }
 
 #bell, #icon-header {
