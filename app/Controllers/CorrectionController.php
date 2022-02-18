@@ -120,7 +120,9 @@ class CorrectionController extends Controller
             $fileContent = fread($file, filesize($studentExercise->dir_path));
             $fileExtention = pathinfo($studentExercise->dir_path, PATHINFO_EXTENSION);
 
-            if ($fileExtention != "java") {
+            if ($fileExtention == "zip") {
+                $fileContent = "Fichier ZIP. Appuyer sur Télécharger pour le consulter";
+            } else if ($fileExtention != "java") {
                 $fileContent = null;
             }
 
