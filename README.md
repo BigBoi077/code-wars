@@ -8,7 +8,7 @@
 
 ~~~
 Code Wars est une plateforme de remise d'exercice de programation pour
-les élèves faisant parti du cours de "Programation Orienté Object 1".
+les élèves faisant parti du cours de "Programmation Orientée Objet 1".
 Dans la thémathique Star-Wars, les élèves s'affronte les Rebels contre
 les Sith pour obtenir le plus haut score. En accomplissant des exercices,
 vous obtener des points avec lesquels vous pouvez acheter de objets dans
