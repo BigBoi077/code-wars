@@ -21,9 +21,10 @@ block body
                 p.mb-0
                   i.fas.fa-plus-square.mr-2
                   | Gestion des missions
-        hr
+        br
       .row.all-missions.col.p-0
-        if exercisesByWeek.lenght == 0
+        if exercisesByWeek == null
+          hr
           span.text-muted Aucune exercice encore
         else
           each week, index in exercisesByWeek
@@ -38,9 +39,9 @@ block body
                         td
                           a(href="/exercises/" + exercise.id)
                             | #{exercise.name}
-                        td
+                        td.end
                           +star_wars_money(exercise.cash_reward)
-                        td
+                        td.end
                           +star_wars_points(exercise.point_reward)
                         if !user.isTeacher
                           td

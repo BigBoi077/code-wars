@@ -1629,6 +1629,10 @@ table {
     padding-left: 0 !important;
 }
 
+table td.end {
+    text-align: right;
+}
+
 .return-ready {
     white-space: pre-wrap;
     text-align: justify;
