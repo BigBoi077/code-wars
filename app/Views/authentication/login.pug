@@ -2,39 +2,39 @@ include ../mixins/base
 doctype html
 html
   head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="icon" href="/assets/images/icon_helmet.png")
     link(rel="stylesheet" href="/stylesheets/style.css")
-
-block title
-  title Connexion - Code Wars
-
-block body
-  .row.form-page
-    .col-6.image-container
-      img(src="/assets/images/sitting_troopers.png")
-    .col-6.vertical-container.login-container
-      .container.text-center.vertical-center.login-container
-        .form-container.w-75
-          img.login-logo(src="/assets/images/trooper_helmet.png")
-          h1.mb-1.letter-space-1 CODE WARS
-          h6.mb-4 AUTHENTIFICATION
-          +flash()
-          form(method='post', action='/login').container.login-form
-            .da-row
-              img(src="/assets/images/user_icon.png")#inputDAIMG
-              input(id='da', type='text', name='da', placeholder='Numéro de DA' maxlength=7).form-control.mb-3
-            .password-row
-              img(src="/assets/images/padlock.png")#inputPWDIMG
-              input(id='password', type='password', name='password', placeholder='Mot de passe').form-control
-            br
-            .text-right.w-100.mb-4
-              .pretty.p-default.p-switch.mr-0
-                input(id='remember_me', name='remember_me', type='checkbox')
-                .state.p-warning-o
-                  label
-                    | Rester connecté
-            button(type='submit').btn.btn-yellow
-              | Connexion
-        #footer
-          p.d-inline-block Ether ©
-          p.d-inline-block.ml-1=format('year', system_date)
+    title Connexion - Code Wars
+  body
+    block body
+      .row.form-page
+        .col-6.image-container
+          img(src="/assets/images/sitting_troopers.png")
+        .col-6.vertical-container.login-container
+          .container.text-center.vertical-center.login-container
+            .form-container.w-75
+              img.login-logo(src="/assets/images/trooper_helmet.png")
+              h1.mb-1.letter-space-1 CODE WARS
+              h6.mb-4 AUTHENTIFICATION
+              +flash()
+              form(method='post', action='/login').container.login-form
+                .da-row
+                  img(src="/assets/images/user_icon.png")#inputDAIMG
+                  input(id='da', type='text', name='da', placeholder='Numéro de DA' maxlength=7).form-control.mb-3
+                .password-row
+                  img(src="/assets/images/padlock.png")#inputPWDIMG
+                  input(id='password', type='password', name='password', placeholder='Mot de passe').form-control
+                br
+                .text-right.w-100.mb-4
+                  .pretty.p-default.p-switch.mr-0
+                    input(id='remember_me', name='remember_me', type='checkbox')
+                    .state.p-warning-o
+                      label
+                        | Rester connecté
+                button(type='submit').btn.btn-yellow
+                  | Connexion
+            #footer
+              p.d-inline-block Ether ©
+              p.d-inline-block.ml-1=format('year', system_date)
