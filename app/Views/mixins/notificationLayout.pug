@@ -1,7 +1,6 @@
 mixin notificationLayout(notifications, isHome)
   .row.d-flex.justify-content-between.align-items-center
     a(href="/profile/notifications").no-decoration
-      h4.mb-4 Mes notifications
     div.d-flex.align-items-end.justify-content-end
       if notifications != null
         a(href="/notification/seeAll").text-dark
