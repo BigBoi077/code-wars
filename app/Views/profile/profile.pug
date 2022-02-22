@@ -39,7 +39,7 @@ block body
             hr
             +profileInfo("Équipe", studentProfile.team_name)
             hr
-            +profileInfo("E-mail", studentProfile.email)
+            +profileInfo("Courriel", studentProfile.email)
             if !isTeacher
               hr
               +profileInfo("Mot de passe", "•••••••••••••••••")
@@ -88,7 +88,7 @@ block body
                   table.table
                     thead
                       th Nom de l'item
-                      th Date
+                      th Date de l'achat
                     tbody
                       each item in items
                         +itemRow(item)
@@ -115,9 +115,9 @@ block body
                       each exercise in exercises
                         +exerciseRow(exercise)
                 else
-                  small.text-muted Aucune mission complété
+                  small.text-muted Aucune mission complétée
               else
-                h2.mb-3#exerciseSection Mes exercices faits
+                h2.mb-3#exerciseSection Rapport des missions
                 if exercises != null
                   table.table
                     thead

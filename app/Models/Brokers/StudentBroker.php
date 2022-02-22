@@ -34,13 +34,9 @@ class StudentBroker extends Broker
                 where s.da = ? and se.corrected = true and w.is_active = true";
         $done = $this->selectSingle($sql, [$da])->done;
         $nbExercises = count((new ExerciseBroker())->getAllActive());
-
-        if ($nbExercises == 0) {
-            $totalDone = 0;
-        } else {
+        $totalDone = 0;
+        if ($nbExercises != 0)
             $totalDone = ($done / $nbExercises) * 100;
-        }
-
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
 
@@ -68,7 +64,7 @@ class StudentBroker extends Broker
 
     public function getExerciseDone($da): int
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.corrected = true";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.corrected = true and w.is_active = true";
         return $this->selectSingle($sql, [$da])->done;
     }
 

@@ -38,23 +38,22 @@ class TeamController extends Controller
     {
         $students = StudentService::getAll();
         $current = null;
-        if (!$this->getUser()['isTeacher']) {
-            $index = 0;
+        $index = 0;
+        if (!$this->getUser()['isTeacher'])
             $current = StudentService::get($this->getUser()['da']);
-            foreach ($students as $student) {
-                $student->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
-                if ($student->email != '' || $student->email != null) {
-                    $gravatar = new Gravatar($student->email);
-                    $student->gravatarAvailable = $gravatar->isAvailable();
-                } else {
-                    $student->gravatarAvailable = false;
-                }
-                if ($current->id === $student->id) {
-                    $current->position = $index + 1;
-                    $current->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
-                }
-                $index++;
+        foreach ($students as $student) {
+            $student->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
+            if ($student->email != '' || $student->email != null) {
+                $gravatar = new Gravatar($student->email);
+                $student->gravatarAvailable = $gravatar->isAvailable();
+            } else {
+                $student->gravatarAvailable = false;
             }
+            if (!$this->getUser()['isTeacher'] && $current->id === $student->id) {
+                $current->position = $index + 1;
+                $current->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
+            }
+            $index++;
         }
 
         return $this->render('teams/leaderboard', [
@@ -71,10 +70,12 @@ class TeamController extends Controller
         foreach ($students as $student) {
             $teamProgress[$student->team_name] += $broker->getExerciseDone($student->da);
         }
-        $nbExercise = count((new ExerciseBroker())->getAll());
+        $nbExercise = count((new ExerciseBroker())->getAllActive());
 
-        $teamProgress['Sith'] = ($nbSith == 0 || $nbExercise == 0) ? 0 : round($teamProgress['Sith'] / ($nbSith * $nbExercise) * 100, 2);
-        $teamProgress['Rebel'] = ($nbRebel == 0 || $nbExercise == 0) ? 0 : round($teamProgress['Rebel'] / ($nbRebel * $nbExercise) * 100, 2);
+        if ($nbExercise > 0) {
+            $teamProgress['Sith'] = ($nbSith == 0) ? 0 : round($teamProgress['Sith'] / ($nbSith * $nbExercise) * 100, 2);
+            $teamProgress['Rebel'] = ($nbRebel == 0) ? 0 : round($teamProgress['Rebel'] / ($nbRebel * $nbExercise) * 100, 2);
+        }
 
         return $teamProgress;
     }

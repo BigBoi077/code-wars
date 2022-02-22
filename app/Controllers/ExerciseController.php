@@ -30,8 +30,8 @@ class ExerciseController extends Controller
     public function exercises()
     {
         $exerciseBroker = new ExerciseBroker();
-        $weeks = (new WeekBroker())->getAllActive();
         $da = $this->getUser()['da'];
+        $weeks = (new WeekBroker())->getAllActive();
         foreach ($weeks as $week) {
             $week->exercises = $exerciseBroker->getAllByWeek($week->week_id);
             foreach ($week->exercises as $exercise) {
@@ -43,8 +43,8 @@ class ExerciseController extends Controller
         $weeklyProgress = null;
         $findProgress = null;
         if (!$this->isUserTeacher()) {
-            $weeklyProgress = (new StudentBroker())->getProgressionByWeek($this->getActiveStudent()->da);
-            $findProgress = (new StudentBroker())->getProgression($this->getActiveStudent()->da);
+            $weeklyProgress = (new StudentBroker())->getProgressionByWeek($da);
+            $findProgress = (new StudentBroker())->getProgression($da);
         }
 
         return $this->render('exercises/exercises_listing', [
@@ -172,7 +172,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
-        if (strlen($form->getValue('comment')) > 1000) {
+        if (strlen($form->getValue('comment')) > 2000) {
             Flash::warning("Votre commentaire est trop long. Veuillez en entrer un plus court.");
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }
