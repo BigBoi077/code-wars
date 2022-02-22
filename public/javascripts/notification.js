@@ -1,4 +1,4 @@
-(function () {
+/* (function () {
     const da = document.querySelector("[data-user-da]").dataset.userDa;
     const route = `/notification/connect/${da}`;
     const evtSource = new EventSource(route);
@@ -16,9 +16,9 @@
             }
         }
     };
-})();
+})(); */
 
-function notificationExists(id) {
+/* function notificationExists(id) {
     return document.getElementById(`notification-${id}`) !== undefined;
 }
 
@@ -41,4 +41,4 @@ function createNotificationNode(notification) {
           </div>
         </div>`;
     return div;
-}
+} */
