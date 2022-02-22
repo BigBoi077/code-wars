@@ -51,7 +51,7 @@ class StudentBroker extends Broker
 
         foreach ($weeks as $week) {
             $week->progress = 0;
-            $week->nbExercise = empty($exercisesBroker->getAllByWeek($week->id)) ? $exercisesBroker->getAllByWeek($week->id) : "N/A";
+            $week->nbExercise = !empty($exercisesBroker->getAllByWeek($week->week_id)) ? $exercisesBroker->getAllByWeek($week->week_id) : "N/A";
             if (isset($exercisesPerWeeks[$index])) {
                 if ($exercisesPerWeeks[$index]->week_id == $week->week_id)
                     $week->progress = number_format(($exercisesPerWeeks[$index]->done / count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
