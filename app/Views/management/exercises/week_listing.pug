@@ -17,7 +17,7 @@ block body
               i.fas.fa-plus-square.mr-2
               | Nouvelle semaine
         hr
-        if weeks.lenght == 0
+        if Count(weeks) <= 0
           span.text-muted Aucune semaine encore
         else
           table.table.w-100

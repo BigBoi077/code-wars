@@ -56,7 +56,7 @@ class ItemManageController extends TeacherController
             ItemService::delete($id);
             Flash::success('Article supprimé avec succès!');
         } else {
-            Flash::error('Une erreur est survenue.');
+            Flash::error('L\'article n\'existe pas.');
         }
         return $this->redirect('/management/items');
     }

@@ -23,11 +23,11 @@ block body
             input.form-control(id='name', type='text', name='name', value=(item !== null) ? item.name : val('name'))
           .form-group.col-12.mb-3
             label(for='price') Prix
-            input.form-control(id='price', type='text', name='price', value=(item !== null) ? item.price : val('price'))
+            input.form-control(id='price', type='number', name='price', value=(item !== null) ? item.price : val('price'))
           .form-group.col-12.mb-3
             label(for="selectedImg") Icône de l'article
             #my-icon-select
-            input(type="hidden" id="selectedImg" name="selectedImg" style="width:65px;")
+            input(type="hidden" id="selectedImg" name="selectedImg" style="width:65px;" value=val("selectedImg"))
           .form-group.col-12.mb-3
             label(for="description") Description
             textArea.form-control(id='description', name='description', rows="3")

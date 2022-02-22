@@ -16,9 +16,7 @@ block body
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
               | Nouvel Exercice
-
-        if exercises == null
-          hr
+        if Count(exercises) <= 0
           span.text-muted Aucune exercice encore
         else
           table.table.w-100

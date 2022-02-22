@@ -42,7 +42,7 @@ block body
               if index < 3
                 div.gravatar-container.position-relative
                   if student.gravatarAvailable
-                    img.rounded-img.position-absolute(data-gravatar data-email=student.email)
+                    img.rounded-img.position-absolute(data-gravatar data-email=student.email class="position" + index)
                   else
                     .profile-bg(class="position" + index)
                       p.mb-0.initials=student.initials
