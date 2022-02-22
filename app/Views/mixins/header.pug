@@ -70,6 +70,5 @@ mixin header()
                 a(href="/management/exercises").dropdown-item Missions
               li.p-1
                 a(href="/management/weeks").dropdown-item Semaines
-        form.disconnect(action="/logout", method="get")
-          button
-            i#icon-header.fas.fa-power-off
+        a(href="/logout").disconnect.ml-1.no-decoration
+          i#icon-header.fas.fa-power-off

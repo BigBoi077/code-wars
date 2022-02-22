@@ -13,7 +13,17 @@ block body
   .container
     .mt-5.p-4.main-card
       .w-100
-        h1 Notifications
+        .d-flex.justify-content-between
+          .align-items-end.d-flex
+            h1.mb-0 Notifications
+          .align-items-end.d-flex
+            if notifications != null
+              a(href="/notification/seeAll").text-dark
+                h6.mb-1 Coché tout comme vu
         hr
-      include ../mixins/notificationLayout
-      +notificationLayout(notifications)
+      #notifs(data-notifications)
+        if notifications == null
+          small.text-muted Vous n'avez aucune notification pour l'instant
+        else
+          each notif in notifications
+            +notification(notif)
