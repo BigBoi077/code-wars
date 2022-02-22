@@ -48,11 +48,11 @@ block body
                           td
                             .d-flex.align-items-center.mt-1
                               if exercise.corrected
-                                i.fas.fa-check-circle.corrected(title="Corrigé")
+                                i.fas.fa-check-circle.corrected(title="Accomplie")
                               else if exercise.is_good
-                                i.fas.fa-times-circle.not-submitted(title="Solution incorrecte")
+                                i.fas.fa-times-circle.not-submitted(title="Échouée")
                               else if exercise.completed
-                                i.fas.fa-check-circle.submitted(title="En attente de correction")
+                                i.fas.fa-check-circle.submitted(title="En cours")
                               else
                                 i.fas.fa-times-circle.transparent
                   else
