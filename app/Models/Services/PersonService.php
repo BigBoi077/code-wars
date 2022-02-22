@@ -1,6 +1,7 @@
 <?php namespace Models\Services;
 
 use Models\Brokers\PersonBroker;
+use Models\Brokers\StudentBroker;
 use Models\Brokers\UserBroker;
 use Models\SessionHelper;
 use Zephyrus\Application\Form;
@@ -16,7 +17,7 @@ class PersonService
     {
         $instance = new self();
         $instance->form = $form;
-        if ($instance->applyRules()) {
+        if ($instance->applyRules($da)) {
             $instance->updateToDatabase($da);
         }
         return $instance;
@@ -37,21 +38,18 @@ class PersonService
         return $this->success;
     }
 
-    private function applyRules(): bool
+    private function applyRules($da): bool
     {
-        $this->form->validate('username', Rule::notEmpty('Le nom d\'utilisateur est requis.'));
+        $this->form->validate('username', Rule::alphanumeric('Le nom d\'utilisateur doit être des lettres ou des chiffres.'));
+        $this->form->validate('username', Rule::maxLength(20, 'Le nom d\'utilisateur doit être de maximum 20 caractères.'));
         if ($this->form->getValue('email') != '') {
             $this->form->validate('email', Rule::email('Le format du e-mail est invalide.'));
         } else {
             $this->form->validate('email', Rule::notEmpty('Le e-mail est requis.'));
         }
-        if ($this->form->getValue('password') != '') {
-            $this->form->validate('password', Rule::passwordCompliant('Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et avoir une longueur minimum de 8 caractères.'));
-            if ($this->form->getValue('confirmPassword') != '') {
-                $this->form->validate('confirmPassword', Rule::sameAs('password', 'La confirmation de mot de passe doit être identique au mot de passe.'));
-            } else {
-                $this->form->validate('confirmPassword', Rule::notEmpty('La confirmation de mot de passe est requise.'));
-            }
+        if ((new PersonBroker())->findByUsername($da, $this->form->getValue('username')) != null) {
+            $this->errorMessages = "Ce nom d'utilisateur est déjà pris par un autre élève.";
+            return false;
         }
 
         if (!$this->form->verify()) {

@@ -172,7 +172,7 @@ class ExerciseController extends Controller
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
-        if (strlen($form->getValue('comment')) > 1000) {
+        if (strlen($form->getValue('comment')) > 2000) {
             Flash::warning("Votre commentaire est trop long. Veuillez en entrer un plus court.");
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }

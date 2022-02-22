@@ -24,7 +24,7 @@ block body
     p Si vous avez des précisions à apporter ou tout autre commentaire que vous désirez transmettre avec la solution, veillez utiliser la zone commentaire ci-dessous.
     form(method="post", action=action enctype="multipart/form-data")
       input(type="hidden" name="exerciseName" value=exercise.name)
-      textarea(rows=6 placeholder="Commentaires" name="comment")
+      textarea(rows=6 placeholder="Commentaires (2000 caractères maximum)" name="comment")=val('comment')
       .d-flex.justify-content-end
         .mission-upload.mt-4.mr-4
           label#uploadLabel(for='exerciseUpload')

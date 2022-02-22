@@ -4,7 +4,7 @@ class StudentExerciseBroker extends Broker
 {
 	public function getAllWithDa($da)
 	{
-		$sql = "SELECT * 
+		$sql = "SELECT e.id as exercise_id, *
                 FROM codewars.studentexercise se
                 JOIN codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id
                 WHERE student_da = ? and w.is_active = true
