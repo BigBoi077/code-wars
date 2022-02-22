@@ -16,27 +16,30 @@ block body
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
               | Nouvelle semaine
-        br
-        table.table.w-100
-          thead
-            tr
-              th Date de début
-              th Numéro
-              th Activée
-          tbody.w-100
-            each week in weeks
+        hr
+        if weeks.lenght == 0
+          span.text-muted Aucune semaine encore
+        else
+          table.table.w-100
+            thead
               tr
-                td
-                  p.student-row-element #{format('date', week.start_date)}
-                td
-                  p.student-row-element Semaine #{week.number}
-                td
-                  p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
-                td
-                  a.col(href='/management/weeks/' + week.id + '/activate')
-                    i(class=week.is_active ? 'fa-eye-slash': 'fa-eye').fas.student-icons
-                  a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal" + week.id)
-                    i.fas.fa-trash.student-icons
-        each week in weeks
-          +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine?',
-              '/management/weeks/' + week.id + '/delete', 'weekDeleteModal' + week.id)
+                th Date de début
+                th Numéro
+                th Activée
+            tbody.w-100
+              each week in weeks
+                tr
+                  td
+                    p.student-row-element #{format('date', week.start_date)}
+                  td
+                    p.student-row-element Semaine #{week.number}
+                  td
+                    p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
+                  td
+                    a.col(href='/management/weeks/' + week.id + '/activate')
+                      i(class=week.is_active ? 'fa-eye-slash': 'fa-eye').fas.student-icons
+                    a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal" + week.id)
+                      i.fas.fa-trash.student-icons
+          each week in weeks
+            +confirmationModal("Suppression de semaine" , 'Voulez-vous vraiment supprimer cette semaine?',
+                '/management/weeks/' + week.id + '/delete', 'weekDeleteModal' + week.id)

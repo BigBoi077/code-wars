@@ -34,7 +34,13 @@ class StudentBroker extends Broker
                 where s.da = ? and se.corrected = true and w.is_active = true";
         $done = $this->selectSingle($sql, [$da])->done;
         $nbExercises = count((new ExerciseBroker())->getAllActive());
-        $totalDone = ($done / $nbExercises) * 100;
+
+        if ($nbExercises == 0) {
+            $totalDone = 0;
+        } else {
+            $totalDone = ($done / $nbExercises) * 100;
+        }
+
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
 

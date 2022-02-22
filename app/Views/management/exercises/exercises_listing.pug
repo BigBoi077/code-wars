@@ -16,38 +16,41 @@ block body
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
               | Nouvel Exercice
-        br
-        table.table.w-100
-          thead
-            tr
-              th Nom
-              th Difficulté
-              th Semaine
-              th Argent
-              th Points
-              th
-          tbody.w-100
-            each exercise in exercises
+        hr
+        if exercises.lenght == 0
+          span.text-muted Aucune exercice encore
+        else
+          table.table.w-100
+            thead
               tr
-                td
-                  a(href="/exercises/" + exercise.id)=exercise.name
-                td
-                  each difficulty, index in difficulties
-                    if (index === exercise.difficulty)
-                      small.student-row-element #{difficulty}
-                td
-                  small Semaine #{exercise.number}
-                td
-                  +star_wars_money(exercise.cash_reward)
-                td
-                  +star_wars_points(exercise.point_reward)
-                td.text-nowrap
-                  a(href='/management/exercises/' + exercise.id + '/tips').mr-3
-                    i.fas.fa-lightbulb.student-icons
-                  a(href='/management/exercises/' + exercise.id + '/edit').mr-3
-                    i.fas.fa-edit.student-icons
-                  a(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
-                    i.fas.fa-trash.student-icons
-      each exercise in exercises
-        +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice?',
-          '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)
+                th Nom
+                th Difficulté
+                th Semaine
+                th Argent
+                th Points
+                th
+            tbody.w-100
+              each exercise in exercises
+                tr
+                  td
+                    a(href="/exercises/" + exercise.id)=exercise.name
+                  td
+                    each difficulty, index in difficulties
+                      if (index === exercise.difficulty)
+                        small.student-row-element #{difficulty}
+                  td
+                    small Semaine #{exercise.number}
+                  td
+                    +star_wars_money(exercise.cash_reward)
+                  td
+                    +star_wars_points(exercise.point_reward)
+                  td.text-nowrap
+                    a(href='/management/exercises/' + exercise.id + '/tips').mr-3
+                      i.fas.fa-lightbulb.student-icons
+                    a(href='/management/exercises/' + exercise.id + '/edit').mr-3
+                      i.fas.fa-edit.student-icons
+                    a(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
+                      i.fas.fa-trash.student-icons
+                each exercise in exercises
+                  +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice?',
+                    '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)

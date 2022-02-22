@@ -23,40 +23,43 @@ block body
                   | Gestion des missions
         hr
       .row.all-missions.col.p-0
-        each week, index in exercisesByWeek
-          .week.w-100.mb-3
-            .row.mb-1d-flex.align-items-end.p-0
-              h4.week-header.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
-            table.table(id="weekExercises" + index).w-100
-              tbody.w-100
-                if week.exercises != null
-                  each exercise in week.exercises
-                    tr.text-dark
-                      td
-                        a(href="/exercises/" + exercise.id)
-                          | #{exercise.name}
-                      td
-                        +star_wars_money(exercise.cash_reward)
-                      td
-                        +star_wars_points(exercise.point_reward)
-                      if !user.isTeacher
+        if exercisesByWeek.lenght == 0
+          span.text-muted Aucune exercice encore
+        else
+          each week, index in exercisesByWeek
+            .week.w-100.mb-3
+              .row.mb-1d-flex.align-items-end.p-0
+                h4.week-header.mb-0 Semaine #{week.number} - #{format('date', week.startDate)}
+              table.table(id="weekExercises" + index).w-100
+                tbody.w-100
+                  if week.exercises != null
+                    each exercise in week.exercises
+                      tr.text-dark
                         td
-                          .d-flex.align-items-center.mt-1
-                            if exercise.corrected
-                              i.fas.fa-check-circle.corrected(title="Corrigé")
-                            else if exercise.is_good
-                              i.fas.fa-times-circle.not-submitted(title="Solution incorrecte")
-                            else if exercise.completed
-                              i.fas.fa-check-circle.submitted(title="En attente de correction")
-                            else
-                              i.fas.fa-times-circle.transparent
-                else
-                  span.text-muted.mt-2 Aucune mission disponible cette semaine
-      .col-5.pr-0.pl-5
-        if student != null
-          .mission-progression.card.mb-4.w-100.fixed-ct
-            .card-body.pb-0
-              h4.mb-3.text-center Progression individuelle
-              p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
-              each week in weeklyProgress
-                +weekProgressSmall(week)
+                          a(href="/exercises/" + exercise.id)
+                            | #{exercise.name}
+                        td
+                          +star_wars_money(exercise.cash_reward)
+                        td
+                          +star_wars_points(exercise.point_reward)
+                        if !user.isTeacher
+                          td
+                            .d-flex.align-items-center.mt-1
+                              if exercise.corrected
+                                i.fas.fa-check-circle.corrected(title="Corrigé")
+                              else if exercise.is_good
+                                i.fas.fa-times-circle.not-submitted(title="Solution incorrecte")
+                              else if exercise.completed
+                                i.fas.fa-check-circle.submitted(title="En attente de correction")
+                              else
+                                i.fas.fa-times-circle.transparent
+                  else
+                    span.text-muted.mt-2 Aucune mission disponible cette semaine
+          .col-5.pr-0.pl-5
+            if student != null
+              .mission-progression.card.mb-4.w-100.fixed-ct
+                .card-body.pb-0
+                  h4.mb-3.text-center Progression individuelle
+                  p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+                  each week in weeklyProgress
+                    +weekProgressSmall(week)

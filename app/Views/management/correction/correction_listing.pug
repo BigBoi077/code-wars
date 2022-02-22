@@ -12,19 +12,19 @@ block body
       .w-100
         .d-flex.justify-content-between.align-items-center
           h1 Correction
-          hr
+        hr
         if corrections == null
-          h5.d-block.text-muted Vous n'avez aucun exercice à corriger pour l'instant...
+          span.d-block.text-muted Vous n'avez aucun exercice à corriger pour l'instant...
         else
-          h5.d-block.text-muted Consulter la liste des solutions. Vous avez (#{count}) missions à corriger :
-        br
-        each correction, person in corrections
-          h4 #{person}
-          hr
-          ul.mb-4.pl-0
-            each exercise, index in correction
-              li.ml-4
-                a(href="/management/correction/detail/" + exercise.exercise_id + "/" + exercise.id ).d-inline-block.text-dark
-                  p.m-0.student-row-element #{exercise.name}
-                .d-inline-block
-                  small.ml-2 (#{exercise.diff})
+          span.d-block.text-muted Consulter la liste des solutions. Vous avez (#{count}) missions à corriger :
+          br
+          each correction, person in corrections
+            h4 #{person}
+            hr
+            ul.mb-4.pl-0
+              each exercise, index in correction
+                li.ml-4
+                  a(href="/management/correction/detail/" + exercise.exercise_id + "/" + exercise.id ).d-inline-block.text-dark
+                    p.m-0.student-row-element #{exercise.name}
+                  .d-inline-block
+                    small.ml-2 (#{exercise.diff})

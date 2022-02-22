@@ -73,8 +73,8 @@ class TeamController extends Controller
         }
         $nbExercise = count((new ExerciseBroker())->getAll());
 
-        $teamProgress['Sith'] = ($nbSith == 0) ? 0 : round($teamProgress['Sith'] / ($nbSith * $nbExercise) * 100, 2);
-        $teamProgress['Rebel'] = ($nbRebel == 0) ? 0 : round($teamProgress['Rebel'] / ($nbRebel * $nbExercise) * 100, 2);
+        $teamProgress['Sith'] = ($nbSith == 0 || $nbExercise == 0) ? 0 : round($teamProgress['Sith'] / ($nbSith * $nbExercise) * 100, 2);
+        $teamProgress['Rebel'] = ($nbRebel == 0 || $nbExercise == 0) ? 0 : round($teamProgress['Rebel'] / ($nbRebel * $nbExercise) * 100, 2);
 
         return $teamProgress;
     }

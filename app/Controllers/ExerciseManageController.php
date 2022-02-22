@@ -38,6 +38,12 @@ class ExerciseManageController extends TeacherController
 
     public function createExercise()
     {
+        $exerciceBroker = new ExerciseBroker();
+        $exercices = $exerciceBroker->getAll();
+        if (count($exercices) == 0) {
+            Flash::error("Vous devez d'abord créer une semaine avant de créer une exercice");
+            return $this->redirect("/management/exercises");
+        }
         return $this->render('management/exercises/exercises_form', [
             'title' => 'Créer un exercice',
             'action' => '/management/exercises/store',
