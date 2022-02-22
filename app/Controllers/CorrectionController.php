@@ -65,9 +65,9 @@ class CorrectionController extends Controller
             (new ExerciseBroker())->correctExercise($userId, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
             $e = (new ExerciseBroker())->getCorrectionPath($id);
             unlink($e->path);
-            Flash::success("Exercice marqué corrigé avec succès. L'élève à bien reçu son argent et ses points.");
+            Flash::success("Mission marqué complétée avec succès. L'élève à bien reçu son argent et ses points.");
         } else {
-            Flash::warning("Commentaire envoyer à l'élève l'informant que sa solution ne convient pas.");
+            Flash::warning("Commentaire envoyé à l'élève l'informant que sa solution ne convient pas.");
             (new ExerciseBroker())->incorrectExercise($userId, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
         }
         return $this->redirect('/management/correction');
@@ -78,7 +78,6 @@ class CorrectionController extends Controller
         $e = (new ExerciseBroker())->getCorrectionPath($id);
 
         if ($e == null) {
-            Flash::error("Impossible de télécharcher le fichier");
             return $this->redirect("/error/404");
         }
 
@@ -103,7 +102,7 @@ class CorrectionController extends Controller
         $studentExercise = $studentExerciseBroker->findById($submitId);
 
         if (is_null($studentExercise)) {
-            Flash::error("Une erreur est survenu lors du traitement. L'exercice remis par l'étudiant à été retiré.");
+            Flash::error("Une erreur est survenue lors du traitement. La mission remise par l'étudiant à été retirée.");
             return $this->redirect($this->request->getReferer());
         }
 
@@ -111,17 +110,17 @@ class CorrectionController extends Controller
         if (file_exists($studentExercise->dir_path)) {
             $file = fopen($studentExercise->dir_path, "r");
             if (!$file) {
-                Flash::error("Impossible d'ouvrir le fichier");
+                Flash::error("Impossible d'ouvrir le fichier.");
             }
             if (filesize($studentExercise->dir_path) == 0) {
-                Flash::error("Impossible d'ouvrir le fichier");
+                Flash::error("Impossible d'ouvrir le fichier.");
             }
 
             $fileContent = fread($file, filesize($studentExercise->dir_path));
             $fileExtention = pathinfo($studentExercise->dir_path, PATHINFO_EXTENSION);
 
             if ($fileExtention == "zip") {
-                $fileContent = "Fichier ZIP. Appuyer sur Télécharger pour le consulter";
+                $fileContent = "Fichier ZIP. Appuyer sur Télécharger pour le consulter.";
             } else if ($fileExtention != "java") {
                 $fileContent = null;
             }

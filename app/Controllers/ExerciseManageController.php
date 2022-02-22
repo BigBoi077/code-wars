@@ -68,7 +68,7 @@ class ExerciseManageController extends TeacherController
     {
         $exercise = ExerciseService::update($id, $this->buildForm());
         if ($exercise->hasSucceeded()) {
-            Flash::success('Exercice mis à jour avec succès!');
+            Flash::success('Mission mise à jour avec succès!');
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
@@ -92,7 +92,7 @@ class ExerciseManageController extends TeacherController
                 }
             }
 
-            Flash::success('Exercice créé avec succès!');
+            Flash::success('Mission créée avec succès!');
             return $this->redirect('/management/exercises');
         }
 
@@ -109,7 +109,7 @@ class ExerciseManageController extends TeacherController
     {
         if (ExerciseService::exists($id)) {
             ExerciseService::delete($id);
-            Flash::success('Exercice supprimé avec succès!');
+            Flash::success('Mission supprimée avec succès!');
         } else {
             Flash::error('Une erreur est survenue.');
         }

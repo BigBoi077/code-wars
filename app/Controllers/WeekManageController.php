@@ -39,7 +39,7 @@ class WeekManageController extends TeacherController
         if ((new WeekBroker())->delete($id)) {
             Flash::success("Semaine supprimée avec succès!");
         } else {
-            Flash::error("Cette semaine ne peut pas être supprimée, car elle appartient à des exercises.");
+            Flash::error("Cette semaine ne peut pas être supprimée, car des missions lui sont rattachées.");
         }
         return $this->redirect('/management/weeks');
     }
@@ -67,7 +67,7 @@ class WeekManageController extends TeacherController
             return $this->redirect('/management/weeks/create');
         }
         (new WeekBroker())->insert($form->getValue("startDate"), $form->getValue("number"));
-        Flash::success("Semaine ajoutée avec succès!");
+        Flash::success("La semaine a été ajoutée avec succès!");
         return $this->redirect('/management/weeks');
     }
 

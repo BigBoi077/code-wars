@@ -16,7 +16,7 @@ class NotificationService
 
     public static function exerciseCorrected($userId, $cash, $points)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Un de vos exercices vient d'être corrigé. Vous avez reçu " . number_format($cash, 0, '.', ' ') . "$ et " . number_format($points, 0, '.', ' ') . " pts.", "Exercice corrige!");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Un de vos exercices vient d'être corrigé. Vous avez reçu " . number_format($cash, 0, '.', ' ') . "$ et " . number_format($points, 0, '.', ' ') . " pts.", "Mission complétée");
     }
 
     public static function newExerciseAvailable($exerciseName, $cash, $points, $id)
@@ -29,7 +29,7 @@ class NotificationService
         if ($add > 0) {
             $add = "+" . number_format($add, 0, '.', ' ');
         }
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance à été mise à jour. " . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance a été mise à jour. " . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
     }
 
     public static function newPoints($userId, $add, $newAmount) {
@@ -41,11 +41,11 @@ class NotificationService
 
     public static function incorrectSolution($userId, $exerciseName, $id)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Votre solution pour " . $exerciseName . " ne convient pas. Consulter les <a href='/profile#exerciseSection'>commentaires</a> pour vous orienter. Cliquer <a href='/exercise/' " . $id . ">ICI</a> pour annuler votre remise.</p>", "Solution incorrect");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Votre solution pour " . $exerciseName . " ne convient pas. Consulter le <a href='/profile#exerciseSection'>commentaire</a> de l'enseignant pour vous orienter. Cliquer <a href='/exercise/' " . $id . ">ici</a> pour annuler votre remise.</p>", "Solution incorrect");
     }
 
     public static function newCommentOnCorrection($userId, $name)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Un commentaire a été déposé sur l'exercice : <a href='/profile#exerciseSection'>" . $name . "</a>.</p>", "Nouveau commentaire");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Un commentaire a été déposé sur la mission : <a href='/profile#exerciseSection'>" . $name . "</a>.</p>", "Nouveau commentaire");
     }
 }

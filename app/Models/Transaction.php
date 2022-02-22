@@ -55,7 +55,7 @@ class Transaction
         $item = ItemService::get($item_id);
         $student = StudentService::get($da);
         if ($student->cash < $item->price) {
-            array_push($this->errorMessages, "Vous n'avez pas assez d'argent pour cet article.");
+            array_push($this->errorMessages, "Vous n'avez pas assez d'argent pour acheter cet article.");
             return;
         }
         if (StudentItemService::exists($item_id, $da)) {

@@ -12,6 +12,7 @@ class Logger
 {
     const INPUT_NAME_DA = 'da';
     const INPUT_NAME_PASSWORD = 'password';
+    const ERROR_MESSAGE = "Identifiants incorrects";
 
     private $user;
     private $success = false;
@@ -24,7 +25,7 @@ class Logger
         if ($form->verify()) {
             $this->success = $this->tryCredentials($form);
         } else {
-            $this->errorMessages = "Identifiants incorrects";
+            $this->errorMessages = self::ERROR_MESSAGE;
         }
     }
 
@@ -40,7 +41,7 @@ class Logger
                 return true;
             }
         }
-        $this->errorMessages = 'Identifiants incorrects';
+        $this->errorMessages = self::ERROR_MESSAGE;
         return false;
     }
 
