@@ -85,13 +85,14 @@ class ExerciseBroker extends Broker
     {
         $sql = "update codewars.studentexercise se set corrected = true, comments = ?, is_good = true where se.id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$comment, $id, $student->da]);
-        $sql = "select cash_reward, point_reward from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
+        $sql = "select cash_reward, point_reward, e.name from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
         $reward = $this->selectSingle($sql, [$id]);
         $broker = new StudentBroker();
         (new TransactionBroker())->insert($userId, TransactionBroker::getActionForRapidAction($reward->cash_reward, $reward->point_reward), "Exercise corrigé");
         $broker->addCash($student->da, $reward->cash_reward);
         $broker->addPoints($student->da, $reward->point_reward);
-        NotificationService::newCommentOnCorrection($userId);
+        if ($comment != null)
+            NotificationService::newCommentOnCorrection($userId, $reward->name);
         NotificationService::exerciseCorrected($userId, $reward->cash_reward, $reward->point_reward);
     }
 
@@ -99,8 +100,8 @@ class ExerciseBroker extends Broker
     {
         $sql = "update codewars.studentexercise se set comments = ?, is_good = false where se.id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$comment, $id, $student->da]);
-        $name = (new StudentExerciseBroker())->findById($id)->name;
-        NotificationService::incorrectSolution($userId, $name);
+        $exercise = (new StudentExerciseBroker())->findById($id);
+        NotificationService::incorrectSolution($userId, $exercise->name, $exercise->se_id);
     }
 
     public function delete($id)

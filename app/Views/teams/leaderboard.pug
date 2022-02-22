@@ -30,7 +30,7 @@ block body
             .col-6
               span #{current.username}
             .col.row.d-flex.align-items-center
-              .col-6.d-flex.justify-content-end
+              .col-6.d-flex.justify-content-start
                 p.mr-3
                   +star_wars_points(current.points)
               .col-6.d-flex.justify-content-end
@@ -47,9 +47,9 @@ block body
                     .profile-bg(class="position" + index)
                       p.mb-0.initials=student.initials
                 .col-1.d-flex.align-items-center.justify-content-end
-                  h4.mt-2.mr-4.ml-4.text-dark ##{index + 1}
+                  h4.my-0.mx-4.text-dark ##{index + 1}
                 .col-6
-                  h4.mt-2.text-dark #{student.username}
+                  h4.text-dark.mb-0 #{student.username}
               else
                 if student.gravatarAvailable
                   img.rounded-img(data-gravatar data-email=student.email).not-top-3.ml-3.mr-3
@@ -57,11 +57,11 @@ block body
                   .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative
                     p.initials.initials-small.mb-0.text-dark=student.initials
                 .col-1.d-flex.align-items-center.justify-content-end
-                  span.mt-2.mr-4.ml-4.text-dark ##{index + 1}
+                  span.mr-4.ml-4.text-dark ##{index + 1}
                 .col-6
-                  span.mt-2.text-dark #{student.username}
+                  span.text-dark #{student.username}
               .col.row.d-flex.align-items-center
-                .col-6.d-flex.justify-content-end
+                .col-6.d-flex.justify-content-start
                   p.mr-3
                     +star_wars_points(student.points)
                 .col-6.d-flex.justify-content-end

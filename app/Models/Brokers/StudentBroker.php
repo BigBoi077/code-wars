@@ -34,7 +34,9 @@ class StudentBroker extends Broker
                 where s.da = ? and se.corrected = true and w.is_active = true";
         $done = $this->selectSingle($sql, [$da])->done;
         $nbExercises = count((new ExerciseBroker())->getAllActive());
-        $totalDone = ($done / $nbExercises) * 100;
+        $totalDone = 0;
+        if ($nbExercises != 0)
+            $totalDone = ($done / $nbExercises) * 100;
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
 
@@ -43,13 +45,13 @@ class StudentBroker extends Broker
         $sql = "select w.id as week_id, w.number, w.start_date, count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id
                 where s.da = ? and se.corrected = true group by w.id";
         $exercisesPerWeeks = $this->select($sql, [$da]);
-        $sql = "select w.id as week_id, * from codewars.week w 
-                where w.is_active = true order by w.id";
         $weeks = (new WeekBroker())->getAllActive();
         $exercisesBroker = new ExerciseBroker();
         $index = 0;
+
         foreach ($weeks as $week) {
             $week->progress = 0;
+            $week->nbExercise = empty($exercisesBroker->getAllByWeek($week->id)) ? $exercisesBroker->getAllByWeek($week->id) : "N/A";
             if (isset($exercisesPerWeeks[$index])) {
                 if ($exercisesPerWeeks[$index]->week_id == $week->week_id)
                     $week->progress = number_format(($exercisesPerWeeks[$index]->done / count($exercisesBroker->getAllByWeek($week->week_id))) * 100, 0);
@@ -62,7 +64,7 @@ class StudentBroker extends Broker
 
     public function getExerciseDone($da): int
     {
-        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id where s.da = ? and se.corrected = true";
+        $sql = "select count(e.id) done from codewars.student s join codewars.studentexercise se on s.da = se.student_da join codewars.exercise e on e.id = se.exercise_id join codewars.week w on e.week_id = w.id where s.da = ? and se.corrected = true and w.is_active = true";
         return $this->selectSingle($sql, [$da])->done;
     }
 
