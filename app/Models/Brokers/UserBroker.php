@@ -6,8 +6,8 @@ class UserBroker extends Broker
 {
     public function findByDa($da): ?stdClass
     {
-        $sql = "SELECT * FROM codewars.user u join codewars.student s on u.da = s.da WHERE u.da = ? and s.da = ?";
-        return $this->selectSingle($sql, [$da, $da]);
+        $sql = "SELECT * FROM codewars.user u WHERE u.da = ?";
+        return $this->selectSingle($sql, [$da]);
     }
 
     public function findByID($id): ?stdClass
