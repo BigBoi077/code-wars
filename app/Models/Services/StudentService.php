@@ -2,10 +2,12 @@
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\ItemBroker;
+use Models\Brokers\NotificationBroker;
 use Models\Brokers\PersonBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\TeamBroker;
 use Models\Brokers\TipBroker;
+use Models\Brokers\TransactionBroker;
 use Models\Brokers\UserBroker;
 use stdClass;
 use Zephyrus\Application\Form;
@@ -49,10 +51,13 @@ class StudentService
 
     public static function delete($da)
     {
+        $studentBroker = new StudentBroker();
         (new ItemBroker())->deleteAllFor($da);
+        (new TransactionBroker())->deleteAllFor($studentBroker->findByDa($da)->id);
+        (new NotificationBroker())->deleteAllFor($studentBroker->findByDa($da)->id);
         (new TipBroker())->deleteAllFor($da);
         (new ExerciseBroker())->deleteAllFor($da);
-        (new StudentBroker())->delete($da);
+        $studentBroker->delete($da);
         (new UserBroker())->delete($da);
         (new PersonBroker())->delete($da);
     }
@@ -91,9 +96,12 @@ class StudentService
         }
         $this->form->validate('firstname', Rule::notEmpty('Le prénom est requis.'));
         $this->form->validate('lastname', Rule::notEmpty('Le nom est requis.'));
-        $this->form->validate('team_id', Rule::integer('Équipe non valide'));
+        $this->form->validate('team_id', Rule::integer('L\'équipe n\'est pas valide.'));
         if ($this->form->getValue('cash') != "") {
-            $this->form->validate('cash', Rule::integer('L\'argent doit être un chiffre'));
+            $this->form->validate('cash', Rule::integer('L\'argent doit être un chiffre valide.'));
+        }
+        if ($this->form->getValue('points') != "") {
+            $this->form->validate('points', Rule::integer('Les points doit être un chiffre valide.'));
         }
         if (!$this->form->verify()) {
             $this->errorMessages = $this->form->getErrorMessages();

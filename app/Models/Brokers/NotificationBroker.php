@@ -52,4 +52,10 @@ class NotificationBroker extends Broker
             }
         }
     }
+
+    public function deleteAllFor($user_id)
+    {
+        $sql = "delete from codewars.notification where user_id = ?";
+        $this->query($sql, [$user_id]);
+    }
 }

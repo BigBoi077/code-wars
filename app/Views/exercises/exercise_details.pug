@@ -87,20 +87,25 @@ block body
             .btn-disabled
               p Corrigé
         if exercise.execution_exemple !== ""
-          div.mission-execution-example.my-5
+          div.mission-execution-example.my-4
             h3 Exemple d'exécution
             pre=exercise.execution_exemple
         if tips != null
           .mission-tips
             if isTeacher
-              h3
-                a(href="/management/exercises/" + exercise.id + "/tips").d-inline-block Indices de mission
+              .d-flex.justify-content-between
+                .d-flex.align-items-end
+                  h3.mb-0 Indices de mission
+                .d-flex.align-items-end
+                  a.no-decoration(href='/management/exercises/' + exercise.id + "/tips")
+                    button.btn.btn-yellow.mb-0#Btn
+                      i.fas.fa-plus-square
+                      | Modifier les indices
             else
               h3 Indices de mission
             hr
-            each tip in tips
-              .row
-                u
+            u
+              each tip in tips
                 if tip.bought
                   if isTeacher
                     li
