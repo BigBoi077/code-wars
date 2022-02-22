@@ -623,8 +623,6 @@ input#exerciseUpload {
     padding-right: 10px;
 }
 
-
-
 .btn-yellow {
     background-color: var(--accent);
     color: var(--font);
@@ -1634,6 +1632,18 @@ table {
 .return-ready {
     white-space: pre-wrap;
     text-align: justify;
+}
+
+.week-number {
+    width: 170px;
+}
+
+.week-progress {
+    width: 80px;
+}
+
+.week-progress p {
+    text-align: right;
 }
 
 /* endregion */
