@@ -23,8 +23,7 @@ block body
                   | Gestion des missions
         br
       .row.all-missions.col.p-0
-        if exercisesByWeek == null
-          hr
+        if Count(exercisesByWeek) <= 0
           span.text-muted Aucune exercice encore
         else
           each week, index in exercisesByWeek
@@ -56,11 +55,11 @@ block body
                                 i.fas.fa-times-circle.transparent
                   else
                     span.text-muted.mt-2 Aucune mission disponible cette semaine
-          .col-5.pr-0.pl-5
-            if student != null
-              .mission-progression.card.mb-4.w-100.fixed-ct
-                .card-body.pb-0
-                  h4.mb-3.text-center Progression individuelle
-                  p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
-                  each week in weeklyProgress
-                    +weekProgressSmall(week)
+      .col-5.pr-0.pl-5
+        if student != null
+          .mission-progression.card.mb-4.w-100.fixed-ct
+            .card-body.pb-0
+              h4.mb-3.text-center Progression individuelle
+              p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
+              each week in weeklyProgress
+                +weekProgressSmall(week)
