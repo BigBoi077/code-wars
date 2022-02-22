@@ -104,7 +104,7 @@ block body
             else
               h3 Indices de mission
             hr
-            u
+            ul
               each tip in tips
                 if tip.bought
                   if isTeacher
@@ -112,7 +112,8 @@ block body
                       a(href="/management/exercises/" + exercise.id + "/tips/" + tip.id + "/edit").pl-0.mb-3.d-inline-block=tip.tip
                       p.d-inline-block.ml-1 (#{tip.price}$)
                   else
-                    li.pl-0.mb-3=tip.tip
+                    li.pl-0.mb-3
+                      pre=tip.tip
                 else
                   if !isTeacher && !corrected
                     form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
