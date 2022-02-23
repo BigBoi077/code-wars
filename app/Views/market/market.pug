@@ -24,31 +24,35 @@ block body
 								p.mb-0
 									i.fas.fa-plus-square.mr-2
 									| Gestion des articles
-			.row.shop-items-list.p-0
-				each item in items
-					.card.shop-item
-						img.card-img-top(src=item.image_path alt='Card image cap')#productImg
-						.card-body
-							h4.card-title #{item.name}
-							p.pb-3 #{item.description}
-							.row.buying-element-row
-								div.d-flex.align-items-center
-									+star_wars_money(item.price)
-								if studentItems !== null
-									- var contains = false;
-									each studentItem in studentItems
-										if studentItem.item_id === item.id
-											- contains = true
-									if !user.isTeacher
-										form(action=(!contains) ? '/market/buy/' + item.id: '#' method="post").mb-0
-											button(disabled=contains).btn.btn-yellow#buyBtn
-												p
-													| Acheter
-													i.fas.fa-shopping-basket
-								else
-									if !user.isTeacher
-										form(action='/market/buy/' + item.id method="post").mb-0
-											button.btn.btn-yellow#buyBtn
-												p
-													| Acheter
-													i.fas.fa-shopping-basket
+			if items == null
+				hr
+				span.text-muted Aucun article pour le moment
+			else
+				.row.shop-items-list.p-0
+					each item in items
+						.card.shop-item
+							img.card-img-top(src=item.image_path alt='Card image cap')#productImg
+							.card-body
+								h4.card-title #{item.name}
+								p.pb-3 #{item.description}
+								.row.buying-element-row
+									div.d-flex.align-items-center
+										+star_wars_money(item.price)
+									if studentItems !== null
+										- var contains = false;
+										each studentItem in studentItems
+											if studentItem.item_id === item.id
+												- contains = true
+										if !user.isTeacher
+											form(action=(!contains) ? '/market/buy/' + item.id: '#' method="post").mb-0
+												button(disabled=contains).btn.btn-yellow#buyBtn
+													p
+														| Acheter
+														i.fas.fa-shopping-basket
+									else
+										if !user.isTeacher
+											form(action='/market/buy/' + item.id method="post").mb-0
+												button.btn.btn-yellow#buyBtn
+													p
+														| Acheter
+														i.fas.fa-shopping-basket

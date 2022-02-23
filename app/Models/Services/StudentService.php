@@ -39,7 +39,7 @@ class StudentService
         return $instance;
     }
 
-    public static function get($da): stdClass
+    public static function get($da): ?stdClass
     {
         return (new StudentBroker())->findByDa($da);
     }
