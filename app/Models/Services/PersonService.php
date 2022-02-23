@@ -43,9 +43,9 @@ class PersonService
         $this->form->validate('username', Rule::alphanumeric('Le nom d\'utilisateur doit être des lettres ou des chiffres.'));
         $this->form->validate('username', Rule::maxLength(20, 'Le nom d\'utilisateur doit être de maximum 20 caractères.'));
         if ($this->form->getValue('email') != '') {
-            $this->form->validate('email', Rule::email('Le format du e-mail est invalide.'));
+            $this->form->validate('email', Rule::email('Le format du courriel est invalide.'));
         } else {
-            $this->form->validate('email', Rule::notEmpty('Le e-mail est requis.'));
+            $this->form->validate('email', Rule::notEmpty('Le courriel est requis.'));
         }
         if ((new PersonBroker())->findByUsername($da, $this->form->getValue('username')) != null) {
             $this->errorMessages = "Ce nom d'utilisateur est déjà pris par un autre élève.";

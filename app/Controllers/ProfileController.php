@@ -68,7 +68,7 @@ class ProfileController extends Controller
     {
         $profile = PersonService::update($this->getActiveStudent()->da, $this->buildForm());
         if ($profile->hasSucceeded()) {
-            Flash::success('Profil edité avec succèss.');
+            Flash::success('Profil modifié avec succès!');
             return $this->redirect('/profile');
         }
         Flash::error($profile->getErrorMessages());
@@ -95,7 +95,7 @@ class ProfileController extends Controller
         }
         (new UserBroker())->update($this->getUser()['da'], password_hash($form->getValue("password") . PASSWORD_PEPPER, PASSWORD_DEFAULT));
 
-        Flash::success("Mot de passe changé avec succès.");
+        Flash::success("Votre mot de passe a été modifié avec succès!");
         return $this->redirect('/profile');
     }
 }

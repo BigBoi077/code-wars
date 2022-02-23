@@ -57,14 +57,14 @@ class ExerciseController extends Controller
     public function exerciseSubmit(stdClass $exercise)
     {
         if ($this->isUserTeacher()) {
-            Flash::error('Un enseignant ne peut pas remettre d\'exercice');
+            Flash::error('Un enseignant ne peut pas participer aux missions.');
             return $this->redirect($this->request->getReferer());
         }
 
         $broker = new ExerciseBroker();
 
         if ($broker->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
-            Flash::error("Vous ne pouvez pas remettre un exercice de cette façon");
+            Flash::error("Vous ne pouvez pas remettre une mission de cette façon.");
             return $this->redirect('/exercises');
         }
 
@@ -79,7 +79,7 @@ class ExerciseController extends Controller
         $broker = new ExerciseBroker();
 
         if ($broker->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
-            Flash::error("Vous ne pouvez pas faire cela !");
+            Flash::error("Vous ne pouvez pas annuler une mission déjà complétée.");
             return $this->redirect('/exercises');
         }
 
@@ -89,7 +89,7 @@ class ExerciseController extends Controller
         unlink($exerciseToDelete->dir_path);
         $broker->deleteExercise($student['da'], $exercise->id);
 
-        Flash::success("L'exercice à été effacé avec succès");
+        Flash::success("La mission à été annulée avec succès!");
         return $this->redirect($this->request->getReferer());
     }
 
@@ -130,7 +130,7 @@ class ExerciseController extends Controller
         $maxsize = 20971520;
 
         if ($this->isUserTeacher()) {
-            Flash::error("L'enseignant ne peut pas remettre des exercices.");
+            Flash::error("L'enseignant ne peut pas participer aux missions.");
             return $this->redirect('/exercises/' . $exercise->id);
         }
 
@@ -144,7 +144,7 @@ class ExerciseController extends Controller
         }
 
         if ((new ExerciseBroker())->isCorrected($exercise->id, $this->getActiveStudent()->da)) {
-            Flash::error("L'exercice à déjà été remis et corrigé. Vous ne pouvez pas le remettre une seconde fois!");
+            Flash::error("La mission à déjà été remise et corrigée. Vous ne pouvez pas la remettre une seconde fois!");
             return $this->redirect('/exercises/' . $exercise->id);
         }
 
@@ -157,18 +157,18 @@ class ExerciseController extends Controller
         }
 
         if ($this->request->getFile("exercise")["size"] > $maxsize) {
-            Flash::error("La taille des fichiers ne doivent pas dépasser 20 Mo.");
+            Flash::error("La taille totale des fichiers ne doit pas dépasser 20 Mo.");
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
         if ($this->request->getFile("exercise")["size"] == 0) {
-            Flash::error("La taille des fichiers ne peut pas être de 0 octet.");
+            Flash::error("La taille totale des fichiers ne peut pas être de 0 octet.");
         }
 
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if ($fileType != "zip" && $fileType != "rar" && $fileType != "7zip" && $fileType != "java" ) {
-            Flash::warning("Le type de fichier n'est pas autorisé. Les types acceptés sont : .zip, .rar, .7zip, .java.");
+        if ($fileType != "zip" && $fileType != "java" ) {
+            Flash::warning("Ce type de fichier n'est pas autorisé. Les types acceptés sont : .zip et .java.");
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }
 
@@ -178,7 +178,7 @@ class ExerciseController extends Controller
         }
 
         if (move_uploaded_file($this->request->getFile("exercise")["tmp_name"], $targetFile)) {
-            Flash::success("La mission à bel et bien été remise.");
+            Flash::success("La mission a bel et bien été remise.");
             if ((new ExerciseBroker())->isSubmitted($exercise->id, $this->getActiveStudent()->da)) {
                 (new ExerciseBroker())->updateSubmit($this->getActiveStudent(), $exercise->id, $targetFile);
             } else {
@@ -198,15 +198,15 @@ class ExerciseController extends Controller
         $broker = new TipBroker();
         $tip = $broker->GetById($tipId);
         if ($student->cash < $tip->price) {
-            Flash::error("Vous n'avez pas assez d'argent pour cet indice...");
+            Flash::error("Vous n'avez pas assez d'argent pour cet indice.");
             return $this->redirect($this->request->getReferer());
         } elseif ($broker->Has($tipId, $student->da)) {
-            Flash::error("Vous avez déjà cet indice, pourquoi payer deux fois?");
+            Flash::error("Vous possédez déjà cet indice, pourquoi payer deux fois?");
             return $this->redirect($this->request->getReferer());
         }
         $broker->buy($tipId, $student->da);
         (new StudentBroker())->addCash($student->da, -($tip->price));
-        Flash::success("Vous avez acheter l'indice avec succès!");
+        Flash::success("Vous avez acheté l'indice avec succès!");
         return $this->redirect($this->request->getReferer());
     }
 

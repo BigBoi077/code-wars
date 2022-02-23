@@ -38,17 +38,18 @@ class ExerciseManageController extends TeacherController
 
     public function createExercise()
     {
-        $exerciceBroker = new ExerciseBroker();
-        $exercices = $exerciceBroker->getAll();
-        if (count($exercices) == 0) {
+        $weeks = ((new WeekBroker())->getAll());
+
+        if (count($weeks) == 0) {
             Flash::error("Vous devez d'abord créer une semaine avant de créer une exercice");
             return $this->redirect("/management/exercises");
         }
+
         return $this->render('management/exercises/exercises_form', [
             'title' => 'Créer un exercice',
             'action' => '/management/exercises/store',
             'exercise' => null,
-            'weeks' => ((new WeekBroker())->getAll()),
+            'weeks' => $weeks,
             'difficulties' => [1 => "Très Facile", 2 => "Facile", 3 => "Moyen", 4 => "Difficile", 5 => "Très Difficile"]
         ]);
     }
@@ -68,7 +69,7 @@ class ExerciseManageController extends TeacherController
     {
         $exercise = ExerciseService::update($id, $this->buildForm());
         if ($exercise->hasSucceeded()) {
-            Flash::success('Exercice mis à jour avec succès!');
+            Flash::success('Mission mise à jour avec succès!');
             return $this->redirect('/management/exercises');
         }
         Flash::error($exercise->getErrorMessages());
@@ -92,7 +93,7 @@ class ExerciseManageController extends TeacherController
                 }
             }
 
-            Flash::success('Exercice créé avec succès!');
+            Flash::success('Mission créée avec succès!');
             return $this->redirect('/management/exercises');
         }
 
@@ -109,7 +110,7 @@ class ExerciseManageController extends TeacherController
     {
         if (ExerciseService::exists($id)) {
             ExerciseService::delete($id);
-            Flash::success('Exercice supprimé avec succès!');
+            Flash::success('Mission supprimée avec succès!');
         } else {
             Flash::error('Une erreur est survenue.');
         }

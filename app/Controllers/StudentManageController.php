@@ -42,7 +42,7 @@ class StudentManageController extends TeacherController
             'title' => 'Créer un étudiant',
             'action' => '/management/students/store',
             'editStudent' => null,
-            'teams' => (new TeamBroker())->getAll(),
+            'teams' => (new TeamBroker())->getAll()
         ]);
     }
 
@@ -72,7 +72,7 @@ class StudentManageController extends TeacherController
     public function editStudent($da)
     {
         if (!StudentService::exists($da)) {
-            Flash::error('L\'étudiant n\'existe pas.');
+            Flash::error('L\'étudiant sélectionné n\'existe pas.');
             return $this->redirect('/management/students');
         }
         $student = StudentService::get($da);
@@ -157,14 +157,15 @@ class StudentManageController extends TeacherController
         $points = $form->getValue('points', 0);
         if ($forValue == "team") {
             if ($form->getValue('team_id') == null) {
-                Flash::error("Aucune équipe sélectionnée...");
+                Flash::error("Vous devez sélectionner une équipe.");
                 return $this->redirect("/management/students/rapidAdd");
             }
             $broker = new TeamBroker();
             $broker->addToTeam($form->getValue('team_id'), (int)($points), (int)($cash), $reason);
+            $form->getValue('team_id') == 1 ? Flash::success("Ajout rapide, à l'équipe des Sith, effectué avec succès!") : Flash::success("L'ajout rapide, à l'équipe des Rebels, effectué avec succès!");
         } elseif ($forValue == "student") {
             if ($form->getValue('student_da') == null) {
-                Flash::error("Aucun élève sélectionné...");
+                Flash::error("Vous devez sélectionner un élève.");
                 return $this->redirect("/management/students/rapidAdd");
             }
             $transactionBroker = new TransactionBroker();
@@ -173,8 +174,8 @@ class StudentManageController extends TeacherController
             $studentBroker->addPoints($form->getValue('student_da'), (int)($points));
             $studentBroker->addCash($form->getValue('student_da'), (int)($cash));
             $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction((int)$cash, (int)$points), $reason);
+            Flash::success("Ajout rapide, à " . $student->firstname . ' ' . $student->lastname . ", effectué avec succès!");
         }
-        Flash::success("Action effectué avec succès");
         return $this->redirect("/management/students");
     }
 }
