@@ -4,7 +4,6 @@ use Models\ImageExample;
 
 class ImageExampleBroker extends Broker
 {
-
     public function getAllById($exerciseId): array
     {
         $sql = "SELECT *

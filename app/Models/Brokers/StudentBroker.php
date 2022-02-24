@@ -35,8 +35,9 @@ class StudentBroker extends Broker
         $done = $this->selectSingle($sql, [$da])->done;
         $nbExercises = count((new ExerciseBroker())->getAllActive());
         $totalDone = 0;
-        if ($nbExercises != 0)
+        if ($nbExercises != 0) {
             $totalDone = ($done / $nbExercises) * 100;
+        }
         return ["totalDone" => $totalDone, "nbExercicesTotal" => $nbExercises, "nbExercisesDone" => $done];
     }
 
@@ -146,8 +147,9 @@ class StudentBroker extends Broker
     {
         $student = $this->findByDa($da);
         $points = $student->points + $amount;
-        if ($points < 0)
+        if ($points < 0) {
             $points = 0;
+        }
         $sql = "UPDATE codewars.student SET points = ? WHERE da = ?";
         $this->query($sql, [$points, $da]);
     }
@@ -178,14 +180,14 @@ class StudentBroker extends Broker
     private function getAddedCash($da, $cash)
     {
         $sql = "SELECT s.da, s.cash FROM codewars.student s WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $cash - $result->cash;
     }
 
     private function getAddedPoints($da, $points)
     {
         $sql = "SELECT s.da, s.points FROM codewars.student s WHERE s.da = ?";
-        $result = $this->selectSingle($sql, [ $da ]);
+        $result = $this->selectSingle($sql, [$da]);
         return $points - $result->points;
     }
 }
