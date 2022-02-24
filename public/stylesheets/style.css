@@ -421,7 +421,9 @@ header .gestion-button {
 
 .rebel-sith {
     position: absolute;
-    top: -135%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .rebel-sith > img {
@@ -1033,10 +1035,6 @@ input#exerciseUpload {
 
     .form-page #footer {
         align-self: flex-end;
-    }
-
-    .rebel-sith {
-        top: -55%;
     }
 
     .student-header-element {
