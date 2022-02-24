@@ -161,7 +161,7 @@ class StudentManageController extends TeacherController
                 return $this->redirect("/management/students/rapidAdd");
             }
             $broker = new TeamBroker();
-            $broker->addToTeam($form->getValue('team_id'), (int)($points), (int)($cash), $reason);
+            $broker->addToTeam($form->getValue('team_id'), (int) ($points), (int) ($cash), $reason);
             $form->getValue('team_id') == 1 ? Flash::success("Ajout rapide, à l'équipe des Sith, effectué avec succès!") : Flash::success("L'ajout rapide, à l'équipe des Rebels, effectué avec succès!");
         } elseif ($forValue == "student") {
             if ($form->getValue('student_da') == null) {

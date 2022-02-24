@@ -53,4 +53,3 @@ class PersonBroker extends Broker
         return $email->email;
     }
 }
-

@@ -15,9 +15,9 @@ block body
           a.no-decoration(href='/management/exercises/create')
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
-              | Nouvel Exercice
+              | Nouvelle mission
         if Count(exercises) <= 0
-          span.text-muted Aucune exercice encore
+          span.text-muted Vous n'avez aucune mission de créée pour l'instant.
         else
           table.table.w-100
             thead
@@ -51,5 +51,5 @@ block body
                     a(data-bs-toggle="modal" data-bs-target="#exerciseDeleteModal" + exercise.id)
                       i.fas.fa-trash.student-icons
                 each exercise in exercises
-                  +confirmationModal("Suppression d'exercice" , 'Voulez-vous vraiment supprimer cet exercice?',
+                  +confirmationModal("Suppression de mission" , 'Voulez-vous vraiment supprimer cette mission?',
                     '/management/exercises/' + exercise.id + '/delete', 'exerciseDeleteModal' + exercise.id)

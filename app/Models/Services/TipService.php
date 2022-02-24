@@ -35,7 +35,6 @@ class TipService
         return $instance;
     }
 
-
     public static function delete($id)
     {
         (new TipBroker())->delete($id);
@@ -82,5 +81,4 @@ class TipService
         (new TipBroker())->update($id, $tip, $price);
         $this->success = true;
     }
-
 }

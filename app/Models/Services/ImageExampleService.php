@@ -1,12 +1,8 @@
 <?php namespace Models\Services;
 
-use Models\Brokers\ExerciseBroker;
 use Models\Brokers\ImageExampleBroker;
-use Models\Brokers\TipBroker;
 use Models\ImageExample;
-use phpDocumentor\Reflection\Types\This;
 use Zephyrus\Application\Form;
-use Zephyrus\Application\Rule;
 use Zephyrus\Security\Cryptography;
 
 class ImageExampleService
@@ -29,7 +25,7 @@ class ImageExampleService
         $instance = new self();
         $instance->form = $form;
 
-        if ($instance->areFieldsValid()){
+        if ($instance->areFieldsValid()) {
             $instance->uploadFiles($exerciseId);
         }
         return $instance;
@@ -47,7 +43,6 @@ class ImageExampleService
 
     public static function delete($exerciseId)
     {
-
     }
 
     public function getErrorMessages()

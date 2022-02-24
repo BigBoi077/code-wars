@@ -3,21 +3,21 @@
 // region Composer autoloading and Zephyrus instance
 // This part is essential for the correct inclusion of the Framework on part
 // with Composer dependency manager. Do not modify.
+use Zephyrus\Application\Bootstrap;
 use Zephyrus\Application\ErrorHandler;
+use Zephyrus\Application\Localization;
+use Zephyrus\Application\Session;
 use Zephyrus\Exceptions\DatabaseException;
+use Zephyrus\Exceptions\LocalizationException;
 use Zephyrus\Exceptions\RouteNotFoundException;
 use Zephyrus\Network\Router;
-use Zephyrus\Application\Bootstrap;
-use Zephyrus\Application\Session;
-use Zephyrus\Application\Localization;
-use Zephyrus\Exceptions\LocalizationException;
 use Zephyrus\Utilities\Formatter;
 
 define('ROOT_DIR', __DIR__ . '/..');
 require ROOT_DIR . '/vendor/autoload.php';
 require ROOT_DIR . '/app/env.php';
 $router = new Router();
-include(Bootstrap::getHelperFunctionsPath());
+include Bootstrap::getHelperFunctionsPath();
 Bootstrap::start();
 // endregion
 
@@ -41,7 +41,7 @@ try {
     // If engine cannot properly start an exception will be thrown and must be corrected
     // to use this feature. Common errors are syntax error in json files. The exception
     // messages should be explicit enough.
-    die($e->getMessage());
+    exit($e->getMessage());
 }
 // endregion
 

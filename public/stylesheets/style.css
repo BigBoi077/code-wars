@@ -62,6 +62,10 @@
     list-style: none;
 }
 
+.text-font {
+    color: var(--font);
+}
+
 .text-dark {
     color: var(--dark);
 }
@@ -431,7 +435,9 @@ header .gestion-button {
 
 .rebel-sith {
     position: absolute;
-    top: -135%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .rebel-sith > img {
@@ -1045,10 +1051,6 @@ input#exerciseUpload {
         align-self: flex-end;
     }
 
-    .rebel-sith {
-        top: -55%;
-    }
-
     .student-header-element {
         margin: 0;
         font-size: 16px;
@@ -1363,7 +1365,7 @@ text-align: center;
 }
 
 .single-mission-detail .mission-submit span {
-    color: var(--dark);
+    color: var(--font);
 }
 
 .single-mission-detail label {
@@ -1468,6 +1470,10 @@ text-align: center;
 
 .mission-point-reward i {
     color: #212529;
+}
+
+.mission-point-reward, .mission-cash-reward {
+    color: var(--font);
 }
 
 .pretty.p-switch .state:before {

@@ -6,7 +6,6 @@ use Models\Services\ItemService;
 use Models\Services\NotificationService;
 use Models\Services\StudentItemService;
 use Models\Services\StudentService;
-use stdClass;
 
 class Transaction
 {
@@ -15,7 +14,7 @@ class Transaction
 
     public function __construct($item_id, $da)
     {
-        $this->errorMessages = array();
+        $this->errorMessages = [];
         $this->processTransaction($item_id, $da);
     }
 

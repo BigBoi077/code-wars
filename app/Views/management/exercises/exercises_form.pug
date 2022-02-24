@@ -16,7 +16,7 @@ block body
       form.w-100(method='post', action=action, enctype="multipart/form-data")
         .form-row
           .form-group.col-12.mb-3
-            label(for="exercisename") Nom de l'exercice
+            label(for="exercisename") Nom de la mission
             input.form-control(id='exercisename', name='exercisename', type='text' value=(exercise !== null) ? exercise.name: val('exercisename'))
         .form-row
           .form-group.col-12.mb-3
