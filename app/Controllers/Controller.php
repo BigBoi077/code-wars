@@ -131,7 +131,6 @@ abstract class Controller extends SecurityController
 
     private function getTheme($rebel, $sith): ?string
     {
-
         if ($rebel > $sith + WINNER_GAP) {
             return "rebelTheme.css";
         } elseif ($sith > $rebel + WINNER_GAP) {

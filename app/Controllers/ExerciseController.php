@@ -165,7 +165,7 @@ class ExerciseController extends Controller
 
         $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if ($fileType != "zip" && $fileType != "java" ) {
+        if ($fileType != "zip" && $fileType != "java") {
             Flash::warning("Ce type de fichier n'est pas autorisé. Les types acceptés sont : .zip et .java.");
             return $this->redirect('/exercises/submit/' . $exercise->id);
         }

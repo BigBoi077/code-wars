@@ -1,12 +1,8 @@
 <?php namespace Models\Services;
 
-use Models\Brokers\ExerciseBroker;
 use Models\Brokers\ImageExampleBroker;
-use Models\Brokers\TipBroker;
 use Models\ImageExample;
-use phpDocumentor\Reflection\Types\This;
 use Zephyrus\Application\Form;
-use Zephyrus\Application\Rule;
 use Zephyrus\Security\Cryptography;
 
 class ImageExampleService

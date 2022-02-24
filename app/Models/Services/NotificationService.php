@@ -21,7 +21,7 @@ class NotificationService
 
     public static function newExerciseAvailable($exerciseName, $cash, $points, $id)
     {
-        (new NotificationBroker())->sendNotificationToStudents("<p>Une nouvelle mission est disponible : <a href='/exercises/" . $id . "'>" . $exerciseName . "</a> . Vous recevrez " . number_format($cash, 0, '.', ' ') . "$ et " . number_format($points, 0, '.', ' ') . " pts en la complétant.</p>","Nouvelle mission disponible");
+        (new NotificationBroker())->sendNotificationToStudents("<p>Une nouvelle mission est disponible : <a href='/exercises/" . $id . "'>" . $exerciseName . "</a> . Vous recevrez " . number_format($cash, 0, '.', ' ') . "$ et " . number_format($points, 0, '.', ' ') . " pts en la complétant.</p>", "Nouvelle mission disponible");
     }
 
     public static function newBalance($userId, $add, $newBalance)

@@ -2,12 +2,8 @@
 
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\WeekBroker;
-use Models\Helpers\ImageUploader;
 use Models\Services\ExerciseService;
 use Models\Services\ImageExampleService;
-use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
-use phpDocumentor\Reflection\Types\Iterable_;
-use phpDocumentor\Reflection\Types\This;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
