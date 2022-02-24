@@ -6,6 +6,7 @@ use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\UserBroker;
 use Models\Services\ExerciseService;
+use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
@@ -22,12 +23,13 @@ class CorrectionController extends Controller
     public function initializeRoutes()
     {
         $this->get('/management/correction', 'correctionList');
-        $this->get('/management/correction/download/{id}', 'downloadExercise');
+        $this->get('/management/correction/download/{submitId}', 'downloadExercise');
         $this->get('/management/correction/detail/{id}/{submitId}', 'exerciseSubmitDetail');
 
-        $this->post('/management/correction/correct/{userId}/{id}', 'correctExercise');
+        $this->post('/management/correction/correct/{userId}/{submitId}', 'correctExercise');
 
         $this->overrideCorrection();
+        $this->overrideStudentExercise();
     }
 
     public function correctionList()
@@ -144,6 +146,21 @@ class CorrectionController extends Controller
                     return $this->redirect('/management/correction');
                 }
                 return $exercise->id;
+            } else {
+                return $this->redirect('/management/correction');
+            }
+        });
+    }
+
+    private function overrideStudentExercise()
+    {
+        $this->overrideArgument('submitId', function ($value) {
+            if (is_numeric($value)) {
+                $exercise = (new StudentExerciseBroker)->findById($value);
+                if (is_null($exercise)) {
+                    return $this->redirect('/management/correction');
+                }
+                return $exercise->se_id;
             } else {
                 return $this->redirect('/management/correction');
             }

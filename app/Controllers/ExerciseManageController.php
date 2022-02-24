@@ -37,12 +37,12 @@ class ExerciseManageController extends TeacherController
         $weeks = ((new WeekBroker())->getAll());
 
         if (count($weeks) == 0) {
-            Flash::error("Vous devez d'abord créer une semaine avant de créer une exercice");
+            Flash::error("Vous devez d'abord créer une semaine avant de créer une mission.");
             return $this->redirect("/management/exercises");
         }
 
         return $this->render('management/exercises/exercises_form', [
-            'title' => 'Créer un exercice',
+            'title' => 'Créer une mission',
             'action' => '/management/exercises/store',
             'exercise' => null,
             'weeks' => $weeks,
@@ -53,7 +53,7 @@ class ExerciseManageController extends TeacherController
     public function editExercise($id)
     {
         return $this->render('management/exercises/exercises_form', [
-            'title' => 'Modifier un exercice',
+            'title' => 'Modifier une mission',
             'action' => '/management/exercises/' . $id . '/update',
             'exercise' => (new ExerciseBroker())->findByID($id),
             'weeks' => (new WeekBroker())->getAll(),

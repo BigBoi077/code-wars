@@ -16,9 +16,9 @@ block body
       .exercise-submit-detail.w-100
         .row.pt-4.pb-0
           .d-flex.align-items-center
-            h4 #{studentName} a remis l'exercise le #{format('datetime', studentExercise.submit_date)}.
+            h4 #{studentName} a remis la mission le #{format('datetime', studentExercise.submit_date)}.
         .d-inline-block
-          h6.text-muted Soumission de l'exercise
+          h6.text-muted Soumission de la mission
         .d-inline-block.mx-1
           a(href="/exercises/" + exercise.id)
             .text-muted.font-italic #{exercise.name}.
