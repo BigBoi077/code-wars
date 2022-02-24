@@ -155,7 +155,7 @@ class CorrectionController extends Controller
     {
         $this->overrideArgument('submitId', function ($value) {
             if (is_numeric($value)) {
-                $exercise = (new StudentExerciseBroker)->findById($value);
+                $exercise = (new StudentExerciseBroker())->findById($value);
                 if (is_null($exercise)) {
                     return $this->redirect('/management/correction');
                 }
