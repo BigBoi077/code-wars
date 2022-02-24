@@ -1,12 +1,4 @@
 <?php namespace Controllers;
-
-use DateTime;
-use Models\Brokers\ExerciseBroker;
-use Models\Brokers\StudentBroker;
-use Models\Brokers\StudentExerciseBroker;
-use Models\Brokers\UserBroker;
-use Models\Services\ExerciseService;
-use Models\Services\PersonService;
 use Zephyrus\Application\Flash;
 use Zephyrus\Network\Response;
 
