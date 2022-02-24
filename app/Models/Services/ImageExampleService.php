@@ -29,7 +29,7 @@ class ImageExampleService
         $instance = new self();
         $instance->form = $form;
 
-        if ($instance->areFieldsValid()){
+        if ($instance->areFieldsValid()) {
             $instance->uploadFiles($exerciseId);
         }
         return $instance;
@@ -47,7 +47,6 @@ class ImageExampleService
 
     public static function delete($exerciseId)
     {
-
     }
 
     public function getErrorMessages()

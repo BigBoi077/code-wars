@@ -134,7 +134,7 @@ abstract class Controller extends SecurityController
 
         if ($rebel > $sith + WINNER_GAP) {
             return "rebelTheme.css";
-        } else if ($sith > $rebel + WINNER_GAP) {
+        } elseif ($sith > $rebel + WINNER_GAP) {
             return "sithTheme.css";
         }
         return null;

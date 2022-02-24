@@ -3,9 +3,7 @@
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\ImageExampleBroker;
 use Models\Brokers\StudentBroker;
-use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\TipBroker;
-use Models\Brokers\TransactionBroker;
 use Models\Brokers\WeekBroker;
 use Models\Services\ExerciseService;
 use stdClass;

@@ -76,7 +76,6 @@ class Logger
         $tokenBroker->insert($this->user->id, $tokenValue);
     }
 
-
     public function automaticLogin(): bool
     {
         $tokenBroker = new TokenBroker();

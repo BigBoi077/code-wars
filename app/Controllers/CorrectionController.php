@@ -1,11 +1,9 @@
 <?php namespace Controllers;
 
-use DateInterval;
 use DateTime;
 use Models\Brokers\ExerciseBroker;
 use Models\Brokers\StudentBroker;
 use Models\Brokers\StudentExerciseBroker;
-use Models\Brokers\TransactionBroker;
 use Models\Brokers\UserBroker;
 use Models\Services\ExerciseService;
 use Zephyrus\Application\Flash;
@@ -41,10 +39,11 @@ class CorrectionController extends Controller
             $exerciseDate = new DateTime($exercise->submit_date);
             $diff = $exerciseDate->diff($nowDate);
             if ($diff->d < 1) {
-                if ($diff->h <= 0)
+                if ($diff->h <= 0) {
                     $exercise->diff = "Remis il y a " . $diff->format("%i minutes");
-                else
+                } else {
                     $exercise->diff = "Remis il y a " . $diff->format("%h heures et %i minutes");
+                }
             } else {
                 $exercise->diff = "Remis le " . format('date', $exercise->submit_date);
             }
@@ -121,7 +120,7 @@ class CorrectionController extends Controller
 
             if ($fileExtention == "zip") {
                 $fileContent = "Fichier ZIP. Appuyer sur Télécharger pour le consulter.";
-            } else if ($fileExtention != "java") {
+            } elseif ($fileExtention != "java") {
                 $fileContent = null;
             }
 

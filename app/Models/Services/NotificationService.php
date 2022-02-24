@@ -32,7 +32,8 @@ class NotificationService
         (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "Votre balance a été mise à jour. " . $add . "$. Nouvelle balance : " . $newBalance . "$", "Nouvelle balance");
     }
 
-    public static function newPoints($userId, $add, $newAmount) {
+    public static function newPoints($userId, $add, $newAmount)
+    {
         if ($add > 0) {
             $add = "+" . number_format($add, 0, '.', ' ');
         }

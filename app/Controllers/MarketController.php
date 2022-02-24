@@ -1,6 +1,5 @@
 <?php namespace Controllers;
 
-use Models\Brokers\TransactionBroker;
 use Models\Services\ItemService;
 use Models\Services\StudentItemService;
 use Models\Transaction;
@@ -8,12 +7,12 @@ use Zephyrus\Application\Flash;
 
 class MarketController extends Controller
 {
-	public function initializeRoutes()
-	{
-		$this->get('/market', 'market');
+    public function initializeRoutes()
+    {
+        $this->get('/market', 'market');
 
         $this->post('/market/buy/{id}', 'buy');
-	}
+    }
 
     public function market()
     {

@@ -5,7 +5,6 @@ use stdClass;
 
 class ExerciseBroker extends Broker
 {
-
     public function findByID($id): ?stdClass
     {
         $sql = "SELECT e.id, week_id, name, description, cash_reward, difficulty, execution_exemple, point_reward, w.is_active
@@ -40,7 +39,6 @@ class ExerciseBroker extends Broker
 
     public function insert($name, $difficulty, $description, $exemple, $cash, $point, $weekId): int
     {
-
         $sql = "INSERT INTO codewars.exercise (id, name, difficulty, description, execution_exemple, cash_reward, point_reward, week_id) VALUES (default, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
 
         $result = $this->selectSingle($sql, [
@@ -91,8 +89,9 @@ class ExerciseBroker extends Broker
         (new TransactionBroker())->insert($userId, TransactionBroker::getActionForRapidAction($reward->cash_reward, $reward->point_reward), "Mission complétée");
         $broker->addCash($student->da, $reward->cash_reward);
         $broker->addPoints($student->da, $reward->point_reward);
-        if ($comment != null)
+        if ($comment != null) {
             NotificationService::newCommentOnCorrection($userId, $reward->name);
+        }
         NotificationService::exerciseCorrected($userId, $reward->cash_reward, $reward->point_reward);
     }
 
