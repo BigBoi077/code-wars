@@ -34,7 +34,12 @@ class TeamBroker extends Broker
         foreach ($students as $student) {
             $studentBroker->addPoints($student->da, $points);
             $studentBroker->addCash($student->da, $cash);
-            $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction($cash, $points), $reason);
+            $isPointsPositive = $points >= 0;
+            $isCashPositive = $cash >= 0;
+            if ($reason == "") {
+                $reason = "Mettre un raison icite";
+            }
+            (new TransactionBroker())->insert($student->id, $reason, $cash, $points, $isCashPositive, $isPointsPositive);
         }
     }
 }

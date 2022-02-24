@@ -64,7 +64,8 @@ class Transaction
         }
         StudentItemService::create($item_id, $da);
         (new StudentBroker())->update($student->da, $student->team_id, $student->cash - $item->price, $student->points); //TODO mettre dans le service ?
-        (new TransactionBroker())->insert($student->id, TransactionBroker::getActionBought($item->price), "Achat effectué");
+        $comment = "Mettre un raison icite";
+        (new TransactionBroker())->insert($student->id, $comment, $item->price, 0, false, false);
         NotificationService::studentBoughtItem($student, $item);
         $this->success = true;
     }

@@ -173,7 +173,12 @@ class StudentManageController extends TeacherController
             $student = $studentBroker->findByDa($form->getValue('student_da'));
             $studentBroker->addPoints($form->getValue('student_da'), (int)($points));
             $studentBroker->addCash($form->getValue('student_da'), (int)($cash));
-            $transactionBroker->insert($student->id, TransactionBroker::getActionForRapidAction((int)$cash, (int)$points), $reason);
+            $isPointsPositive = $points >= 0;
+            $isCashPositive = $cash >= 0;
+            if ($reason == "") {
+                $reason = "Mettre un raison icite";
+            }
+            $transactionBroker->insert($student->id, $reason, $cash, $points, $isCashPositive, $isPointsPositive);
             Flash::success("Ajout rapide, à " . $student->firstname . ' ' . $student->lastname . ", effectué avec succès!");
         }
         return $this->redirect("/management/students");

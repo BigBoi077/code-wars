@@ -178,8 +178,11 @@ create table if not exists transaction (
     id serial,
     user_id int,
     date timestamp,
-    action varchar,
     description varchar,
+    cash double precision,
+    points integer,
+    is_cash_positive boolean,
+    is_points_positive boolean,
     constraint fk_transaction_user_id foreign key (user_id) references "user"(id),
     constraint pk_transaction_id primary key (id)
 );

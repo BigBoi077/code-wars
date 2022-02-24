@@ -17,6 +17,8 @@
     --blue: #0f86ff;
     --font: #212529;
     --bronze: #cd7f32;
+    --success-green: #4BB543;
+    --error-red: #ed4337;
 }
 
 .bg-accent-50 {
@@ -33,6 +35,14 @@
 
 .accent {
     color: var(--accent);
+}
+
+.success-green * {
+    color: var(--success-green) !important;
+}
+
+.error-red * {
+    color: var(--error-red) !important;
 }
 
 .foreground {
@@ -1618,6 +1628,8 @@ th {
 }
 
 .table td:last-child {
+    display: flex;
+    justify-content: flex-end;
     text-align: right;
 }
 
@@ -1630,8 +1642,10 @@ table {
     padding-left: 0 !important;
 }
 
-table td.end {
+table td.end, table th.end {display: flex;
+    justify-content: flex-end;
     text-align: right;
+    padding-right: 0;
 }
 
 .return-ready {

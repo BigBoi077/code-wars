@@ -2,10 +2,10 @@
 
 class TransactionBroker extends Broker
 {
-    public function insert($userId, $action, $description = 'Aucune')
+    public function insert($userId, $description, $cash, $points, $isCashPositive, $isPointsPositive)
     {
-        $sql = "insert into codewars.transaction(action, date, description, user_id) values(?, now(), ?, ?)";
-        $this->query($sql, [$action, $description, $userId]);
+        $sql = "insert into codewars.transaction(user_id, date, description, cash, points, is_cash_positive, is_points_positive) values(?, now(), ?, ?, ?, ?, ?)";
+        $this->query($sql, [$userId, $description, $cash, $points, $isCashPositive, $isPointsPositive]);
     }
 
     public function getAllByUser($userId): array
@@ -18,12 +18,12 @@ class TransactionBroker extends Broker
     {
         $cash = TransactionBroker::addSub($cash);
         $points = TransactionBroker::addSub($points);
-        return "Il vous a été " . $cash . "$ et " . $points . " points";
+        return "Vous avez été " . $cash . "$ et " . $points . " points";
     }
 
     public static function getActionBought($cash): string
     {
-        return "Il vous a été déduit " . $cash . "$";
+        return "Vous avez  été déduit " . $cash . "$";
     }
 
     private static function addSub($value): string

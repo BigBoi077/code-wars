@@ -88,7 +88,12 @@ class ExerciseBroker extends Broker
         $sql = "select cash_reward, point_reward, e.name from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
         $reward = $this->selectSingle($sql, [$id]);
         $broker = new StudentBroker();
-        (new TransactionBroker())->insert($userId, TransactionBroker::getActionForRapidAction($reward->cash_reward, $reward->point_reward), "Mission complétée");
+        $isPointsPositive = $reward->point_reward >= 0;
+        $isCashPositive = $reward->cash_reward >= 0;
+        if ($comment == "") {
+            $comment = "Mettre un raison icite";
+        }
+        (new TransactionBroker())->insert($student->id, $comment, $reward->cash_reward, $reward->point_reward, $isCashPositive, $isPointsPositive);
         $broker->addCash($student->da, $reward->cash_reward);
         $broker->addPoints($student->da, $reward->point_reward);
         if ($comment != null)

@@ -23,13 +23,16 @@ block body
             table.table
               thead
                 th Date
-                th Action
-                th Raison
+                th Description
+                th.end Balance
               tbody
                 each transaction in transactions
                   tr
                     td=format('date', transaction.date)
-                    td=transaction.action
                     td.start=transaction.description
+                    td.end
+                      .d-flex
+                        +cashBalance(transaction.cash, transaction.isCashPositive)
+                        +pointsBalance(transaction.points, transaction.isPointsPositive)
           else
             small.text-muted Vous n'avez aucune transaction pour l'instant
