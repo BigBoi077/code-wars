@@ -63,7 +63,7 @@ class Transaction
         }
         StudentItemService::create($item_id, $da);
         (new StudentBroker())->update($student->da, $student->team_id, $student->cash - $item->price, $student->points); //TODO mettre dans le service ?
-        $comment = "Mettre un raison icite";
+        $comment = "Vous avez acheter un objet du magasin.";
         (new TransactionBroker())->insert($student->id, $comment, $item->price, 0, false, false);
         NotificationService::studentBoughtItem($student, $item);
         $this->success = true;

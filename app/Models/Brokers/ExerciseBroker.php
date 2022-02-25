@@ -90,7 +90,7 @@ class ExerciseBroker extends Broker
         $isPointsPositive = $reward->point_reward >= 0;
         $isCashPositive = $reward->cash_reward >= 0;
         if ($comment == "") {
-            $comment = "Mettre un raison icite";
+            $comment = "Votre exercices à été corrigé. Voici votre récompense :";
         }
         (new TransactionBroker())->insert($student->id, $comment, $reward->cash_reward, $reward->point_reward, $isCashPositive, $isPointsPositive);
         $broker->addCash($student->da, $reward->cash_reward);
