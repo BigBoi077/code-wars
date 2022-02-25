@@ -87,7 +87,7 @@ Votre consommation au 100km est de 6.62L
 Le cout estimé au 100km est de 7.62$
 ');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (19, 1,'Mise à niveau -  Échec ou succès', 'Vous devez écrire un programme qui demande à l’utilisateur de saisir sa note lors d’un examen et le programme affiche sa notation littérale (en lettre) suivant le barème suivant. Le programme affiche également une mention de l’apprentissage (excellent, très bien, bien, passage ou échec).
-<br /><br />
+<br />
 <table>
 <tr>
 <th>Appréciation</th>
@@ -174,11 +174,11 @@ Jour : 11
 
 Vous avez 27 ans !');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (31, 1,'Mise à niveau -  Jours dans un mois', 'Vous devez écrire un programme qui calcule le nombre de jours qu’il y’a dans un mois pour une année donnée. Votre programme demande de saisir l’année et ensuite le numéro du mois. Il affiche le nombre de jours pour le mois demandé. Vous devez tenir compte des années bissextiles. Voici la règle :
-<br /><br />
+<br />
 Une année est bissextile si l’année est divisible par 4 et non divisible par 100 ou si l’année est divisible par 400.
-<br /><br />
+<br />
 Une année bissextile fait en sorte qu’il y aura 366 jours dans une année au lieu de 365. La journée supplémentaire s’ajoute au mois de février qui passe de 28 jours à 29.
-<br /><br />
+<br />
 Vous devez respecter l''affichage exigé. C''est-à-dire que si le mois demandé est février, il faut afficher l''année dans la sortie, mais pas pour les autres mois. Il faut, par contre, toujours indiquer le mois sous forme textuelle dans la sortie.
 ', 1, 500, 20, 'Annee : 2015
 Numéro du mois (1-12): 12
@@ -192,7 +192,7 @@ Annee : 2000
 Numéro du mois (1-12): 10
 Le mois de octobre compte 31 jours');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (32, 1,'Mise à niveau -  Réclamations', 'Vous devez écrire un programme qui calcule le montant d’une police d’assurance selon le nombre de réclamations dans l’année. Votre programme demande le montant de la prime initiale et le nombre de réclamations. Selon le nombre de réclamations, le montant de la prime augmente :
-<br /><br />
+<br />
 <table>
 <tr>
 <th>Nombre de réclamations</th>
@@ -283,9 +283,9 @@ insert into codewars.exercise(id, week_id, name, description, difficulty, cash_r
 [99, 76, 54, 32, 76]
 1 valeur(s) r&#233;p&#233;t&#233;(s)');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (58, 1,'Le jeu du pendu, sans le pendu', 'Vous devez écrire un programme qui permet de jouer au pendu, sans le pendu. Vous devez chercher dans un fichier texte ordonné de façon séquentielle (1 mot par ligne) nommé <code>pendu.mots</code> un mot aléatoire qui sera le mot magique à deviner. Tenez pour acquis qu''il ne peut pas avoir plus de 255 lignes dans ce fichier.
-<br /><br />
+<br />
 Le joueur essaie une lettre à la fois et si la lettre est bien dans le mot magique, vous affichez la lettre à la bonne position.
-<br /><br />
+<br />
 Les lettres cachées sont représentées par un trait de soulignement (<i>underscore</i>). Le jeu s''arrête lorsque le mot a été trouvé. Si le fichier n''existe pas, il faut afficher <code>Fichier introuvable !</code>.', 2, 850, 40, 'Entrez une lettre : j
 _ _ _ j _ _ _
 
@@ -370,16 +370,16 @@ Moyenne: 6,00
 Médiane: 6,00
 Mode: 6');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (65, 2,'Tri par sélection', 'Il existe plusieurs façons de trier un tableau de données. À partir du pseudo-code fourni, vous devez implanter une fonction dans un programme Java qui permet de trier un tableau depuis l''algorithme du tri par sélection. Vous devez afficher le tableau avec les éléments non-triés et le tableau trié.
-<br /><br />
+<br />
 L''idée du tri par sélection est de chercher dans le tableau l''élément le plus petit et l''échanger avec le premier élément. Ensuite, on cherche le deuxième élément le plus petit et on l''échange avec le deuxième élément et on continue jusqu''à ce que le tableau soit entièrement trié.
-<br /><br />
+<br />
 <span style=""font-family: ''Courier New'', Courier, monospace;"">
 proc&eacute;dure tri_selection(tableau t, entier n)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;pour i de 1 &#224; n - 1<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min &#8592; i<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pour j de i + 1 &#224; n<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;si t[j] < t[min], alors min &#8592; j<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;si min &#8800; i, alors &#233;changer t[i] et t[min]<br />
+pour i de 1 &#224; n - 1<br />
+min &#8592; i<br />
+pour j de i + 1 &#224; n<br />
+si t[j] < t[min], alors min &#8592; j<br />
+si min &#8800; i, alors &#233;changer t[i] et t[min]<br />
 </span>', 3, 1700, 100, 'Non-trié: [8, 4, 2, 6, 5]
 Trié: [2, 4, 5, 6, 8]
 
@@ -392,7 +392,7 @@ insert into codewars.exercise(id, week_id, name, description, difficulty, cash_r
  2 |     2    4    6    8   10   12   14   16   18    20
 ...');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (67, 2,'L''extrême addition de deux nombres', 'Vous devez concevoir un programme qui effectue l''addition de deux nombres entiers. L''utilisateur entre les deux nombres au clavier et le programme doit afficher le résultat du calcul. <u>La partie intéressante est que votre programme doit prévoir les débordements lors du calcul</u>. S''il y a en effet débordement dans le calcul, vous devez afficher <code>Débordement !</code>.
-<br /><br />
+<br />
 Vous devez <b>ABSOLUMENT</b> utiliser le type <i>int</i> pour les variables du programme qui effectuent le calcul et qui garde en mémoire les valeurs saisies.  ', 3, 1700, 100, 'Entrez la première opérande : 10
 Entrez la seconde op&eacute;rande : 5
 10 + 5 = 15
@@ -429,11 +429,11 @@ Entrez un nombre dans le format binaire : 10010101
 Entrez un nombre dans le format binaire : 010101100001
 1377');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (69, 3,'Dolorama Express', 'Vous devez réaliser un programme Java qui sera implanté dans les caisses de la chaîne de magasins Dolorama. Votre programme demande à l''utilisateur d''entrer une succession d''articles pour un client et ensuite d''afficher le total (avec les taxes) à l''écran.
-<br /><br />
+<br />
 Tout d''abord, le programme demande le prix de l''article en sélectionnant un choix parmi les suivants : 1$; 1,25$; 1,50$; 2$ (souvenez-vous que nous sommes au Dolorama).
-<br /><br />
+<br />
 Ensuite, le programme demande d''entrer la quantité pour cet article. Une fois fait, le programme demande à l''utilisateur s''il veut entrer un autre article. Si oui, on recommence depuis le début en conservant le sous-total actuel. Lorsque l''utilisateur a terminer d''entrer les articles, le sous-total, la TPS, la TVQ et le grand total sont affichés et le programme se termine.
-<br /><br />
+<br />
 <b>ATTENTION !</b> La solution doit être objet et être faite en utilisant une seule classe (autre que celle qui contient le Main). Une solution procédurale sera automatiquement refusée. ', 2, 1500, 75, 'Quel est le prix (1) 1$ | (2) 1,25$ | (3) 1,50$ | (4) 2$ ? 1
 Quel est la quantité ? 4
 Voulez-vous entrer un autre article (O / N) ? N
@@ -468,19 +468,19 @@ Entrez une chaîne : Poker
 Entrez une chaîne : Programmation orientée-objet
 2 mot(s) trouvé(s)');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (71, 3,'Console IO', 'Vous devez programmer un simulateur pour une console virtuelle de base qui implémente uniquement certaines fonctionnalités de IO. Votre programme demande la saisie d''une commande et l''exécute. Si la commande n''existe pas, vous devez afficher le message ""Commande non reconnue"". Après l''exécution d''une commande, le programme redemande une commande jusqu''à ce que l''utilisateur utilise la commande ""<i>exit</i>"". Le répertoire racine de votre console virtuelle est le répertoire du projet. Voici la liste des commandes qui doivent être implémentée :
-<br /><br />
+<br />
 <i>exit</i> : termine le programme.
-<br /><br />
+<br />
 <i>cd</i> [répertoire ou ..] : si l''argument de la commande est "".."", il remonter d''un niveau. Sinon, il faut vérifier que le répertoire existe et entrer dedans.
-<br /><br />
+<br />
 <i>pwd</i> : afficher à l''écran le chemin actuel de l''utilisateur.
-<br /><br />
+<br />
 <i>ls</i> : afficher la liste des fichiers et répertoires dans le dossier actuel.
-<br /><br />
+<br />
 <i>mkdir</i> [nom du répertoire] : création d''un répertoire avec le nom passé en argument.
-<br /><br />
+<br />
 <i>touch</i> [nom du fichier] : création d''un fichier vide avec le nom passé en argument.
-<br /><br />
+<br />
 <b>ATTENTION !</b> La solution doit être objet. Une solution procédurale sera automatiquement refusée.', 4, 3000, 120, '> mkdir test
 Répertoire &lt;test&gt; créé avec succès.
 > cd test
@@ -505,9 +505,9 @@ Répertoire &lt;un_dossier&gt; créé avec succès.
 test
 > exit');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (72, 3,'Analyse HTTP I', 'Vous devez écrire un programme qui permet de saisir une adresse Web (URL) sous le protocole HTTP standard et d''obtenir les informations qui sont contenues dans l''entête de la réponse HTTP d''une requête envoyée au serveur ciblé.
-<br /><br />
+<br />
 Vous pouvez utiliser les classes ""URL"" et ""URLConnection"" ou encore la classe ""Socket"". Vous pouvez utiliser d''autres classes selon vos besoins, mais les classes ""URL"" et ""URLConnection"" risquent d''être les plus simples d''utilisation. Vous devez afficher toutes les informations qui se retrouvent dans l''entête de la réponse HTTP.
-<br /><br />
+<br />
 ATTENTION ! La solution doit être objet. Une solution procédurale sera automatiquement refusée.', 2, 850, 40, 'Entrez une adresse valide : http://google.ca
 HTTP/1.1 200 OK
 alt-svc:quic=""www.google.com:443""; ma=2592000; v=""30,29,28,27,26,25"",quic="":443""; ma=2592000; v=""30,29,28,27,26,25""
@@ -523,11 +523,11 @@ x-xss-protection:1; mode=block');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (73, 2,'CAPS LOCK', 'Vous devez écrire un programme qui permet de prendre une chaîne de caractères saisie par l''utilisateur et de la réécrire en majuscule sans espace inutile (les espaces au début et en fin de chaîne).', 1, 500, 20, 'Entrez une chaîne : vive LE beau Soleil
 VIVE LE BEAU SOLEIL
 
-Entrez une chaîne : &nbsp;&nbsp;&nbsp;coucou&nbsp;&nbsp;&nbsp;
+Entrez une chaîne : coucou
 COUCOU
 
-Entrez une chaîne : batman est le &nbsp;&nbsp;&nbsp;&nbsp;meilleur
-BATMAN EST LE &nbsp;&nbsp;&nbsp;&nbsp;MEILLEUR
+Entrez une chaîne : batman est le meilleur
+BATMAN EST LE MEILLEUR
 
 Entrez une chaîne : Java 7
 JAVA 7
@@ -535,7 +535,7 @@ JAVA 7
 Entrez une chaîne : école
 ÉCOLE');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (74, 3,'Avant de mourir, on voit le cercle', 'Programmez une classe ""Cercle"" qui contient comme propriété son rayon et l''unité (par défaut à cm). Cette classe doit offrir trois services : afficher l''air du cercle, afficher le périmètre du cercle et assigner l''unité à utiliser (limité à mm, cm, dm et m). De plus, le rayon du cercle doit être donné au constructeur de la classe.
-<br /><br />
+<br />
 Utilisez ensuite votre classe depuis le main. Ne faite pas de lecture au clavier, faites vos tests directement dans le code. ', 3, 1800, 80, '// Utilisation dans le main
 Cercle cercle = new Cercle(15);
 cercle.afficherPerimetre();
@@ -549,9 +549,9 @@ cercle.afficherAir();
 
 ');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (75, 3,'Un point dans l''univers', 'Vous devez programmer une classe ""Point"" qui contient deux propriétés : x et y. Vous devez créer des accesseurs et des mutateurs pour ces deux propriétés. Vous devez ajouter un mutateur ""setXY(int x, int y)"" qui permet d''assigner les deux valeurs d''un seul coup.
-<br /><br />
+<br />
 Votre classe doit offrir le service ""calculerDistance"" qui prend en argument un autre point. Cette méthode doit retourner la distance entre les deux points.
-<br /><br />
+<br />
 Consultez le lien suivant pour la formule de distance : <a href=""https://fr.wikipedia.org/wiki/Distance_entre_deux_points_sur_le_plan_cart%C3%A9sien"" target=""_blank"">Wikipédia</a>. Utilisez ensuite votre classe depuis le main. Ne faite pas de lecture au clavier, faites vos tests directement dans le code.
 ', 3, 1800, 80, '// Utilisation dans le main
 Point a = new Point();
@@ -562,11 +562,11 @@ b.setXY(50, 200);
 
 System.out.println(""Distance : "" + a.calculerDistance(b));');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (76, 3,'Triangle des bermudes', 'Vous devez programmez une classe ""Triangle"" qui contient comme propriété les trois points du triangle. VOUS DEVEZ ABSOLUMENT UTILISER LA CLASSE POINT DEPUIS L''EXERCICE « <a href=""http://starwars.cegeplabs.qc.ca/missions/75"" target=""_blank"">Un point dans l''univers</a> ».
-<br /><br />
+<br />
 Votre classe doit implémenter un getter et un setter pour chaque point et offrir un mutateur qui permet d''assigner les 3 points d''un seul coup.
-<br /><br />
+<br />
 Votre classe doit offrir une méthode qui calcul le périmètre du triangle ainsi que l''aire (utilisez la distance entre les points). Vous devez également offrir un service qui permet d''afficher le type du triangle (équilatéral [tous les côtés sont égaux], scalene [deux des trois côtés sont égaux] ou isocèle [aucun côté égal]).
-<br /><br />
+<br />
 Consultez le <a href=""http://www.comment-calculer.net/aire-du-triangle.php"" target=""_blank"">lien suivant</a> pour la formule d''aire d''un triangle indépendamment des angles. Utilisez ensuite votre classe depuis le main. Ne faite pas de lecture au clavier, faites vos tests directement dans le code.', 4, 2500, 90, '// Utilisation dans le main
 Point p1 = new Point();
 Point p2 = new Point();
@@ -584,7 +584,7 @@ triangle.afficherType();
 System.out.println(""Périmètre: "" + perimetre);
 System.out.println(""Aire: "" + aire);');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (77, 3,'Une forme générale', 'Vous devez programmer une classe ""FormeGeometrique"" qui contient un ensemble de points qui forme sa structure. Par exemple, si nous voulons un hexagone, nous allons insérer 6 points. VOUS DEVEZ ABSOLUMENT UTILISER LA CLASSE POINT DEPUIS L''EXERCICE « <a href=""http://starwars.cegeplabs.qc.ca/missions/75"" target=""_blank"">Un point dans l''univers</a> » comme base, <b>MAIS</b> modifiez-la de sorte à ce que le constructeur prenne en argument les coordonnées X et Y.
-<br /><br />
+<br />
 Votre classe doit permettre d''ajouter des points sur demande et permet simplement le calcul du périmètre. Utilisez ensuite votre classe depuis le main. Ne faite pas de lecture au clavier, faites vos tests directement dans le code.', 3, 1800, 80, '// Utilisation dans le main
 Point p1 = new Point(0, 20);
 Point p2 = new Point(20, 20);
@@ -604,11 +604,11 @@ double perimetre = hexagone.calculerPerimetre();
 
 System.out.println(""Périmètre: "" + perimetre);');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (78, 3,'Le temps dans une bouteille I', 'Vous devez programmer une classe ""Time"" qui contient les propriétés suivantes : heures (version 24 heures), minutes et secondes. Vous devez offrir un accesseur et un mutateur pour les 3 propriétés ainsi qu''un constructeur qui prend les 3 données en argument. Ajouter également un constructeur par défaut qui initiale le temps actuel. ATTENTION ! Vous devez faire en sorte que les setters soient valide. C''est-à-dire que si la donnée entrée est invalide vous devez conserver 0 (ex. 25 pour le nombre d''heures).
-<br /><br />
+<br />
 Vous devez programmer des méthodes qui permettent de retourner une nouvelle instance de Time depuis un objet Time. Les méthodes sont : nextHour, nextMinute, nextSecond, previousHour, previousMinute et previousSecond. Ses méthodes prennent un argument qui indique le nombre à avancer ou à reculer. Par exemple, nextHour(4) retournera un objet ""Time"" avancé de 4 heures.
-<br /><br />
+<br />
 Finalement, écrivez une méthode ""afficher"" qui affiche à la console le temps de l''objet sous le format suivant : hh:mm:ss (ex. 17:34:06).
-<br /><br />
+<br />
 ATTENTION ! Vous ne devez pas utiliser de classe Calendar ou Date ou tout autre classe déjà existante qui manipule le temps. Vous devez programmer l''ensemble de la logique.', 4, 2800, 90, '// UTILISATION DANS LE MAIN
 Time t1 = new Time(10, 10, 00);
 t1.afficher(); // Affiche 10:10:00
@@ -622,77 +622,77 @@ t3.afficher(); // Affiche 16:05:00
 ');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (79, 4,'Netflix', 'Terminer l''application Netflix débuté collectivement en classe tel que demandé dans l''énoncé disponible sur LÉA.', 3, 1800, 80, '');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (80, 4,'Bibliothèque (diagramme UML)', 'Vous devez réaliser le diagramme de classes UML pour représenter la situation suivante. Vous n''avez pas à écrire les classes Java. Votre diagramme doit contenir toutes les associations nécessaires, toutes les généralisations nécessaires (l''héritage) et le type des propriétés (ainsi que l''accessibilité) doit être énoncé.
-<br /><br />
+<br />
 Vous devez concevoir un diagramme de classes en vue de la production d''un système informatisé de location de livres à la bibliothèque.
-<br /><br />
+<br />
 Pour qu''une personne puisse emprunter un livre, elle doit être membre de la bibliothèque. Les membres sont créés par un employé de la bibliothèque et exigent les propriétés suivantes : nom, prénom, adresse et numéro de téléphone. Un membre peut emprunter un maximum de 5 livres (qu''il a en sa possession en même temps).
-<br /><br />
+<br />
 La bibliothèque veut offrir un système de recherche de livre à l''accueil. Un livre doit donc avoir les propriétés suivantes : titre, année de publication, éditeur, ISBN, nom et prénom de l''auteur. D''ailleurs, il faudrait être en mesure de rechercher un auteur dans le système pour obtenir la liste de ses livres publiés.
-<br /><br />
+<br />
 Finalement, le système doit prévoir un accès pour les employés. Les employés sont caractérisés par un nom, un prénom, un numéro d''employé et une date d''embauche. Les employés peuvent ajouter dans le système des auteurs, des livres et des membres.', 3, 1500, 75, '');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (81, 4,'Clinique vétérinaire (diagramme UML)', 'Vous devez réaliser le diagramme de classes UML pour représenter la situation suivante. Vous n''avez pas à écrire les classes Java. Votre diagramme doit contenir toutes les associations nécessaires, toutes les généralisations nécessaires (l''héritage) et le type des propriétés (ainsi que l''accessibilité) doit être énoncé.
-<br /><br />
+<br />
 Vous devez concevoir un diagramme de classes en vue d''un système qui va permettre de gérer les rendez-vous d''une clinique vétérinaire.
-<br /><br />
+<br />
 Tout d''abord, le système doit permettre la gestion des clients. Un client est caractérisé par un nom, un prénom, une adresse et un numéro de téléphone. Un client peut avoir plusieurs animaux d''inscrits à la clinique.
-<br /><br />
+<br />
 Les animaux acceptés dans cette clinique sont les chats et les chiens seulement. Tous les animaux ont un nom, une race et une liste de maladies connues. Une maladie doit être représentée par un nom, une description des symptômes et une description du remède. Le système permettra d''effectuer des recherches dans la liste des maladies.
-<br /><br />
+<br />
 Finalement, le système doit permettre la création d''une rencontre. Une rencontre est caractérisée par une date, une description du problème et une description du diagnostic. Évidemment, une rencontre doit être associée avec un animal.
 
 ', 3, 1500, 75, '');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (82, 5,'Tim Horton (diagramme UML)', 'Vous devez réaliser le diagramme de classes UML pour représenter la situation suivante. Vous n''avez pas à écrire les classes Java. Votre diagramme doit contenir toutes les associations nécessaires, toutes les généralisations nécessaires (l''héritage) et le type des propriétés (ainsi que l''accessibilité) doit être énoncé.
-<br /><br />
+<br />
 Vous devez concevoir un diagramme de classes en vue d''un système de caisse pour les restaurants Tim Hortons. Votre système doit permettre l''achat des breuvages disponibles chez Tim Hortons.
-<br /><br />
+<br />
 Tout d''abord, il existe les breuvages chauds et il existe les breuvages froids. Dans la catégorie des breuvages chauds, il existe les cafés, les thés et les cafés spécialités (moka, latte, etc.). Dans la catégorie des breuvages froids, il existe les cappucinos glacés, les smooties et les limonades.
-<br /><br />
+<br />
 Tous les breuvages offrent les formats petit, moyen et grand. Les breuvages froids permettent l''ajout d''une saveur. Les cappucinos glacés permettent l''option d''ajouter de la crème. Les cafés offrent la possibilité d''ajouter des sucres, des crèmes ou des laits. Les cafés spécialisés ont simplement un type (moka, latte, etc.). Les thés offrent simplement une saveur de poche.
-<br /><br />
+<br />
 Tous les breuvages ont un prix de vente et une propriété qui permet de dire si le prix est en spécial ou non.
-<br /><br />
+<br />
 Votre système doit gérer la notion de commande. Une commande peut comporter plusieurs breuvages et conserve le mode de paiement (comptant, débit, crédit, etc.).', 4, 1800, 80, '');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (83, 5,'Ordinateurs', 'Vous devez réaliser des classes Java qui peuvent représenter les objets Ordinateur, Portable et Table. La classe Ordinateur contient les propriétés : modèle (ex. Macbook Pro), processeur (ex. 2.3GHz quad-core Intel Core i7), mémoire (ex. 8GB), espace disque (ex. 750 GB) et nombre de ports USB (ex. 3).
-<br /><br />
+<br />
 La classe Portable hérite de la classe Ordinateur et contient les propriétés suivantes : poids (ex. 1.7 lbs), dimension de l''écran (ex. 15'''') et capacité de la pile (ex. 7 heures).
-<br /><br />
+<br />
 La classe Table hérite de la classe Ordinateur et contient les propriétés suivantes : nombre de fentes d''expansion (ex. 3) et le style de boîtier (ex. Base).
-<br /><br />
+<br />
 Vous devez redéfinir la méthode toString pour permettre d''afficher directement les caractéristiques d''un ordinateur dans la situation d''un affichage par println (Macbook Pro 15'''' 2.3GHz quad-core Intel Core i7 8GB de RAM).
-<br /><br />
+<br />
 Vous devez écrire les trois classes Java et un main qui test vos classes (instancie chaque type et affiche les informations).', 2, 1500, 75, '');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (84, 5,'Usine d''animaux', 'Vous devez construire une architecture de classe qui permet d''instancier des animaux dans un programme main. Chaque animal devra implémenter les méthodes « parler » et « bouger » qui ne prennent aucun paramètre.
-<br /><br />
+<br />
 Les classes d''animaux que vous devez créer sont : Chien, Chat, Oiseau, Lion et Poisson. Ces classes devraient toutes être une spécialisation d''une certaine classe Animal ...
-<br /><br />
+<br />
 Dans le main, vous devez utiliser une classe de cette façon :
-<br /><br />
+<br />
 <i>
 // Instanciation d''un chien<br />
-Chien chien = new Chien();<br /><br />
+Chien chien = new Chien();<br />
 System.out.println(chien.parler());<br />
 System.out.println(chien.bouger());
 </i>
-<br /><br />
+<br />
 Le résultat à l''écran devrait être quelque chose comme : « Le chien parle avec Wooof ! » et « Le chien se déplace à quatre pattes ». Soyez inventif dans la façon de parler et de bouger des animaux. Vous devez simplement afficher des moyens différents pour chacun et indiquer la sorte d''animaux dans votre affichage.', 3, 1500, 75, '');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (85, 4,'ATM', 'Vous devez écrire un programme Java qui utilise des classes dans le but de réaliser un système de guichet monétaire (un ATM). Vous devez ABSOLUEMENT utiliser une classe « Compte » et une classe « Utilisateur » minimalement.
-<br /><br />
+<br />
 La classe Utilisateur contient un prénom, un nom, un ou plusieurs Compte (on peut imaginer un compte chèque et un compte épargne) et un NIP (4 caractères).
-<br /><br />
+<br />
 La classe Compte contient le nom du compte (épargne, chèque, etc.), le solde disponible et le maximum de retrait (par exemple 500$).
-<br /><br />
+<br />
 Votre programme demande tout d''abord d''entrer un NIP de 4 lettres (le NIP peut être affiché à l''écran de façon littérale sans les caractères invisibles *). Si le NIP est bon (c''est bel et bien un NIP existant dans un des objets Utilisateur de votre programme), vous offrez alors le choix à l''utilisateur de : retirer de l''argent, déposer de l''argent, voir l''état des comptes et quitter.
-<br /><br />
+<br />
 <b>Retirer de l''argent</b> : demande à l''utilisateur de choisir son compte en premier (il peut en avoir plusieurs !). Une fois le compte sélectionné, vous demandez à l''utilisateur d''entrer un montant et affiche le maximum qu''il peut retirer pour ce compte. Le montant entré par l''utilisateur doit être valide. S''il ne l''est pas, vous affichez un message d''erreur et recommencez l''opération. Si tout se passe bien, vous débitez le montant du compte de l''utilisateur et vous retournez au menu principal. Si l''utilisateur entre <termine>, il retourne au menu principal.
-<br /><br />
+<br />
 <b>Déposer de l''argent</b> : demande à l''utilisateur de choisir son compte en premier (il peut en avoir plusieurs !). Une fois le compte sélectionné, vous demandez à l''utilisateur d''entrer un montant. Le montant entré par l''utilisateur doit être valide. S''il ne l''est pas, vous affichez un message d''erreur et recommencez l''opération. Si tout se passe bien, vous ajoutez le montant indiqué dans le compte de l''utilisateur et vous retournez au menu principal. Si l''utilisateur entre <termine>, il retourne au menu principal.
-<br /><br />
+<br />
 <b>Voir l''état des comptes</b> : affiche le solde de tous les comptes de l''utilisateur et retourne au menu principal.
-<br /><br />
+<br />
 <b>Quitter</b> : retourne à l''écran de saisie du NIP.
-<br /><br />
+<br />
 Attention ! Tout affichage monétaire doit être formaté avec deux chiffres après la décimale.
-<br /><br />
+<br />
 Créez dans votre programme principal (le main) des objets Utilisateur que vous allez pouvoir tester.', 4, 3500, 150, 'NIP: 1234
 -------------------------------
 Bonjour Bruce Wayne,

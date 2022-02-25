@@ -15,7 +15,8 @@ block body
       .d-flex.flex-row
         .w-75.pr-5
           h3.mb-2 Débriefing de la mission
-          p.mission-description=exercise.description
+          - var desc = exercise.description
+          p.mission-description !{desc}
           +missionSubmit(corrected, submitted, isTeacher)
           +exerciseExecutionExample(exercise)
           +exerciseImageExample(imageExamples)

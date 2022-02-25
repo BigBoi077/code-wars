@@ -20,8 +20,8 @@ mixin missionSidebar(exercise)
         .col-2.mb-0
           i.far.fa-edit
         .col-8.mb-0
-          span.font-weight-light
-            a(href="/management/exercises/" + exercise.id + "/edit") Editer l'exercise
+          small.font-weight-light
+            a(href="/management/exercises/" + exercise.id + "/edit") Modifier la mission
       else
         if corrected
           .col-2.mb-0
@@ -44,10 +44,10 @@ mixin missionSidebar(exercise)
           .col-10.mb-0
             small En cours
     .col-12.mission-difficulty-container.mb-1
-      span.mb-2 Achèvement
-      h6.text-muted=completion + " % des élèves ont complété l'exercice"
+      span.mb-1 Achèvement
+      h6.text-muted=completion + " % des élèves ont complété la mission"
     .col-8.mission-difficulty-container
-      span.mb-2 Difficulté
+      span.mb-1 Difficulté
       .difficulty-stars
         - var i = 0
         - var difficultyDifference = 5 - exercise.difficulty

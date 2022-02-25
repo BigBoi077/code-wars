@@ -18,14 +18,14 @@ mixin exerciseTips(tips)
           if tip.bought
             if isTeacher
               li
-                a(href="/management/exercises/" + exercise.id + "/tips/" + tip.id + "/edit").pl-0.mb-3.d-inline-block=tip.tip
+                a(href="/management/exercises/" + exercise.id + "/tips/" + tip.id + "/edit").pl-0.mb-3.d-inline-block !{tip.tip}
                 p.d-inline-block.ml-1 (#{tip.price}$)
             else
               li.pl-0.mb-3
-                pre=tip.tip
+                p !{tip.tip}
           else
             if !isTeacher && !corrected
               form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
                 button.btn.btn-yellow.position-absolute.tip-buy-button
                   +star_wars_money(tip.price)
-            p(class=(isTeacher) ? '' : 'blur').my-4.pl-0=tip.tip
+            p(class=(isTeacher) ? '' : 'blur').my-4.pl-0 !{tip.tip}
