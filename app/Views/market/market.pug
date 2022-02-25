@@ -15,7 +15,7 @@ block flash
 block body
 	.container
 		.row.mt-5.p-4.main-card
-			.w-100.mb-4
+			.w-100(class=items == null ? '': 'mb-4')
 				.d-flex.justify-content-between.align-items-center
 					h1 Magasin
 					if user.isTeacher
@@ -25,7 +25,7 @@ block body
 									i.fas.fa-plus-square.mr-2
 									| Gestion des articles
 			if items == null
-				hr
+				hr.w-100
 				span.text-muted Aucun article pour le moment
 			else
 				.row.shop-items-list.p-0

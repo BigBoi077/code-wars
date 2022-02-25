@@ -1,0 +1,5 @@
+mixin exerciseExecutionExample(exercise)
+  if exercise.execution_exemple !== ""
+    div.mission-execution-example.my-4
+      h3 Exemple d'exécution
+      pre=exercise.execution_exemple

@@ -1,0 +1,31 @@
+mixin exerciseTips(tips)
+  if tips != null
+    .mission-tips
+      if isTeacher
+        .d-flex.justify-content-between
+          .d-flex.align-items-end
+            h3.mb-0 Indices de mission
+          .d-flex.align-items-end
+            a.no-decoration(href='/management/exercises/' + exercise.id + "/tips")
+              button.btn.btn-yellow.mb-0#Btn
+                i.fas.fa-plus-square
+                | Modifier les indices
+      else
+        h3 Indices de mission
+      hr
+      ul
+        each tip in tips
+          if tip.bought
+            if isTeacher
+              li
+                a(href="/management/exercises/" + exercise.id + "/tips/" + tip.id + "/edit").pl-0.mb-3.d-inline-block=tip.tip
+                p.d-inline-block.ml-1 (#{tip.price}$)
+            else
+              li.pl-0.mb-3
+                pre=tip.tip
+          else
+            if !isTeacher && !corrected
+              form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
+                button.btn.btn-yellow.position-absolute.tip-buy-button
+                  +star_wars_money(tip.price)
+            p(class=(isTeacher) ? '' : 'blur').my-4.pl-0=tip.tip

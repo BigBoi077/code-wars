@@ -1,0 +1,9 @@
+mixin exerciseImageExample(imageExamples)
+  if imageExamples != null
+    div.mission-image-example.mt-5
+      h3 Exemple en image
+      .row
+          each example in imageExamples
+            .col-6.bg-transparent.p-0
+              .card.m-2.bg-transparent
+                img(src=example.path + "/" + example.name_hash + "." + example.file_extension).card-img-top
