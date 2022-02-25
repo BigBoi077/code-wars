@@ -2,6 +2,7 @@
 
 use Models\Services\NotificationService;
 use stdClass;
+use Zephyrus\Application\Flash;
 
 class ExerciseBroker extends Broker
 {
@@ -162,10 +163,10 @@ class ExerciseBroker extends Broker
         $sql = "select dir_path from codewars.studentexercise se where se.exercise_id = ?";
         $exerciseDirPath = $this->select($sql, [$id]);
         foreach ($exerciseDirPath as $path) {
-            if (!unlink($path->dir_path)) {
-                echo "Cannot delete " . $path->dir_path;
-            } else {
-                echo $path->dir_path . "deleted";
+            try {
+                unlink($path->dir_path);
+            } catch (\Exception $e) {
+                Flash::error($e);
             }
         }
         $sql = "delete from codewars.studentexercise se where se.exercise_id = ?";
@@ -177,10 +178,10 @@ class ExerciseBroker extends Broker
         $sql = "select dir_path from codewars.studentexercise se where se.student_da = ?";
         $exerciseDirPath = $this->select($sql, [$da]);
         foreach ($exerciseDirPath as $path) {
-            if (!unlink($path->dir_path)) {
-                echo "Cannot delete " . $path->dir_path;
-            } else {
-                echo $path->dir_path . "deleted";
+            try {
+                unlink($path->dir_path);
+            } catch (\Exception $e) {
+                Flash::error($e);
             }
         }
         $sql = "delete from codewars.studentexercise se where se.student_da = ?";
