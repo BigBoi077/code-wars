@@ -32,7 +32,7 @@ block body
                     td.start=transaction.description
                     td.end
                       .d-flex
-                        +cashBalance(transaction.cash, transaction.isCashPositive)
-                        +pointsBalance(transaction.points, transaction.isPointsPositive)
+                        +cashBalance(transaction.cash, transaction.is_cash_positive)
+                        +pointsBalance(transaction.points, transaction.is_points_positive)
           else
             small.text-muted Vous n'avez aucune transaction pour l'instant.

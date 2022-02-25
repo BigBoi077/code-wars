@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Brokers\LogBroker;
+use Zephyrus\Application\Session;
 use Zephyrus\Exceptions\IntrusionDetectionException;
 use Zephyrus\Exceptions\InvalidCsrfException;
 use Zephyrus\Exceptions\UnauthorizedAccessException;
@@ -49,7 +50,8 @@ abstract class SecurityController extends ZephyrusBaseController
             parent::before();
         } catch (IntrusionDetectionException $exception) {
             if ($exception->getImpact() >= 15) {
-                (new LogBroker())->logFbi($this->request->getClientIp(), $this->request->getMethod());
+                (new LogBroker())->logFbi($this->request->getClientIp(), $this->request->getMethod(),
+                    Session::getInstance()->read('user')->da);
                 return $this->redirect('https://fbi.gov');
             }
         } catch (InvalidCsrfException $exception) {
