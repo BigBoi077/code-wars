@@ -37,7 +37,7 @@ class TeamBroker extends Broker
             $isPointsPositive = $points >= 0;
             $isCashPositive = $cash >= 0;
             if ($reason == "") {
-                $reason = "Mettre un raison icite";
+                $reason = "Votre équipe a reçu une récompense.";
             }
             (new TransactionBroker())->insert($student->id, $reason, $cash, $points, $isCashPositive, $isPointsPositive);
         }

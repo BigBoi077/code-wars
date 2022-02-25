@@ -9,125 +9,20 @@ block header
 block body
   .container
     .single-mission-detail(class=state)
-      h1#mission-title=exercise.name
-      hr.separator
-      h3.mb-2 Débriefing de la mission
-      p.mission-description=exercise.description
-        .mission-info.px-0
-          .row.mission-week
-            .col-2.mb-0
-              i.fas.fa-calendar-alt
-            .col-8.mb-0
-              span Semaine #{exercise.week_id}
-          .row.mission-cash-reward
-            .col-2.mb-0
-              img(src="/assets/images/credit_symbol.svg").svg-icons
-            .col-8.mb-0
-              span #{format('decimal', exercise.cash_reward, 0, 0)}
-          .row.mission-point-reward
-            .col-2.mb-0
-              img(src="/assets/images/ethereum_symbol.svg").svg-icons
-            .col-8.mb-0
-              span #{format('decimal', exercise.point_reward, 0, 0)}
-          .row.mission-state
-            if isTeacher
-              .col-2.mb-0
-                i.far.fa-edit
-              .col-8.mb-0
-                span.font-weight-light
-                  a(href="/management/exercises/" + exercise.id + "/edit") Editer l'exercise
-            else
-              if corrected
-                .col-2.mb-0
-                  i.far.fa-check-circle.corrected
-                .col-8.mb-0
-                  span.font-weight-light Complétée
-              else if !is_good
-                .col-2.mb-0
-                  i.far.fa-times-circle.not-submitted
-                .col-8.mb-0
-                  span.font-weight-light Échouée
-              else if !submitted
-                .col-2.mb-0
-                  i.far.fa-times-circle.not-submitted
-                .col-8.mb-0
-                  span.font-weight-light Non débutée
-              else
-                .col-2.mb-0
-                  i.far.fa-check-circle.submitted
-                .col-10.mb-0
-                  small En attente du résultat
-          .col-12.mission-difficulty-container.mb-1
-            span.mb-2 Achèvement
-            h6.text-muted=completion + " % des élèves ont complété la mission"
-          .col-8.mission-difficulty-container
-            span.mb-2 Difficulté
-            .difficulty-stars
-              - var i = 0
-              - var difficultyDifference = 5 - exercise.difficulty
-              while i < exercise.difficulty
-                i.fas.fa-star.active
-                - i++
-              - var i = 0
-              while i < difficultyDifference
-                i.fas.fa-star
-                - i++
-        .mission-submit
-          if !corrected && !submitted && !isTeacher
-            a(href="/exercises/submit/" + exercise.id).mb-0
-              button(type="submit").btn.btn-yellow
-                +teamIcon(student)
-                p Soumettre une solution
-          else if !corrected && submitted && !isTeacher
-            form(action="/exercises/cancel/" + exercise.id method="POST").mb-0
-              button(type="submit").btn.btn-yellow
-                +teamIcon(student)
-                p Annuler la remise
-          else if !isTeacher && corrected
-            .btn-disabled
-              p Corrigé
-        if exercise.execution_exemple !== ""
-          div.mission-execution-example.my-4
-            h3 Exemple d'exécution
-            pre=exercise.execution_exemple
-        if tips != null
-          .mission-tips
-            if isTeacher
-              .d-flex.justify-content-between
-                .d-flex.align-items-end
-                  h3.mb-0 Indices de mission
-                .d-flex.align-items-end
-                  a.no-decoration(href='/management/exercises/' + exercise.id + "/tips")
-                    button.btn.btn-yellow.mb-0#Btn
-                      i.fas.fa-plus-square
-                      | Modifier les indices
-            else
-              h3 Indices de mission
-            hr
-            ul
-              each tip in tips
-                if tip.bought
-                  if isTeacher
-                    li
-                      a(href="/management/exercises/" + exercise.id + "/tips/" + tip.id + "/edit").pl-0.mb-3.d-inline-block=tip.tip
-                      p.d-inline-block.ml-1 (#{tip.price}$)
-                  else
-                    li.pl-0.mb-3
-                      pre=tip.tip
-                else
-                  if !isTeacher && !corrected
-                    form(action="/exercises/tips/" + tip.id + "/buy" method="post").position-relative.foreground.w-100
-                      button.btn.btn-yellow.position-absolute.tip-buy-button
-                        +star_wars_money(tip.price)
-                  p(class=(isTeacher) ? '': 'blur').my-4.pl-0=tip.tip
-        if imageExamples != null
-          div.mission-image-example.mt-5
-            h3 Exemple en image
-            .row
-              each example in imageExamples
-                .col-6.bg-transparent.p-0
-                  .card.m-2.bg-transparent
-                    img(src=example.path + "/" + example.name_hash + "." + example.file_extension).card-img-top
+      .d-block
+        h1#mission-title=exercise.name
+        hr.separator
+      .d-flex.flex-row
+        .w-75.pr-5
+          h3.mb-2 Débriefing de la mission
+          - var desc = exercise.description
+          p.mission-description !{desc}
+          +missionSubmit(corrected, submitted, isTeacher)
+          +exerciseExecutionExample(exercise)
+          +exerciseImageExample(imageExamples)
+          +exerciseTips(tips)
+        .w-25
+          +missionSidebar(exercise)
 
 block script
   script(src='/javascripts/upload.js')

@@ -1,0 +1,15 @@
+mixin missionSubmit(corrected, submitted, isTeacher)
+  .mission-submit
+    if !corrected && !submitted && !isTeacher
+      a(href="/exercises/submit/" + exercise.id).mb-0
+        button(type="submit").btn.btn-yellow
+          +teamIcon(student)
+          p Soumettre une solution
+    else if !corrected && submitted && !isTeacher
+      form(action="/exercises/cancel/" + exercise.id method="POST").mb-0
+        button(type="submit").btn.btn-yellow
+          +teamIcon(student)
+          p Annuler la remise
+    else if !isTeacher && corrected
+      .btn-disabled
+        p Corrigé

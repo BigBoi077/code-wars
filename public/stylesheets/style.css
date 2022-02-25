@@ -87,7 +87,7 @@
 }
 
 .page {
-    min-height: 55vh;
+    min-height: 60vh;
     position: relative;
 }
 
@@ -1177,27 +1177,12 @@ text-align: center;
 
 .single-mission-detail {
     width: 100%;
-    display: grid;
     padding: 32px;
     border-radius: 10px;
     position: relative;
     background-color: var(--background);
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .1);
-    grid-template-columns: 25% 25% 25% 25%;
     margin: 32px auto auto;
-}
-
-.single-mission-detail {
-    grid-template-areas:
-    "title            title            title            title"
-    "separator        separator        separator        separator"
-    "debrief          debrief          .                info"
-    "description      description      description      info"
-    "description      description      description      info"
-    "submit           submit           submit           info"
-    "example          example          example          ."
-    "image            image            image            ."
-    "tips             tips             tips             .";
 }
 
 .tip-buy-button {
@@ -1240,26 +1225,22 @@ text-align: center;
 }
 
 .single-mission-detail #mission-title {
-    grid-area: title;
     margin: auto;
     font-family: StarJedi, sans-serif;
 }
 
 .single-mission-detail .separator {
-    grid-area: separator;
     color: var(--dark);
 }
 
 .single-mission-detail .mission-description {
-    grid-area: description;
     margin-bottom: 52px;
     white-space: pre-wrap;
     text-align: justify;
-    max-width: 600px;
+    max-width: 650px;
 }
 
 .single-mission-detail .mission-info {
-    grid-area: info;
     padding: 18px;
     background-color: var(--background);
     border-radius: 0 5px 5px 0;
