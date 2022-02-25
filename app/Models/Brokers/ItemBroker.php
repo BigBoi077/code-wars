@@ -6,7 +6,7 @@ class ItemBroker extends Broker
 {
     public function getAll(): array
     {
-        $sql = "SELECT * FROM codewars.item ORDER BY price, name";
+        $sql = "SELECT * FROM codewars.item ORDER BY name, price";
         return $this->select($sql);
     }
 

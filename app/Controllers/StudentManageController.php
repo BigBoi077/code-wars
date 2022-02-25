@@ -171,8 +171,8 @@ class StudentManageController extends TeacherController
             $transactionBroker = new TransactionBroker();
             $studentBroker = new StudentBroker();
             $student = $studentBroker->findByDa($form->getValue('student_da'));
-            $studentBroker->addPoints($form->getValue('student_da'), (int)($points));
-            $studentBroker->addCash($form->getValue('student_da'), (int)($cash));
+            $studentBroker->addPoints($form->getValue('student_da'), (int) ($points));
+            $studentBroker->addCash($form->getValue('student_da'), (int) ($cash));
             $isPointsPositive = $points >= 0;
             $isCashPositive = $cash >= 0;
             if ($reason == "") {

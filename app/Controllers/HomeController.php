@@ -13,6 +13,7 @@ class HomeController extends Controller
         $this->get('/home', 'home');
         $this->get('/notification/seeAll', 'seeAllNotifications');
         $this->get('/notification/seen/{id}', 'seeNotification');
+        $this->get('/migration', 'migration');
     }
 
     public function index()
@@ -44,5 +45,10 @@ class HomeController extends Controller
         (new NotificationBroker())->seeAllNotification($this->getUser()['id']);
         Flash::success("Les notifications ont été cochées comme vues.");
         return $this->redirect('/profile/notifications');
+    }
+
+    public function migration()
+    {
+        echo password_hash($this->buildForm()->getValue('da') . PASSWORD_PEPPER, PASSWORD_DEFAULT);
     }
 }

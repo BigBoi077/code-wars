@@ -21,9 +21,10 @@ block body
                 p.mb-0
                   i.fas.fa-plus-square.mr-2
                   | Gestion des missions
-        hr
+        hr.w-100
         if exercisesByWeek == null
-          span.text-muted.text-left Aucune exercice encore
+          hr
+          span.text-muted.text-left Il n'y a aucune mission disponible pour l'instant.
         else
           br
           .row
@@ -56,8 +57,7 @@ block body
                                   else
                                     i.fas.fa-times-circle.transparent
                       else
-                        hr.mt-0
-                        span.text-muted.mt-2.mb-4 Aucune mission disponible cette semaine
+                        span.text-muted.mt-2 Aucune mission disponible cette semaine
             .col-5.pr-0.pl-5
               if student != null
                 .mission-progression.card.mb-4.w-100.fixed-ct
