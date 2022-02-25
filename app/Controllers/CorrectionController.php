@@ -65,7 +65,7 @@ class CorrectionController extends Controller
             (new ExerciseBroker())->correctExercise($userId, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));
             $e = (new ExerciseBroker())->getCorrectionPath($id);
             unlink($e->path);
-            Flash::success("Mission marqué complétée avec succès. L'élève à bien reçu son argent et ses points.");
+            Flash::success("Mission marqué complétée avec succès. L'élève a bien reçu son argent et ses points.");
         } else {
             Flash::warning("Commentaire envoyé à l'élève l'informant que sa solution ne convient pas.");
             (new ExerciseBroker())->incorrectExercise($userId, (new StudentBroker())->findByDa($da), $id, $form->getValue('comment'));

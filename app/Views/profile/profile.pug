@@ -80,7 +80,7 @@ block body
                       each item in items
                         +itemRow(item)
                 else
-                  small.text-muted.mb-3 L'élève n'a fait aucun achat
+                  small.text-muted.mb-3 L'élève n'a fait aucun achat, pour l'instant.
               else
                 h2.mb-3 Mes achats
                 if items != null
@@ -92,7 +92,7 @@ block body
                       each item in items
                         +itemRow(item)
                 else
-                  small.text-muted Vous n'avez fait aucun achat
+                  small.text-muted Vous n'avez fait aucun achat, pour l'instant.
                 .text-center.mt-3
                   a.btn.btn-yellow(href="/market")
                     i.fas.fa-shopping-cart.mr-2
@@ -114,7 +114,7 @@ block body
                       each exercise in exercises
                         +exerciseRow(exercise)
                 else
-                  small.text-muted Aucune mission complétée
+                  small.text-muted L'élève n'a complété aucune mission, pour l'instant.
               else
                 h2.mb-3#exerciseSection Rapport des missions
                 if exercises != null
@@ -129,7 +129,7 @@ block body
                       each exercise in exercises
                         +exerciseRow(exercise)
                 else
-                  small.text-muted Vous n'avez complété aucune mission
+                  small.text-muted Vous n'avez complété aucune mission, pour l'instant.
                 .text-center.mt-3
                   a.btn.btn-yellow(href="/exercises")
                     i.fas.fa-jedi.mr-2
