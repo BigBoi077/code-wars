@@ -23,7 +23,7 @@ block body
         hr
       #notifs(data-notifications)
         if notifications == null
-          small.text-muted Vous n'avez aucune notification pour l'instant
+          small.text-muted Vous n'avez aucune notification pour l'instant.
         else
           each notif in notifications
             +notification(notif)

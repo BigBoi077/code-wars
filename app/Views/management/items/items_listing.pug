@@ -17,27 +17,30 @@ block body
               i.fas.fa-plus-square.mr-2
               | Nouvel article
         hr.w-100
-      table.table.w-100
-        thead
-          tr
-            th Nom
-            th Description
-            th.d-flex.justify-content-end Prix
-            th
-        tbody.w-100
-          each item in items
+      if items == null
+        span.text-muted Vous n'avez aucun article de créé, pour le moment.
+      else
+        table.table.w-100
+          thead
             tr
-              td
-                a(href="/management/items/" + item.id + "/edit")=item.name
-              td
-                p.student-row-element #{item.description}
-              td
-                +star_wars_money(item.price, true)
-              td.d-flex.align-items-center.h-100
-                a(href='/management/items/' + item.id + '/edit').mr-3
-                  i.fas.fa-edit.student-icons
-                a(data-bs-toggle="modal" data-bs-target="#itemDeleteModal" + item.id)
-                  i.fas.fa-trash.student-icons
-          each item in items
-            +confirmationModal("Suppression d'article", 'Voulez-vous vraiment supprimer cet article ?',
-              '/management/items/' + item.id + '/delete', 'itemDeleteModal' + item.id)
+              th Nom
+              th Description
+              th.d-flex.justify-content-end Prix
+              th
+          tbody.w-100
+            each item in items
+              tr
+                td
+                  a(href="/management/items/" + item.id + "/edit")=item.name
+                td
+                  p.student-row-element #{item.description}
+                td
+                  +star_wars_money(item.price, true)
+                td.d-flex.align-items-center.h-100
+                  a(href='/management/items/' + item.id + '/edit').mr-3
+                    i.fas.fa-edit.student-icons
+                  a(data-bs-toggle="modal" data-bs-target="#itemDeleteModal" + item.id)
+                    i.fas.fa-trash.student-icons
+            each item in items
+              +confirmationModal("Suppression d'article", 'Voulez-vous vraiment supprimer cet article ?',
+                '/management/items/' + item.id + '/delete', 'itemDeleteModal' + item.id)
