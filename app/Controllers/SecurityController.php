@@ -50,8 +50,11 @@ abstract class SecurityController extends ZephyrusBaseController
             parent::before();
         } catch (IntrusionDetectionException $exception) {
             if ($exception->getImpact() >= 15) {
-                (new LogBroker())->logFbi($this->request->getClientIp(), $this->request->getMethod(),
-                    Session::getInstance()->read('user')->da);
+                (new LogBroker())->logFbi(
+                    $this->request->getClientIp(),
+                    $this->request->getMethod(),
+                    Session::getInstance()->read('user')->da
+                );
                 return $this->redirect('https://fbi.gov');
             }
         } catch (InvalidCsrfException $exception) {
