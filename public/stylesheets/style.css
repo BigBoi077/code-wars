@@ -1303,6 +1303,11 @@ text-align: center;
 
 .single-mission-detail .mission-tips {
     grid-area: tips;
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .single-mission-detail .mission-info .mission-difficulty-container {
