@@ -19,7 +19,7 @@ block body
                 img.rounded-img.mt-2(src=profileImageUrl)
               else
                 .d-flex.justify-content-center.align-items-center
-                  .profile-bg.rounded-img
+                  .profile-bg.rounded-img(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                   p.initials-profile.mb-0 #{student.initials}
             h6.text-muted.mt-3 #{studentProfile.da}
             h5 #{studentProfile.username}

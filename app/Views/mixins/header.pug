@@ -45,7 +45,7 @@ mixin header()
               img(src=profileTeamImg)#profileTeamImg
           else
             a.profile-pic(href="/profile")
-              .profile-bg
+              .profile-bg(class=(student.team_id === 1) ? "bg-red": "bg-blue")
               img(src=profileTeamImg)#profileTeamImg
             p.initials #{student.initials}
 
