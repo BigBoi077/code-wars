@@ -176,7 +176,7 @@ class StudentManageController extends TeacherController
             $isPointsPositive = $points >= 0;
             $isCashPositive = $cash >= 0;
             if ($reason == "") {
-                $reason = "Mettre un raison icite";
+                $reason = "Ajout rapide d'argent pour vous.";
             }
             $transactionBroker->insert($student->id, $reason, $cash, $points, $isCashPositive, $isPointsPositive);
             Flash::success("Ajout rapide, à " . $student->firstname . ' ' . $student->lastname . ", effectué avec succès!");

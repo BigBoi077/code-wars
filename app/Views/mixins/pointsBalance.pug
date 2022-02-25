@@ -1,4 +1,7 @@
 mixin pointsBalance(points, isPositive)
   .mission-point-reward.d-flex.align-items-center(class = isPositive ? 'success-green': 'error-red')
     img.mr-1(src=isPositive ? '/assets/images/ethereum_symbol_green.svg': '/assets/images/ethereum_symbol_red.svg').svg-icons
-    span.text-dark #{format('decimal', points, 0, 0)}
+    if isPositive
+      span #{format('decimal', points, 0, 0)}
+    else
+      span -(#{format('decimal', points, 0, 0)})
