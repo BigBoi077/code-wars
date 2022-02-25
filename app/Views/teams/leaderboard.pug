@@ -23,7 +23,7 @@ block body
             if profileImageUrl !== null
               img.rounded-img(src=profileImageUrl).not-top-3.ml-3.mr-3
             else
-              .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative
+              .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                 p.mb-0.initials-small.initials.text-dark=current.initials
             .col-1.d-flex.align-items-center.justify-content-end
               span ##{current.position}
@@ -44,7 +44,7 @@ block body
                   if student.gravatarAvailable
                     img.rounded-img.position-absolute(data-gravatar data-email=student.email class="position" + index)
                   else
-                    .profile-bg(class="position" + index)
+                    .profile-bg(class="position" + index)(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                       p.mb-0.initials=student.initials
                 .col-1.d-flex.align-items-center.justify-content-end
                   h4.my-0.mx-4.text-dark ##{index + 1}
@@ -54,7 +54,7 @@ block body
                 if student.gravatarAvailable
                   img.rounded-img(data-gravatar data-email=student.email).not-top-3.ml-3.mr-3
                 else
-                  .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative
+                  .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                     p.initials.initials-small.mb-0.text-dark=student.initials
                 .col-1.d-flex.align-items-center.justify-content-end
                   span.mr-4.ml-4.text-dark ##{index + 1}
