@@ -31,7 +31,7 @@ block body
                 a(href="/management/items/" + item.id + "/edit")=item.name
               td
                 p.student-row-element #{item.description}
-              td.end
+              td
                 +star_wars_money(item.price, true)
               td.d-flex.align-items-center.h-100
                 a(href='/management/items/' + item.id + '/edit').mr-3

@@ -18,7 +18,7 @@ delete from person where id > 0;
 
 /*PERSON*/
 alter sequence codewars.person_id_seq restart with 1;
-insert into codewars.person(id, da, firstname, lastname, username, email) values (1, 'dadajuice', 'David', 'Tucker', 'Dadajuice', null);
+insert into codewars.person(id, da, firstname, lastname, username, email) values (1, 'dadajuice', 'David', 'Tucker', 'Dadajuice', 'david.tucker2003@msn.com');
 insert into codewars.person(id, da, firstname, lastname, username, email) values (116, '2029684', 'Marly', 'Cournoyer', 'Izuku Midoriya', null);
 insert into codewars.person(id, da, firstname, lastname, username, email) values (117, '1448676', 'Ivan-Alberto', 'Diaz-Muy', 'MrMister', null);
 insert into codewars.person(id, da, firstname, lastname, username, email) values (118, '6176471', 'Excellence', 'Ekanza Ezokola', 'ERROR 404', null);
@@ -38,7 +38,7 @@ insert into codewars.person(id, da, firstname, lastname, username, email) values
 alter sequence codewars.person_id_seq restart with 132;
 
 /*USER*/
-insert into codewars.user(id, da, password) values (1, 'dadajuice', '$2y$10$AwlizdSe4w688bM64hrgOe/2BeGAONYXWGHGAQ8Vm2/7YddD.5HdK');
+insert into codewars.user(id, da, password) values (1, 'dadajuice', '$2y$10$mdBrMt4E2GZi75CbiiSCPedpk0T85tjGXYtLn4WT6Jc/KtKYlcg.e');
 insert into codewars.user(id, da, password) values (116, '2029684', '$2y$10$yKQOV6p7UZpRcOpJwJFyouZf7l/8HvBOKncUGULKSae7fI26J3pkm');
 insert into codewars.user(id, da, password) values (117, '1448676', '$2y$10$T2OWktwvLlZosf6LWiH2OeWcCEra3EJSEZmCA6DpkFhm8Vf1uSxl2');
 insert into codewars.user(id, da, password) values (118, '6176471', '$2y$10$bTNjnetlirGP9PF0eSEOHOFjZ0W.QGFwEoiQCnYXUYewm2kNUS3Xe');
@@ -77,16 +77,16 @@ insert into codewars.student(id, da, team_id, cash, points) values (130, '216701
 insert into codewars.student(id, da, team_id, cash, points) values (131, 'josh', 1, 0, 0);
 alter sequence codewars.student_id_seq restart with 132;
 
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (3, 1,'MISE à NIVEAU -  Conversion de devise', 'Vous devez demander à l’utilisateur d’entrer un montant en dollars américains (USD) et votre programme doit fournir en sortie la conversion de ce montant en dollars canadiens (CAD). Vous devez également indiquer en sortie le taux qui a été utilisé. Prenez comme taux celui enregistré le 8 septembre 2015 en pleine récession (0.7579).', 1, 500, 20, 'Entrez le montant USD : 100
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (3, 1,'Mise à niveau -  Conversion de devise', 'Vous devez demander à l’utilisateur d’entrer un montant en dollars américains (USD) et votre programme doit fournir en sortie la conversion de ce montant en dollars canadiens (CAD). Vous devez également indiquer en sortie le taux qui a été utilisé. Prenez comme taux celui enregistré le 8 septembre 2015 en pleine récession (0.7579).', 1, 500, 20, 'Entrez le montant USD : 100
 Conversion utilisant le taux 0.7579
 Le montant CAD est 131,94$');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (8, 1,'MISE à NIVEAU -  Consommation d''essence', 'Vous devez écrire un programme qui calcule la consommation de litre au 100km et le prix moyen au 100km. Vous demandez à l’utilisateur  d’entrer le nombre de kilomètres parcourus, le nombre de litres consommés ainsi que le prix d''un litre à la pompe. Le programme doit afficher la consommation de litre au 100km et le total de cette consommation.', 1, 500, 20, 'Entrez le nombre de km parcourus : 687
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (8, 1,'Mise à niveau -  Consommation d''essence', 'Vous devez écrire un programme qui calcule la consommation de litre au 100km et le prix moyen au 100km. Vous demandez à l’utilisateur  d’entrer le nombre de kilomètres parcourus, le nombre de litres consommés ainsi que le prix d''un litre à la pompe. Le programme doit afficher la consommation de litre au 100km et le total de cette consommation.', 1, 500, 20, 'Entrez le nombre de km parcourus : 687
 Entrez le nombre de litres consommés : 45.5
 Entrez le montant d''un litre à la pompe : 1.15
 Votre consommation au 100km est de 6.62L
 Le cout estimé au 100km est de 7.62$
 ');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (19, 1,'MISE à NIVEAU -  Échec ou succès', 'Vous devez écrire un programme qui demande à l’utilisateur de saisir sa note lors d’un examen et le programme affiche sa notation littérale (en lettre) suivant le barème suivant. Le programme affiche également une mention de l’apprentissage (excellent, très bien, bien, passage ou échec).
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (19, 1,'Mise à niveau -  Échec ou succès', 'Vous devez écrire un programme qui demande à l’utilisateur de saisir sa note lors d’un examen et le programme affiche sa notation littérale (en lettre) suivant le barème suivant. Le programme affiche également une mention de l’apprentissage (excellent, très bien, bien, passage ou échec).
 <br /><br />
 <table>
 <tr>
@@ -151,29 +151,29 @@ insert into codewars.exercise(id, week_id, name, description, difficulty, cash_r
 
 A-
 Excellent !');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (21, 1,'MISE à NIVEAU -  Validation', 'Votre programme doit demander à l’utilisateur de faire un choix entre 1 et 10. Votre programme doit valider la valeur saisie de façon <b>robuste</b> ! C’est-à-dire que si on entre des lettres à la place d’un chiffre, le programme ne doit pas planter, mais donner une erreur significative.', 1, 500, 20, 'Votre choix (1-10) : batman
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (21, 1,'Mise à niveau -  Validation', 'Votre programme doit demander à l’utilisateur de faire un choix entre 1 et 10. Votre programme doit valider la valeur saisie de façon <b>robuste</b> ! C’est-à-dire que si on entre des lettres à la place d’un chiffre, le programme ne doit pas planter, mais donner une erreur significative.', 1, 500, 20, 'Votre choix (1-10) : batman
 Votre choix est invalide !
 
 Votre choix (1-10) : 15
 Votre choix est invalide !');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (24, 1,'MISE à NIVEAU -  Monnaie à rendre', 'Vous devez écrire un programme qui affiche la monnaie à rendre pour un montant d’argent tout comme une caisse enregistreuse. Vous devez demander à l’utilisateur de saisir le montant et le programme affiche le nombre de 2$, de 1$, de 25c, de 10c, de 5c et de 1c (même si le 1c n’est actuellement plus en circulation).', 1, 500, 20, 'Entrez un montant : 8,83
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (24, 1,'Mise à niveau -  Monnaie à rendre', 'Vous devez écrire un programme qui affiche la monnaie à rendre pour un montant d’argent tout comme une caisse enregistreuse. Vous devez demander à l’utilisateur de saisir le montant et le programme affiche le nombre de 2$, de 1$, de 25c, de 10c, de 5c et de 1c (même si le 1c n’est actuellement plus en circulation).', 1, 500, 20, 'Entrez un montant : 8,83
 2$ : 4
 1$ : 0
 25c : 3
 10c : 0
 5c : 1
 1c : 3');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (25, 1,'MISE à NIVEAU -  Facture de base', 'Vous devez écrire un programme qui calcule simplement le montant des taxes au Québec. Vous devez demander à l’utilisateur de saisir un montant avant taxes et votre programme affiche le total de la TPS (5%), de la TVQ (9,975%) et le montant après taxes.', 1, 500, 20, 'Entrez le montant avant taxes : 100,00
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (25, 1,'Mise à niveau -  Facture de base', 'Vous devez écrire un programme qui calcule simplement le montant des taxes au Québec. Vous devez demander à l’utilisateur de saisir un montant avant taxes et votre programme affiche le total de la TPS (5%), de la TVQ (9,975%) et le montant après taxes.', 1, 500, 20, 'Entrez le montant avant taxes : 100,00
 
 TPS (5%) : 5,00$
 TVQ (9,975%) : 9,98$
 Total : 114,98$');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (28, 1,'MISE à NIVEAU -  Âge depuis date', 'Vous devez écrire un programme qui permet de calculer l’âge d’un individu depuis sa date de naissance. Le programme demande d’entrer la date de naissance en trois étapes : l’année, le mois et le jour. Il affiche finalement l’âge calculé de l’individu en fonction de la date actuelle du système. Vous devrez utiliser l’objet Date (ou un équivalent) pour obtenir la date courante.', 1, 500, 20, 'Annee : 1988
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (28, 1,'Mise à niveau -  Âge depuis date', 'Vous devez écrire un programme qui permet de calculer l’âge d’un individu depuis sa date de naissance. Le programme demande d’entrer la date de naissance en trois étapes : l’année, le mois et le jour. Il affiche finalement l’âge calculé de l’individu en fonction de la date actuelle du système. Vous devrez utiliser l’objet Date (ou un équivalent) pour obtenir la date courante.', 1, 500, 20, 'Annee : 1988
 Mois : 3
 Jour : 11
 
 Vous avez 27 ans !');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (31, 1,'MISE à NIVEAU -  Jours dans un mois', 'Vous devez écrire un programme qui calcule le nombre de jours qu’il y’a dans un mois pour une année donnée. Votre programme demande de saisir l’année et ensuite le numéro du mois. Il affiche le nombre de jours pour le mois demandé. Vous devez tenir compte des années bissextiles. Voici la règle :
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (31, 1,'Mise à niveau -  Jours dans un mois', 'Vous devez écrire un programme qui calcule le nombre de jours qu’il y’a dans un mois pour une année donnée. Votre programme demande de saisir l’année et ensuite le numéro du mois. Il affiche le nombre de jours pour le mois demandé. Vous devez tenir compte des années bissextiles. Voici la règle :
 <br /><br />
 Une année est bissextile si l’année est divisible par 4 et non divisible par 100 ou si l’année est divisible par 400.
 <br /><br />
@@ -191,7 +191,7 @@ Le mois de fevrier pour l''annee 2016 compte 29 jours
 Annee : 2000
 Numéro du mois (1-12): 10
 Le mois de octobre compte 31 jours');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (32, 1,'MISE à NIVEAU -  Réclamations', 'Vous devez écrire un programme qui calcule le montant d’une police d’assurance selon le nombre de réclamations dans l’année. Votre programme demande le montant de la prime initiale et le nombre de réclamations. Selon le nombre de réclamations, le montant de la prime augmente :
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (32, 1,'Mise à niveau -  Réclamations', 'Vous devez écrire un programme qui calcule le montant d’une police d’assurance selon le nombre de réclamations dans l’année. Votre programme demande le montant de la prime initiale et le nombre de réclamations. Selon le nombre de réclamations, le montant de la prime augmente :
 <br /><br />
 <table>
 <tr>
@@ -220,15 +220,15 @@ Montant de la prime: 108,00$
 Montant initial: 100,00
 Nb. reclamations: 15
 Desole ! Le client n''est plus assurable !');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (36, 1,'MISE à NIVEAU -  Nombres pairs', 'Vous devez écrire un programme qui affiche simplement tous les nombres pairs de 100 à 200.', 1, 250, 10, '100, 102, 104, 106, 108, ..., 200');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (37, 1,'MISE à NIVEAU -  Factorielle', 'Votre programme demande à l’utilisateur un entier et affiche la factorielle de ce nombre. Exemple, la factorielle de 5 égal 5 x 4 x 3 x 2 x 1 = 120.', 1, 500, 20, 'Entrez un nombre: 5
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (36, 1,'Mise à niveau -  Nombres pairs', 'Vous devez écrire un programme qui affiche simplement tous les nombres pairs de 100 à 200.', 1, 250, 10, '100, 102, 104, 106, 108, ..., 200');
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (37, 1,'Mise à niveau -  Factorielle', 'Votre programme demande à l’utilisateur un entier et affiche la factorielle de ce nombre. Exemple, la factorielle de 5 égal 5 x 4 x 3 x 2 x 1 = 120.', 1, 500, 20, 'Entrez un nombre: 5
 
 5! = 120');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (43, 1,'MISE à NIVEAU -  Nombre premier', 'Vous devez écrire un programme qui détermine si un nombre saisi par l’utilisateur est premier. Un nombre est premier si son seul diviseur est lui-même et l’unité. Il suffit donc de diviser le nombre par 2,3,4,5,6 jusqu''à nombre – 1. Si aucun des restes trouvés n’est à 0, le nombre est donc premier.', 1, 750, 25, 'Entrez un nombre : 13
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (43, 1,'Mise à niveau -  Nombre premier', 'Vous devez écrire un programme qui détermine si un nombre saisi par l’utilisateur est premier. Un nombre est premier si son seul diviseur est lui-même et l’unité. Il suffit donc de diviser le nombre par 2,3,4,5,6 jusqu''à nombre – 1. Si aucun des restes trouvés n’est à 0, le nombre est donc premier.', 1, 750, 25, 'Entrez un nombre : 13
 
 Ce nombre est premier !
 ');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (46, 1,'MISE à NIVEAU -  HILO Game', 'Vous devez réaliser le jeu HILO. Ce jeu consiste à deviner un nombre généré aléatoirement par l’ordinateur. Ce nombre se trouve entre 1 et 100. L’utilisateur à droit à 10 essais. S’il réussit à trouver le nombre avant les 10 essais, un message de félicitation s’affiche. Sinon, le nombre caché et un message d’échec s’affichent et le programme se termine. Lorsque le nombre saisi par l’utilisateur est près de 5 du nombre caché, le programme affiche « vous brulez ! ».', 1, 500, 20, 'Essai #1: 3
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (46, 1,'Mise à niveau -  HILO Game', 'Vous devez réaliser le jeu HILO. Ce jeu consiste à deviner un nombre généré aléatoirement par l’ordinateur. Ce nombre se trouve entre 1 et 100. L’utilisateur à droit à 10 essais. S’il réussit à trouver le nombre avant les 10 essais, un message de félicitation s’affiche. Sinon, le nombre caché et un message d’échec s’affichent et le programme se termine. Lorsque le nombre saisi par l’utilisateur est près de 5 du nombre caché, le programme affiche « vous brulez ! ».', 1, 500, 20, 'Essai #1: 3
 Mauvaise réponse
 Essai #2: 90
 Mauvaise réponse
@@ -238,7 +238,7 @@ Essai #4: 76
 Vous brulez !
 Essai #5: 77
 BRAVO ! Vous avez trouve le nombre cache');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (50, 1,'MISE à NIVEAU -  Générateur de billets', 'Vous devez écrire un programme qui génère de façon aléatoire une certaine quantité de codes de billet pour un événement quelconque. Ce code de billet doit être composé de 8 caractères aléatoires qui peuvent être soit des nombres ou des lettres majuscules. Le programme débute par demander le nombre de billets à générer. Le programme doit créer un fichier de sortie et inscrire un code de billet par ligne.', 1, 750, 25, 'Nombre de billets : 4
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (50, 1,'Mise à niveau -  Générateur de billets', 'Vous devez écrire un programme qui génère de façon aléatoire une certaine quantité de codes de billet pour un événement quelconque. Ce code de billet doit être composé de 8 caractères aléatoires qui peuvent être soit des nombres ou des lettres majuscules. Le programme débute par demander le nombre de billets à générer. Le programme doit créer un fichier de sortie et inscrire un code de billet par ligne.', 1, 750, 25, 'Nombre de billets : 4
 Terminé
 
 // Dans le fichier ...
@@ -246,7 +246,7 @@ FG561DDP
 1KLW5TVY
 551GYVB2
 DYB52ILM');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (51, 1,'MISE à NIVEAU -  Âge moyen d''une cohorte', 'Vous devez écrire un programme qui permet de réaliser des statistiques sur la nouvelle cohorte du Cégep. Le programme demande de saisir le nombre d’étudiants et pour chacun, l’utilisateur doit saisir son âge. À la fin, le programme affiche la moyenne d’âge des étudiants ainsi que le nombre d’étudiants qui sont adultes.', 1, 500, 20, 'Nombre d''etudiants: 3
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (51, 1,'Mise à niveau -  Âge moyen d''une cohorte', 'Vous devez écrire un programme qui permet de réaliser des statistiques sur la nouvelle cohorte du Cégep. Le programme demande de saisir le nombre d’étudiants et pour chacun, l’utilisateur doit saisir son âge. À la fin, le programme affiche la moyenne d’âge des étudiants ainsi que le nombre d’étudiants qui sont adultes.', 1, 500, 20, 'Nombre d''etudiants: 3
 
 Age etudiant #1: 18
 Age etudiant #2: 16
@@ -265,7 +265,7 @@ Maximum du type &lt;int&gt; : 2147483647
 
 Minimum du type &lt;long&gt; : -9223372036854775808
 Maximum du type &lt;long&gt; : 9223372036854775807');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (55, 1,'MISE à NIVEAU -  Fichier vers tableau', 'Vous devez concevoir un programme qui doit remplir un tableau selon des nombres contenus dans un fichier texte (1 nombre par ligne) qui se nomme <code>tableau.test</code>. Tenez pour acquis qu''il ne peut pas avoir plus de 255 lignes dans ce fichier. Une fois la lecture effectuée, vous devez afficher les éléments du tableau qui ont été chargés. Si le fichier n''existe pas, il faut afficher "Fichier introuvable !".', 1, 750, 25, '[1, 6, 8, 2, 90, 33, 9, 122, 2, 43]');
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (55, 1,'Mise à niveau -  Fichier vers tableau', 'Vous devez concevoir un programme qui doit remplir un tableau selon des nombres contenus dans un fichier texte (1 nombre par ligne) qui se nomme <code>tableau.test</code>. Tenez pour acquis qu''il ne peut pas avoir plus de 255 lignes dans ce fichier. Une fois la lecture effectuée, vous devez afficher les éléments du tableau qui ont été chargés. Si le fichier n''existe pas, il faut afficher "Fichier introuvable !".', 1, 750, 25, '[1, 6, 8, 2, 90, 33, 9, 122, 2, 43]');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (56, 2,'Est-ce que la fin est le commencement ?', 'Vous devez programmer une fonction Java qui reçoit en paramètre un tableau d''entiers et qui retourne une valeur booléenne (VRAI ou FAUX) selon si le premier élément du tableau et le dernier sont identiques. Vous devez afficher, avant l''appel de votre fonction, les éléments du tableau et par la suite le résultat qu''a retourné votre fonction.', 1, 750, 25, '[1, 2, 5, 7, 33, 2, 21, 1]
 VRAI
 
@@ -388,7 +388,7 @@ Trié: [1, 2, 3, 4, 5]
 
 Non-trié: [12, 5, 4, 4, 9]
 Trié: [4, 4, 5, 9, 12]');
-insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (66, 1,'MISE à NIVEAU -  Table de multiplication', 'Vous devez concevoir un programme qui affiche la table de multiplication de 1 à 10. Vous devez construire cette table en utilisant des boucles et un calcul arithmétique. Simplement écrire la table avec des <i>print</i> ne sera pas accepté. Vous pouvez avoir un affichage différent.', 1, 500, 20, ' 1 |     1    2    3    4    5    6    7    8    9    10
+insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (66, 1,'Mise à niveau -  Table de multiplication', 'Vous devez concevoir un programme qui affiche la table de multiplication de 1 à 10. Vous devez construire cette table en utilisant des boucles et un calcul arithmétique. Simplement écrire la table avec des <i>print</i> ne sera pas accepté. Vous pouvez avoir un affichage différent.', 1, 500, 20, ' 1 |     1    2    3    4    5    6    7    8    9    10
  2 |     2    4    6    8   10   12   14   16   18    20
 ...');
 insert into codewars.exercise(id, week_id, name, description, difficulty, cash_reward, point_reward, execution_exemple) values (67, 2,'L''extrême addition de deux nombres', 'Vous devez concevoir un programme qui effectue l''addition de deux nombres entiers. L''utilisateur entre les deux nombres au clavier et le programme doit afficher le résultat du calcul. <u>La partie intéressante est que votre programme doit prévoir les débordements lors du calcul</u>. S''il y a en effet débordement dans le calcul, vous devez afficher <code>Débordement !</code>.
@@ -822,37 +822,37 @@ insert into codewars.item(id, image_path, price, description, name) values (defa
 insert into codewars.item(id, image_path, price, description, name) values (default, '/assets/images/market_icons/star-wars.png', 8500, 'Obtenir un délai supplémentaire de 24h pour le TP #5', 'Délai Supplémentaire');
 
 /*TRANSACTIONS*/
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'MISE à NIVEAU - Facture de base', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'MISE à NIVEAU - Échec ou succès', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 119, now(), 'MISE à NIVEAU - Consommation d''essence', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'MISE à NIVEAU - Consommation d''essence', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'Mise à niveau - Facture de base', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'Mise à niveau - Échec ou succès', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 119, now(), 'Mise à niveau - Consommation d''essence', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'Mise à niveau - Consommation d''essence', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 118, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
 insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Types primitifs', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'MISE à NIVEAU - Nombres pairs', 250, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'MISE à NIVEAU - Facture de base', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'MISE à NIVEAU - Consommation d''essence', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'MISE à NIVEAU - Échec ou succès', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 126, now(), 'MISE à NIVEAU - Échec ou succès', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 129, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 121, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 130, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 127, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 125, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 126, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 123, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 122, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 120, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 119, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 117, now(), 'MISE à NIVEAU - Conversion de devise', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 125, now(), 'MISE à NIVEAU - Consommation d''essence', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 123, now(), 'MISE à NIVEAU - Consommation d''essence', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 127, now(), 'MISE à NIVEAU - Monnaie à rendre', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 124, now(), 'MISE à NIVEAU - Consommation d''essence', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 124, now(), 'MISE à NIVEAU - Âge depuis date', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 119, now(), 'MISE à NIVEAU - Âge depuis date', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 117, now(), 'MISE à NIVEAU - Âge depuis date', 500, 0, true, true);
-insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'MISE à NIVEAU - Âge depuis date', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Mise à niveau - Nombres pairs', 250, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Mise à niveau - Facture de base', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Mise à niveau - Consommation d''essence', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Mise à niveau - Échec ou succès', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 126, now(), 'Mise à niveau - Échec ou succès', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 129, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 121, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 130, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 127, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 125, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 126, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 123, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 122, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 120, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 119, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 117, now(), 'Mise à niveau - Conversion de devise', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 125, now(), 'Mise à niveau - Consommation d''essence', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 123, now(), 'Mise à niveau - Consommation d''essence', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 127, now(), 'Mise à niveau - Monnaie à rendre', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 124, now(), 'Mise à niveau - Consommation d''essence', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 124, now(), 'Mise à niveau - Âge depuis date', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 119, now(), 'Mise à niveau - Âge depuis date', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 117, now(), 'Mise à niveau - Âge depuis date', 500, 0, true, true);
+insert into codewars.transaction(id, user_id, date, description, cash, points, is_cash_positive, is_points_positive) values (default, 116, now(), 'Mise à niveau - Âge depuis date', 500, 0, true, true);
 
 /*SUBMISSION*/
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2029684, 46, true, false, '', '/home/dtucker/www/code-wars/uploads/hmkY319iCOe6XB35JDLAvBEt.zip', now(), '', null);
