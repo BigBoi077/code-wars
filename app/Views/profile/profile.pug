@@ -136,4 +136,4 @@ block body
                     | Aller aux missions
       each exercise in exercises
         if exercise.comments != null
-          +commentModal("Commentaire du professeur" , exercise.comments, "commentModal" + exercise.id)
+          +commentModal("Commentaire du professeur" , exercise.comments, "commentModal" + exercise.exercise_id)
