@@ -78,7 +78,8 @@ class CorrectionController extends Controller
         $e = (new ExerciseBroker())->getCorrectionPath($id);
 
         if ($e == null) {
-            return $this->redirect("/error/404");
+            Flash::error("Impossible de télécharcher le fichier");
+            return $this->redirect($this->request->getReferer());
         }
 
         if (file_exists($e->path)) {
@@ -92,7 +93,7 @@ class CorrectionController extends Controller
             exit();
         } else {
             Flash::error("Impossible de télécharcher le fichier");
-            exit("Error: File not found.");
+            return $this->redirect($this->request->getReferer());
         }
     }
 
