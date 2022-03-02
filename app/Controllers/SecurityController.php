@@ -53,7 +53,7 @@ abstract class SecurityController extends ZephyrusBaseController
                 (new LogBroker())->logFbi(
                     $this->request->getClientIp(),
                     $this->request->getMethod(),
-                    Session::getInstance()->read('user')->da
+                    null
                 );
                 return $this->redirect('https://fbi.gov');
             }
