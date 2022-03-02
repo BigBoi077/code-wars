@@ -37,7 +37,7 @@ https://gist.github.com/dadajuice/a10b953b7c01db11f0c6d498f1dcc8ed
     sudo -u www-data git clone https://github.com/cegepst/code-wars.git
 
 2 - Installer les dépendances
-    cd codewars
+    cd code-wars
     sudo -u www-data composer install
 ~~~
 
@@ -109,7 +109,7 @@ createdb codewars
 Après, donner les droits à votre utilisateur de base de donnée.
 
 sudo -u postgres psql
-postgres=# grant all privileges on database nexusapi to <USER_APP>;
+postgres=# grant all privileges on database codewars to <USER_APP>;
 postgres=# \q
 
 Finalement, importer les données des scripts SQL.
