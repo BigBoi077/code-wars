@@ -30,6 +30,7 @@ class AuthenticationController extends Controller
             $logger->logUser();
             return $this->redirect('/');
         }
+        sleep(2);
         Flash::error($logger->getErrorMessage());
         return $this->redirect('/login');
     }
