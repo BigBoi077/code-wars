@@ -42,7 +42,7 @@ class NotificationService
 
     public static function incorrectSolution($userId, $exerciseName, $id)
     {
-        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Votre solution pour " . $exerciseName . " ne convient pas. Consulter le <a href='/profile#exerciseSection'>commentaire</a> de l'enseignant pour vous orienter. Cliquer <a href='/exercise/' " . $id . ">ici</a> pour annuler votre remise.</p>", "Solution incorrect");
+        (new NotificationBroker())->sendNotificationToSpecificStudent($userId, "<p>Votre solution pour " . $exerciseName . " ne convient pas. Consulter le <a href='/profile#exerciseSection' class='notification-a'>commentaire</a> de l'enseignant pour vous orienter. Cliquer <a href='/exercise/' " . $id . ">ici</a> pour annuler votre remise.</p>", "Solution incorrect");
     }
 
     public static function newCommentOnCorrection($userId, $name)
