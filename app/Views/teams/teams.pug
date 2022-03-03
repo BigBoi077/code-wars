@@ -27,14 +27,14 @@ block body
           .col-lg-5.col-sm-12.p-0.rebel
             h1.rebel-sith-logo.starwars-font Rebel
               img(src='assets/images/rebel.png').ml-3
-            h6.mb-3 #{teamProgress.Rebel} % des missions totales complétées
+            h6.mb-3 #{format('decimal', teamProgress.Rebel, 1, 1)} % des missions totales complétées
             .card.py-3.box-shadow-rebel
               each rebel, index in teams.rebels
                 +teamMember(rebel, index)
           .col-lg-5.col-sm-12.p-0.sith
             h1.rebel-sith-logo.starwars-font Sith
               img(src='assets/images/sith.png').ml-3
-            h6.mb-3.text-right #{teamProgress.Sith} % des missions totales complétées
+            h6.mb-3.text-right #{format('decimal', teamProgress.Sith, 1, 1)} % des missions totales complétées
             .card.py-3.box-shadow-sith
               each sith, index in teams.siths
                 +teamMember(sith, index)
