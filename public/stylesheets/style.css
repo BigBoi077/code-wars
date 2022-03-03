@@ -1642,12 +1642,6 @@ th {
     vertical-align: center;
 }
 
-.table td:last-child {
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
-}
-
 table {
     position: relative;
 }
