@@ -265,6 +265,12 @@ header #hamburger-menu {
     display: none;
 }
 
+#memberPicture {
+    height: 190px;
+    object-fit: cover;
+    object-position: top;
+}
+
 .about-team-member {
     width: 100%;
     display: flex;
@@ -336,7 +342,7 @@ header #hamburger-menu {
 
 .team-pics-container .card-img-top {
     width: 200px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 header .menu-items a:hover {
