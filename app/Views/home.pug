@@ -33,7 +33,8 @@ block body
                 each transaction in transactions
                   tr
                     td=format('date', transaction.date)
-                    td.start=transaction.description
+                    td
+                      div!=transaction.description
                     td.end
                       .d-flex
                         +cashBalance(transaction.cash, transaction.is_cash_positive)

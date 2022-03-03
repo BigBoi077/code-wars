@@ -34,16 +34,22 @@ block body
                   +star_wars_points(current.points)
               .col-6.d-flex.justify-content-end
                 p.m-0 #{current.team_name}
+
       .leaderboard.w-100
         .flex-column
           each student, index in students
-            .row.py-3.px-0.d-flex.align-items-center.w-100(class=(current.position === (index + 1) ? 'accent': ''))
+            .row.p-3.px-0.d-flex.align-items-center.w-100(class=(current.position === (index + 1) ? 'accent': ''))
               if index < 3
-                div.gravatar-container.position-relative
+                div.gravatar-container.position-relative.text-dark
                   if student.gravatarAvailable
                     img.rounded-img.position-absolute(data-gravatar data-email=student.email class="position" + index)
                   else
-                    .profile-bg(class="position" + index)(class=(student.team_id === 1) ? "bg-red": "bg-blue")
+                    .profile-bg(class=(student.team_id === 1) ? "bg-red": "bg-blue")
+                      .top-3.text-center(class="position" + index)
+                        if index === 0
+                          i.fa.fa-trophy
+                        else
+                          i.fa.fa-medal
                       p.mb-0.initials=student.initials
                 .col-1.d-flex.align-items-center.justify-content-end
                   h4.my-0.mx-4.text-dark ##{index + 1}
@@ -51,10 +57,10 @@ block body
                   h4.text-dark.mb-0 #{student.username}
               else
                 if student.gravatarAvailable
-                  img.rounded-img(data-gravatar data-email=student.email).not-top-3.ml-3.mr-3
+                  img.rounded-img(data-gravatar data-email=student.email).ml-3.mr-3
                 else
-                  .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
-                    p.initials.initials-small.mb-0.text-dark=student.initials
+                  .profile-bg.rounded-img.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
+                    p.initials.mb-0.text-dark=student.initials
                 .col-1.d-flex.align-items-center.justify-content-end
                   span.mr-4.ml-4.text-dark ##{index + 1}
                 .col-6
@@ -64,7 +70,7 @@ block body
                   p.mr-3
                     +star_wars_points(student.points)
                 .col-6.d-flex.justify-content-end
-                  p.m-0.text-dark #{student.team_name}
+                  +teamName(student.team_name)
             hr.m-0.w-100
 
 block script
