@@ -12,9 +12,10 @@ mixin weekProgress(week)
         p.mb-0=week.nbExercise
 
 mixin weekProgressSmall(week)
-  .row.my-2
-    .col-4.px-0
-      small Semaine #{week.number} :
+  .row.my-2.d-flex.align-items-center
+    .col-4.d-flex.justify-content-end
+      a(href="#weekExercises" + week.week_id)
+        small Semaine #{week.number}
     .col-5.mt-1.p-0
       .progress
         .progress-bar(style="width: " + week.progress + "%").bg-accent
