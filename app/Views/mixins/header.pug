@@ -47,7 +47,6 @@ mixin header()
             a.profile-pic(href="/profile")
               .profile-bg(class=(student.team_id === 1) ? "bg-red": "bg-blue")
               #profileTeamImg(style="background: #fff url('" + profileTeamImg + "') no-repeat center; background-size: cover;").team-logo-header
-                //img(src=profileTeamImg)
             p.initials #{student.initials}
 
       .d-flex.ml-3
