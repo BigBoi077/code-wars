@@ -14,14 +14,18 @@ block body
     .row.mt-5.p-4.main-card
       .w-100
         .d-flex.justify-content-between.align-items-center
-          h1 Équipes
+          .row.mb-4
+            .col-10.p-0
+              h1 Équipes
+              small.header-description Avec l'aide de vos camarades, accumulez des points en réussissant des missions pour vaincre l'autre équipe. Avec certains articles du magasin vous pourrez aussi punir l'autre équipe.
+            .col-2
+              img.img-fluid.w-100(src="/assets/images/trooper_team.png")
           if user.isTeacher
             a(href='/management/students').no-decoration
               button.btn.btn-yellow
                 p.mb-0
                   i.fas.fa-plus-square.mr-2
                   | Gestion des Étudiants
-        hr
       #teams
         .row.justify-content-between
           .col-lg-5.col-sm-12.p-0.rebel
