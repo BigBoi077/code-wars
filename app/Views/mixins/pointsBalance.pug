@@ -4,4 +4,4 @@ mixin pointsBalance(points, isPositive)
     if isPositive
       span #{format('decimal', points, 0, 0)}
     else
-      span -(#{format('decimal', points, 0, 0)})
+      span (#{format('decimal', points, 0, 0)})
