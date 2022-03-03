@@ -20,7 +20,7 @@ mixin exerciseRow(exercise)
         +star_wars_money(exercise.cash_reward)
       else
         +star_wars_money(0)
-    td.start
+    td.start.d-block
       if exercise.corrected
         +star_wars_points(exercise.point_reward)
       else

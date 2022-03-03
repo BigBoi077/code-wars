@@ -13,8 +13,8 @@
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --grey: rgb(169, 169, 169);
-    --red: #fd5a5a;
-    --blue: #0f86ff;
+    --red: #d1463d;
+    --blue: #367bc4;
     --font: #212529;
     --bronze: #cd7f32;
     --success-green: #4BB543;
@@ -57,6 +57,10 @@
     z-index: 1;
 }
 
+.grey-50 {
+    color: rgba(0,0,0, 0.5);
+}
+
 .grey-border {
     border: 1px solid var(--grey);
 }
@@ -80,6 +84,10 @@
 
 .text-light {
     color: var(--light);
+}
+
+.header-description {
+    font-weight: lighter;
 }
 
 .dark-bg {
@@ -113,11 +121,12 @@ body {
 }
 
 a {
-    color: var(--dark);
+    color: #23a1c9;
 }
 
 a:hover {
-    color: var(--accent);
+    color: #1a7392;
+    text-decoration: none;
 }
 
 .letter-space-1 {
@@ -256,6 +265,12 @@ header #hamburger-menu {
     display: none;
 }
 
+#memberPicture {
+    height: 190px;
+    object-fit: cover;
+    object-position: top;
+}
+
 .about-team-member {
     width: 100%;
     display: flex;
@@ -327,7 +342,7 @@ header #hamburger-menu {
 
 .team-pics-container .card-img-top {
     width: 200px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 header .menu-items a:hover {
@@ -348,12 +363,35 @@ header .menu-items a:hover {
     right: -5px;
 }
 
-.background-yellow {
-    //background-color: rgba(255, 222, 0, 0.5);
+.top-3 {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    top: -10px;
+    right: -10px;
+    border-radius: 50%;
+    color: white;
+    border: white 1px solid;
 }
 
-.profile-bg {
-    /*box-shadow: 1px 1px black;*/
+.top-3.position0 {
+    background-color: gold;
+}
+
+.top-3.position1 {
+    background-color: silver;
+}
+
+.top-3.position2 {
+    background-color: var(--bronze);
+}
+
+.team-logo-header {
+    border: 2px solid #FFF;
+    border-radius: 50%;
 }
 
 .initials {
@@ -491,18 +529,6 @@ header .gestion-button {
     position: absolute;
     width: 100%;
     top: 50px;
-}
-
-.position0 {
-    border: 4px solid gold;
-}
-
-.position1 {
-    border: 4px solid silver;
-}
-
-.position2 {
-    border: 4px solid var(--bronze);
 }
 
 /*notifications*/
@@ -894,11 +920,6 @@ input#exerciseUpload {
 
 .student-row-element, .student-header-element {
     word-break: break-all;
-}
-
-.student-link {
-    color: var(--font);
-    text-decoration: underline;
 }
 
 .heading-row {
@@ -1491,13 +1512,9 @@ text-align: center;
 
 .leaderboard .rounded-img {
     height: 64px;
-    width: auto;
+    width: 64px;
 }
 
-.leaderboard .not-top-3 {
-    height: 32px;
-    width: 32px;
-}
 
 .leaderboard .leaderboard-overlay {
     height: 64px;
@@ -1625,12 +1642,6 @@ th {
 .table tbody td {
     position: relative;
     vertical-align: center;
-}
-
-.table td:last-child {
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
 }
 
 table {

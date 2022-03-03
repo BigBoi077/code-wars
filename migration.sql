@@ -13,6 +13,7 @@ delete from studentItem where id > 0;
 delete from item where id > 0;
 delete from token where user_id > 0;
 delete from student where id > 0;
+delete from notification where id > 0;
 delete from "user" where id > 0;
 delete from person where id > 0;
 
@@ -38,23 +39,23 @@ insert into codewars.person(id, da, firstname, lastname, username, email) values
 alter sequence codewars.person_id_seq restart with 132;
 
 /*USER*/
-insert into codewars.user(id, da, password) values (1, 'dadajuice', '$2y$10$mdBrMt4E2GZi75CbiiSCPedpk0T85tjGXYtLn4WT6Jc/KtKYlcg.e');
-insert into codewars.user(id, da, password) values (116, '2029684', '$2y$10$yKQOV6p7UZpRcOpJwJFyouZf7l/8HvBOKncUGULKSae7fI26J3pkm');
-insert into codewars.user(id, da, password) values (117, '1448676', '$2y$10$T2OWktwvLlZosf6LWiH2OeWcCEra3EJSEZmCA6DpkFhm8Vf1uSxl2');
-insert into codewars.user(id, da, password) values (118, '6176471', '$2y$10$bTNjnetlirGP9PF0eSEOHOFjZ0W.QGFwEoiQCnYXUYewm2kNUS3Xe');
-insert into codewars.user(id, da, password) values (119, '2134218', '$2y$10$KNsJ5zsGvi1GclUTrRA9/.ixIiOS8xE30l.0idWC6YcnYcbJSE1fi');
-insert into codewars.user(id, da, password) values (120, '2136072', '$2y$10$5IEsnkvY6Z3NKSEVcO59nOXAQvwZQ08ULOjG9jVIN3xk0UDkAczWi');
-insert into codewars.user(id, da, password) values (121, '2154718', '$2y$10$d/Ht8lsCOy0PofY57oQQQuEs6GW70D.QH85af2ZAEHGS.228LU4n2');
-insert into codewars.user(id, da, password) values (122, '2183098', '$2y$10$dhcx4umW0uBfGNZjYQ6XTupYSl8mboFyRBEpQMx9rDPkuvYKKKpmu');
-insert into codewars.user(id, da, password) values (123, '6176553', '$2y$10$T966ViZzf4MIo6KISyvs9O8.CyoBdDt1wNaoFe44V2DNwCc10CIvi');
-insert into codewars.user(id, da, password) values (124, '1326333', '$2y$10$I9b3FMCE5/852N.BGMvRauRxarRLrfW.1hsPfaD132bmk1p.00S/C');
-insert into codewars.user(id, da, password) values (125, '2178274', '$2y$10$seiw12008BLIV3JjnolZGOF8elTlcOANyjcnc2pn10L2eE2bZlJ7m');
-insert into codewars.user(id, da, password) values (126, '2146790', '$2y$10$nGamOGSJiYw49NOkpotfIOsnq9yIi9d5aHO.x.B7iHxGUd8TYlTRu');
-insert into codewars.user(id, da, password) values (127, '1929852', '$2y$10$KmHDyOWqqoUFs1JPmUVrEeyO.B7J9prVG36ub3YhRDMR5g6JjMzEm');
-insert into codewars.user(id, da, password) values (128, '1538902', '$2y$10$7HqQWdqPntRviBTWZyCBf.GvCTHCxKpJjYlVdfI7RHEDRw9hyJUWK');
-insert into codewars.user(id, da, password) values (129, '2144667', '$2y$10$H3l2sBUMonCuJ5Cu0M9IcezVjImBOZaEy9WfUXLVvnZ932JMDA9R6');
-insert into codewars.user(id, da, password) values (130, '2167015', '$2y$10$gF3HdnhGw3CMIZEnLyrom.hMEOKfAzeOEF7wxbBd53EwoPNYT1l26');
-insert into codewars.user(id, da, password) values (131, 'josh', '$2y$10$TgtPN2mNmmitVV95GzdPPewMBBbfgxc/M.qcPTTWOXWAGl8mfU15S');
+insert into codewars.user(id, da, password) values (1, 'dadajuice', '$2y$10$Nf3YH2vKsr1/joVZcdG1PO2IUvg8sNFncCbWERZxldVEn6c4RbXUa');
+insert into codewars.user(id, da, password) values (116, '2029684', '$2y$10$seTJWVcxioxbaJdRIpMt3.h6GfaD6HPOz.fh/h1QhnPJRXUpz0NDG');
+insert into codewars.user(id, da, password) values (117, '1448676', '$2y$10$0PKu.O1YXqV.TqtsC2Vr4OmMtxu.BnHx5fdT1hQczyIJE2zdzim0i');
+insert into codewars.user(id, da, password) values (118, '6176471', '$2y$10$9LQCNplOLjUtZ69E98mFNuDHJqYKdK9V/WqFYS2Lr5glb9VGY0aDK');
+insert into codewars.user(id, da, password) values (119, '2134218', '$2y$10$wzqEjo1NHn2rUoHg6Bk7EeVUm40Jny6ZAPcYRnDnrVltFHyJVG6Xq');
+insert into codewars.user(id, da, password) values (120, '2136072', '$2y$10$cWRgiyDePtT5bwnLQdNJ8e.7ZQmMW1xrF39vZ.SbKZMVA3hk/cuq6');
+insert into codewars.user(id, da, password) values (121, '2154718', '$2y$10$s4KUaUt/LMoRfcfZH3TBte/vU1fhzzSytFc4Du.7bmNX.jJGMcb9O');
+insert into codewars.user(id, da, password) values (122, '2183098', '$2y$10$l18selpmua84ZKilj1P1ZucHgNXoaIW7NDFCKSehf5AkHAPLavnAy');
+insert into codewars.user(id, da, password) values (123, '6176553', '$2y$10$9aen53CTgjpvrd76CMUHUOjMG2E6HuHdylH5DJ4k8SfLiWiQzxoWu');
+insert into codewars.user(id, da, password) values (124, '1326333', '$2y$10$GWX5UqfKGz98U8Qx2rdnWuE3Pmbu.5gXu1tsCNsVq4nvPAbIt.I5q');
+insert into codewars.user(id, da, password) values (125, '2178274', '$2y$10$SDduGbCGMaeZzzCiLpeO4.KOzbAiTs2SWvrEGPXKZyleiPzb/kVi6');
+insert into codewars.user(id, da, password) values (126, '2146790', '$2y$10$ZRjjOCOdpG3HPxpLHqG/O.ut.7f3CDRj/bYkGjDpSIOdkmMzReHU2');
+insert into codewars.user(id, da, password) values (127, '1929852', '$2y$10$5rozLkoLd4Rmeshi96bonuzyiNelNR94diVIUs9IkB2d2AY2jLuRq');
+insert into codewars.user(id, da, password) values (128, '1538902', '$2y$10$5r4Hq6PKxdOkgJGhVIShXO94z8V0u8ItcTgC4hv2cuBxwjt0Ggc/S');
+insert into codewars.user(id, da, password) values (129, '2144667', '$2y$10$xSEbVvmI6tNQLbBjiCD8Fu2M9xeVJJmma6CxhnbRWPbd8IH3UcbAm');
+insert into codewars.user(id, da, password) values (130, '2167015', '$2y$10$V8fh2B/X8LXWesPX.s/ENOWpHOEVbidVa/Y05drDzzjV3sW9.S6qy');
+insert into codewars.user(id, da, password) values (131, 'josh', '$2y$10$tc6fIxVZcKmSTHnPbnncLOkyssKCQg67f90lIjEnCZb/6Si1ve19u');
 alter sequence codewars.user_id_seq restart with 132;
 
 /*STUDENT*/
@@ -920,8 +921,8 @@ insert into codewars.studentexercise(id, student_da, exercise_id, completed, cor
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2029684, 28, true, true, '', '', now(), '', true);
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 1448676, 28, true, true, '', '', now(), '', true);
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2134218, 28, true, true, '', '', now(), '', true);
-insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2136072, 28, true, true, 'Pas si simple que ça ...', '', now(), '', false);
-insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2183098, 28, true, true, 'Pas si simple que ça ....', '', now(), '', false);
+insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2136072, 28, true, false, 'Pas si simple que ça ...', '', now(), '', false);
+insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2183098, 28, true, false, 'Pas si simple que ça ....', '', now(), '', false);
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 1326333, 28, true, true, '', '', now(), '', true);
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2029684, 36, true, true, '', '', now(), '', true);
 insert into codewars.studentexercise(id, student_da, exercise_id, completed, corrected, comments, dir_path, submit_date, student_comment, is_good) values(default, 2029684, 54, true, true, '', '', now(), '', true);

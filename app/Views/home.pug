@@ -16,8 +16,12 @@ block body
         h3.font-italic “ #{quote} ”
     .row.mt-5.p-4.main-card
       .w-100
-        h1 Transactions
-        hr
+        .row.mb-4
+          .col-10.p-0
+            h1 Transactions
+            small.header-description Ici vous pouvez voir l'historique de vos transactions. Autant pour les objets que vous achetez dans le magasin que les récompenses octroyées par rapport aux missions que vous avez complété.
+          .col-2
+            img.img-fluid.w-100(src="/assets/images/leaderboard_art.png")
         .done
           if transactions != null
             table.table
@@ -29,7 +33,8 @@ block body
                 each transaction in transactions
                   tr
                     td=format('date', transaction.date)
-                    td.start=transaction.description
+                    td
+                      div!=transaction.description
                     td.end
                       .d-flex
                         +cashBalance(transaction.cash, transaction.is_cash_positive)
