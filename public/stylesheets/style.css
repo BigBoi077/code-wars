@@ -58,7 +58,7 @@
 }
 
 .grey-50 {
-    color: var(--grey);
+    color: rgba(0,0,0, 0.5);
 }
 
 .grey-border {
@@ -84,6 +84,10 @@
 
 .text-light {
     color: var(--light);
+}
+
+.header-description {
+    font-weight: lighter;
 }
 
 .dark-bg {
@@ -359,6 +363,11 @@ header .menu-items a:hover {
 
 .profile-bg {
     /*box-shadow: 1px 1px black;*/
+}
+
+.team-logo-header {
+    border: 2px solid #FFF;
+    border-radius: 50%;
 }
 
 .initials {

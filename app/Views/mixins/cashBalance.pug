@@ -1,7 +1,7 @@
 mixin cashBalance(cash, isPositive)
   .mission-cash-reward.d-flex.align-items-center.mr-4(class = isPositive ? 'success-green': 'error-red')
-    img.mr-2(src=isPositive ? '/assets/images/credit_symbol_green.svg': '/assets/images/credit_symbol_red.svg').svg-icons
     if isPositive
       span #{format('decimal', cash, 0, 0)}
     else
       span (#{format('decimal', cash, 0, 0)})
+    img.ml-2(src=isPositive ? '/assets/images/credit_symbol_green.svg': '/assets/images/credit_symbol_red.svg').svg-icons
