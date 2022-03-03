@@ -86,6 +86,10 @@
     color: var(--light);
 }
 
+.header-description {
+    font-weight: lighter;
+}
+
 .dark-bg {
     background-color: var(--dark);
 }
