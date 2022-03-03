@@ -363,12 +363,30 @@ header .menu-items a:hover {
     right: -5px;
 }
 
-.background-yellow {
-    //background-color: rgba(255, 222, 0, 0.5);
+.top-3 {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    top: -10px;
+    right: -10px;
+    border-radius: 50%;
+    color: white;
+    border: white 1px solid;
 }
 
-.profile-bg {
-    /*box-shadow: 1px 1px black;*/
+.top-3.position0 {
+    background-color: gold;
+}
+
+.top-3.position1 {
+    background-color: silver;
+}
+
+.top-3.position2 {
+    background-color: var(--bronze);
 }
 
 .team-logo-header {
@@ -511,18 +529,6 @@ header .gestion-button {
     position: absolute;
     width: 100%;
     top: 50px;
-}
-
-.position0 {
-    border: 4px solid gold;
-}
-
-.position1 {
-    border: 4px solid silver;
-}
-
-.position2 {
-    border: 4px solid var(--bronze);
 }
 
 /*notifications*/
@@ -1506,13 +1512,9 @@ text-align: center;
 
 .leaderboard .rounded-img {
     height: 64px;
-    width: auto;
+    width: 64px;
 }
 
-.leaderboard .not-top-3 {
-    height: 32px;
-    width: 32px;
-}
 
 .leaderboard .leaderboard-overlay {
     height: 64px;

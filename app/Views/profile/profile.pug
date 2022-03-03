@@ -37,7 +37,7 @@ block body
             hr
             +profileInfo("Prénom", studentProfile.firstname)
             hr
-            +profileInfo("Équipe", studentProfile.team_name)
+            +profileInfo("Équipe", (student.team_name === "Rebel") ? "Rebelles": "Impériaux")
             hr
             +profileInfo("Courriel", studentProfile.email)
             if !isTeacher
