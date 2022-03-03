@@ -4,4 +4,4 @@ mixin cashBalance(cash, isPositive)
     if isPositive
       span #{format('decimal', cash, 0, 0)}
     else
-      span -(#{format('decimal', cash, 0, 0)})
+      span (#{format('decimal', cash, 0, 0)})
