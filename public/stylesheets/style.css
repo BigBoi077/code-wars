@@ -13,8 +13,8 @@
     --background: rgb(247, 247, 249);
     --card-background: rgb(203, 203, 203);
     --grey: rgb(169, 169, 169);
-    --red: #fd5a5a;
-    --blue: #0f86ff;
+    --red: #d1463d;
+    --blue: #367bc4;
     --font: #212529;
     --bronze: #cd7f32;
     --success-green: #4BB543;
@@ -55,6 +55,10 @@
 
 .foreground {
     z-index: 1;
+}
+
+.grey-50 {
+    color: var(--grey);
 }
 
 .grey-border {
@@ -113,11 +117,12 @@ body {
 }
 
 a {
-    color: var(--dark);
+    color: #23a1c9;
 }
 
 a:hover {
-    color: var(--accent);
+    color: #1a7392;
+    text-decoration: none;
 }
 
 .letter-space-1 {
@@ -894,11 +899,6 @@ input#exerciseUpload {
 
 .student-row-element, .student-header-element {
     word-break: break-all;
-}
-
-.student-link {
-    color: var(--font);
-    text-decoration: underline;
 }
 
 .heading-row {
