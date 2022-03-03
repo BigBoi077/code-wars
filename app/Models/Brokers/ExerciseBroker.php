@@ -84,13 +84,13 @@ class ExerciseBroker extends Broker
     {
         $sql = "update codewars.studentexercise se set corrected = true, comments = ?, is_good = true where se.id = ? and se.student_da = ? and se.completed = true";
         $this->query($sql, [$comment, $id, $student->da]);
-        $sql = "select cash_reward, point_reward, e.name from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
+        $sql = "select e.id as exercise_id, cash_reward, point_reward, e.name from codewars.exercise e join codewars.studentexercise s on e.id = s.exercise_id where s.id = ?";
         $reward = $this->selectSingle($sql, [$id]);
         $broker = new StudentBroker();
         $isPointsPositive = $reward->point_reward >= 0;
         $isCashPositive = $reward->cash_reward >= 0;
         if ($comment == "") {
-            $comment = "Votre exercices à été corrigé. Voici votre récompense :";
+            $comment = '<p>Correction de la mission : <a href="/exercises/' . $reward->exercise_id . '">' . $reward->name . '</a></p>';
         }
         (new TransactionBroker())->insert($student->id, $comment, $reward->cash_reward, $reward->point_reward, $isCashPositive, $isPointsPositive);
         $broker->addCash($student->da, $reward->cash_reward);
