@@ -31,10 +31,10 @@ block body
             .all-missions.col.p-0
               each week, index in exercisesByWeek
                 if week.exercises != null
-                  .week.w-100.mb-5
+                  .week.w-100.mb-5(id="weekExercises" + week.week_id)
                     .row.mb-1d-flex.align-items-end.p-0
                       h4.week-header.mb-1 Semaine #{week.number} - #{format('date', week.startDate)}
-                    table.table(id="weekExercises" + week.week_id).w-100
+                    table.table.w-100
                       tbody.w-100
                         if week.exercises != null
                           each exercise in week.exercises
@@ -43,20 +43,20 @@ block body
                                 a(href="/exercises/" + exercise.id)
                                   | #{exercise.name}
                               td.p-3
-                                +star_wars_money(exercise.cash_reward, true)
-                              td.p-3
                                 +star_wars_points(exercise.point_reward, true)
+                              td.p-3
+                                +star_wars_money(exercise.cash_reward, true)
                               if !user.isTeacher
                                 td.p-3
                                   .d-flex.align-items-center.mt-1
                                     if exercise.corrected
-                                      i.fas.fa-check-circle.corrected(title="Corrigé")
+                                      i.fas.fa-check-circle.corrected(data-bs-toggle="tooltip" data-bs-placement="top" title="Complétée")
                                     else if exercise.is_good
-                                      i.fas.fa-times-circle.not-submitted(title="Solution incorrecte")
+                                      i.fas.fa-times-circle.not-submitted(data-bs-toggle="tooltip" data-bs-placement="top" title="Échouée")
                                     else if exercise.completed
-                                      i.fas.fa-check-circle.submitted(title="En attente de correction")
+                                      i.fas.fa-check-circle.submitted(data-bs-toggle="tooltip" data-bs-placement="top" title="En attente de correction")
                                     else
-                                      i.fas.fa-check-circle.disabled.
+                                      i.fas.fa-times-circle.grey-50(data-bs-toggle="tooltip" data-bs-placement="top" title="Non débutée")
             .col-5.pr-0.pl-5
               if student != null
                 .mission-progression.card.mb-4.w-100.fixed-ct
@@ -65,3 +65,5 @@ block body
                     p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
                     each week in weeklyProgress
                       +weekProgressSmall(week)
+block script
+  script(src="/javascripts/enableToolTip.js")
