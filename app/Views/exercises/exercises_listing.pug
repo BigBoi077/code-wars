@@ -33,21 +33,21 @@ block body
                 if week.exercises != null
                   .week.w-100.mb-5(id="weekExercises" + week.week_id)
                     .row.mb-1d-flex.align-items-end.p-0
-                      h4.week-header.mb-1 Semaine #{week.number} - #{format('date', week.startDate)}
+                      h4.week-header.mb-1 Semaine #{week.number}
                     table.table.w-100
                       tbody.w-100
                         if week.exercises != null
                           each exercise in week.exercises
                             tr.text-dark
-                              td.w-75.p-3
+                              td.w-75.p-2
                                 a(href="/exercises/" + exercise.id)
                                   | #{exercise.name}
-                              td.p-3
-                                +star_wars_points(exercise.point_reward, true)
-                              td.p-3
+                              td.p-2
                                 +star_wars_money(exercise.cash_reward, true)
+                              td.p-2
+                                +star_wars_points(exercise.point_reward, true)
                               if !user.isTeacher
-                                td.p-3
+                                td.p-2
                                   .d-flex.align-items-center.mt-1
                                     if exercise.corrected
                                       i.fas.fa-check-circle.corrected(data-bs-toggle="tooltip" data-bs-placement="top" title="Complétée")
@@ -64,6 +64,7 @@ block body
                     h4.mb-3.text-center Progression individuelle
                     p.mb-0.text-center Vous avez complété #{individualProgress.nbExercisesDone} mission(s) sur #{individualProgress.nbExercicesTotal}
                     each week in weeklyProgress
-                      +weekProgressSmall(week)
+                      if week.nbExercise !== 'N/A'
+                        +weekProgressSmall(week)
 block script
   script(src="/javascripts/enableToolTip.js")

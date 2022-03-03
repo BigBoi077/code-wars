@@ -5,14 +5,14 @@ mixin scoreBoard()
         .score-bar
           .score-points
             .d-flex
-              img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
-              h4.text-font #{format('decimal', teamPoints.Rebel, 0, 0)}
+              h4
+                +star_wars_points(teamPoints.Rebel)
           .score-value-left(style="width: " + teamPoints.rebelWidth + "%")
         .score-bar
           .score-points
-            .d-flex.justify-content-end.mr-3
-              img.m-1(src="/assets/images/ethereum_symbol.svg").svg-icons
-              h4.text-font #{format('decimal', teamPoints.Sith, 0, 0)}
+            .d-flex.justify-content-end
+              h4
+                +star_wars_points(teamPoints.Sith)
           .score-value-right(style="width: " + teamPoints.sithWidth + "%")
       .rebel-sith.text-center.w-100
         img(src='/assets/images/rebelvsith.png')
