@@ -45,7 +45,7 @@ mixin missionSidebar(exercise)
             small En attente de correction
     .col-12.mission-difficulty-container.mb-1
       span.mb-1 Achèvement
-      h6.text-muted=completion + " % des élèves ont complété la mission"
+      h6.text-muted=format('decimal', completion, 1, 1) + " % des élèves ont complété la mission"
     .col-8.mission-difficulty-container
       span.mb-1 Difficulté
       .difficulty-stars
