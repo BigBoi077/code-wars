@@ -33,7 +33,7 @@ block body
                 p.mr-3
                   +star_wars_points(current.points)
               .col-6.d-flex.justify-content-end
-                p.m-0 #{current.team_name}
+                +teamName(student.team_name)
 
       .leaderboard.w-100
         .flex-column
