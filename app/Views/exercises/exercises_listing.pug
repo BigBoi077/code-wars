@@ -37,7 +37,7 @@ block body
                         if week.exercises != null
                           each exercise in week.exercises
                             tr.text-dark
-                              td.w-75.p-2
+                              td.p-2
                                 a(href="/exercises/" + exercise.id)
                                   | #{exercise.name}
                               td.p-2
@@ -55,6 +55,12 @@ block body
                                       i.fas.fa-check-circle.submitted(data-bs-toggle="tooltip" data-bs-placement="top" title="En attente de correction")
                                     else
                                       i.fas.fa-times-circle.grey-50(data-bs-toggle="tooltip" data-bs-placement="top" title="Non débutée")
+                              if exercise.difficulty > 3
+                                td.p-2.text-right
+                                  if exercise.difficulty === 5
+                                    span.badge.badge-danger Très Difficile
+                                  else if exercise.difficulty === 4
+                                    span.badge.badge-danger Difficile
             .col-5.pr-0.pl-5
               if student != null
                 .mission-progression.card.mb-4.w-100.fixed-ct
