@@ -121,6 +121,17 @@ codewars=# \i \home\<User Linux>\www\code-wars\mock-data.sql
 codewars=# \q
 ~~~
 
+### Issues et bug hunting
+
+~~~
+Pour ce qui concerne les bugs, deux options s'offrent à vous. Premièrement,
+il existe un chanel sur le serveur Discord du Cégep apellé "codewars-bug-hunting"
+où vous pouvez soumettre des bugs trouvés au sein du système. Sinon, il est possible
+avec GitHub de créer des "issues"
+~~~
+
+<a href="https://github.com/cegepst/code-wars"><img style="height: 80px; widht: auto;" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png" /></a>
+
 ### Crédits
 
 <div style="display: flex;">
