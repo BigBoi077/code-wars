@@ -34,8 +34,21 @@ class StudentManageController extends TeacherController
 
     public function listStudents(): Response
     {
+        $students = (new StudentBroker())->getAllAlphabetic();
+
+        foreach ($students as $student) {
+            $student->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
+            if ($student->email != '' || $student->email != null) {
+                $gravatar = new Gravatar($student->email);
+                $student->gravatarAvailable = $gravatar->isAvailable();
+            } else {
+                $student->gravatarAvailable = false;
+            }
+
+        }
+
         return $this->render('management/students/student_listing', [
-            'students' => (new StudentBroker())->getAllAlphabetic(),
+            'students' => $students,
         ]);
     }
 
