@@ -16,7 +16,7 @@ block body
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
               | Nouvel article
-        hr.w-100
+        br
       if items == null
         span.text-muted Vous n'avez aucun article de créé, pour le moment.
       else
@@ -36,7 +36,7 @@ block body
                   p.student-row-element #{item.description}
                 td
                   +star_wars_money(item.price, true)
-                td.d-flex.align-items-center.h-100
+                td.d-flex.align-items-center.h-100.justify-content-end
                   a(href='/management/items/' + item.id + '/edit').mr-3
                     i.fas.fa-edit.student-icons
                   a(data-bs-toggle="modal" data-bs-target="#itemDeleteModal" + item.id)

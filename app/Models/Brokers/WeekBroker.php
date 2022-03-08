@@ -59,4 +59,10 @@ class WeekBroker extends Broker
                 WHERE w.number = ?";
         return $this->selectSingle($sql, [$number]);
     }
+
+    public function deactivateAll()
+    {
+        $sql = "update codewars.week set is_active = false";
+        $this->query($sql);
+    }
 }

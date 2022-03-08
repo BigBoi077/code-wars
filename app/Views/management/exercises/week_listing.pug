@@ -16,26 +16,23 @@ block body
             button.btn.btn-yellow
               i.fas.fa-plus-square.mr-2
               | Nouvelle semaine
-        hr
+        br
         if Count(weeks) <= 0
           span.text-muted Vous n'avez aucune semaine de créée pour l'instant.
         else
           table.table.w-100
             thead
               tr
-                th Date de début
                 th Numéro
                 th Activée
             tbody.w-100
               each week in weeks
                 tr
                   td
-                    p.student-row-element #{format('date', week.start_date)}
-                  td
                     p.student-row-element Semaine #{week.number}
                   td
                     p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
-                  td
+                  td.text-right
                     a.col(href='/management/weeks/' + week.id + '/activate')
                       i(class=week.is_active ? 'fa-eye-slash': 'fa-eye').fas.student-icons
                     a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal" + week.id)

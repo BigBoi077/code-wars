@@ -39,7 +39,7 @@ class PersonService
 
     private function applyRules($da): bool
     {
-        $this->form->validate('username', Rule::alphanumeric('Le nom d\'utilisateur doit être des lettres ou des chiffres.'));
+        $this->form->validate('username', Rule::regex("[-@.\/#&+\w]*",'Le nom d\'utilisateur doit être des lettres, chiffres ou charactères spéciaux.'));
         $this->form->validate('username', Rule::maxLength(20, 'Le nom d\'utilisateur doit être de maximum 20 caractères.'));
         if ($this->form->getValue('email') != '') {
             $this->form->validate('email', Rule::email('Le format du courriel est invalide.'));

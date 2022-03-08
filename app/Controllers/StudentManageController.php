@@ -5,6 +5,7 @@ use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
 use Models\Brokers\TransactionBroker;
+use Models\Brokers\WeekBroker;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
@@ -22,6 +23,8 @@ class StudentManageController extends TeacherController
         $this->get('/management/students/{da}/profile', 'viewStudent');
         $this->get("/management/students/rapidAdd", "rapidAdd");
 
+        $this->post("/management/students/reset", 'reset');
+
         $this->post('/management/students/store', 'storeStudent');
         $this->post('/management/students/{da}/update', 'updateStudent');
         $this->post("/management/students/rapidAdd", 'rapidAddUpdate');
@@ -31,8 +34,21 @@ class StudentManageController extends TeacherController
 
     public function listStudents(): Response
     {
+        $students = (new StudentBroker())->getAllAlphabetic();
+
+        foreach ($students as $student) {
+            $student->initials = substr($student->firstname, 0, 1) . substr($student->lastname, 0, 1);
+            if ($student->email != '' || $student->email != null) {
+                $gravatar = new Gravatar($student->email);
+                $student->gravatarAvailable = $gravatar->isAvailable();
+            } else {
+                $student->gravatarAvailable = false;
+            }
+
+        }
+
         return $this->render('management/students/student_listing', [
-            'students' => (new StudentBroker())->getAllAlphabetic(),
+            'students' => $students,
         ]);
     }
 
@@ -180,6 +196,22 @@ class StudentManageController extends TeacherController
             }
             $transactionBroker->insert($student->id, $reason, $cash, $points, $isCashPositive, $isPointsPositive);
             Flash::success("Ajout rapide, à " . $student->firstname . ' ' . $student->lastname . ", effectué avec succès!");
+        }
+        return $this->redirect("/management/students");
+    }
+
+    public function reset()
+    {
+        $studentBroker = new StudentBroker();
+        $all = $studentBroker->getAll();
+        (new WeekBroker())->deactivateAll();
+        if (empty($all))
+            Flash::warning('Il n\'y a aucun élève, mais les semaines ont été désactivé.');
+        else {
+            foreach ($all as $student) {
+                StudentService::delete($student->da);
+            }
+            Flash::success("Tous les étudiants ont été supprimés et les semaines désactivées.");
         }
         return $this->redirect("/management/students");
     }

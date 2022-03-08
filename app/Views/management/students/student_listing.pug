@@ -19,37 +19,49 @@ block body
                   p.mb-0
                     i.fas.fa-plus-square.m-1
                     | Nouvel étudiant
-              a.no-decoration(href='/management/students/rapidAdd')
+              a.no-decoration(href='/management/students/rapidAdd').mr-4
                 button.btn.btn-yellow
                   p.mb-0
                     i.fas.fa-hat-wizard.m-1
                     | Ajout rapide
-        hr.w-100
+              a.no-decoration(data-bs-toggle="modal" data-bs-target='#reset')
+                button.btn.btn-yellow
+                  p.mb-0
+                    .fas.fa-bomb.m-1
+                    | ORDER 66
+        br
         table.table.w-100
           thead
             tr
-              th DA
+              th
               th Nom
-              th Équipe
-              th Balance
-              th Points
+              th DA
+              th.text-right Balance
+              th.text-right Points
               th
           tbody.w-100
               each student in students
                 tr
-                  td
-                    p.student-row-element #{student.da}
-                  td
+                  td.py-3
+                    .gravatar-container.position-relative
+                      if student.gravatarAvailable
+                        img.rounded-img.profile-bg(data-gravatar data-email=student.email)
+                      else
+                        .profile-bg.rounded-img.position-relative(class=(student.team_id === 1) ? "bg-red" : "bg-blue")
+                          p.initials.mb-0.text-dark=student.initials
+                  td.py-3
                     p.student-row-element
-                      a.student-link(href='/management/students/' + student.da + '/profile')
-                        | #{student.firstname} #{student.lastname}
-                  td
-                    p.student-row-element #{student.team_name}
-                  td
-                    +star_wars_money(student.cash)
-                  td
-                    +star_wars_points(student.points)
-                  td
+                      .d-flex.flex-column
+                        a.student-link(href='/management/students/' + student.da + '/profile')
+                          | #{student.firstname} #{student.lastname}
+                        span.text-muted=student.username
+                  td.py-3
+                    p.student-row-element #{student.da}
+                  td.py-3
+                    +star_wars_money(student.cash, true)
+                  td.py-3
+                    +star_wars_points(student.points, true)
+                  td.text-right.py-3
                     a.col(href='/management/students/' + student.da + '/edit')
                       i.fas.fa-edit.student-icons
                     a.col(data-bs-toggle="modal" data-bs-target='#studentDeleteModal' + student.da)
@@ -57,3 +69,9 @@ block body
               each student in students
                 +confirmationModal("Suppression d'étudiant", 'Voulez-vous vraiment supprimer cet étudiant ?',
                   '/management/students/' + student.da + '/delete', 'studentDeleteModal' + student.da)
+
+    +confirmationModalPOST("ORDER 66", 'Voulez-vous vraiment exécuter l\'ordre 66 ? (Supprimer tous les étudiants et désactivé les semaines)', "/management/students/reset", 'reset')
+
+block script
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js")
+  script(src="/javascripts/gravatar.js")
