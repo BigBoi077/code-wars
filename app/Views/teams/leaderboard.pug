@@ -20,7 +20,7 @@ block body
             span Votre position actuelle :
           .position-info.row.m-0.px-2.py-4.d-flex.align-items-center.w-100.bg-white
             if profileImageUrl !== null
-              img.rounded-img(src=profileImageUrl).not-top-3.ml-3.mr-3
+              img.rounded-img(src=profileImageUrl).not-top-3
             else
               .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                 p.mb-0.initials-small.initials.text-dark=current.initials
