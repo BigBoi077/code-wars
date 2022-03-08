@@ -1329,7 +1329,7 @@ text-align: center;
     display: flex;
 }
 
-.single-mission-detail .mission-info .mission-difficulty-container i.active {
+.single-mission-detail .mission-info .mission-difficulty-container i.active, .mission-difficulty-container i.active {
     color: var(--accent);
     text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
 }
