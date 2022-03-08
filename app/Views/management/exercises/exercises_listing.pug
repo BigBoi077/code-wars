@@ -26,8 +26,8 @@ block body
                 th Nom
                 th Difficulté
                 th Semaine
-                th Argent
-                th Points
+                th.text-right Argent
+                th.text-right Points
                 th
             tbody.w-100
               each exercise in exercises
@@ -41,10 +41,10 @@ block body
                   td
                     small Semaine #{exercise.number}
                   td
-                    +star_wars_money(exercise.cash_reward)
-                  td
-                    +star_wars_points(exercise.point_reward)
-                  td.text-nowrap
+                    +star_wars_money(exercise.cash_reward, true)
+                  td.text-right
+                    +star_wars_points(exercise.point_reward, true)
+                  td.text-nowrap.text-right
                     a(href='/management/exercises/' + exercise.id + '/tips').mr-3
                       i.fas.fa-lightbulb.student-icons
                     a(href='/management/exercises/' + exercise.id + '/edit').mr-3
