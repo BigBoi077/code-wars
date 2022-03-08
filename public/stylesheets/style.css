@@ -1470,8 +1470,6 @@ text-align: center;
 }
 
 .rounded-img {
-    height: 150px;
-    width: 150px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -1521,7 +1519,7 @@ text-align: center;
     border-radius: 50%;
 }
 
-.leaderboard .gravatar-container {
+.gravatar-container {
     height: 64px;
     width: 64px;
 }
