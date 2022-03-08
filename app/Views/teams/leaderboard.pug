@@ -23,7 +23,7 @@ block body
               img.rounded-img(src=profileImageUrl).not-top-3.ml-3.mr-3
             else
               .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
-                p.mb-0.initials-small.initials.text-dark=current.initials
+                p.mb-0.initials.text-dark=current.initials
             .col-1.d-flex.align-items-center.justify-content-end
               span ##{current.position}
             .col-6

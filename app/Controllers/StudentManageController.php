@@ -191,11 +191,15 @@ class StudentManageController extends TeacherController
     {
         $studentBroker = new StudentBroker();
         $all = $studentBroker->getAll();
-        foreach ($all as $student) {
-            StudentService::delete($student->da);
-        }
         (new WeekBroker())->deactivateAll();
-        Flash::success("Tous les étudiants ont été supprimés et les semaines désactivées");
+        if (empty($all))
+            Flash::warning('Il n\'y a aucun élève, mais les semaines ont été désactivé.');
+        else {
+            foreach ($all as $student) {
+                StudentService::delete($student->da);
+            }
+            Flash::success("Tous les étudiants ont été supprimés et les semaines désactivées.");
+        }
         return $this->redirect("/management/students");
     }
 }
