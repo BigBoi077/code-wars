@@ -44,7 +44,6 @@ class StudentManageController extends TeacherController
             } else {
                 $student->gravatarAvailable = false;
             }
-
         }
 
         return $this->render('management/students/student_listing', [
@@ -205,9 +204,9 @@ class StudentManageController extends TeacherController
         $studentBroker = new StudentBroker();
         $all = $studentBroker->getAll();
         (new WeekBroker())->deactivateAll();
-        if (empty($all))
+        if (empty($all)) {
             Flash::warning('Il n\'y a aucun élève, mais les semaines ont été désactivé.');
-        else {
+        } else {
             foreach ($all as $student) {
                 StudentService::delete($student->da);
             }
