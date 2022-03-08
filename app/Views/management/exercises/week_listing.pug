@@ -23,14 +23,11 @@ block body
           table.table.w-100
             thead
               tr
-                th Date de début
                 th Numéro
                 th Activée
             tbody.w-100
               each week in weeks
                 tr
-                  td
-                    p.student-row-element #{format('date', week.start_date)}
                   td
                     p.student-row-element Semaine #{week.number}
                   td
