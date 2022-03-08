@@ -1252,11 +1252,6 @@ text-align: center;
     font-size: 18px;
 }
 
-.single-mission-detail {
-    margin: auto;
-    font-family: StarJedi, sans-serif;
-}
-
 .single-mission-detail .separator {
     color: var(--dark);
 }
