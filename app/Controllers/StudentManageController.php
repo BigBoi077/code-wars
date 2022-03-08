@@ -5,6 +5,7 @@ use Models\Brokers\StudentExerciseBroker;
 use Models\Brokers\StudentItemBroker;
 use Models\Brokers\TeamBroker;
 use Models\Brokers\TransactionBroker;
+use Models\Brokers\WeekBroker;
 use Models\Services\ItemService;
 use Models\Services\StudentService;
 use Zephyrus\Application\Flash;
@@ -21,6 +22,8 @@ class StudentManageController extends TeacherController
         $this->get('/management/students/{da}/delete', 'deleteStudent');
         $this->get('/management/students/{da}/profile', 'viewStudent');
         $this->get("/management/students/rapidAdd", "rapidAdd");
+
+        $this->post("/management/students/reset", 'reset');
 
         $this->post('/management/students/store', 'storeStudent');
         $this->post('/management/students/{da}/update', 'updateStudent');
@@ -181,6 +184,18 @@ class StudentManageController extends TeacherController
             $transactionBroker->insert($student->id, $reason, $cash, $points, $isCashPositive, $isPointsPositive);
             Flash::success("Ajout rapide, à " . $student->firstname . ' ' . $student->lastname . ", effectué avec succès!");
         }
+        return $this->redirect("/management/students");
+    }
+
+    public function reset()
+    {
+        $studentBroker = new StudentBroker();
+        $all = $studentBroker->getAll();
+        foreach ($all as $student) {
+            StudentService::delete($student->da);
+        }
+        (new WeekBroker())->deactivateAll();
+        Flash::success("Tous les étudiants ont été supprimés et les semaines désactivées");
         return $this->redirect("/management/students");
     }
 }
