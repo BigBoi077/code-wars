@@ -10,3 +10,6 @@ mixin teamMember(member, index)
         +star_wars_money(member.cash)
         .mr-2
         +star_wars_points(member.points)
+
+mixin teamName(name)
+  p.m-0.text-dark=(student.team_name === "Rebel" ? "Rebelles": "Impériaux")

@@ -14,19 +14,23 @@ block body
     .row.mt-5.p-4.main-card
       .w-100
         .d-flex.justify-content-between.align-items-center
-          h1 Équipes
-        hr
+          .row.mb-4
+            .col-10.p-0
+              h1 Équipes
+              small.header-description Avec l'aide de vos camarades, accumulez des points en réussissant des missions pour vaincre l'autre équipe. Avec certains articles du magasin vous pourrez aussi punir l'autre équipe.
+            .col-2
+              img.img-fluid.w-100(src="/assets/images/trooper_team.png")
       #teams
         .row.justify-content-between
           .col-lg-5.col-sm-12.p-0.rebel
-            h1.rebel-sith-logo.starwars-font Rebel
+            h1.rebel-sith-logo.starwars-font rebelles
               img(src='assets/images/rebel.png').ml-3
             h6.mb-3 #{format('decimal', teamProgress.Rebel, 1, 1)} % des missions totales complétées
             .card.py-3.box-shadow-rebel
               each rebel, index in teams.rebels
                 +teamMember(rebel, index)
           .col-lg-5.col-sm-12.p-0.sith
-            h1.rebel-sith-logo.starwars-font Sith
+            h1.rebel-sith-logo.starwars-font impériaux
               img(src='assets/images/sith.png').ml-3
             h6.mb-3.text-right #{format('decimal', teamProgress.Sith, 1, 1)} % des missions totales complétées
             .card.py-3.box-shadow-sith
