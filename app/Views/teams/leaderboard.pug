@@ -13,12 +13,7 @@ block body
   .container
     .row.mt-5.p-4.main-card
       .w-100.mb-4
-        .row.mb-4
-          .col-10.p-0
-            h1 Classement
-            small.header-description Ici se situe le classement des plus grands Jedi. Seul les grands seront capable de gravir les échelons.
-          .col-2
-            img.img-fluid.w-100(src="/assets/images/the_boys.webp")
+        h1 Classement
       if current.position > 3
         .w-100.leaderboard.mb-4
           .position.row.m-0.p-4.bg-accent
@@ -28,7 +23,7 @@ block body
               img.rounded-img(src=profileImageUrl).not-top-3.ml-3.mr-3
             else
               .profile-bg.rounded-img.not-top-3.ml-3.mr-3.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
-                p.mb-0.initials.text-dark=current.initials
+                p.mb-0.initials-small.initials.text-dark=current.initials
             .col-1.d-flex.align-items-center.justify-content-end
               span ##{current.position}
             .col-6
@@ -38,7 +33,7 @@ block body
                 p.mr-3
                   +star_wars_points(current.points)
               .col-6.d-flex.justify-content-end
-                +teamName(student.team_name)
+                p.m-0 #{current.team_name}
 
       .leaderboard.w-100
         .flex-column
@@ -67,7 +62,7 @@ block body
                   h4.text-dark.mb-0 #{student.username}
               else
                 if student.gravatarAvailable
-                  img.rounded-img(data-gravatar data-email=student.email)
+                  img.rounded-img(data-gravatar data-email=student.email).ml-3.mr-3
                 else
                   .profile-bg.rounded-img.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                     p.initials.mb-0.text-dark=student.initials

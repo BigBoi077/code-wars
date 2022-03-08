@@ -355,7 +355,7 @@ header .menu-items a:hover {
     position: relative;
 }
 
-.profile-pic-container #profileTeamImg {
+#profileTeamImg {
     position: absolute;
     width: 25px;
     height: 25px;
@@ -1633,7 +1633,7 @@ th {
 
 .table tbody td {
     position: relative;
-    vertical-align: center;
+    vertical-align: middle;
 }
 
 .table thead tr {
