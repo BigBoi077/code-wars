@@ -57,7 +57,7 @@ block body
                   h4.text-dark.mb-0 #{student.username}
               else
                 if student.gravatarAvailable
-                  img.rounded-img(data-gravatar data-email=student.email).ml-3.mr-3
+                  img.rounded-img(data-gravatar data-email=student.email)
                 else
                   .profile-bg.rounded-img.position-relative(class=(student.team_id === 1) ? "bg-red": "bg-blue")
                     p.initials.mb-0.text-dark=student.initials
