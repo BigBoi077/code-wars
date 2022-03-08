@@ -18,12 +18,6 @@ block body
 			.w-100
 				.d-flex.justify-content-between.align-items-center
 					h1 Magasin
-					if user.isTeacher
-						a(href='/management/items').no-decoration
-							button.btn.btn-yellow
-								p.mb-0
-									i.fas.fa-plus-square.mr-2
-									| Gestion des articles
 			hr.w-100
 			if items == null
 				span.text-muted Aucun article n'est disponible, pour le moment.

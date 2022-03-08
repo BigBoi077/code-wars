@@ -63,8 +63,8 @@ block body
                 else
                   option(value=week.id)
                     | #{week.number}
-        .form-row
-          button#submitBtn.btn.w-100(type='submit')
+        .form-row.d-flex.justify-content-end
+          button#submitBtn.btn.w-25.mt-3(type='submit')
             i.fas.fa-plus-square.mr-2
             if exercise !== null
               | Modifier

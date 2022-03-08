@@ -20,13 +20,6 @@ block body
               small.header-description Consulter la liste des missions disponibles. Sélectionnez une mission pour afficher les détails et soumettre une solution qui sera évaluée. Lorsqu'une mission est correctement rempli, le montant indiqué est automatiquement ajouté à votre compte et le pointage est ajouté à votre équipe. La correction peut prendre jusqu'à 14 jours ouvrables.
             .col-2
               img.img-fluid.w-100(src="/assets/images/trooper_sitting.png")
-          if user.isTeacher
-            a(href='/management/exercises').no-decoration
-              button.btn.btn-yellow
-                p.mb-0
-                  i.fas.fa-plus-square.mr-2
-                  | Gestion des missions
-
         if exercisesByWeek == null
           hr
           span.text-muted.text-left Il n'y a aucune mission disponible pour l'instant.

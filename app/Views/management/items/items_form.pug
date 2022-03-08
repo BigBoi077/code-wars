@@ -32,8 +32,8 @@ block body
             label(for="description") Description
             textArea.form-control(id='description', name='description', rows="3")
               | #{(item !== null) ? item.description : val('description')}
-        .form-row
-          button#submitBtn.btn.w-100(type='submit')
+        .form-row.d-flex.justify-content-end
+          button#submitBtn.btn.w-25.mt-3(type='submit')
             i.fas.fa-plus-square.mr-2
             if item !== null
               | Modifier
