@@ -124,6 +124,12 @@ codewars=# \q
 ### Crédits
 
 <img src="https://avatars.githubusercontent.com/u/72167870?s=60&v=4" />
+<img src="https://avatars.githubusercontent.com/u/72167889?s=60&v=4" />
+<img src="https://avatars.githubusercontent.com/u/58580199?s=60&v=4" />
+<img src="https://avatars.githubusercontent.com/u/72167772?s=60&v=4" />
+<img src="https://avatars.githubusercontent.com/u/72167795?s=60&v=4" />
+<img src="https://avatars.githubusercontent.com/u/4491532?s=60&v=4" />
+<img src="https://avatars.githubusercontent.com/u/3046578?s=60&v=4" />
 
 ~~~
 Samuel Tessier
@@ -150,4 +156,6 @@ Julien Deguire
 
 [MIT](https://opensource.org/licenses/MIT)
 
-Copyright © 2021-present, Ether
+## Droits d'auteur
+
+© 2021-present, Ether
