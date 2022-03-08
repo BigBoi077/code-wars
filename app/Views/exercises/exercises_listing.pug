@@ -17,16 +17,9 @@ block body
           .row.mb-4
             .col-10.p-0
               h1 Missions
-              small.header-description Consulter la liste des missions disponibles. Sélectionnez une mission pour afficher les détails et soumettre une solution qui sera évaluée. Lorsqu'une mission est correctement rempli, le montant indiqué est automatiquement ajouté à votre compte et le pointage est ajouté à votre équipe. La correction peut prendre jusqu'à 14 jours ouvrables.
+              small.header-description Consulter la liste des missions disponibles. Sélectionnez une mission pour afficher les détails et soumettre une solution qui sera évaluée. Lorsqu'une mission est correctement remplie, le montant indiqué est automatiquement ajouté à votre compte et le pointage est ajouté à votre équipe. La correction peut prendre jusqu'à 14 jours ouvrables.
             .col-2
               img.img-fluid.w-100(src="/assets/images/trooper_sitting.png")
-          if user.isTeacher
-            a(href='/management/exercises').no-decoration
-              button.btn.btn-yellow
-                p.mb-0
-                  i.fas.fa-plus-square.mr-2
-                  | Gestion des missions
-
         if exercisesByWeek == null
           hr
           span.text-muted.text-left Il n'y a aucune mission disponible pour l'instant.
@@ -44,7 +37,7 @@ block body
                         if week.exercises != null
                           each exercise in week.exercises
                             tr.text-dark
-                              td.w-75.p-2
+                              td.p-2
                                 a(href="/exercises/" + exercise.id)
                                   | #{exercise.name}
                               td.p-2
@@ -62,6 +55,12 @@ block body
                                       i.fas.fa-check-circle.submitted(data-bs-toggle="tooltip" data-bs-placement="top" title="En attente de correction")
                                     else
                                       i.fas.fa-times-circle.grey-50(data-bs-toggle="tooltip" data-bs-placement="top" title="Non débutée")
+                              if exercise.difficulty > 3
+                                td.p-2.text-right
+                                  if exercise.difficulty === 5
+                                    span.badge.badge-danger Très Difficile
+                                  else if exercise.difficulty === 4
+                                    span.badge.badge-danger Difficile
             .col-5.pr-0.pl-5
               if student != null
                 .mission-progression.card.mb-4.w-100.fixed-ct

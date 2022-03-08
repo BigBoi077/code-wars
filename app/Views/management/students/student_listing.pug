@@ -19,11 +19,16 @@ block body
                   p.mb-0
                     i.fas.fa-plus-square.m-1
                     | Nouvel étudiant
-              a.no-decoration(href='/management/students/rapidAdd')
+              a.no-decoration(href='/management/students/rapidAdd').mr-4
                 button.btn.btn-yellow
                   p.mb-0
                     i.fas.fa-hat-wizard.m-1
                     | Ajout rapide
+              a.no-decoration(data-bs-toggle="modal" data-bs-target='#reset')
+                button.btn.btn-yellow
+                  p.mb-0
+                    .fas.fa-bomb.m-1
+                    | ORDER 66
         br
         table.table.w-100
           thead
@@ -57,3 +62,5 @@ block body
               each student in students
                 +confirmationModal("Suppression d'étudiant", 'Voulez-vous vraiment supprimer cet étudiant ?',
                   '/management/students/' + student.da + '/delete', 'studentDeleteModal' + student.da)
+
+    +confirmationModalPOST("ORDER 66", 'Voulez-vous vraiment exécuter l\'ordre 66 ? (Supprimer tous les étudiants et désactivé les semaines)', "/management/students/reset", 'reset')

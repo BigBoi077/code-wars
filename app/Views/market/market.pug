@@ -23,12 +23,6 @@ block body
 							small.header-description Ici vous pouvez acheter des objets avec l'argent gagner en faisant des missions. Les articles ne peuvent être acheté qu'une seule fois. Après avoir acheté un objet, si la récompense doit être vérifier par le professeur, simplement lui en faire part avec la preuve que vous l'avez acheter dans votre profil dans la section "Mes achats".
 						.col-2.d-flex.justify-content-end
 							img.img-fluid.w-75(src="/assets/images/han_solo.png")
-					if user.isTeacher
-						a(href='/management/items').no-decoration
-							button.btn.btn-yellow
-								p.mb-0
-									i.fas.fa-plus-square.mr-2
-									| Gestion des articles
 			if items == null
 				span.text-muted Aucun article n'est disponible, pour le moment.
 			else
