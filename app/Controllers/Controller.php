@@ -10,6 +10,7 @@ use Zephyrus\Utilities\Gravatar;
 abstract class Controller extends SecurityController
 {
     private const LOGIN_ROUTE = '/login';
+    private const CSS_VERSION = '1.0.1';
     public const SESSION_IS_LOGGED = 'is_logged';
 
     /**
@@ -55,6 +56,7 @@ abstract class Controller extends SecurityController
         $teamPoints = TeamController::getTeamPoints();
 
         return parent::render($page, array_merge($args, [
+            'cssVersion' => self::CSS_VERSION,
             'system_date' => date(FORMAT_DATE_TIME),
             'user' => $user,
             'profileImageUrl' => $imageUrl,
