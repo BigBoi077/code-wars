@@ -1627,7 +1627,7 @@ th {
 }
 
 .table td, .table th {
-    padding: 1.25rem 1.25rem 1.25rem 0;
+    padding: 1rem 1rem 1rem 0;
 }
 
 .table td:last-child {
@@ -1642,6 +1642,10 @@ th {
 .table tbody td {
     position: relative;
     vertical-align: center;
+}
+
+.table thead tr {
+    border-bottom: 2px solid var(--card-background);
 }
 
 table {
