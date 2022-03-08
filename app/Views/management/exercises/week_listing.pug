@@ -35,7 +35,7 @@ block body
                     p.student-row-element Semaine #{week.number}
                   td
                     p.student-row-element #{week.is_active ? 'Oui' : 'Non'}
-                  td
+                  td.text-right
                     a.col(href='/management/weeks/' + week.id + '/activate')
                       i(class=week.is_active ? 'fa-eye-slash': 'fa-eye').fas.student-icons
                     a.col(data-bs-toggle="modal" data-bs-target="#weekDeleteModal" + week.id)
