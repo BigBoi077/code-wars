@@ -13,12 +13,10 @@ block body
   .container
     .row.mt-5.p-4.main-card
       .w-100.mb-4
-        .row.mb-4
-          .col-10.p-0
+        .row
+          .col.p-0
             h1 Classement
-            small.header-description Ici se situe le classement des plus grands Jedi. Seul les grands seront capable de gravir les échelons.
-          .col-2
-            img.img-fluid.w-100(src="/assets/images/the_boys.webp")
+        hr
       if current.position > 3
         .w-100.leaderboard.mb-4
           .position.row.m-0.p-4.bg-accent
