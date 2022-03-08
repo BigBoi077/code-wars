@@ -1253,7 +1253,7 @@ text-align: center;
     font-size: 18px;
 }
 
-.single-mission-detail #mission-title {
+.single-mission-detail {
     margin: auto;
     font-family: StarJedi, sans-serif;
 }
