@@ -10,7 +10,7 @@ use Zephyrus\Utilities\Gravatar;
 abstract class Controller extends SecurityController
 {
     private const LOGIN_ROUTE = '/login';
-    private const CSS_VERSION = '1.0.1';
+    private const CSS_VERSION = '1.0.2';
     public const SESSION_IS_LOGGED = 'is_logged';
 
     /**
