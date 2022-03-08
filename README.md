@@ -124,13 +124,27 @@ codewars=# \q
 ### Crédits
 
 <div style="display: flex;">
+    <a href="https://github.com/WooDooWooDa">
 	<img src="https://avatars.githubusercontent.com/u/72167870?s=60&v=4" />
+    </a>
+    <a href="https://github.com/ZElGHTS">
 	<img src="https://avatars.githubusercontent.com/u/72167889?s=60&v=4" />
+    </a>
+    <a href="https://github.com/BigBoi077">
 	<img src="https://avatars.githubusercontent.com/u/58580199?s=60&v=4" />
+    </a>
+    <a href="https://github.com/Lee31416">
 	<img src="https://avatars.githubusercontent.com/u/72167772?s=60&v=4" />
+    </a>
+    <a href="https://github.com/CordePanthere61">
 	<img src="https://avatars.githubusercontent.com/u/72167795?s=60&v=4" />
+    </a>
+    <a href="https://github.com/dadajuice">
 	<img src="https://avatars.githubusercontent.com/u/4491532?s=60&v=4" />
+    </a>
+    <a href="https://github.com/jordanrioux">
 	<img src="https://avatars.githubusercontent.com/u/3046578?s=60&v=4" />
+    </a>
 </div>
 
 ~~~
