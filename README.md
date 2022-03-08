@@ -121,10 +121,68 @@ codewars=# \i \home\<User Linux>\www\code-wars\mock-data.sql
 codewars=# \q
 ~~~
 
-### Importation de nouvelles images pour le magasin
+### Issues et bug hunting
 
 ~~~
-À venir . . .
+Pour ce qui concerne les bugs, deux options s'offrent à vous. Premièrement,
+il existe un chanel sur le serveur Discord du Cégep apellé "codewars-bug-hunting"
+où vous pouvez soumettre des bugs trouvés au sein du système. Sinon, il est possible
+avec GitHub de créer des "issues"
 ~~~
 
-Ether © 2022
+<a href="https://github.com/cegepst/code-wars"><img style="height: 80px; widht: auto;" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png" /></a>
+
+### Crédits
+
+<div style="display: flex;">
+    <a href="https://github.com/WooDooWooDa">
+	<img src="https://avatars.githubusercontent.com/u/72167870?s=60&v=4" />
+    </a>
+    <a href="https://github.com/ZElGHTS">
+	<img src="https://avatars.githubusercontent.com/u/72167889?s=60&v=4" />
+    </a>
+    <a href="https://github.com/BigBoi077">
+	<img src="https://avatars.githubusercontent.com/u/58580199?s=60&v=4" />
+    </a>
+    <a href="https://github.com/Lee31416">
+	<img src="https://avatars.githubusercontent.com/u/72167772?s=60&v=4" />
+    </a>
+    <a href="https://github.com/CordePanthere61">
+	<img src="https://avatars.githubusercontent.com/u/72167795?s=60&v=4" />
+    </a>
+    <a href="https://github.com/dadajuice">
+	<img src="https://avatars.githubusercontent.com/u/4491532?s=60&v=4" />
+    </a>
+    <a href="https://github.com/jordanrioux">
+	<img src="https://avatars.githubusercontent.com/u/3046578?s=60&v=4" />
+    </a>
+</div>
+
+~~~
+Samuel Tessier
+  - Développeur back-end
+  - Coordonnateur
+  
+Tommy-Lee Pigeon
+  - Développeur fullstack
+  - Responsable des tests unitaires
+  
+Jérémie Bouchard
+  - Développeur fullstack
+  - Responsable de la base de données
+  
+Joshua Leblanc
+  - Développeur front-end
+  - Responsable UI/UX
+  
+Julien Deguire
+  - Développeur back-end
+~~~
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+## Droits d'auteur
+
+© 2021-present, Ether
