@@ -130,7 +130,7 @@ où vous pouvez soumettre des bugs trouvés au sein du système. Sinon, il est p
 avec GitHub de créer des "issues"
 ~~~
 
-<a href="https://github.com/cegepst/code-wars"><img style="height: 80px; widht: auto;" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png" /></a>
+<a href="https://github.com/cegepst/code-wars"><img style="height: 20px; widht: auto;" src="https://pnggrid.com/wp-content/uploads/2021/05/Discord-Logo-White-1024x780.png" /></a>
 
 ### Crédits
 
