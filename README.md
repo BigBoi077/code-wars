@@ -121,10 +121,33 @@ codewars=# \i \home\<User Linux>\www\code-wars\mock-data.sql
 codewars=# \q
 ~~~
 
-### Importation de nouvelles images pour le magasin
+### Crédits
+
+<img src="https://avatars.githubusercontent.com/u/72167870?s=60&v=4" />
 
 ~~~
-À venir . . .
+Samuel Tessier
+  - Développeur back-end
+  - Coordonnateur
+  
+Tommy-Lee Pigeon
+  - Développeur fullstack
+  - Responsable des tests unitaires
+  
+Jérémie Bouchard
+  - Développeur fullstack
+  - Responsable de la base de données
+  
+Joshua Leblanc
+  - Développeur front-end
+  - Responsable UI/UX
+  
+Julien Deguire
+  - Développeur back-end
 ~~~
 
-Ether © 2022
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+Copyright © 2021-present, Ether
